@@ -2583,19 +2583,19 @@ Computing Machinery]
  \fi
 }
 \def\ACM@adddotafter#1{\ifx\relax#1\relax\else\LTX@adddotafter{#1}\fi}
-\renewcommand\section{\@startsection{section}{1}{\z@}{\z@}%
+\renewcommand\section{\@startsection{section}{1}{\z@}%
   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {.25\baselineskip}%
   {\ACM@NRadjust\@secfont}}
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}{\z@}%
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {.25\baselineskip}%
   {\ACM@NRadjust\@subsecfont}}
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}{\z@}%
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
   {\ACM@NRadjust{\@subsubsecfont\@adddotafter}}}
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}{\z@}%
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\parindent}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
   {\ACM@NRadjust{\@parfont\@adddotafter}}}
@@ -2630,7 +2630,7 @@ Computing Machinery]
 \or % sigplan
  \def\@secfont{\bfseries\Large\section@raggedright}
  \def\@subsecfont{\bfseries\section@raggedright}
- \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}{\z@}%
+ \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
    {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
    {.25\baselineskip}%
    {\@subsubsecfont}}
@@ -2640,7 +2640,7 @@ Computing Machinery]
    {-3.5\p@}%
    {\@parfont\@addspaceafter}}
  \def\@parfont{\bfseries\itshape}
- \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}{\z@}%
+ \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
    {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
    {-3.5\p@}%
    {\@subparfont\@addspaceafter}}
