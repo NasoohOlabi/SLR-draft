@@ -1,16 +1,33 @@
 \section{Background and Evolution of Linguistic Steganography}
 \label{sec:background}
 
-This section summarizes key concepts and the evolution of linguistic steganography.
+Linguistic steganography has evolved from early methods to advanced deep learning models and Large Language Models (LLMs). This progression focuses on improving imperceptibility, embedding capacity, and maintaining naturalness and semantic coherence in cover text.
 
-\subsection{Imperceptibility in Steganography}
-Imperceptibility means making steganographic text indistinguishable from normal text, measured by perceptual, statistical, and semantic criteria. Improving one aspect can harm another (Psic Effect).
-
-\subsection{Security Definitions and Metrics}
-Security is measured by information-theoretic metrics (e.g., KL divergence) and computational indistinguishability.
-
-\subsection{Evolution of Linguistic Steganography}
-Early methods used syntax/statistics but lacked naturalness. Neural models improved fluency but sometimes compromised security.
-
-\subsection{Provably Secure Steganography in Practice}
-Classical secure methods include rejection sampling and arithmetic coding.
+Here's an overview of this evolution:
+\begin{itemize}
+    \item \textbf{Early and Format-Based Approaches} Early steganography modified existing carriers, like using whitespace or linguistic idiosyncrasies (e.g., synonym substitution). These methods, often rule-based and context-neglecting, resulted in unnatural text and limited capacity (typically <1 BPT), making them easily detectable.
+    \item \textbf{Transition to Carrier Generation and Early Text Generation Models} A significant shift involved "carrier generation based steganography," where the carrier text is generated to hide information, allowing greater freedom and higher embedding rates without altering original carrier statistics.
+    \begin{itemize}
+        \item \textbf{Syntax Rules and Statistical Methods:} Early text generation for steganography, using syntax rules or statistical models like Markov models, produced easily recognizable texts, failing imperceptibility and security.
+        \item \textbf{Challenges of Early Generation:} The Psic Effect (perceptual-imperceptibility vs. statistical-imperceptibility conflict) was a key challenge. Generated text, though natural-looking, often had detectable statistical properties. Models also lacked semantic control, crucial for covert communication.
+    \end{itemize}
+    \item \textbf{The Era of Custom Artificial Neural Network (ANN) Models} Advancements in ANNs and NLP led to sophisticated models for automatic steganographic text generation. These neural networks learned language models, encoding secret information by manipulating word probability distributions during generation.
+    \item \textbf{The Era of Large Language Models (LLMs)} The advent of LLMs has revolutionized linguistic steganography, offering unprecedented capabilities for generating highly coherent and contextually relevant text. LLMs like BERT, GPT-2, and Llama-2 have been leveraged in various approaches:
+    \begin{itemize}
+        \item \textbf{VAE-Stega} utilizes Variational Auto-Encoders with BERTBASE (BERT-LSTM) or LSTM-LSTM models, achieving a bit per word (BPW) of 5.245 and focusing on statistical fidelity.
+        \item \textbf{General Framework for Reversible Data Hiding} employs BERTBase for Masked Language Modeling (MLM), with a BPW of 4.152 and an F1 score of 0.9402.
+        \item \textbf{Co-Stega} leverages Llama-2-7B-chat, GPT-2, and Llama-2-13B, achieving a high capacity of 10.42 BPW and strong resistance to steganalysis, particularly in social media contexts.
+        \item \textbf{Joint Linguistic Steganography} combines BERT MLM with Graph Attention Networks (GAT) for deep semantic context, yielding a BPW of 2.251 and a PPL of 13.917.
+        \item \textbf{Discop} (Provably Secure Steganography) uses GPT-2 for sampling, achieving a BPW of 5.76 and focusing on provable security.
+        \item \textbf{Generative Text Steganography with LLM} is a black-box approach with a BPW of 5.93 and a PPL of 165.76, focusing on semantic similarity.
+        \item \textbf{Meteor} (Cryptographically Secure Steganography) uses GPT-2 for sampling, achieving 4.11 BPW and focusing on cryptographic security.
+        \item \textbf{Zero-shot Generative Linguistic Steganography} uses LLaMA2-Chat-7B and GPT-2, with a BPW of 2.511 and a PPL of 8.81.
+        \item \textbf{Provably Secure Disambiguating Neural Linguistic Steganography} uses LLaMA2-7b and Baichuan2-7b, achieving 0.85 BPW with zero decoding error and provable security.
+        \item \textbf{DeepTextMark} is a model-independent watermarking approach tested with OPT-2.7B, achieving 1 BPW with high detection accuracy and robustness.
+        \item \textbf{Hi-Stega} (Hierarchical Linguistic Steganography) uses GPT-2, achieving 10.42 BPW with high payload and semantic coherence.
+        \item \textbf{Linguistic Steganography: From Symbolic Space to Semantic Space} uses CTRL and BERT, achieving 0.08 BPW with symbol-free and efficient extraction.
+        \item \textbf{Natural Language Steganography by ChatGPT} uses ChatGPT 4.0, achieving 0.144 BPW with natural concealment and scalability.
+        \item \textbf{Rewriting-Stego} uses BART (bart-base2), achieving 4 BPW with high capacity and naturalness.
+        \item \textbf{ALiSa} (Acrostic Linguistic Steganography) uses BERT and Gibbs Sampling, achieving 0.92 BPW with simple and low capacity.
+    \end{itemize}
+\end{itemize}

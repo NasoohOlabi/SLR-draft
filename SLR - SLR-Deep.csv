@@ -1,0 +1,177 @@
+number ,title ,Type,input,output,LLM,1rst eval cate,2nd categ,Main strengths,Main weaknesses,dataset,ER,eval,result,code available,pipline method used,context aware,categ context,representation context,context usage in method detail text
+1,VAE-Stega: Linguistic Steganography Based on Variational Auto-Encoder,Steganography,control-text,stego-text,"BERTBASE (BERT-LSTM) 
+(LSTM-LSTM) model was trained from scratch",VAE,Psic,statistical fidelity,Not AutoRegressive,"Twitter (2.6M sentences)
+IMDB (1.2M sentences)
+preprocessed        ",5.245 (bpw),"PPL, KLD. JSD
+FE,CNN,TS-CSW( Acc, R )","PPL: 28.879, ∆MP: 0.242, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616	",github,"Input text → Encoder (LSTM/BERT) → latent vector z ~ N(0,1)
+z → Decoder (LSTM) → conditional distribution → top-m Candidate Pool
+Candidate Pool + secret bits → Coding (Huffman/Arithmetic) → word output
+Repeat → sentence with hidden bits
+Shared z + Decoder → conditional distribution → CP reconstruction
+Observed word + CP → decode bits",non-explicit,pre-text,text,
+2,General Framework for Reversible Data Hiding in Texts Based on Masked Language Modeling,Steganography,"cover text, secret key, data ",stego-text,BERTBase,MLM,,,,BookCorpus ,4.152 (bpw),"PPL, ER 47, 48, 49","BPW=0.5335
+F1=0.9402
+PPL=134.2199 ",NO,"Initialized text (secret words fixed, others masked)
+→ Masked LM → conditional distribution over masked slots
+→ secret bits guide word selection → Marked Text
+Marked Text = original words + data-encoded generated words
+→ Receiver (with key) → decode secret bits + recover original text
+",non-explicit,pre-text,text,
+3,Co-Stega: Collaborative Linguistic Steganography for the Low Capacity Challenge in Social Media,Steganography,,,"Llama-2-7B-chat, GPT-2 (fine-tuned), Llama-2-13B",,,"High capacity, fluency, semantic relevance, EES boosts entropy, 𝜖-security satisfied","Context limits capacity, retrieval vulnerable to mismatch, small models limit query handling","Tweet dataset (for GPT-2 fine-tuning), Twitter (real-time testing)",10.42 (bpw),"Capacity, Entropy, SR1, SR2, E(Capacity), Words/Tokens, PPL, SimCSE, 𝜖-security","SR1: 60.87%, SR2: 98.55%, Gen. Capacity: 44.91 bits, Entropy: 49.21 bits, BPW: 2.31, PPL: 16.75, SimCSE: 0.69",No,"Message → split into query bits + remaining bits  
+Query bits → Search engine → retrieve matching posts  
+Remaining bits + retrieved context → LLM (with entropy prompts) → generate reply  
+→ Reply embeds remaining bits  
+",explicit,Social Media,text,"Context is used for embedding and generation: the retrieval module embeds part of the message by selecting posts matching the query, and the generation module encodes the rest in replies conditioned on that context to balance capacity and relevance."
+4,Joint Linguistic Steganography With BERT Masked Language Model and Graph Attention Network,Steganography,"prefix text, data, intermediate text",stego-text,"LSTM + attention for temporal context.
+GAT for spatial token relationships.
+BERT MLM for deep semantic context in substitution.",GMLM,,,,OPUS,2.251 (bpw),"PPL, KLD, SIM, ER, FLOPs, LS-CNN, TS-RNN, BERT classifier","PPL=13.917
+KLD=2.904
+SIM=0.812
+ER=0.365 (BN=2)
+Best Acc=0.575 (BERT classifier)
+FLOPs=1.834G",no,"pre‑text → LSTM → Temporal context (H_time) → self-attention → H_time'
+                                
+ Temporal context (H_time) + sliding-window graph
+                        → GAT → Spatial context (H_space)
+
+GAT + H_time' + H_space → fusion → next-token distribution
+",explicit,pre-text,text,
+5,Discop: Provably Secure Steganography in Practice Based on “Distribution Copies”,Steganography,"prefix text, data",stego-text,GPT-2,sampling,,,,IMDB,4.76 (bpw),"KLD, ER, FCN, R-BiLSTM-C, BiLSTM-Dense","p=1.00
+Total Time (seconds)=362.63
+Ave Time ↓ (seconds/bit)=6.29E-03
+Ave KLD ↓ (bits/token)=0
+Max KLD ↓ (bits/token)=0
+Capacity (bits/token)=5.76
+Entropy (bits/token)=6.08
+Utilization ↑=0.95
+Text Generation (FCN): 50.10%.
+Text Generation (R-BiLSTM-C): 50.45%.
+Text Generation (BiLSTM-Dense): 49.95%",yes,sampling using the distribution copy,non-explicit,tuning + pretext,text,
+6,Generative Text Steganography with Large Language Model,Steganography,"prefix text, data",stego-text,Any,BlackBox,,,,,5.93 (bpw),"PPL, BPW, LS-CNN, BiLSTM-Dense, and Bert-FT, KLD","Length: 13.333 (words).
+BPW: 5.93 bpw
+PPL: 165.76.
+Semantic Similarity (SS): 0.5881
+LS-CNN Acc: 51.55%.
+BiLSTM-Dense Acc: 49.20%.
+Bert-FT Acc: 50.00%.
+KLD (Log, lower is better): 2.02 .",no,"Keyword Prompt → LLM → 4 keyword subsets:
+- Subject, Predicate, Object (16 words each)
+- Emotion (3 words: negative, neutral, positive)
+→ Evaluation Prompt → LLM optimizes sampling probabilities
+",explicit,,,
+7,Meteor: Cryptographically Secure Steganography for Realistic Distributions,Steganography,"prefix text, data",stego-text,GPT-2,sampling,,,,"Hutter Prize, HTTP GET requests",4.11 (bpw),"PPL,Average Time (Ave Time - seconds/bit), ER, Utilization,  FCN, R-BiLSTM-C, BiLSTM-Dense",GPT-2: 3.09 bits/token,no,"Next-word distribution → partitioned into intervals
+→ random r selects word
+→ shared r prefix → message bits
+→ r XOR PRG mask → secure transmission
+→ Receiver unmasks r → decodes bits
+→ Bit rate ∝ entropy of next word",non-explicit,tuning + pretext,text,
+8,Zero-shot Generative Linguistic Steganography,Steganography,"prefix text, data, context samples",stego-text,"LLaMA2-Chat-7B (as the stegotext generator / QA model).
+GPT-2 (for NLS baseline and JSD evaluation)",sampling,,,,"IMDB, Twitter ",2.511 (bpw),"JSD, PPL, BPW, TS-BiRNN, R-BiLSTM-C, BERT-C","
+PPL: 8.81.
+JSDfull: 17.90 (x10^-2).
+JSDhalf: 16.86 (x10^-2).
+JSDzero: 13.40 (x10^-2)
+TS-BiRNN: 80.29%.
+R-BiLSTM-C: 84.34%.
+BERT-C: 89.61%",https://github.com/leonardodalinky/zero-shot-GLS,"Secret text → Huffman + Edge Flipping → binary bitstream  
+→ LM generates candidates (filtered by threshold τ)  
+→ Embedding Module selects word matching bitstream prefix  
++ Annealing Selection (temperature control)  
++ Repeat Penalty (discourages repetition)  
+→ Word output per step → encoded sentence  
+",explicit,zero-shot + prompt,text,
+9,Provably Secure Disambiguating Neural Linguistic Steganography,Steganography,"prefix text, data",stego-text,"LLaMA2-7b (English), Baichuan2-7b (Chinese)",,,"Zero decoding error, provable security, perceptual imperceptibility, multilingual support, transferable design",Reduced entropy utilization due to token prefix loss in detokenization/retokenization,"IMDb dataset (100 texts/sample, 3 English sentences + Chinese translations)",0.85 (bpw),"Total Error, Ave/Max KLD, Ave PPL, Utilization, Total & Ave Time; proven secure against PPT adversaries","Total Error: 0%, Ave KLD: 0, Max KLD: 0, Ave PPL: 3.19 (EN), 7.49 (ZH), Capacity: 1.03–3.05 bits/token, Utilization: 0.66–0.74, Ave Time: ~4μs/bit",https://github.com/7-yaya/SyncPool,"Context → token distribution prediction
+→ ambiguous token pooling
+→ CSPRNG + message bits select tokens from pools
+→ detokenize → coherent stegotext
+",non-explicit ,pretext,text,pre-text
+10,A Principled Approach to Natural Language Watermarking,Watermarking,"cover text,
+Watermark bitstring (𝑚)
+Side info (𝐾, shared, hidden from attacker)",marked-text,Transformer-based encoder/decoder; BERT for distillation,,,,,Web Transformer 2,0.2 (bpw),"Capacity: BPT, Bit accuracy; Transparency: METEOR, SBERT; Robustness: accuracy drop under attack; Ownership Verification","Bit acc: 0.994 (K=None), 1.000 (DAE), 0.978 (Adaptive+K=S); Meteor Drop: ~0.057; SBERT ↑: ~1.227; Ownership Rate: 1.0 (no attack), 0.978 (adaptive+K=S)",NO,"Original Text (S), Watermark bits (m), Side info (K) →
+Encoder (Transformer) → paraphrase under distortion constraints →
+Watermarked Text (X)
+Attacker (omniscient) → corrupts X → Corrupted Text (Y)
+Decoder (Transformer + linear) + K → estimate watermark (m̂)
+Train via rate-distortion game maximizing mutual info,
+minimizing distortion, with adversarial robustness",Yes; semantic-level embedding; synonym substitution using BERT,"Yes; watermark message assigned categorical label (e.g., 4-bit → 1-of-16)",Yes; semantic embeddings via transformer encoder and BERT; SBERT distance as metric,
+11,Context-Aware Linguistic Steganography Model Based on Neural Machine Translation,Steganography,"Source text, Secret bit sequence",stego-text,"BERT (encoder), LSTM (decoder)",NMT,Context-Aware,"Context control, Semantic match","Old models lacked context, low capacity (waiting), probabilistic cliffs, possible meaning mismatch","WMT18 News Commentary (train/test), Yang et al. bits, Doc2Vec, 5,000 stego pairs (8:1:1 split)",3.275 (bpw),"BLEU, PPL, KL Divergence, SIM, ER, Detection Rate,TS-RNN, LS-CNN, Bi-LSTM-C","BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86, Stego detection ~16%",No,"Context (C), Secret Message (m), Shared Key (K) →
+Language Model (Transformer) → next-token distribution (Pc, V)
+SyncPool Ambiguity Pool Grouping → ambiguous tokens grouped (V_amb),
+preserving original distribution
+Embed message via ENCODE + CSPRNGsteg → select Ambiguity Pool
+If ambiguous → CSPRNGsync → synchronous token selection
+Detokenize → Stegotext (S) → transmit
+Receiver DECODE + retokenization + CSPRNGsteg + CSPRNGsync →
+extract message bits, preserving provable security",Yes,,"GCF (global context), LMR (language model reference), Multi-head attention",
+12,DeepTextMark: A Deep Learning-Driven Text Watermarking Approach for Identifying Large Language Model Generated Text,Watermarking,cover-text,marked-text,Model-independent; tested with OPT-2.7B,,,"Blindness, robustness, imperceptibility, high accuracy, automatic, model-independent, compact, fast, sentence-level","Training data dependence, needs pre-watermarking, limited on short/diverse texts, insertion overhead, rewrite circumvention","Dolly ChatGPT (train/validate), C4 (test), robustness & sentence-level test sets",1 (bit),"Detection Accuracy, SMS, mSMS, mIOA, TPR, FNR, AUC, comparative analysis","100% accuracy (multi-synonym, 10-sentence), mSMS: 0.9892, TPR: 0.83, FNR: 0.17, Detection: 0.00188s, Insertion: 0.27931s",No,"Input text → Identify candidate words (exclude stopwords/punctuation)
+Candidates → Word2Vec → top-n semantically similar words
+Secret bits + candidates → Guided substitution → sentence proposals
+Proposals → USE → select highest similarity → Marked Text
+Marked Text = original + synonym substitutions (watermarked)
+Marked Text → BERT-based classifier → detect watermark (blind detection)",NO,,,
+13,Hi-Stega: A Hierarchical Linguistic Steganography Framework Combining Retrieval and Generation,Steganography,"Context data carrier c, keyword set k, data",stego-text,GPT-2,RAG,Hierarchical,"High payload, semantic coherence, high text quality, strong resistance to steganalysis","Slightly reduced diversity, limited retrieval scope","Yahoo! News (titles, bodies, comments); 2,400 titles used",10.42 (bpw),"ppl, MAUVE, Distinct-n, Δ(cosine), Δ(simcse), ER1, ER2; SeSy, TS-CNN","ppl: 109.60, MAUVE: 0.2051, ER2: 10.42, Δ(cosine): 0.0088, Δ(simcse): 0.0191",https://github.com/wanghl21/Hi-Stega,"Secret message m → split into data info + control info
+Data info → retrieve carrier c from corpus C → maximize m ∩ c
+Control info = (keywords k = m \ c, positions i = m ∩ c) → format → bitstream b
+Bitstream b + keywords k + carrier c → Prompt Learning + Keyword Guidance → generate stegotext s
+s embeds keywords k + hidden bitstream b → high semantic coherence (Δcos, Δsimcse) → cognitive imperceptibility
+Only c or s ≠ full m → layer separation → security ↑, anti-steganalysis ↑
+Embedding rate (ER2) ↑ → high payload per word with low perplexity
+",explicit,Social Media,Text,"The method retrieves a context data carrier from a social corpus, using it as input to the language model. This context embeds some secret content naturally, while a Prompt Learning Module ensures template-based, semantically coherent stegotext generation. This boosts realism and imperceptibility in social settings."
+14,Linguistic Steganography: From Symbolic Space to Semantic Space,Steganography,Secret message (n-ary) → semantic vector (α) → conditional text generation model; stegotext (x) + semantic classifier model for extraction,,"CTRL (generation), BERT (semantic classifier)",,,"Symbol-free, efficient, imperceptible, accurate extraction, complements symbolic steganography","Classifier struggles with large n, higher loop count, semanteme text quality varies, orthogonality issues","5,000 CTRL-generated texts per semanteme (n = 2–16); 1,000 user-generated texts for anti-steganalysis",0.08 (bpw),"Loop count, PPL, symbolic and BERT-based steganalysis",Classifier Accuracy: 0.9880; Loop Count: 1.0160; PPL: 13.9565; Anti-Steganalysis Accuracy: ~0.5,https://github.com/YangzlTHU/Linguistic-Steganography-and-Steganalysis/tree/master/Steganography/Linguistic-Semantic-Steganography,"Secret message → Semantic mapping → semanteme α (discrete space, log(n)-bit)
+α → CTRL (Transformer) → stegotext x (conditional distribution pθ(x|α))
+Stegotext x → BERT classifier → extracted semanteme α'
+α' ≠ α → Rejection sampling → repeat generation until α' = α
+Final stegotext → Bob decodes → secret message m'",implicit,Text,Semanteme (α) as a vector in semantic spac,"The semanteme (α) shapes the generated text to match a topic, ensuring it appears natural and blends into regular communication. This contextual alignment helps conceal the message and enables the classifier to recover it using the same semantic grounding."
+15,Natural Language Steganography by ChatGPT,Steganography,"Topic, keyword sets (subsets A, B...), stegomessage, strict rules",Synthetic stego covers; optionally bolded keywords + labels,,,,"Effective LLM-based stego text, natural concealment, scalable, supports prompt iteration","NL complexity, duplication, hallucinations, errors in long texts, statistical artifacts","Custom word sets for specific topics (e.g., 16×10-word sets for music reviews)",0.144 (bpw),"Referenced: bits/word, KL divergence, entropy, accuracy, LSTM-CNN, RNN",,No,"Key Generator: Topic-specific word sets → labeled subsets (e.g., A, B) → no duplicates, single words only
+Message → sequence of subset labels (stegosequence, e.g., ""AABBAABB"")
+Embedder (ChatGPT 4.0): Stegosequence + topic + word sets → stego cover text",Explicit, Specific Genre/Topic Text,Text,"The system uses the topic as core context. The Key Generator builds keyword sets typical of the topic, and the Embedder ensures generated text appears natural and topic-appropriate. ChatGPT’s contextual capabilities maintain coherence while embedding messages seamlessly."
+16,Natural language watermarking via paraphraser-based lexical substitution,Watermarking,"Source sentence (x₁...xₙ), watermark bit sequence (m), target word (xᵢ)","Watermarked sentence (x'), extracted bit sequence (m), word substitutions","Transformer (Paraphraser), BART (BARTScore), BERT (BLEURT, comparisons)",Paraphrase ,,"High meaning preservation, strong performance vs. BERT-based NLW, no annotated data needed, robust decoding, high text recoverability","Limited reversibility, hard for short texts, beam decoding limits substitution, lower capacity in some cases","ParaBank2, LS07, CoInCo, Novels, WikiText-2, IMDB, NgNews",0.22 (bpw),"LS: SemEval 2007 (best, oot, P@1, GAP); NLW: Payload, Text Recoverability; No specific steganalysis models","LS07 P@1: 58.3, GAP: 65.1; CoInCo P@1: 62.6, GAP: 60.7; Text Recoverability: ~88–90%",Yes,"Original sentence → Paraphraser (Transformer) → paraphrases → extract substitute candidates for target word xi Novel decoding → force prefix x<i → predict vocabulary distribution for yi → top-K substitutes Substitutes → rank by Semantic Textual Similarity (BARTScore + BLEURT + prediction scores) → select best candidate Exchangeability test → ensure xi and yi are mutually interchangeable → form candidate set C = {c0, c1} Watermark bit (0/1) → replace xi with csignal from C → watermarked sentence x' Extraction → mirror embedding → generate C for x' → compare xi with c0/c1 → recover watermark bit",Explicit,,text,"ParaLS uses context to generate semantically appropriate substitutions. Decoder predictions begin with prefix words, and attention uses cumulative source weights. Semantic similarity scores rank substitutes, ensuring watermarked sentences retain meaning. Context ensures reproducibility of embedding and extraction through identical candidate sets."
+17,Rewriting-Stego: Generating Natural and Controllable Steganographic Text with Pre-trained Language Model,Steganography,cover-text,stego-text,BART (bart-base2),Paraphrase,,"High capacity, naturalness, reduced vigilance, denoising, real-world efficiency","Similarity drops with high BPTS, may underperform in detection accuracy vs edit-based","Movie, News, Tweet",4 (bpw),"BPTS, BPTC+S, PPL (GPT2-medium), Mean/Variance (BERT), Acc (fine-tuned BERT)","BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1, Mean: 44.4, Variance: 2.1e04, Acc: 8.9%",https://github.com/cheslee15/Rewriting-Stego,"Cover text (Y) + Conditional Code → BART Encoder → encoded representation
+Secret message (S) → bit stream → 2^n vocabulary groups, each with n-bit code
+BART Decoder + Group-Wise Masked Decoding → mask non-aligned token probabilities → stego text (Y')
+Beam search → K candidate stego texts
+GPT2 → Perplexity (PPL) scoring → select lowest PPL candidate as final stego text",not Explicit,,,
+18,ALiSa: Acrostic Linguistic Steganography Based on BERT and Gibbs Sampling,Steganography,"Token-level secret message, position key, and initial [MASK]-filled sequence",stego-text,"BERT (Google’s BERTBase, Uncased)",,,Simple,"Poor Quality, low cap","BookCorpus (10,000 natural texts for evaluation)",0.92 (bpw),"Perplexity (PPL), Detection Accuracy (Acc), F1-score; LS-RNN, LS-BERT","PPL: Natural = 13.91, ALiSa = 14.85; LS-RNN/LS-BERT Acc & F1 = ~0.50; Outperforms GPT-AC/ADG in all cases",Yes (https://github.com/clearloveclearlove/Alisa),"Secret tokens → initialize stego text s with [MASK] tokens
+Secret plaintext w → insert tokens at positions p in s
+Remaining [MASK] tokens → BERT MLM → probability distribution
+Gibbs sampling → sample tokens from conditional distribution → fill s
+Iterate T times → refine non-secret positions → fluent stego text
+BERT + Gibbs → low Perplexity (PPL) → high fluency
+Conditional sampling → distribution mimics natural text → strong anti-steganalysis
+Receiver → extract plaintext from positions p",No,,,
+19,Prompting Steganography: A New Paradigm,Steganography,,,LLM,LSB,,,,,,,,,,,,,
+20,RNN-Stega: Linguistic Steganography Based on Recurrent Neural Networks,Steganography,Secret bitstream; previously generated words; 800-dimensional word vectors,High-quality text covers containing hidden bitstreams,RNN (LSTM units),,,"High text quality, superior imperceptibility, high capacity (up to 20%), dynamic coding, efficient FLC","VLC slower, FLC lowers text quality, detectable by advanced models, concealment vs. capacity trade-off","VLC slower, FLC lowers text quality, detectable by advanced models, concealment vs. capacity trade-off",,,,,,,,,
+21,Linguistic Steganography Based on Adaptive Probability Distribution,Steganography,"cover texts, data",stego-text,3-layer LSTM (800 hidden units per layer) as generator,,,,,"Sentiment140 (Twitter)
+MSCOCO (captions)
+IMDB (reviews)
+350,000 training sentences",,"PPL, ER, EMD, Word Diversity, LS-CNN[14],
+ TS-RNN[47],andR-BI-C[32]","Twitter BPW=28.12 ± 0.11
+BPW=1 | 
+PPL=28.12
+EMD=1.2312
+LS-CNN(F1)=0.6531
+TS-RNN(F1)=0.6192
+R-BI-C(F1)=0.6672
+Word Diversity=2215",no,GAN-based: LSTM generator + CNN discriminator; policy gradient training with adaptive probability-based embedding,non-explicit,pre-text,text,
+22,A novel method for linguistic steganography by English translation using attention mechanism and probability distribution theory,Steganography,"Source sentence (Chinese)
+prior target words (English)",stego-text,NMT encoder-decoder ❌,,,,,,,,,,,,,,
+23,PNG-Stega: Progressive Non-Autoregressive Generative Linguistic Steganography,Steganography,control-text -> YAKE (keywordset),stego-text,❌ Custom PNG,,,,,,,,,,,,,,
+24,Semantic-Preserving Linguistic Steganography by Pivot Translation and Semantic-Aware Bins Coding,Steganography,,,❌ En2Ge2En,,,,,,,,,,,,,,
+25,Topic-aware Neural Linguistic Steganography Based on Knowledge Graphs,Steganography,Secret message bitstream; Topic-specific graph,Steganographic text; Secret binary bitstream,No pre-trained LLM; uses Transformer encoder + LSTM decoder,"Neural, Linguistic, Knowledge Graph-based",,"Better concealment, topic control, high quality, high capacity, detection resilience, wide applicability",Text quality declines at high embedding rates; unique graph topics required for extraction,"AGENDA dataset (40K papers, 500 used for graph-text pairs)",,"BLEU, METEOR (topic); Perplexity (text quality); Text steganalysis (detection)",BLEU: 13.13; METEOR: 17.74; Perplexity: 52.23; F1-score: 0.681,No,"Uses Transformer-based encoder for topic graph and RNN decoder. Candidate words are selected based on predicted probabilities, encoded, and the secret bits choose which word is output.",Explicit,Topical (Scientific/Technical),Graph (converted to vectors),"Graph vectors guide decoder via attention and copy mechanisms, ensuring topic relevance. Keywords from received text help identify the original graph for message extraction."
+26,Topic Controlled Steganography via Graph-to-Text Generation,Steganography,"prefix text, data",stego-text,"T5 model (Transformer, fine-tuned on WebNLG)",,,,,,,,,,,,,,
+27,A Semantic Controllable Long Text Steganography Framework Based on LLM Prompt Engineering and Knowledge Graph,Steganography,,,,,,,,,,,,,,,,,
+28,Reversible Linguistic Steganography With Bayesian Masked Language Modeling,Steganography,"prefix text, data",stego-text,,,,,,,,,,,,,,,
+29,Arabic Text Steganography Based on Deep Learning Methods,,,,,,,,,,,,,,,,,,
+30,Beyond Binary Classification: Customizable Text Watermark on Large Language Models,,,,,,,,,,,,,,,,,,
+31,Controllable Semantic Linguistic Steganography via Summarization Generation,,,,,,,,,,,,,,,,,,
+32,COSYWA: Enhancing Semantic Integrity in Watermarking Natural Language Generation,,,,,,,,,,,,,,,,,,
+33,CPG-LS: Causal Perception Guided Linguistic Steganography,,,,,,,,,,,,,,,,,,
+34,Enhancing Semantic Consistency in Linguistic Steganography via Denosing Auto-Encoder and Semantic-Constrained Huffman Coding,,,,,,,,,,,,,,,,,,
+35,FREmax: A Simple Method Towards Truly Secure Generative Linguistic Steganography,,,,,,,,,,,,,,,,,,
+36,Imperceptible Text Steganography based on Group Chat,,,,,,,,,,,,,,,,,,
+37,LZW-CIE: a high-capacity linguistic steganography based on LZW char index encoding,,,,,,,,,,,,,,,,,,
+38,Neural Linguistic Steganography with Controllable Security,,,,,,,,,,,,,,,,,,
+39,"NLWM: A Robust, Efficient and High-Quality Watermark for Large Language Models",,,,,,,,,,,,,,,,,,
+40,Robust and semantic-faithful post-hoc watermarking of text generated by black-box language models,,,,,,,,,,,,,,,,,,
+41,Steganographic Text Generation Based on Large Language Models in Dialogue Scenarios,,,,,,,,,,,,,,,,,,
+42,Robust Secret Data Hiding for Transformer-based Neural Machine Translation,,,,,,,,,,,,,,,,,,
