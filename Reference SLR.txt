@@ -1,0 +1,3909 @@
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/361288408
+The Use of NLP-Based Text Representation Techniques to Support Requirement
+Engineering Tasks: A Systematic Mapping Review
+Article in IEEE Access · June 2022
+DOI: 10.1109/ACCESS.2022.3182372
+CITATIONS
+READS
+57
+482
+3 authors:
+Riad Sonbol
+Ghaida Rebdawi
+Higher Institute for Applied Sciences and Technology
+Higher Institute for Applied Sciences and Technology
+14 PUBLICATIONS 140 CITATIONS
+22 PUBLICATIONS 154 CITATIONS
+SEE PROFILE
+Nada Ghneim
+Arab International University
+69 PUBLICATIONS 727 CITATIONS
+SEE PROFILE
+All content following this page was uploaded by Riad Sonbol on 22 June 2022.
+The user has requested enhancement of the downloaded file.
+SEE PROFILE
+The Use of NLP-Based Text Representation Techniques to Support
+Requirement Engineering Tasks: A Systematic Mapping Review
+Riad Sonbola,∗, Ghaida Rebdawia , Nada Ghneimb
+a Department
+arXiv:2206.00421v1 [cs.SE] 17 May 2022
+b Faculty
+of Informatics, Higher Institute for Applied Sciences and Technology (HIAST)
+of Information and Communication Technology, Arab International University (AIU)
+Abstract
+Natural Language Processing (NLP) is widely used to support the automation of different Requirements Engineering (RE) tasks. Most of the proposed approaches start with various NLP steps that
+analyze requirements statements, extract their linguistic information, and convert them to easy-toprocess representations, such as lists of features or embedding-based vector representations. These
+NLP-based representations are usually used at a later stage as inputs for machine learning techniques or rule-based methods. Thus, requirements representations play a major role in determining
+the accuracy of different approaches. In this paper, we conducted a survey in the form of a systematic literature mapping (classification) to find out (1) what are the representations used in RE tasks
+literature, (2) what is the main focus of these works, (3) what are the main research directions in
+this domain, and (4) what are the gaps and potential future directions. After compiling an initial
+pool of 2,227 papers, and applying a set of inclusion/exclusion criteria, we obtained a final pool
+containing 104 relevant papers. Our survey shows that the research direction has changed from
+the use of lexical and syntactic features to the use of advanced embedding techniques, especially
+in the last two years. Using advanced embedding representations has proved its effectiveness in
+most RE tasks (such as requirement analysis, extracting requirements from reviews and forums,
+and semantic-level quality tasks). However, representations that are based on lexical and syntactic
+features are still more appropriate for other RE tasks (such as modeling and syntax-level quality
+tasks) since they provide the required information for the rules and regular expressions used when
+handling these tasks. In addition, we identify four gaps in the existing literature, why they matter,
+and how future research can begin to address them.
+Keywords: Natural Language Processing, Requirements Engineering, Requirements
+Representation, Syntax, Semantic
+∗ Corresponding
+author
+Email address: riad.sonbol@hiast.edu.sy (Riad Sonbol )
+Preprint submitted to
+April 2, 2022
+1. Introduction
+Requirements Engineering (RE) is the most critical phase of the software development life cycle
+[1]. It aims to specify precisely the requirements that must be met or possessed by the desired system
+[2]. RE involves a wide range of tasks related to extracting, documenting, analyzing, validating,
+and managing requirements [3]. The requirement represents the core elements of all these tasks. It
+is a broad concept describing a purpose, a need, a goal, a functionality, a constraint, a quality, a
+behavior, a service, a condition, or a capability [4]. Requirements play a major role in the success
+or failure of software projects [5]. According to many studies, most errors in software development
+projects stem from the RE phase. The lack of understanding of requirements increases the risk of
+time and cost overrun of the project [5, 3].
+Requirements come from various stakeholders who have different needs, roles, and responsibilities, and are as such prone to the occurrence of conflicts including interference, interdependency,
+and inconsistency [6]. Moreover, requirements typically are specified in natural languages, which
+increases the complexity of requirement engineering because of the inherent ambiguity, incompleteness, and inaccuracy of natural languages [7]. These factors make RE tasks challenging, timeconsuming, and error-prone work mainly for large projects, as large volumes of requirements need
+to be processed, analyzed, and understood [8].
+Many researches have been carried out on the automation of different RE tasks. The proposed
+approaches usually start by applying a set of Natural Language Processing (NLP) steps that extract linguistic features and information from requirements texts and construct various NLP-based
+representations. These representations are used in further stages to solve the targeted task (e.g.,
+classifying requirements [9, 10, 11], detecting trace links, discovering quality defects, etc.).
+In the last decade, a growing number of works employed various syntactic and semantic-based
+features to represent requirements. The used representation is considered one of the most important
+factors that affect the accuracy of the proposed solutions for different RE tasks [12, 13]. Therefore,
+there is a need to analyze the related literature to investigate the suggested representations, identify
+gaps, and guide future research.
+To address the aforementioned needs, a systematic mapping review was used as a research
+method for this study. A mapping review is aimed at providing an understanding of the scope
+of the research activities in a given area [14]. Compared to a traditional literature review, a
+mapping review has many advantages, such as a well-defined methodology that reduces bias and a
+wider context that allows more general conclusions [15]. The review presented in this paper aims
+to identify all recently published primary literature that employs NLP-based representations to
+support RE tasks. We classify these works based on two aspects: the targeted RE task and the
+proposed representation, and identify potentials and gaps in the field to inform future research.
+The rest of the paper is structured as follows: In section 2 we provide a background for NLPrelated concepts. Section 3 provides a quick overview of related works. Section 4 describes the
+methodology adopted to conduct this study including the search terms, online databases, and the
+2
+systematic mapping process. Section 5 presents and discusses our results. We summarize our
+findings in section 6 and conclude our paper in section 7.
+2. Background: Natural Language Processing
+Natural language processing is one of the main artificial intelligence disciplines. It aims to enable
+computer programs to “understand” and process natural language texts to achieve some specific
+goals [16, 17]. Traditionally, there are three main levels of processing in an NLP-based approach:
+[18]: lexical and morphological level, syntactic level, and semantic level.
+2.1. Morphological (or Lexical) Level
+The Morphological level focuses on analyzing words into their morphemes like prefixes, suffixes,
+and base words. It includes common tasks, such as Tokenization and Lemmatization [18].
+Tokenization: the process of splitting a text into a list of tokens. Tokens can be words,
+numbers, or punctuation marks.
+Lemmatization: the process of finding the dictionary form, or the lemma, of each word. For
+example, the lemma of “Supporting” and “Supported” is “Support”.
+2.2. Syntactic Level
+The Syntactic level focuses on analyzing the grammatical structure of sentences. This level usually includes Part-of-Speech Tagging (POS-tagging), Chunking, dependency Parsing, and NamedEntity Recognition [18].
+POS-Tagging: the process of tagging each token in a sentence with its corresponding part of
+a speech tag (such as noun, verb, adjective, etc.) based on its syntactical context [19].
+Chunking: the process of detecting syntactic constituents such as Noun Phrases and Verb
+Phrases in a sentence [20].
+Dependency Parsing: the process of analyzing the syntactic structure of the sentence, by
+finding out the grammatically related words, as well as the type of the relationship between them
+[21].
+Named-Entity Recognition: It seeks to locate and classify named entities mentioned in the
+sentence into pre-defined categories such as person names, organizations, locations, etc [22].
+2.3. Semantic Level
+The Semantic level focuses on understanding the meaning of the text. The main goal of semantic
+processing is to automatically map a natural language sentence into a formal representation of its
+meaning. Different semantic representations have been proposed in the literature, such as:
+3
+Ontology-Based Representation: The ontology is a data model that represents a set of
+concepts within a domain and the relationships between those concepts [23]. WordNet [24] is one
+of the widely used lexical ontologies. Ontologies are commonly used to assign words to a predefined
+set of concepts and to measure semantic similarity between them using different ontology-based
+measures such as Wu and Palmer [25] and path-based similarity [26].
+Vector Space Model (VSM): A basic representation model that represents text as a termby-document matrix [27]. The Bag-of-Words (BOW) model is a special case for VSM where words
+frequencies are used as weights, and words are used as features. Other weighting factors are used
+in VSM, such as IDF and TF-IDF.
+Topic Modeling-Based Representation: A statistical modeling approach used to discover
+the latent or abstract topics that occur in a set of texts. These topics are used to represent each
+text. This approach helps in finding a low-rank approximation to the term-document matrix by
+retaining the semantic relations between words. Latent Dirichlet Allocation (LDA) [28] and Latent
+Semantic Analysis (LSA) [29] are two common examples of this approach.
+Advanced Embedding Techniques: Embedding is an efficient method for learning highquality vector representations of words from large amounts of unstructured text data [30]. Word
+embedding can capture the context of a word within a document, which allows words with similar
+meanings to have similar vector representations. Many famous pre-trained word embeddings are
+available to the public, such as Word2Vec [30], GloVe [31], BERT [32], etc.
+3. Related Reviews
+Many reviews have been published on the relation between NLP and RE tasks [33, 34, 35].
+Some of these reviews provide a broad picture of NLP activities and technologies used in the
+RE domain [36, 37, 33]. Dermeval et al. [36] conducted a systematic literature review to identify
+the primary studies on the use of ontologies in the RE domain. This study considered 77 studies
+published between January 2007 and October 2013. Nazir et al. [37] investigated the applications
+of NLP in the context of RE. It included 27 studies published between 2002 and 2016. Zhao et al.
+[33] introduced a comprehensive overview of the applications of NLP in RE research focusing on the
+state of the literature, the state of empirical research, the research focus, the state of the practice,
+and the NLP technologies used. This study reviewed 404 relevant primary studies reported between
+1983 and April 2019.
+Other reviews focused on specific RE problems. Bozyigit et al. [38] provided a review of 44
+primary studies related to the automatic transformation of software requirements into conceptual
+models. It covered works published between 1996 and 2020.
+On the other hand, a number of reviews have limited their work to specific templates for requirements [35, 34]. Amna et al. [35] reviewed studies that investigate or develop solutions for
+4
+Group
+Group
+A
+Main Keyword
+Requirements Engineering
+Enriched List
+”requirement engineering” AND ”software requirement”
+Group
+B
+Syntactic Processing
+”syntax” OR ”POS-tagging” OR ”tagging” OR ”Dependency
+Parsing” OR ”shallow parsing” OR ”chunking” OR ”named entity recognition”
+Group
+C
+Semantic
+ing
+”semantic” OR ”BERT” OR ”word embedding” OR ”word2vec”
+OR ”Vector Space Model” OR ”VSM” OR ”Latent Semantic
+Analysis” OR ”LSA”
+Process-
+Table 1: Keywords used in our study
+problems related to ambiguity in user stories. The study covered 36 researches published between
+2001 and 2020. Similarly, Raharjana et al. [34] presented a systematic literature review for research
+related to the role of NLP on user story specification. This work found 30 primary studies between
+January 2009 to December 2020.
+Although all these works provided good information regarding requirements engineering, no
+conducted secondary studies have focused on the used techniques to represent textual requirements
+and the involved syntactic and semantic aspects in these representations.
+4. Research Method
+This study was undertaken as a systematic mapping review using the guidelines presented in
+Petersen et al. [15]. The goal of this review is to identify, categorize, and analyze existing literature
+published between 2010 and 2021 and use syntactic and semantics aspects to represent software
+requirements when handling RE tasks.
+4.1. Planning
+In this section, we define our research questions, the search strategy we use, and the inclusion
+and exclusion criteria considered to filter the results.
+4.1.1. Research question
+Our work is guided by the following main research questions:
+“How are the syntactic and semantics aspects considered to represent software requirements when
+handling RE tasks?”.
+This question is detailed in the following five RQs:
+(RQ1) What is the state of the published literature on RE works that use syntactic and semantic
+representations for requirements?
+5
+(RQ2) In which RE tasks are the syntactic and semantic aspects mostly considered to represent
+requirements?
+(RQ3) What are the proposed representations in the literature for RE tasks?
+(RQ4) What are the main research directions to represent requirements for each category of RE
+tasks?
+(RQ5) What gaps and potential future directions exist in this field?
+While the first question (RQ1) focuses on having a general overview of the published works
+(number of publications and the top publication venues), the second and the third questions analyze
+the targeted problems in RE (RQ2) and the proposed solutions (RQ3). The fourth research question
+(RQ4) explores the current research directions for each category of RE tasks, and the fifth question
+(RQ5) discusses the gaps and possible future improvements in this domain.
+4.1.2. Search Strategies
+We used five digital libraries to conduct the automated search: Scopus, IEEE Xplore, ACM
+Digital Library, ScienceDirect, and SpringerLink. Scopus and ScienceDirect are general indexing
+systems that help to cover a broader scope for our search. On the other hand, IEEE Xplore, ACM
+Digital Library, and SpringerLink publish papers related to the most well-known conferences and
+journals related to the software domain.
+The search string is built based on the following three key terms: “Requirements Engineering”,
+“Syntactic Processing”, and “Semantic Processing”. These terms are derived from our main research question. Each of these terms is enriched by adding synonyms and sub-fields. Table 1 shows
+the whole set of selected keywords for this study divided into three groups: A, B, and C. These
+groups were used to create the final search query as follows:
+A AND ( B OR C)
+4.1.3. Inclusion and Exclusion Criteria
+Inclusion and exclusion criteria are used to filter out papers that are not relevant to our research
+questions. We defined three inclusion criteria and four exclusion criteria.
+Inclusion Criteria:
+1C1: Peer-reviewed research presents an approach related to the field of software requirements
+engineering.
+2C2: The research uses NLP techniques including syntactic or semantic processing.
+3C3: It is published between 2010 and 2021
+Exclusion Criteria:
+EC1: Secondary research is excluded (such as literature reviews, summaries, etc.)
+EC2: The research is published in languages other than English
+6
+Figure 1: Search flow diagram for our systematic review
+EC3: Duplicate papers (only the most recent and detailed one is considered)
+EC4: The study does not provide detailed information about the proposed approach (such as, short
+papers, posters, etc.)
+4.2. Conducting the Search
+The review process consists of five main stages. Figure 1 illustrates these stages and the numbers
+of selected publications after each stage. Starting from the defined data sources, we obtained a total
+of 2,227 candidate papers. Duplicated papers were automatically eliminated using Parsifal tool1
+first, and then additional duplicate entries were manually eliminated by comparing authors, titles,
+and abstracts. After removing all duplicates, 1,573 papers remained.
+These papers are filtered by applying the selection criteria based on titles and abstracts. This
+stage led to the selection of 252 papers. A full-text review of those papers was then conducted to
+discard papers that did not satisfy our selection criteria. The remaining primary research papers
+after this stage are 98. Finally, reference checking led to an additional 6 relevant papers. After
+these stages, our final list consists of 104 unique primary papers.
+1 https://parsif.al
+7
+4.3. Data Extraction and classification
+A Data Extraction Form (DEF) is developed to collect the required data to answer our RQs.
+The form is designed in a table format consisting of the following types of information:
+• Bibliometric Information: author(s), publication year, type of publication, and publication
+venue.
+• Targeted RE task(s).
+• Proposed solution including the Syntactic and semantic information used to represent requirements.
+• Evaluation Details: evaluation dataset, used metrics, and the results.
+• limitations and constraints.
+5. Results and Discussions
+This section describes and explains the results obtained by the analysis of the 104 selected
+papers answering the RQs exposed in the previous sections.
+5.1. (RQ1) What is the state of the published literature on RE works that use syntactic and semantic
+representations for requirements?
+As previously mentioned, our final list consists of 104 unique peer-reviewed research papers. Fig
+2 shows the distribution of these publications per year. This chart reflects a growing interest in the
+use of syntactic and semantic levels of processing to handle RE tasks. The vast majority of papers
+(more than 85%) have been published since 2015.
+Among the selected papers, 47% of them appeared in journals; 42% of papers were published
+in conference proceedings, while 11% of papers came from workshops.
+The most popular venue for publishing articles related to our study is IEEE International
+Conference on Requirements Engineering and its workshops with more than 12% of papers, while the
+most popular journals are: Information and Software Technology, Empirical Software Engineering,
+Requirements Engineering with 5-6% of papers in each of them.
+5.2. (RQ2) In which RE tasks are the syntactic and semantic aspects mostly considered to represent
+requirements?
+We classified the retrieved papers based on the type of the targeted RE task. Fig. 3 shows the
+hierarchy of all 104 papers categorized into 6 top-level categories and 19 subcategories. The six
+main categories are:
+8
+20
+15
+10
+5
+20
+10
+20
+11
+20
+12
+20
+13
+20
+14
+20
+15
+20
+16
+20
+17
+20
+18
+20
+19
+20
+20
+20
+21
+0
+Figure 2: Number of published per year
+5.2.1. Requirements Analysis
+This category represents the majority of publications (50 out of 104 papers). It includes papers
+focusing on the following RE tasks:
+• Requirements Classification: Requirements classification is an important step towards
+automatically analyzing natural language requirements, especially when handling projects
+with large numbers of requirements [10]. We recognized 21 papers proposing solutions to
+various requirements classification tasks. Most of them focused on Functional/Non-Functional
+classification tasks [39, 40, 41, 10, 11, 42, 43, 44, 45, 46, 47, 48, 49], while the remaining focused
+on other classification tasks: security/Not security [50, 51, 52], topic-based classification [53],
+and classification based on requirements importance level [54].
+• Requirements Traceability: Requirements traceability is used to capture the relationships
+between the requirements, the design, and the implementation of a system [55]. We recognized
+21 papers related to this task, part of which focused on detecting the relationships between
+requirements (inter-dependency between requirements) [56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+66], while the remaining focused on detecting the relationships between requirements and
+other artifacts (design documents and source code) [67, 55, 68, 69, 70, 71, 72, 73, 74].
+• Requirements Clustering: Requirements clustering is used to organize software requirements into a set of clusters with high cohesion and low coupling [75]. We recognized 5 papers
+presenting approaches to cluster requirements. These papers used the resultant clusters to
+understand the main functional groups or topics over requirements [76, 77, 78], to organize
+9
+Figure 3: A chart illustrating the hierarchy of papers categorized based on their targeted RE task.
+10
+requirements in a tree structure (hierarchy) [79], or as a step towards discovering redundancy
+and inconsistency between requirements [80].
+• Semantic Role Labeling: Semantic role labeling is the task of extracting semantic information from a software requirements specification [81]. Four papers addressed this task
+[82, 83, 81]. These works focused on mapping requirements to formal representations by
+extracting their main semantic elements such as actors, actions, and objects.
+5.2.2. Requirements Extraction
+Requirements extraction (or elicitation) is one of the crucial steps in software development. We
+recognized 19 papers addressing tasks related to this category. These papers can be divided into
+three groups:
+• Extracting Requirements from Reviews and Forums: 9 papers [84, 85, 86, 87, 88, 63,
+89, 90, 91] proposed solutions for this task, where various applications reviews and forums are
+used as a source for input texts such as App Store and Google Play.
+• Extracting Requirements from Textual Documents: 7 papers [92, 93, 94, 95, 96, 97, 98]
+presented approaches to extract requirements from SRS documents, policies, user manuals,
+and emails.
+• Extracting Requirements from Similar applications: 3 papers [99, 100, 101] focused
+on recommending requirements based on the specifications of similar applications. This goal
+is achieved by processing the description of similar products to suggest new possible features
+and generate creative requirements.
+5.2.3. Quality assessment
+Quality assessment tasks are concerned with detecting defects in software requirements specifications. [102, 103]. We recognized 17 papers focusing on tasks related to the following quality
+assessment tasks:
+• Ambiguity Detection: This task helps in the identification of ambiguous requirements.
+The works under this sub-category (9 papers) can be further classified based on the discussed
+level of ambiguity:
+– Lexical Ambiguity: The main focus at this level is the ambiguity caused by words and
+terms. We recognized 6 papers related to this level [93, 104, 105, 106, 10, 107].
+– Syntactic Ambiguity: This level focuses on detecting sentences that have different possible grammatical structures. We recognized one paper handling this level of ambiguity
+(Osama et al. [108]).
+11
+– Semantic Ambiguity: This level focuses on detecting confusing contexts in sentences such
+as anaphoric ambiguity and coordination ambiguity. We recognized one paper handling
+this level (Ezzini et al. [109]).
+– Pragmatic Ambiguity: This level focuses on detecting sentences with multiple meanings.
+We recognized one paper handling this level (Ferrari et al. [110])
+• Incompleteness Detection: This task is concerned with detecting any possible incompleteness in requirements statements. We recognized 3 papers handling this task [111, 112, 113].
+• Conformance With Templates: This task focuses on verifying that the requirements are
+indeed written according to pre-defined templates. We recognized one work proposing a
+solution to handle this task (Arrora et al. [114]); specifically, this work focused on checking
+the conformance of requirements with two well-known templates: Rupp [115] and EARS [116]
+templates.
+• Vagueness Detection: Vagueness occurs when a statement can have a continuum of interpretations (e.g., when using words like tall, large, etc.). We recognized one paper focusing on
+this problem (Cruz et al. [117]).
+• General Assessment: Other papers suggest approaches providing a general assessment
+for different aspects of requirements quality. Three papers can be classified under this type
+[118, 102, 103]
+5.2.4. Modeling
+Modeling software requirements is the process of transferring the natural language requirements
+into models and diagrams [119]. We recognized 12 papers proposing solutions related to this type
+of RE tasks. One of the main differences between these works is the type of the generated model:
+• Use Case Diagrams [120, 121, 119, 122], that focus on actors and their corresponding actions.
+• Feature Models [123, 124], that define features and their dependencies.
+• Conceptual Diagrams[125, 126], that focus on concepts and relationships between them.
+• Glossaries [127, 128], which define technical terms which are specific to an application domain.
+• Goal Models [129], that focus on the objectives which a system should achieve through the
+cooperation of actors in the intended software and the environment.
+• Semantic of Business Vocabulary and Rules (SBVR) [130], which defines the semantics of
+business vocabulary, business facts, and business rules.
+12
+5.2.5. Requirements Management
+Requirements management is an ongoing activity throughout the development process [131].
+We classified two tasks under this category:
+• Requirements Prioritization: the main target for this task is to determine which candidate
+requirements of a software product should be included in a certain release. We recognized 5
+papers handling this task [132, 133, 134, 135, 136].
+• Effort Estimation: This task focuses on estimating the effort involved in implementing a
+requirement [137]. We found 2 papers proposing methods to handle this problem [138, 137].
+Both of them focused on estimating the effort in Agile development methodologies.
+5.2.6. Others
+One of the retrieved papers (Mishra et al. [139]) focused on building a language model for the
+software requirement domain. This model was based on a domain-specific text corpus collected by
+crawling the software engineering category on Wikipedia.
+5.3. (RQ3) What are the proposed representations in the literature for RE tasks?
+In general, almost all covered papers consist of two main phases:
+(1) Representation Phase: NLP processing steps are applied to analyze requirements texts, and to
+capture linguistic information in order to represent them in various forms.
+(2) Solving Phase: the results of the previous stage are used to solve the targeted problem based
+on various ML and non-ML approaches.
+Fig. 4 shows these two phases and the techniques used for each of them. Overall, we recognized
+five different text representation techniques used to handle the first phase: Lexical and syntactic
+features, ontology-based representation, VSM, topic modeling-based representation, and advanced
+embedding techniques. On the other hand, two families of solutions were proposed for the second
+phase: Machine Learning approaches which represent 55% of papers, and Rule-Based approaches
+(in 45% of papers) where patterns, regular expressions, and heuristics were used.
+To answer our third research question (RQ3), we explore the representations used in the first
+phase in more detail:
+5.3.1. Lexical and Syntactic features
+This part represents the largest group with more than 46% of papers (48 out of the selected
+104 papers). The solutions proposed in these papers share a similar pipeline: (1) Applying a set
+of NLP pre-processing steps. (2) Representing each requirement as a pre-defined set of linguistic
+features. (3) Then, proceeding to the solving phase which uses ML techniques (such as Decision
+Trees [97, 138, 81, 118, 52], SVM [53, 10, 88], and RF [96, 60, 90, 49]), or rule-based approach using
+a set of syntactic regular expressions [125, 95, 126, 130, 117].
+13
+Input
+Understanding
+Phase
+Adv.
+Embedding
+(24 papers)
+Lex.
+and Syn.
+(48 papers)
+Solving
+Phase
+Topic
+Modeling
+(8)
+Output
+Machine Learning
+(57 papers)
+OntologyBased (9)
+Rule Based
+(47 papers)
+VSM
+(15 papers)
+Figure 4: The general flow and the used techniques for each phase
+The used pre-defined set of features (in step 2) usually includes features related to the following
+four groups:
+• The lexical and morphological features, which are based on requirement words and their
+morphological information, such as token, stem (or lemma), n-gram (sequence of words).
+• The syntactic features, which are derived from the syntax-related information in the requirement statement, such as POS-tag, chunks (noun or verb phrases), dependency relations,
+and the entities extracted using NER.
+• The frequency-based features, which are based on the requirements list frequency metadata such as the number of words and the number of requirements.
+• Dictionary-based features, which are extracted with the help of special dictionaries representing special words lists.
+To further investigate the commonly used features, Fig. 5 shows the most frequently used
+features and the number of papers that consider each of these features. The most used feature is
+the POS-tag, as it is considered in 34 out of the total 48 papers related to this type of representation.
+14
+pos Tags
+Tokens
+Chunking
+Stem
+Dependency Rel.
+Freq-Based
+n-Gram
+Dictionary-Based
+NER
+0
+5
+10
+15
+20
+25
+30
+35
+Figure 5: Frequently used features
+5.3.2. Ontology-Based Representation
+This group represents about 9% of papers (9 out of 104). It benefits from pre-defined lexicons
+and semantic resources to extend the lexical and syntactic features. Most of these papers used a
+rule-based approach in their solutions by applying various ontology-path-based similarity measures.
+[110, 105, 74, 109, 113].
+WordNet
+Knowledge Domain
+Both
+2
+4
+6
+Figure 6: The used ontologies with their frequencies
+One of the main differences between these papers is whether the used ontology is general or
+domain-specific. Fig. 6 shows three types of works under this category based on the type of the
+used ontology: 6 papers used a general ontology (specifically WordNet) [127, 129, 113, 105, 140, 74],
+while 2 papers used a domain-specific ontology [110, 109], and one paper merges both approaches
+in its similarity calculations [83].
+5.3.3. VSM
+Various forms of VSM representation are used in 15% of papers (15 papers). These works
+combine the BOW technique with different weighting methods. The most frequent combination is
+BOW with TF-IDF (10 papers). Fig 7 shows all used weighting methods with their frequencies.
+15
+TF-IDF
+Frequency
+Boolean
+2
+4
+6
+8
+10
+Figure 7: Weighting methods used in VSM representations with their frequency
+Based on this type of representation, each requirement is represented as a vector of words or
+tokens or stems combined with their weights. These vectors are used in the subsequent phase to
+apply similarity-based rules [55, 71] or as an input to train machine learning models (such as SVM
+[87, 69, 40, 141]).
+5.3.4. Topic modeling based representations
+About 8% of papers (8 papers) used topic modeling techniques to represent requirements texts
+based on automatically discovered latent topics. Two main topic modeling techniques are used in
+these papers: LSA and LDA. Fig 8 shows the distribution of these two techniques over the related
+papers.
+LSA
+LDA
+2
+3
+4
+5
+6
+Figure 8: The used Topic modeling techniques with their frequency
+The output of both techniques is a k-dimensional space that reflects a k latent topics within
+the processed requirements. Then, each requirement is represented as a vector representation in
+this k-dimensional space. In most related papers, this representation is employed to calculate the
+similarity between requirements as a part of similarity-based rules [70, 107] or clustering machine
+learning techniques [135, 99, 78].
+5.3.5. Advanced Embedding Representations
+This part represents the second largest group of papers (24 papers) with a major increase in
+the last couple of years. It is noted that papers that use this kind of representations achieve
+promising results in many major tasks such as requirement classification [11, 50, 51], traceability
+[64, 56, 59, 58], ambiguity detection [106], and requirement extraction [98, 91].
+16
+Based on this type of representation, each requirement is represented as a vector of floating
+point values. The proposed representations in the related papers are built following two generic
+steps (Fig. 9): First, each token in the requirement text is represented using a word embedding
+technique; then the final requirement representation is constructed using the representation of its
+words. To further investigate papers that use advanced embedding techniques, we explore the
+techniques and models used in the implementation of each of these two steps.
+• Word Representation: Various word embedding techniques were used in the related literature. Word2vec and BERT are the most common techniques utilized in this group; together
+they were used in 17 out of the total 24 papers related to this group. Other works used GloVe
+and FastText models, while the remaining papers used an embedding layer instead (added to
+the front of their neural network model).
+Table 2 shows the related papers for each of the used word embedding techniques.
+Word Embedding
+word2vec
+BERT
+Embedding Layer
+GloVe
+FastText
+Related Papers
+[101, 104, 106, 139, 59, 67, 50, 43, 58, 76]
+[11, 47, 56, 64, 91, 84, 98]
+[39, 51, 137, 112]
+[54]
+[128, 66]
+Table 2: The used word embedding techniques with their related papers
+• Statement Representation: Papers that use this type of representation can be further
+classified based on the method used to merge word embeddings in order to represent statements. Table 3 shows all related papers classified into three types of statement embedding
+techniques.
+Statement embedding
+Aggregation-based
+RNN-based
+CNN-based
+Related Papers
+[11, 47, 56, 64, 91, 84, 98, 128, 66, 101, 104, 59, 58, 76]
+[54, 51, 137, 67, 112, 43]
+[39, 50]
+Table 3: the used statement embedding techniques with their related paper
+The aggregation approach is the most used technique (16 out of 24). It produces the requirement representation by applying various aggregation methods on word embedding results such
+as:
+– Using the average of words embedding to represent statements [101, 128, 66].
+– For BERT-based word embedding, a special token ([CLS]) is added to the beginning
+of the sentence and is used to calculate an aggregated representation of the statement
+[11, 64, 91, 84, 98].
+17
+Understanding Phase Using Advanced Embedding
+Statement
+Representation
+Word
+Representation
+Requirement
+GloVe
+(1)
+BERT
+(7 papers)
+RNN and
+its variants
+(6 papers)
+Fast
+Text
+(2 papers)
+Embedding
+Layer
+(4 papers)
+Requirement
+Representation
+CNN
+(2 papers)
+Aggregation
+(16 papers)
+Word2Vec
+(10 papers)
+Figure 9: The general flow of representing requirements based on advanced embedding techniques
+– Combining the syntactic information with the semantic ones by (1) classifying words
+based on their syntactic role, (2) calculating the weighted average for each role, then (3)
+concatenating the resultant vectors to form the final representation [58].
+– Representing requirements by representing its main ”semantic frames” which can be retrieved with the help of FrameNet [142]. The representation of these frames is calculated
+by averaging the embedding vectors of their words [59].
+Recurrent Neural Network (RNN) based representation takes word embedding vectors as input.
+It finds a dense and low-dimensional semantic representation for each requirement statement
+by sequentially and recurrently processing its words. Many RNN architectures have been
+used in the related papers such as LSTM [51, 137, 43], Bi-LSTM [54], BI-GRU [67], and
+Skip-Thought [112].
+Convolutional Neural Network (CNN) based representation takes word embedding vectors as
+input. It finds the final representation through a number of convolutional layers, pooling
+layers, and fully connected layers [39, 50].
+18
+5.4. (RQ4) What are the main research directions to represent requirements for each category of
+RE tasks?
+To answer this question, we start with a general overview of how the research directions to
+represent requirements have evolved over the last decade; then we present a deeper analysis of the
+trends and possible future directions in each category of RE tasks.
+5.4.1. General Overview
+Fig. 10 shows the number of papers according to the used NLP representation and the year
+of publication. The bubble chart (Fig. 10) shows clearly how the trend has changed in the last
+few years from the lexical and syntactic features to the advanced embedding techniques. These
+embedding representations became the most used type in the last 2 years (2020-2021) with 15 out
+of 40 published works in that period.
+2020-2021
+14
+3
+6
+1
+16
+2018-2019
+11
+1
+5
+1
+7
+2016-2017
+11
+2
+2
+2
+1
+2014-2015
+7
+1
+2
+2012-2013
+5
+1
+2
+2010-2011
+1
+2
+Lex. and ontology
+Syn.
+-based
+VSM
+Topic advanced
+Modelling embedding
+Figure 10: Bubble chart showing the number of papers according to the used NLP representation and the year of
+publications
+5.4.2. Research directions for each category of RE tasks
+To further investigate the trends of various representations, we studied their distribution over
+the main categories.
+Fig. 11 shows the number of papers that used each of these representations for each category.
+As noted, representing requirements based on a set of lexical and syntactic features is the most used
+approach in many tasks, especially in quality assessment and requirement modeling. However, there
+is a clear interest in the use of advanced embedding and VSM-based representations in requirement
+analysis tasks.
+19
+Req. Managements
+Req. Modelling
+Req. Extraction
+Quality Assessment
+Req. Analysis
+0
+Lex. and Syn.
+10
+20
+30
+40
+Ontology-Based
+VSM
+50
+60
+70
+Topic Modelling
+80
+90 100
+Adv. Embedding
+Figure 11: The percentage of used NLP representation for each category of RE tasks
+The following sub-sections discuss the trends for each category.
+• Requirement Analysis: Embedding techniques have been proven to be useful for various
+requirement analysis tasks [11, 64, 58, 59]. Two recent studies [11, 64] compared the performance of lexical-syntactic features representation with advanced embedding representation,
+and concluded that using embedding vectors led to better results in requirement classification
+[11] and traceability detection [64] tasks. This finding is consistent with the results observed
+in the NLP literature [143], which indicate that embedding techniques are powerful in determining the similarity of words and sentences. of words and sentences. Similarity represents
+the core operation in almost all requirements analysis tasks.
+• Quality Assessment: More than 50% of quality assessment papers used lexical and syntactic
+features to represent requirements (Fig. 11). However, a deeper analysis of related papers
+showed that we can differentiate between two types of quality-related RE tasks:
+– The majority of papers focused on lexical and syntactic quality-related issues such as
+lexical ambiguity and conformance with templates. Many significant contributions provide experiments that indicate the effectiveness of using lexical and syntactic features to
+represent requirements when handling this category of tasks [103, 102, 114, 144].
+– The remaining papers focused on semantic quality-related issues such as incompleteness,
+and semantic-level quality problems. For these tasks, the most used representation in
+the literature is ontology-based representation [109, 113, 111]. Besides, one of the recent
+interesting works employed advanced embedding representation based on an embedding
+layer with a Skip-Thought model to handle incompleteness detection problem [112].
+• Requirements Extraction: It is noted that there are two directions to handle requirements
+extraction tasks based on the source of data:
+– Extracting requirements from documents: the structured format of these documents
+20
+motivated many researchers to use lexical and syntactic features. All retrieved papers
+under this sub-category used lexical and syntactic representations [92, 96, 95].
+– Extracting requirements from reviews, forums, or similar applications: Most of the recent papers (especially the ones published in the last 2 years) used advanced embedding
+techniques to handle these tasks [84, 91, 101]. This finding could be due to the approaches used to handle this type of requirement extraction tasks; most solutions handle
+the problem as a classification task (classify sentences or phrases into requirements or
+not requirements classes) or a clustering task (group sentences that mention the same
+aspects in the product). Both approaches (clustering and classification) make the embedding technique more suitable (as mentioned previously when discussing the requirement
+analysis case).
+• Requirements Modeling: Almost all works under this category represent requirements
+based on their lexical and syntactic features or using ontology-based representation [130, 120,
+129]. These features are used in the form of rules and syntactic patterns to generate various
+models based on rule-based transfer techniques.
+• Requirements Management: Most of the papers under this category use lexical and syntactic features representation [136, 133, 134]. However, the number of NLP-based publications
+related to this category is still limited to have a clear conclusion regarding the suitable representations for this type of tasks.
+5.5. (RQ5) What gaps and potential future directions exist in this field?
+Our survey shows that the use of NLP-based requirements representation has made remarkable
+progress over the last decade. Based on our findings in the previous research questions (especially
+RQ4), the use of advanced embedding techniques to represent requirements seems to be promising
+for most RE tasks (mainly requirement analysis, extracting requirements from reviews and forums,
+and semantic-level quality tasks). Besides, representing requirements based on a set of lexical and
+syntactic features or using ontology-based information seems more suitable for other RE tasks (such
+as modeling and syntax-level quality tasks).
+In the following paragraphs, we will discuss the gaps that represent potential future research
+directions in this domain.
+5.5.1. More RE domain-specific word embedding models
+As shown in Fig. 9, word representation plays an essential role in representing requirements
+(mainly when using embedding techniques). To implement this step, most researchers use generic
+word embedding pre-trained models in their solutions. One of the main limitations of these generic
+models is their inability to provide appropriate representations for many domain-specific words.
+21
+For example, the domain-specific meaning of words like ”virus”, ”cookies”, ”Python”, ”fork”, etc.
+can not be captured based on models trained on generic corpora [139]. Building such domainspecific word embedding models is notoriously a challenging task, especially with the little size of
+data available in the RE domain. One of the recent works [139] provided an embedding model
+trained on 92 MB of texts collected from Wikipedia pages related to the software engineering
+domain. However, more research is needed (1) to have embedding models trained on more practical
+industrial texts, (2) and to evaluate the use of these models in various RE tasks.
+5.5.2. More suitable statements representation techniques
+Another important challenge, related to embedding techniques, is the way of merging word vectors to formulate requirements representations (step 2 in Fig 9). Although the suggested techniques
+lead to good accuracy in some RE tasks (such as requirements classification and traceability detection), these representations can still be considered as a step towards more suitable representations.
+Most of these works use aggregation techniques (that ignore word order [145]) or RNN-based technique (that usually focus on predicting the next element in a sequence [146]). These works can be
+further improved by considering more RE domain-specific representations [58]. One of the main
+potential future directions to handle this problem is using a ”syntax-aware sentence embedding”
+technique that considers both the main syntactic roles in requirement statements (such as actor,
+action, objects,...) and the semantic aspects of requirements.
+5.5.3. More adaptive syntactic processing
+Many studies have concluded that there is a gap between RE tasks automation research and
+its implementation undertaken in industrial and real-life projects [147, 148, 149]. This gap is more
+obvious in the case of rule-based approaches since they usually need the requirements to be represented based on specific templates [150]; hence, their success strongly depends on the consistency of
+the requirements with the predefined templates [114, 150]. Using such “template-based” approaches
+to handle RE tasks could lead to lower accuracy when applied to new requirements written based on
+some variations of the predefined template or a completely different template. These situations are
+common in real-life projects when it is hard to control requirements authoring environments, especially in large development projects, or when one has little control over the requirements authoring
+environments. [114, 151, 147, 148, 149, 150, 12]. One of the potential future research directions
+is working on more adaptive approaches which can be more flexible when handling requirements,
+such as identifying the syntactic structures automatically and building more adaptive approaches
+based on the dynamically identified structure.
+5.5.4. More research in some RE tasks
+Only a few works handled the following RE tasks: requirements prioritization, effort estimation,
+and semantic and pragmatic level quality tasks. More research should be conducted to explore the
+efficiency of using advanced embedding techniques for these tasks.
+22
+6. Main Findings:
+In this section, we summarize the main conclusions and findings in the following points:
+(1) There is a significant increase in the number of papers that use NLP-based requirements representation over the last decade. The increase is more obvious in the last 2 years.
+(2) We recognized 104 papers that employed an NLP-based representation to solve various RE
+tasks. We classified these works based on (1) the targeted RE task using a hierarchy consisting
+of 6 top-level categories and 19 sub-categories (Fig. 3), (2) the used NLP-based representation
+using 5 classes of text representation techniques (Fig. 4).
+(3) Using advanced embedding techniques to represent requirements seems to be promising for most
+RE tasks (especially requirement analysis, extracting requirements from reviews and forums,
+semantic-level quality tasks). Besides, representing requirements based on a set of lexical and
+syntactic features or using ontology-based information seems more suitable for other RE tasks
+(such as modeling and syntax-level quality tasks).
+(4) Most of the proposed embedding-based representations use generic language models that suffer
+from limitations when representing the meaning of software engineering terms. Having more
+domain-specific language models to represent words is considered one of the important research
+directions in future works.
+(5) Most of the proposed embedding-based techniques represent requirements statements without
+giving attention to the special structure of a software requirement that consists of clear components (actor, action, data object, etc). Using syntax-aware statements embedding could be one
+of the possible solutions to have more domain-specific representations that reflect the semantics
+of requirements in a better way (compared to traditional aggregation approaches).
+(6) There is a need for more flexible approaches in terms of the ability to handle requirements that
+do not follow (completely or partially) standard requirements templates, which is the common
+case in real-life projects.
+(7) The number of researches that use NLP-based representation is still limited for some RE tasks
+(requirements prioritization, effort estimation, semantic-based quality assessment).
+Finally, tables 4 and 5 summarize the extracted information for all 104 selected papers, in
+addition to their categorization based on their targeted RE task and the used text representation.
+In the matrix represented in Table 4, each cell includes the papers related to each category of RE
+tasks and text representation. Note that two papers ([97] and [98]) are mentioned twice in the table
+since they are related to both requirement analysis and requirement extraction categories. Table
+5 shows a detailed summary of the 104 papers. This table includes detailed information about
+the input and the output of the approach proposed in each paper. In addition, it encloses other
+descriptive information including the employed text processing steps, details about the solution
+technique (e.g., which ML approach is used), the used dataset, and a summary of the results.
+23
+Requirement
+Analysis
+Requirements
+Extraction
+Quality
+Assessment
+Modeling
+Management
+Lexical and
+Syntactic
+Features
+[152, 44, 65,
+97, 53, 46, 10,
+81, 80, 60, 57,
+52, 61, 45, 77,
+82, 72]
+[89, 96, 94,
+153, 90, 95,
+88, 92, 97]
+[103,
+117,
+114, 118, 144,
+93, 108, 111,
+102]
+[123,
+130,
+125, 120, 121,
+124, 122, 119,
+126]
+[138,
+134,
+136, 133]
+OntologyBased
+VSM
+[74, 140, 83]
+[41, 55, 48,
+40, 51, 79, 71,
+73, 141, 69,
+42, 49, 62]
+[87, 100]
+[113,
+105,
+110, 109]
+Topic
+ModelingBased
+[68, 78, 70]
+Advanced
+Embedding
+[99, 85, 86]
+[63, 91, 101,
+84, 98]
+[107]
+[112,
+104]
+[129, 127]
+[39, 50, 98,
+43, 76, 64, 58,
+11, 67, 66, 47,
+54, 56, 59]
+106,
+[128]
+[132]
+Others
+[135]
+[137]
+[139]
+Table 4: The final list of selected papers categorized based on the type of targeted RE task and the used text
+representation
+This table provides a starting point for researchers and practitioners in this field to obtain a quick
+overview of the state-of-the-art in each RE task, including the recommended dataset to be used
+and the most related publications.
+7. Threats To Validity
+Likewise any secondary research process, it is almost impossible to guarantee that we found the
+entire population of all the relevant papers. However, several actions were undertaken to minimize
+threats to validity.
+• To ensure the inclusion of almost all relevant academic works in the field, we followed a
+systematic mapping review methodology based on the recommenced guidelines for similar
+cases.[15].
+• Five reputable and well-known data sources ( Scopus, IEEE Xplore, ACM Digital Library,
+ScienceDirect, and SpringerLink) were chosen to maximize the number of candidate papers.
+• We tried to make our search string as general as possible by including various synonyms for
+each term and by including papers that cover either syntactic or semantic aspects. However,
+24
+the final search string may not encompass all the existing synonyms, which might lead to not
+capturing all the relevant studies. We mitigated this threat by checking the references of the
+final selected papers to add any additional relevant works.
+• To minimize mistakes caused by subjective analyses, we followed a rigorous study selection
+process, guided by clear inclusion and exclusion criteria. However, the exclusion of papers
+published in languages other than English may have failed to potentially find some relevant
+works.
+• When there were doubts or conflicts about whether to include an article or not, the final
+decision is discussed between authors.
+• To obtain data consistency and avoid bias in data extraction, we defined a clear data extraction
+template and discussed our results in several brainstorming sessions.
+8. Conclusion
+This study presents a systematic mapping review of the used NLP-based representations in
+various RE tasks. Starting from 2,227 papers retrieved from five well-known digital libraries, we
+recognized 104 primary papers fulfilling the inclusion and exclusion criteria. We analyzed these
+works and categorized them based on: the targeted RE task and the used text representation.
+Our results indicate that about two-thirds of retrieved publications handle tasks related to
+requirements classification, requirements traceability, ambiguity detection, and extracting requirements from reviews and documents. On the other hand, Lexical and syntactic features are widely
+used to represent requirements (more than 45% of publications). Besides, a growing number of
+papers use advanced word embedding techniques, especially in the last two years. Moreover, we
+summarize the main research directions to represent requirements in each category, and identify
+the gaps and possible future directions.
+The data extracted from the selected 104 papers and their categorization, can help as a useful
+set of references for further analysis in each task or category of tasks in RE. Besides, trends and
+gaps identified from this mapping study have provided many new ideas for research opportunities.
+25
+26
+at
+al. [46]
+classes
+NFR
+Mahmoud et
+Classification a Req.
+classes
+NFR
+Classification a Req.
+Younas et al.
+[45]
+classes
+NFR
+Classification a Req.
+Rashwan et
+al. [44]
+classes
+NFR
+Classification a Req.
+NFR
+al. [43]
+et
+DT; KNN; RF;
+FFNN
+features
+syntactic
+lexical
+Features
+and
+Syntactic
+Lexical and
+Features
+Syntactic
+Lexical and
+Embedding
+Advanced
+Based
+Rule-
+Based
+Rule-
+ML
+ML
+removal,
+stem-
+Normalized
+Google Distance (NGD)
+lemmatization;
+NFR indicator keywords
+ming, POS-tagging, famous
+stopwords
+ter, Stemming;
+Tokenization, Sentence split-
+word2vec
+ming; BOW
+GRU;
+approach
+similarity-based
+approach
+similarity-based
+SVM
+CNN
+LSTM;
+NB; LR*
+NFR
+to
+Dataset
+Own
+PROMISE
++PROMISE
+0.52
+R: 0.88 /P:
+F1: 0.64
+0.67-
+F1: 0.71
+to
+0.87;
+F1: 0.75
+0.84
+up
+0.94;
+up
+FR/QR
+Q(0.76)
+F1: F(0.79);
+Acc: 0.75
+0.72
+0.91 / NFR:
+CONCORDIA F1:
+PROMISE
+PROMISE
+Version)
+(Dalpiaz
+PROMISE
+PROMISE+
+0.82-
+FR/NFR
+F1:
+0.92
+F1:
+Results
+0.92
+Stop words removal; Stem-
+BERT
+SVM
+egy
+PROMISE
+version)
+(lima
+PROMISE
+PROMISE+
+Dataset
+classes
+ML
+ML
+Classi-
+fier +EM strat-
+Bayesian
+MNB;
+De-
+FR
+VSM
+Embedding
+Advanced
+based features
+features
+17 lexical-syntactic features
+ming; BOW + TF-IDF
+Sop words removal; Stem-
+including syn. dependency-
+ML
+ML
+Syntactic
+Lexical-
+VSM
+tion
+KNN; LR
+SVM*;
+ANN; CNN*
+tails
+Method
+Solving
+FR
+classes;
+NFR
+FR/QR;
+Rahman
+Classification a Req.
+Classification a Req.
+classes
+et
+al.
+al. [42]
+Khatian
+[11]
+Hey
+al. [10]
+Classification a Req.
+FR/QR
+et
+Dalpiaz
+NFR
+classes
+Classification a Req.
+Tok-
+Tok-
+TFIDE, CH2 feature selec-
+Stop words removal;
+enization; Stemming;
+Stop words removal;
+Text Processing
+classes
+ML
+ML
+Method
+enization; Stemming; BOW,
+VSM
+Embedding
+Advanced
+Method
+RepresentationSolving
+NFR
+et al. [41]
+Casamayor
+Classification a Req.
+FR/NFR;
+al.[40]
+Dias
+NFR
+Output
+classes
+et
+Input
+Classification a Req.
+Task
+Targeted
+[39]
+Baker et al.
+Paper
+27
+Advanced
+[78]
+ment
+Docu-
+SRS
+Misra et al.
+Clustering
+cases
+et al. [77]
+use-
+Clustering
+Casamayor
+a set of
+Req.
+Clustering
+[76]
+Gulle et al.
+al. [49]
+Classification Issues
+Clusters
+eling
+Topic
+and
+mod-
+features
+tional
+group
+syntactic
+lexical
+for func-
+Clusters
+embedding
+advanced
+ML
+ML
+ML
+features,
+Word
+RF
+tion; LSA
+move stop-words; lemmetiza-
+pos tagging; chunking; Re-
+V relates to.
+bilities based on the NP and
+egorize candidate responsi-
+MNB,
+based
+Mover’s
+clustering
+Theme
+based
+Xmeans, DBScan
+on EM, CobWeb,
+Clustering Based
+clustering
+POS-tagging; chunking; cat-
+algo-
+MNB, SVM*
+SVM*, RF
+LR,
+J48; NB; LR
+LSTM*)
+Words; word2vec
+words
+ML
+rithm (including
+22
+CNN
+tention
+Bi-LSTM + At-
+Distance
+Stop
+similarity
+text
+measure + KNN
+Fuzzy
+classification
+multi-class
+removal; Remove Template
+Tokenization;
+syntactic
+features, Semantic Triplet
+Clusters
+n-gram,
+Length-based
+rounding requirements
+Tokenization, n-gram, Sur-
+issue
+ML
+ML
+TF-IDF
+BOW,
+VSM
+Features
+Syntactic
+Lexical and
+VSM
+(Syntactic Features)
+140 Keywords (Lexical fea-
+BOW
+lected security dataset
+word2vec trained on a col-
+GloVe trained on 124 SRS
+moval, Stemming, TF-IDF
+Features
+ML
++
+(Distill-
+BiLSTM
+tures) + 34 linguistic rules
+ML
+and
+embedding
+Tokenization, Stop words re-
+ELMo)
+BERT
+word
+Syntactic
+Lexical and
+ML
+ML
+ML
+ML
+ML
+related
+quality
+et
+Krasniqi
+Classification a Req.
+Topic
+al.
+Req.
+at
+[53]
+Ott
+Design
+Patterns
+Classification a Req.
+Silva et al.
+Sec/NSec
+Sec/NSec
+[141]
+Classification a Req.
+Classification a Req.
+Li et al.[52]
+et
+VSM
+al.[51]
+Kobilica
+Advanced
+Embedding
+Sec/NSec
+Classification a Req.
+Palacio et al.
+Embedding
+Advanced
+[50]
+FR.
+Significant
+Classification a Req.
+Chatterjee
+et al. [54]
+aspects
+Quality
+al. [48]
+Classification a Req.
+FR/NFR
+VSM
+et
+Classification a Req.
+Raharja
+al.
+Embedding
+et
+[47]
+Kici
+P:0.68;
+F1: 0.80
+Dataset
+Own
+Dataset
+Own
+CrowdRE
+Dataset
+Own
+DCU
+PROMISE+
++PROMISE
+SecReq
+SecReq
+Dataset
+Own
+Dataset
+Own
+0.71-
+measure
+F1: 0.52.
+Purity: 0.46;
+0.80
+Rand Index:
+exists
+no
+F1:0.79
+R:0.8/ P: 0.6
+F1: 0.52
+F1: 0.63
+Acc: 0.84
+0.96
+Acc:
+F1: 0.86
+(PROMISE+) R:0.55
+6 datasets
+PROMISE
+DOORS +
+28
+Two
+Traceability
+Reqs
+Two
+et
+Sultanov
+al. [62]
+Reqs
+[61]
+Two
+Samer et al.
+Traceability
+Reqs
+Two
+Traceability
+et al. [60]
+Deshpande
+Two
+Reqs
+Two
+Reqs
+Traceability
+Traceability
+al. [59]
+Alhoshan et
+[58]
+Sonbol et al.
+related
+not
+related
+/
+its
+not
+related
+/
+related
+type
+and
+VSM
+features
+syntactic
+lexical
+features
+syntactic
+and
+and
+Embedding
+Advanced
+Embedding
+Advanced
+Dependency lexical
+score
+Similarity
+score
+similarity
+ML
+ML
+ML
+Based
+Rule-
+Based
+Rule-
+similar words
+classify re-
+words
+Removal
+words
+ming, VSM+TF-IDF; agent
+stop words removal, stem-
+zation
+merged synonyms, lemmati-
+Stop
+,
+stop words removal; lemmatization
+tokenized,
+gence
+swarm
+KNN
+NB,RF*,
+Linear
+intelli-
+and
+SVM,
+RF, SVM, NB
+cos sim
+mantic frames
+Embeddings and
+based representation of se-
+relatedness score
+lemmatisation, Embedding-
+tagging
+Based
+Dis-
+of
+based on frame
+POS
+Similarity
+tance
+Manhattan
+number
+and
+moval,
+tokenisation, stop-word re-
+mensions; word2vec
+quirements to semantic di-
+NP chunking;
+Tokenization; POS Tagging;
+is
+be-
+calculated based
+on
+determine verbs
+reqs
+ments
+features
+tween
+Similarity
+require-
+moval; generate synonyms;
+Tokenization; stopwords re-
+Cos Similarity
+lapping
+Based
+Rule-
+BERT
+K-mean
+ments
+and
+Based
+Rule-
+terms
+to detect technical business
+pos tagging; NP chunking
+clustering (AHC)
+Hierarchical
+Agglomerative
+docu-
+syntactic
+lexical
+Embedding
+Advanced
+ML
+moval; stemming; VSM
+Tokenization; stopwords re-
+over-
+identify
+score
+Similarity
+and
+ML
+SRS
+Two
+[57]
+Traceability
+Traceability
+Blake et al.
+al.
+Reqs
+et
+features
+ment
+lexical
+VSM
+syntactic
+Clusters
+Clusters
+Docu-
+[56]
+Das
+Clustering
+SRS
+al. [80]
+Mezghani et
+a set of
+Req.
+Clustering
+[79]
+Eyal et al.
+pairs
+Dataset
+Own
+Dataset
+OpenReq
+dataset
+PURE
+of reqs
+1,770 pairs
+of reqs
+5,852 pairs
+Dataset
+Own
+of reqs
+800
+Dataset
+Own
+Dataset
+Own
+Avail-
+F1: 0.58
+F1: 0.89
+F1:0.89
+F1: 0.86
+F1: 0.92
+able
+Not
+Acc: 0.88
+Results
+No Available
+R:0.54-0.61
+P:0.72-0.83/
+29
+code-reqs
+al. [70]
+Mahmoud et
+[69]
+Rasekh et al.
+[68]
+Wang et al.
+Traceability
+Traceability
+Traceability
+tifcats
+and ar-
+reqs
+tifcats
+and ar-
+reqs
+tifcats
+and ar-
+reqs
+tifcats
+and ar-
+links
+trace
+links
+trace
+links
+trace
+links
+trace
+reqs
+[55]
+Traceability
+use
+ments
+docu-
+related
+Design
+not
+/
+and
+related
+Wang et al.
+Traceability
+not
+related
+cases+code links
+et
+Traceability
+/
+related
+related
+al. [73]
+Chhabra
+[67]
+al.
+SRSs
+et
+Guo
+two
+Reqs
+Traceability
+Deshpande
+/
+Reqs
+not
+related
+Two
+et al. [64]
+Traceability
+Lu et al. [63]
+and
+eling
+Topic
+VSM
+eling
+Topic
+VSM
+VSM
+mod-
+mod-
+embedding
+advanced
+embedding
+advanced
+features
+syntactic
+lexical
+based
+rule
+ML
+ML
+based
+rule
+based
+rule
+ML
+ML
+based
+rule
+(B)
+words
+words
+lemmatization;
+to-
+similar-
+removal;
+Cos
+stemming;
+stop
+stemming,
+stemming,
+TF–IDF,
+(VSM-T),
+POS-
+LDA,
+(LSI),
+two
+ap-
+logic
+to
+(Bidirec-
+Topic
+tech-
+(NGD).
+larger
+Avail-
+perform
+NGD
+ESA,
+and
+out-
+and
+VSM-POS,
+VSM-T,
+R:0.94
+P:0.91;
+0.70/0.30
+than
+R/P
+able
+Not
+F1: 0.56
+LDA.
+iTrust.
+eTour, and
+CM-1,
+albergate
+Easyclinic,
+Dataset
+Own
+eTour
+iTrust,
+Precision: 0.59
+age
+Mean Aver-
+F1: 0.93
+Acc: 0.83
+LSA
+func-
+14
+Easyclinic,
+Dataset
+Own
+Dataset
+Own
+Dataset
+Redmine
+projects
+from
+Own Data
+normalized Google distance
+tion
+similarity
+LR, SVM, DT
+, RBF Network,
+Bayesian learning
+Algo
+Model–Genetic
+Biterm
+nique
+ranking
+a set of huristics
+Gated Unit)
+tional Recurrent
+RNN
+Classification
+BertForSequence
+merge results
+fuzzy
+proaches and use
+apply
+mantic analysis (ESA), and
+se-
+indexing
+explicit
+semantic
+latent
+enabled VSM (VSM-POS),
+support
+VSM, VSM with thesaurus
+TF-IDF+BoW
+Topic Modeling
+ging,
+stop words removal, pos tag-
+VSM, word2vec
+normalization,
+VSM based model
+main corpus
+word2vec trained on a do-
+BERT
+kenization;
+stop
+ity
+SVM+Freq;
+removal;
+proach
+(A) Jaccard sim based ap-
+30
+et
+al.
+beling
+Role
+[81]
+La-
+Semantic
+Wang et al.
+beling
+La-
+Role
+[83]
+La-
+Semantic
+beling
+Role
+Wang et al.
+et al. [82]
+Diamantopoulos Semantic
+Traceability
+SRS
+a Req
+a Req
+Reqs
+and
+Spec.
+Design
+[72]
+Leitao et al.
+a set of
+reqs
+Traceability
+senario
+al. [66]
+Nicholson et
+of
+inter-
+conflicts
+conflicts
+links
+trace
+and
+ontology-
+based
+ontology-
+features
+syntactic
+lexical
+VSM
+tree,
+tagging,
+Rela-
+roles
+semantic
+roles
+semantic
+tions
++
+Concepts
+Rules
+and
+and
+features
+syntactic
+lexical
+based
+and
+ontology-
+features
+syntactic
+lexical
+features
+syntactic
+Association lexical
+embedding
+dependenciesadvanced
+ML
+ML
+ML
+ML
+pos
+tagging,
+parsing, NER
+tokenization,
+ogy
+pos
+tagging,
+wordNet and domain ontol-
+tree; word sense fetures using
+chunking; Verb class; parsing
+Fetures: lemmas; pos tags;
+tic dependency relations
+Fetures: lemma, pos, syntac-
+chunking
+tokenization,
+word embedding
+sim
+VP; similarity measure using
+dency
+ML
+pos
+dependency
+chunking; extract NP and
+WordNet
+parser,
+tokenization,
+basic NLP processing
+pos tagging, stemming,
+Levenstein and path based
+based
+rule
+based
+rule
+based
+rule
+based
+rule
+depen-
+reqs+change
+requirement based
+set
+Traceability
+Arora et al.
+[74]
+reqs
+a set of
+Traceability
+[140]
+Shah et al.
+a set of
+tifcats
+and ar-
+reqs
+reqs
+Traceability
+Traceability
+al. [65]
+Aldekhail et
+[71]
+Alia
+to
+ap-
+re-
+clusters
+based
+maximum
+DT classifier
+entropy classifier
+The
+classifier
+logistic regression
+Mining
+Association Rule
+LR*, RF, NN
+algorithm
+similarity
+to detect conflicts
+process
+quirements, then
+clustering
+flicts
+to identify con-
+rule based system
+prove links
+pruning
+Constraint-based
++
+baseline
+approaches
+apply
+case
+18 SRS
+Dataset
+Own
+Own Data
+Dataset
+Own
+3 test cases
+studies
+trial
+Two indus-
+5 datasets
+ENP, FMS
+CPMS,
+Lynx, SIP
+Pooka,
+iTrust,
+R: 0.91-0.92
+P: 0.92-0.93;
+F1:0.85
+ex-
+rules
+0.55-
+F1: 0.76
+tracted
+were
+238
+0.67
+F1:
+reqs
+impacted
+99% of the
+detected
+F1:0.65
+100%
+Accuracy:
+and JSM
+R than VSM
+higher P and
+and 8%-64%
+11%-107%
+31
+Detection
+Ambiguity
+[109]
+Wang
+Ambiguity
+Detection
+Mishra et al.
+[104]
+Detection
+[107]
+Detection
+Ambiguity
+Misra et al
+[110]
+Detection
+[108]
+Ambiguity
+Ambiguity
+Osama et al.
+Ferrari et al.
+Detection
+al.[93]
+et
+Ambiguity
+Ezzini et al.
+words
+related
+domain
+the
+ous
+CS
+ambigu-
+lated/not
+domain
+ity
+ambigu-
+detect
+guity
+disambi-
+aliases
+mod-
+and
+and
+embedding
+advanced
+based
+ontology-
+eling
+Topic
+features
+ambiguity
+syntactic
+syntactic
+resolving
+ity
+lexical
+features
+onymous
+ambigu-
+syntactic
+and Syn-
+re-
+to
+based
+ontology-
+Overloaded lexical
+specific
+cor-
+ambi-
+gious?
+is
+puses:
+2
+Reqs
+a set of
+a Req
+a Req
+Reqs
+a set of
+a Req
+based
+rule
+based
+rule
+based
+rule
+based
+rule
+based
+rule
+based
+rule
+POS
+Tagger,
+terms
+words
+re-
+ex-
+a
+domain
+Punctuation
+related
+Tagging,
+Lemmatiza-
+each corpus
+tion, learn word2vec from
+PoS
+Removal,Stop word removal,
+Tokenization,
+knowledge graphs
+Build
+LSA
+cation, aliases identification,
+moval, misspelling identifi-
+stop
+Tagging,
+traction,
+POS
+syntactic parsing
+tures
+features, pattern based fea-
+lexical features, contextual
+and extracted nouns
+specific corpus based on wiki
+Lemmatizer, parser, domain-
+Tokenizer,
+method
+con-
+projects
+CS
+words
+meaning
+have a different
+used
+of the commonly
+find
+an
+of
+amples
+a set of ex-
+compare
+graph,
+which
+example
+out
+with
+concept
+proof
+65 reqs
+each
+paths
+requirements
+126
+(459 reqs)
+4
+within
+searches
+the
+Reqs
+documents
+20
+for concept paths
+cepts,
+takes
+approach
+Similarity-based
+set of heuristics
+date concepts
+to extract candi-
+C-value
+heuristics
+a set of rules and
+aver-
+-
+-
+F1: 0.6
+sion, R:0.99
+P:0.65 preci-
+: 0.52-0.57
+age precision
+Mean
+0.89
+P: 0.80; R:
+32
+Detection
+Ambiguity
+Detection
+Ambiguity
+al. [105]
+Ferrari et al.
+[106]
+Dalpiaz
+quirement
+Assessment
+Re-
+[103]
+a
+Reqs
+General
+ment
+Assess-
+a set of
+reqs
+a set of
+Reqs
+a set of
+Bad
+of defects
+10 types
+scores
+quality
+Requ
+or
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+terms
+Good
+syntactic
+synonyms
+and
+rule
+and
+and
+and
+based
+rule
+based
+rule
+ML
+based
+Lemmatiza-
+JAPE rules;
+Shallow Parsing; Gazetters;
+Tokenization; POS Tagging;
+tion
+POS Tagging;
+formation
+flect lexical and syntactic in-
+24 quality metrics that re-
+lexical and syntactic
+and
+and use
+most
+freq.
+of
+top
+each
+be-
+rules
+dictionaties
+heuristics
+and
+a set of rules and
+Boosting
+with Bagging and
+C4.5*,
+PART,
+context
+Cortical.io
+their
+using
+between
+tween terms then
+similarity
+the
+ambiguity
+calculate
+score
+find
+similar words to
+Compare
+for
+similar
+nouns, find a set
+find
+For each domain:
+cluster them
+tic similarity to
+noun.
+Genera-
+term:
+WordNet seman-
+C-value
+tences,
+words
+Models
+domain specific documents;
+crawl Wikipedia to extract
+C-Value
+each
+get related sen-
+For
+mains
+lexical
+ex-
+do-
+near-
+tokenization,
+tract terms using wordNet,
+sentence
+tion
+based
+rule
+based
+rule
+ferent
+embedding
+advanced
+based
+ontology-
+Language
+terms
+ambiguous
+terms
+biguous
+am-
+detect
+dif-
+from
+corpuses
+SRS
+Ferrari et al.
+al. [102]
+General
+ment
+Assess-
+[118]
+et
+General
+Parra et al.
+Femmer
+Detection
+al. [144]
+et
+Ambiguity
+matsuoka et
+from
+data
+Large
+and
+D-Pilot
+D-
+1471 reqs
+corpus
+INCOSE
+sets
+28
+5 domains
+data
+amples
+a set of ex-
+R:0.85
+P:
+R:0.82
+P:
+0.83;
+0.59;
+Acc: 0.87
+0.51
+R: 0.25; P:
+Tau of 88
+Kendall’s
+Maximum
+-
+33
+IncompletenessSRS
+a Req
+Extraction
+from Docs
+Extraction
+from Docs
+Extraction
+from Docs
+Abualhaija
+et al. [96]
+Haris et al
+[95]
+Quirchmayr
+et al. [94]
+plates
+with
+[114]
+tem-
+conformance
+Arora et al.
+Detection
+[117]
+tex-
+manual
+user
+SRS
+ment
+docu-
+tual
+a
+a Req
+or
+or
+of
+features
+list
+Not Req
+Req
+Not Req
+Req
+or Not
+and
+features
+syntactic
+lexical
+based
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+and
+and
+and
+and
+and
+ontology-
+embedding
+advanced
+features
+syntactic
+Conformancelexical
+is vague?
+cases
+Vagueness
+defect
+defined
+solve pre-
+Detection
+Am-
+plete?
+is incom-
+score
+Completenesslexical
+biguity
+and
+Cruz et al.
+et
+Incompletenessa Req
+al. [113]
+Baumer
+ment
+Docu-
+Detection
+[112]
+al.
+Liu
+et
+Detection
+[111]
+Reqs
+Incompletenessa set of
+Ferrari et al.
+based
+rule
+based
+rule
+ML
+based
+rule
+based
+rule
+based
+rule
+ML
+based
+rule
+Tagging,
+extract
+POS,
+Stop
+Labeling;
+Stop-
+splitrer,
+POS-
+Features:
+token-based
+and correction
+parse tree transformations
+tion ; parsing; Pattern-based
+POS tagging; terms extrac-
+POS Tagging, chunking
+based features
+semantic features, frequency-
+features, syntactic features,
+20
+NER; Chunking
+Tokenization; POS tagging;
+of not vague terms.
+does not match a whitelist
+list of known vague terms or
+adverbs that match a black-
+tagging, get adjectives and
+sentence
+WordNet
+words removal; POS tagging;
+Semantic
+encoder
+tion; skip-thoughts sent2vec
+words removal; Lemmatiza-
+Tokenization,
+tive+noun)
+POS-based patterns (adjec-
+POS
+comscore
+graph-based
+rules
+to
+set
+of
+Post-
+terns
+Syntactical
+tern
+pat-
+POS tagging pat-
+Processing steps
+a
+sitive learning +
+RF with cost sen-
+pattern matching
+Req Exp based on
+pilot study
+cases
+solve some defect
+fined
+a set of prede-
+clustering
+a
+Values
+based on C-NC
+pleteness
+calculate
+set
+of
+0.34;
+se-
+indus-
+case
+industrial
+dataset
+PURE
+reqs.
+trial set of
+33
+4 test cases
+R:0.94
+P:
+ments
+require-
+lected
+400
+reqs
+aerospace
+a
+pilot study
+In-
+F1:0.92
+R: 0.64-0.89
+P:0.64-1.0;
+0.95
+P: 0.81, R:
+F2: 0.96-1.0
+(0.78)
+Ambig.
+comp.(0.76);
+F1:
+F1:0.52
+-
+34
+Extraction
+Shi
+et
+al.
+et
+Re-
+views
+from
+Re-
+Extraction
+[89]
+views
+user re-
+view
+views
+user re-
+from
+Re-
+Extraction
+views
+quests
+Re-
+from
+view
+user re-
+user re-
+Re-
+back
+feed-
+user
+view
+user re-
+Extraction
+views
+from
+Extraction
+views
+from
+Extraction
+Peng et al.
+Lu et al. [63]
+Li et al. [88]
+[87]
+Jha
+al. [86]
+Carreno
+views
+from
+[85]
+Re-
+Extraction
+Bakar et al.
+views
+view
+from
+Re-
+user re-
+Extraction
+De et al. [84]
+list
+Mailing
+from Docs
+and
+stop words removal, lemma-
+or
+re-
+requests
+feature
+classes.
+4 reviews
+8 types
+quests to
+user
+classify
+features
+bugs
+ics
+main top-
+features
+features
+syntactic
+lexical
+and
+embedding
+advanced
+features
+and
+mod-
+syntactic
+lexical
+VSM
+eling
+Topic
+eling
+ML
+ML
+ML
+ML
+ML
+based
+TF-IDE; lexical
+ging, dependency parser
+lexical processing, pos tag-
+produce: AUR-BoW
+the paper used word2vec to
+and syntactic patterns
+Unigram;
+(2) BOW: Stemmer, BOW
+tic frame semantic parser.
+(1) BOF: based a probabilis-
+moval,
+tokenization, stop words re-
+trix,
+IDF, Term-Document Ma-
+tization, pos tagging, TF-
+pat-
+modeling
+sentiment
+Naive Bayes
+and Bagging*
+Naive Bayes, J48,
+SVM*, KNN, NB
+SVM*, NB
+analysis
+and
+topic
+features
+terns to extract
+syntactic
+boundaries
+tations to label
+use B,I,O anno-
+quence patterns
+10 semantic se-
+Bi-LSTM-CRF
+SRS
+set
+327
+views
+1924
+tences
+4000
+re-
+sen-
+WinMerge
+Mumble,
+KeePass,
+reviews
+datasets of
+Three
+comments
+of
+data
+tences
+/ 1253 sen-
+32 software
+for
+for 8 Apps
+dataset
+Match
+Ex-
+recall:
+0.76
+preci-
+Match
+Avg
+0.54-
+Avg
+Acc:
+F: 0.82
+F1: 0.71
+P:0.73-0.92
+0.81;
+R:
+0.77;
+Avg
+(0.85)
+(0.75); Bugs
+F1: Features
+0.5-0.8
+P: 0.90; R:
+(0.82 avg)
+avg); R: 0.86
+P: 0.87 (0.62
+(0.62)
+tial
+(0.46); Par-
+act
+F1
+0.86
+community
+reviews
+Avg
+sion:
+Avg
+F1: 0.86
+Ubuntu
+from
+317 emails
+documents
+22
+each)
+rule
+tokenization, BERT
+81 fuzzy rules
+depen-
+lemmatiza-
+pos tagging,
+dency parsing
+tion,
+Tokenization,
+a feature
+mod-
+ML
+based
+rule
+ML
+(125
+Topic
+embedding
+advanced
+features
+syntactic
+lexical
+and
+represent
+which
+chunk
+extract
+requests
+Feature
+features
+ment
+docu-
+requirements lexical
+syntactic
+tex-
+tual
+a
+[92]
+al.
+from Docs
+[93]
+et
+Extraction
+Wang et al.
+35
+et
+et
+al.
+mation
+Effort Esti-
+Apps
+al.
+of
+ments
+require-
+Prioritization set
+et
+Ali
+[132]
+mation
+et al.[137]
+eling
+Topic
+features
+Level
+priority
+points
+and
+VSM
+embedding
+advanced
+syntactic
+lexical
+embedding
+advanced
+mod-
+embedding
+Point
+Function
+ments
+require-
+new
+suggested
+ment
+require-
+and
+advanced
+features
+syntactic
+lexical
+recommendedVSM
+features
+new
+requirements
+story
+reqs
+a set of
+ments
+Similar
+of
+require-
+set
+of reqs
+corpus
+tions
+From
+Extraction
+Apps
+Similar
+From
+Choetkiertikul Effort Esti-
+al. [138]
+Hussain
+[101]
+Do
+al.[100]
+Extraction
+applica-
+Apps
+et
+ilar
+Similar
+Abbas
+features
+key
+features
+featurs+repo.
+suggested
+of sim-
+Re-
+reviews
+From
+views
+from
+Extraction
+views
+[99]
+al.
+Extraction
+et
+views
+user re-
+Jiang et al.
+[91]
+Wu
+from
+[90]
+Re-
+Extraction
+Yang et al.
+based
+rule
+ML
+ML
+ML
+ML
+ML
+ML
+ML
+pos
+tagging,
+Pronouns;
+VP;
+moval,BOW
+Stemming, Stop words re-
+Tokenization, POS tagging,
+word embedding
+(hapax legomena)
+Words; Sentences; Uniques
+junctions;
+Tokens in parentheses; Con-
+Active Verbs;
+including:
+Parentheses;
+features
+NP;
+tokenization,
+doc2vec, POS tagging
+stemming,
+ger, Lemmatization, TF-IDF
+Stop words removal, pos tag-
+BOW+LDA
+dependency parsing, BERT
+tokenization,
+ming
+analysis, POS tagging, stem-
+Sentence splitting, sentiment
+regression
+re-
+tech-
+to
+algo-
+based
+technique
+soning
+case-based
+work
+(CBR)
+rea-
+rent highway net-
+LSTM and recur-
+C4.5
+rithm
+BIRCH
+clustering
+recommend reqs
+Neighbours
+quirements+ use
+clustering
+nique
+clustering
+features
+model to identify
+A
+RF
+app
+fea-
+anno-
+re-
+sys-
+dif-
+studies
+ferent case
+four
+issues
+23,313
+4 projects
+3 domains
+tems from
+571
+quirements
+188
+100 apps
+tures from
+tated
+533
+reviews.
+with 1,1M
+200
+6 products
+reviews for
+common
+baselines
+3
+outperforms
+F1: 0.66
+uation
+Human eval-
+Acc: 0.74
+78%
+score: up to
+Hit@15
+F1: 0.78
+F1: 0.72
+36
+et
+et
+(UML)
+Modeling
+(UML)
+Modeling
+[121]
+Tiwari et al.
+[120]
+Haj
+Modeling
+(Con-
+Lucassen et
+al. [126]
+Model)
+ceptual
+(SBVR)
+[130]
+al.
+Modeling
+Hamza et al
+et
+(UML)
+Modeling
+al. [119]
+et
+(UML)
+al. [122]
+Elallaoui
+a set of
+Modeling
+Al-Hroob et
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+Reqs
+Prioritization a set of
+ments
+require-
+of
+relations
+and
+concepts
+SBVR
+use cases
+use cases
+use cases
+Cases
+Use
+priority
+suggested
+features
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+and
+and
+and
+and
+and
+and
+and
+and
+and
+mod-
+syntactic
+lexical
+eling
+Topic
+features
+Prioritization set
+priority
+lexical
+features
+syntactic
+lexical
+ments
+priority
+priority
+syntactic
+of
++
+of
+require-
+Prioritization set
+backs
+feed-
+reqs’
+reqs
+Prioritization set
+[136]
+Shafiq et al.
+[135]
+Misra et al.
+al. [134]
+McZara
+al. [133]
+Kifetew
+based
+rule
+based
+rule
+based
+rule
+based
+rule
+based
+rule
+ML
+ML
+based
+rule
+based
+rule
+based
+rule
+pos
+tagging,
+pos tagging,
+Tagger,
+pos tagging,
+dependency parsing
+tokenization;
+dependency tree, NER,
+Lemmatization, pos tagging,
+Tree
+POS
+pat-
+Dependency
+Grammar
+terns tagging
+Chunking;
+Tokenization; POS tagging;
+pos tagging
+dependency parsing
+Tokenization,
+tion extraction, LSA
+pos tagging, entities and ac-
+tagging
+tokenization, stemming, pos
+score
+sis, intention score, severity
+stemming, sentiment analy-
+tokenization,
+solver
++
+rules
+a set of heuristic
+rule based
+rule based
+rule based
+rule based
+word
+the role of each
+ANN to predict
+approach
+semi-automatic
+approach
+similarity-based
+AHP
+SMT
+prioritizing reqs.
+for
+properties
+relevant
+able
+extracts quantifi-
+reqs
+case
+sets
+trial
+4
+case
+data
+indus-
+studies
+3
+studies.
+10
+4 test cases
+ries
+90 user sto-
+5 test cases
+19 projects
+ments
+41 require-
+annotated)
+(top 20 are
+100
+ical studies
+two empir-
+0.87;
+0.43-
+P:0.92-0.98
+R:0.88-0.97;
+F1: 0.87
+Evaluation
+Human
+0.69
+P: 0.72; R:
+R:0.85
+P:
+0.44
+F1:
+acc 81%
+average top3
+37
+(Features
+(Goal
+[129]
+Language
+Model
+Mishra et al.
+[139]
+Model)
+Modeling
+Gunes et al
+Extraction
+Terms
+[128]
+Extraction
+Terms
+Glossary
+Glossary
+et
+Bhatia et al.
+al.[127]
+Arora
+(Features
+et al. [123]
+Model)
+Modeling
+Sree-Kumar
+Model)
+Modeling
+Model)
+ceptual
+(Con-
+Modeling
+[124]
+et
+Hamza et al
+al. [125]
+Thakur
+clus-
+rule
+pos
+Soft
+tagging,
+TF-IDF,
+enization, chunking; Lemma-
+Stop words removal, Tok-
+wordNet
+chunking,
+tokenization,
+IDF
+enization, NP chunking, TF-
+Stop words removal, Tok-
+tokenization, pos tagging
+embeddings
+model
+from
+wiki
+SE word
+model
+goal
+embedding
+advanced
+based
+ML
+based
+word embedding
+ments, similarity scores
+ging, extract user story ele-
+stopwords removal, pos tag-
+common concepts
+ontology-
+ML
+based
+rule
+pos tagging,
+dependency parsing
+tokenization;
+tization, WordNet to remove
+embedding
+advanced
+based
+based
+rule
+based
+rule
+based
+rule
+terms
+clus-
+and
+and
+and
+ontology-
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+features
+syntactic
+lexical
+tering
++
+Glossary
+terms
+tering
++
+Glossary
+Features
+Model
+Features
+relations
+and
+concepts
+of texts
+corpus
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+Reqs
+a set of
+set
+of
+huris-
+on
+fast-
+calculated
+word2vec
+huristic rules
+clustering
+Text + EM for
+based
+is
+Similarity Matrix
+based approach
+tics + similarity-
+a
+rules
+Set of heuristics
+rules
+a set of heuristic
+rule based
+case
+case
+use
+92MB
+model
+trained
+is
+size of our
+a test case
+Dataset
+CrowdRE
+reqs
+of 110-380
+consists
+3 sets each
+studies
+6
+studies
+4
+cases
+40
+/
+Terms
+-
+-
+tering (0.65)
+(0.39); Clus-
+F1:
+F: 0.52 - 0.64
+R 0.48-0.76
+P
+0.41-0.87
+0.57-0.93
+/
+P
+Relation:
+R
+0.40-0.73
+Features:
+uation
+human eval-
+Acc: 0.91
+38
+al. [98]
+Sainani
+et
+tences
+ments
+/
+cation
+Classifi-
+docu-
+From Docs
+Extraction
+or not
+Contracts Obligation
+ML
+(1)
+POS
+tags).
+Length;
+Extraction
+(BOW;
+dependencies;
+Approach
+Features:
+using
+IDF
+bigrams and trigrams, TF-
+stop words, lemmatization,
+WordNet; dependencies)
+Semantic
+Table 5: The Detailed Info for all 104 selected papers
+embedding
+advanced
+ML
+graphic;
+and
+Labeling
+features
+syntactic
+Semantic Labeling (Ortho-
+labeling
+reqs+Semantic
+lexical
+Semantic
++
+Docs
+set
+sen-
+of
+From
+al. [97]
+a
+Extraction
+Dollmann et
+BiLSTM
+tences)
+1608
+sen-
+(250 pages,
+document
+contracts
+Forge
+Source-
+from
+ExtraTreeClassifier dataset
+Extrac-
+Ex-
+(0.60-0.96)
+sification
+(0.93); Clas-
+traction
+F1:
+(0.73)
+labeling
+semantic
+tion(0.91);
+F1:
+References
+[1] A. Tahir, R. Ahmad, Requirement engineering practices-an empirical study, in: 2010 International Conference on Computational Intelligence and Software Engineering, IEEE, 2010, pp.
+1–5.
+[2] IEEE, Ieee standard glossary of software engineering terminology (std. 610.12-1990) (1990).
+[3] T. Ambreen, N. Ikram, M. Usman, M. Niazi, Empirical research in requirements engineering:
+trends and opportunities, Requirements Engineering 23 (1) (2018) 63–95.
+[4] I. Jureta, J. Mylopoulos, S. Faulkner, Revisiting the core ontology and problem in requirements engineering, in: 2008 16th IEEE International Requirements Engineering Conference,
+IEEE, 2008, pp. 71–80.
+[5] A. Aurum, C. Wohlin, Requirements engineering: setting the context, in: Engineering and
+managing software requirements, Springer, 2005, pp. 1–15.
+[6] A. Van Lamsweerde, R. Darimont, E. Letier, Managing conflicts in goal-driven requirements
+engineering, IEEE transactions on Software engineering 24 (11) (1998) 908–926.
+[7] C. Denger, D. M. Berry, E. Kamsties, Higher quality requirements specifications through
+natural language patterns, in: Proceedings 2003 Symposium on Security and Privacy, IEEE,
+2003, pp. 80–90.
+[8] R. Vlas, W. N. Robinson, A rule-based natural language technique for requirements discovery and classification in open-source software development projects, in: 2011 44th Hawaii
+International Conference on System Sciences, IEEE, 2011, pp. 1–10.
+[9] Z. Kurtanović, W. Maalej, Automatically classifying functional and non-functional requirements using supervised machine learning, in: 2017 IEEE 25th International Requirements
+Engineering Conference (RE), Ieee, 2017, pp. 490–495.
+[10] F. Dalpiaz, D. Dell’Anna, F. B. Aydemir, S. Çevikol, Requirements classification with interpretable machine learning and dependency parsing, in: 2019 IEEE 27th International
+Requirements Engineering Conference (RE), IEEE, 2019, pp. 142–152.
+[11] T. Hey, J. Keim, A. Koziolek, W. F. Tichy, Norbert: Transfer learning for requirements
+classification, in: 2020 IEEE 28th International Requirements Engineering Conference (RE),
+IEEE, 2020, pp. 169–179.
+[12] A. Ferrari, F. Dell’Orletta, A. Esuli, V. Gervasi, S. Gnesi, Natural language requirements
+processing: A 4d vision., IEEE Softw. 34 (6) (2017) 28–35.
+39
+[13] R. Garigliano, D. Perini, L. Mich, Which semantics for requirements engineering: From shallow to deep., in: The 1st Workshop on Natural Language Processing for REquirements Engineering (NLP4RE), 2018.
+[14] A. Booth, A. Sutton, M. Clowes, M. Martyn-St James, Systematic approaches to a successful
+literature review.
+[15] K. Petersen, S. Vakkalanka, L. Kuzniarz, Guidelines for conducting systematic mapping studies in software engineering: An update, Information and Software Technology 64 (2015) 1–18.
+[16] D. Jurafsky, Speech and language processing : an introduction to natural language processing,
+computational linguistics, and speech recognition, Prentice Hall, Upper Saddle River, N.J,
+2000.
+[17] V. Teller, Speech and language processing: an introduction to natural language processing,
+computational linguistics, and speech recognition (2000).
+[18] D. Jurafsky, J. H. Martin, Speech and language processing: An introduction to natural language processing, computational linguistics, and speech recognition.
+[19] K. Toutanova, D. Klein, C. D. Manning, Y. Singer, Feature-rich part-of-speech tagging with a
+cyclic dependency network, in: Proceedings of the 2003 Human Language Technology Conference of the North American Chapter of the Association for Computational Linguistics, 2003,
+pp. 252–259.
+[20] S. Abney, Partial parsing via finite-state cascades, Natural Language Engineering 2 (4) (1996)
+337–344.
+[21] M.-C. De Marneffe, C. D. Manning, Stanford typed dependencies manual, Tech. rep., Technical report, Stanford University (2008).
+[22] D. Nadeau, S. Sekine, A survey of named entity recognition and classification, Lingvisticae
+Investigationes 30 (1) (2007) 3–26.
+[23] T. R. Gruber, A translation approach to portable ontology specifications, Knowledge acquisition 5 (2) (1993) 199–220.
+[24] G. A. Miller, Wordnet: a lexical database for english, Communications of the ACM 38 (11)
+(1995) 39–41.
+[25] Z. Wu, M. Palmer, Verb semantics and lexical selection, in: 32nd Annual Meeting of the
+Association for Computational Linguistics, 1994, pp. 133–138.
+[26] R. Rada, H. Mili, E. Bicknell, M. Blettner, Development and application of a metric on
+semantic nets, IEEE transactions on systems, man, and cybernetics 19 (1) (1989) 17–30.
+40
+[27] G. Salton, Automatic text processing-addison-wesley longman publishing co., inc.
+[28] D. M. Blei, A. Y. Ng, M. I. Jordan, Latent dirichlet allocation, the Journal of machine
+Learning research 3 (2003) 993–1022.
+[29] S. T. Dumais, Latent semantic analysis, Annual review of information science and technology
+38 (1) (2004) 188–230.
+[30] T. Mikolov, K. Chen, G. Corrado, J. Dean, Efficient estimation of word representations in
+vector space, arXiv preprint arXiv:1301.3781.
+[31] J. Pennington, R. Socher, C. D. Manning, Glove: Global vectors for word representation,
+in: Proceedings of the 2014 conference on empirical methods in natural language processing
+(EMNLP), 2014, pp. 1532–1543.
+[32] J. Devlin, M.-W. Chang, K. Lee, K. Toutanova, BERT: Pre-training of deep bidirectional
+transformers for language understanding, in: Proceedings of the 2019 Conference of the North
+American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), Association for Computational Linguistics,
+Minneapolis, Minnesota, 2019, pp. 4171–4186. doi:10.18653/v1/N19-1423.
+URL https://aclanthology.org/N19-1423
+[33] L. Zhao, W. Alhoshan, A. Ferrari, K. J. Letsholo, M. A. Ajagbe, E.-V. Chioasca, R. T.
+Batista-Navarro, Natural language processing for requirements engineering: A systematic
+mapping study, ACM Computing Surveys (CSUR) 54 (3) (2021) 1–41.
+[34] I. K. Raharjana, D. Siahaan, C. Fatichah, User stories and natural language processing: A
+systematic literature review, IEEE Access 9 (2021) 53811–53826.
+[35] A. R. Amna, G. Poels, Ambiguity in user stories: A systematic literature review, Information
+and Software Technology (2022) 106824.
+[36] D. Dermeval, J. Vilela, I. I. Bittencourt, J. Castro, S. Isotani, P. Brito, A systematic review on
+the use of ontologies in requirements engineering, in: 2014 Brazilian Symposium on Software
+Engineering, IEEE, 2014, pp. 1–10.
+[37] F. Nazir, W. H. Butt, M. W. Anwar, M. A. K. Khattak, The applications of natural language
+processing (nlp) for software requirement engineering-a systematic literature review, in: International conference on information science and applications, Springer, 2017, pp. 485–493.
+[38] F. Bozyiğit, Ö. Aktaş, D. Kılınç, Linking software requirements and conceptual models: A
+systematic literature review, Engineering Science and Technology, an International Journal
+24 (1) (2021) 71–82.
+41
+[39] C. Baker, L. Deng, S. Chakraborty, J. Dehlinger, Automatic multi-class non-functional software requirements classification using neural networks, in: 2019 IEEE 43rd annual computer
+software and applications conference (COMPSAC), Vol. 2, IEEE, 2019, pp. 610–615.
+[40] E. Dias Canedo, B. Cordeiro Mendes, Software requirements classification using machine
+learning algorithms, Entropy 22 (9) (2020) 1057.
+[41] A. Casamayor, D. Godoy, M. Campo, Identification of non-functional requirements in textual
+specifications: A semi-supervised learning approach, Information and Software Technology
+52 (4) (2010) 436–445.
+[42] V. M. Khatian, Q. A. Arain, M. Alenezi, M. O. Raza, F. Shaikh, I. Farah, Comparative
+analysis for predicting non-functional requirements using supervised machine learning, in:
+2021 1st International Conference on Artificial Intelligence and Data Analytics (CAIDA),
+IEEE, 2021, pp. 7–12.
+[43] M. A. Rahman, M. A. Haque, M. N. A. Tawhid, M. S. Siddik, Classifying non-functional
+requirements using rnn variants for quality software development, in: Proceedings of the
+3rd ACM SIGSOFT International Workshop on Machine Learning Techniques for Software
+Quality Evaluation, 2019, pp. 25–30.
+[44] A. Rashwan, O. Ormandjieva, R. Witte, Ontology-based classification of non-functional requirements in software specifications: a new corpus and svm-based classifier, in: 2013 IEEE
+37th Annual Computer Software and Applications Conference, IEEE, 2013, pp. 381–386.
+[45] M. Younas, D. N. Jawawi, I. Ghani, M. A. Shah, Extraction of non-functional requirement
+using semantic similarity distance, Neural Computing and Applications 32 (11) (2020) 7383–
+7397.
+[46] A. Mahmoud, G. Williams, Detecting, classifying, and tracing non-functional software requirements, Requirements Engineering 21 (3) (2016) 357–381.
+[47] D. Kici, G. Malik, M. Cevik, D. Parikh, A. Başar, A bert-based transfer learning approach
+to text classification on software requirements specifications.
+[48] I. M. S. Raharja, D. O. Siahaan, Classification of non-functional requirements using fuzzy
+similarity knn based on iso/iec 25010, in: 2019 12th International Conference on Information
+& Communication Technology and System (ICTS), IEEE, 2019, pp. 264–269.
+[49] R. Krasniqi, A. Agrawal, Analyzing and detecting emerging quality-related concerns across
+oss defect report summaries, in: 2021 IEEE International Conference on Software Analysis,
+Evolution and Reengineering (SANER), IEEE, 2021, pp. 12–23.
+42
+[50] D. N. Palacio, D. McCrystal, K. Moran, C. Bernal-Cárdenas, D. Poshyvanyk, C. Shenefiel,
+Learning to identify security-related issues using convolutional neural networks, in: 2019
+IEEE International conference on software maintenance and evolution (ICSME), IEEE, 2019,
+pp. 140–144.
+[51] A. Kobilica, M. Ayub, J. Hassine, Automated identification of security requirements: A
+machine learning approach, in: Proceedings of the Evaluation and Assessment in Software
+Engineering, 2020, pp. 475–480.
+[52] T. Li, Z. Chen, An ontology-based learning approach for automatically classifying security
+requirements, Journal of Systems and Software 165 (2020) 110566.
+[53] D. Ott, Automatic requirement categorization of large natural language specifications at
+mercedes-benz for review improvements, in: International Working Conference on Requirements Engineering: Foundation for Software Quality, Springer, 2013, pp. 50–64.
+[54] R. Chatterjee, A. Ahmed, P. R. Anish, Identification and classification of architecturally significant functional requirements, in: 2020 IEEE Seventh International Workshop on Artificial
+Intelligence for Requirements Engineering (AIRE), IEEE, 2020, pp. 9–17.
+[55] H. Wang, G. Shen, Z. Huang, Y. Yu, K. Chen, Analyzing close relations between target
+artifacts for improving ir-based requirement traceability recovery, Frontiers of Information
+Technology & Electronic Engineering 22 (7) (2021) 957–968.
+[56] S. Das, N. Deb, A. Cortesi, N. Chaki, Sentence embedding models for similarity detection of
+software requirements, SN Computer Science 2 (2) (2021) 1–11.
+[57] M. B. Blake, I. Saleh, Y. Wei, I. D. Schlesinger, A. Yale-Loehr, X. Liu, Shared service recommendations from requirement specifications: A hybrid syntactic and semantic toolkit,
+Information and Software Technology 57 (2015) 392–404.
+[58] R. Sonbol, G. Rebdawi, N. Ghneim, Towards a semantic representation for functional software
+requirements, in: 2020 IEEE Seventh International Workshop on Artificial Intelligence for
+Requirements Engineering (AIRE), IEEE, 2020, pp. 1–8.
+[59] W. Alhoshan, R. Batista-Navarro, L. Zhao, Using frame embeddings to identify semantically
+related software requirements., in: REFSQ Workshops, 2019.
+[60] G. Deshpande, C. Arora, G. Ruhe, Data-driven elicitation and optimization of dependencies
+between requirements, in: 2019 IEEE 27th International Requirements Engineering Conference (RE), IEEE, 2019, pp. 416–421.
+[61] R. Samer, M. Stettinger, M. Atas, A. Felfernig, G. Ruhe, G. Deshpande, New approaches
+to the identification of dependencies between requirements, in: 2019 IEEE 31st International
+Conference on Tools with Artificial Intelligence (ICTAI), IEEE, 2019, pp. 1265–1270.
+43
+[62] H. Sultanov, J. H. Hayes, W.-K. Kong, Application of swarm techniques to requirements
+tracing, Requirements Engineering 16 (3) (2011) 209–226.
+[63] M. Lu, P. Liang, Automatic classification of non-functional requirements from augmented
+app user reviews, in: Proceedings of the 21st International Conference on Evaluation and
+Assessment in Software Engineering, 2017, pp. 344–353.
+[64] G. Deshpande, B. Sheikhi, S. Chakka, D. L. Zotegouon, M. N. Masahati, G. Ruhe, Is bert
+the new silver bullet?-an empirical investigation of requirements dependency classification,
+in: 2021 IEEE 29th International Requirements Engineering Conference Workshops (REW),
+IEEE, 2021, pp. 136–145.
+[65] M. Aldekhail, M. Almasri, Intelligent identification and resolution of software requirement
+conflicts: Assessment and evaluation, COMPUTER SYSTEMS SCIENCE AND ENGINEERING 40 (2) (2022) 469–489.
+[66] A. Nicholson, G. J. LC, Issue link label recovery and prediction for open source software,
+in: 2021 IEEE 29th International Requirements Engineering Conference Workshops (REW),
+IEEE, 2021, pp. 126–135.
+[67] J. Guo, J. Cheng, J. Cleland-Huang, Semantically enhanced software traceability using deep
+learning techniques, in: 2017 IEEE/ACM 39th International Conference on Software Engineering (ICSE), IEEE, 2017, pp. 3–14.
+[68] B. Wang, R. Peng, Z. Wang, X. Wang, Y. Li, An automated hybrid approach for generating requirements trace links, International Journal of Software Engineering and Knowledge
+Engineering 30 (07) (2020) 1005–1048.
+[69] A. H. Rasekh, S. M. Fakhrahmad, M. H. Sadreddini, Mining traces between source code
+and textual documents, International Journal of Computer Applications in Technology 59 (1)
+(2019) 43–52.
+[70] A. Mahmoud, N. Niu, On the role of semantics in automated requirements tracing, Requirements Engineering 20 (3) (2015) 281–300.
+[71] N. Ali, H. Cai, A. Hamou-Lhadj, J. Hassine, Exploiting parts-of-speech for effective automated
+requirements traceability, Information and Software Technology 106 (2019) 126–141.
+[72] V. Leitão, I. Medeiros, Srxcrm: Discovering association rules between system requirements
+and product specifications., in: REFSQ Workshops, 2021.
+[73] J. K. Chhabra, et al., Requirements traceability through information retrieval using dynamic
+integration of structural and co-change coupling, in: International Conference on Advanced
+Informatics for Computing Research, Springer, 2017, pp. 107–118.
+44
+[74] C. Arora, M. Sabetzadeh, A. Goknil, L. C. Briand, F. Zimmer, Change impact analysis for
+natural language requirements: An nlp approach, in: 2015 IEEE 23rd International Requirements Engineering Conference (RE), IEEE, 2015, pp. 6–15.
+[75] T. N. Al-Otaiby, M. AlSherif, W. P. Bond, Toward software requirements modularization
+using hierarchical clustering techniques, in: Proceedings of the 43rd annual Southeast regional
+conference-Volume 2, 2005, pp. 223–228.
+[76] K. J. Gülle, N. Ford, P. Ebel, F. Brokhausen, A. Vogelsang, Topic modeling on user stories
+using word mover’s distance, in: 2020 IEEE Seventh International Workshop on Artificial
+Intelligence for Requirements Engineering (AIRE), IEEE, 2020, pp. 52–60.
+[77] A. Casamayor, D. Godoy, M. Campo, Functional grouping of natural language requirements
+for assistance in architectural software design, Knowledge-Based Systems 30 (2012) 78–86.
+[78] J. Misra, S. Sengupta, S. Podder, Topic cohesion preserving requirements clustering, in: 2016
+IEEE/ACM 5th International Workshop on Realizing Artificial Intelligence Synergies in Software Engineering (RAISE), IEEE, 2016, pp. 22–28.
+[79] H. Eyal Salman, M. Hammad, A.-D. Seriai, A. Al-Sbou, Semantic clustering of functional
+requirements using agglomerative hierarchical clustering, Information 9 (9) (2018) 222.
+[80] M. Mezghani, J. Kang, F. Sèdes, Industrial requirements classification for redundancy and
+inconsistency detection in semios, in: 2018 IEEE 26th International Requirements Engineering
+Conference (RE), IEEE, 2018, pp. 297–303.
+[81] Y. Wang, Semantic information extraction for software requirements using semantic role
+labeling, in: 2015 IEEE International Conference on Progress in Informatics and Computing
+(PIC), IEEE, 2015, pp. 332–337.
+[82] T. Diamantopoulos, M. Roth, A. Symeonidis, E. Klein, Software requirements as an application domain for natural language processing, Language Resources and Evaluation 51 (2)
+(2017) 495–524.
+[83] Y. Wang, Automatic semantic analysis of software requirements through machine learning and
+ontology approach, Journal of Shanghai Jiaotong University (Science) 21 (6) (2016) 692–701.
+[84] A. F. de Araújo, R. M. Marcacini, Re-bert: automatic extraction of software requirements
+from app reviews using bert language model, in: Proceedings of the 36th Annual ACM
+Symposium on Applied Computing, 2021, pp. 1321–1327.
+[85] N. H. Bakar, Z. M. Kasirun, N. Salleh, H. A. Jalab, Extracting features from online software
+reviews to aid requirements reuse, Applied Soft Computing 49 (2016) 1297–1315.
+45
+[86] L. V. G. Carreno, K. Winbladh, Analysis of user comments: an approach for software requirements evolution, in: 2013 35th international conference on software engineering (ICSE),
+IEEE, 2013, pp. 582–591.
+[87] N. Jha, A. Mahmoud, Using frame semantics for classifying and summarizing application
+store reviews, Empirical Software Engineering 23 (6) (2018) 3734–3767.
+[88] C. Li, L. Huang, J. Ge, B. Luo, V. Ng, Automatically classifying user requests in crowdsourcing requirements engineering, Journal of Systems and Software 138 (2018) 108–123.
+[89] Z. Peng, J. Wang, K. He, M. Tang, An approach of extracting feature requests from app
+reviews, in: International Conference on Collaborative Computing: Networking, Applications
+and Worksharing, Springer, 2016, pp. 312–323.
+[90] C. Yang, L. Wu, C. Yu, Y. Zhou, A phrase-level user requests mining approach in mobile
+application reviews: Concept, framework, and operation, Information 12 (5) (2021) 177.
+[91] H. Wu, W. Deng, X. Niu, C. Nie, Identifying key features from app user reviews, in: 2021
+IEEE/ACM 43rd International Conference on Software Engineering (ICSE), IEEE, 2021, pp.
+922–932.
+[92] L. Shi, C. Chen, Q. Wang, B. Boehm, Automatically detecting feature requests from development emails by leveraging semantic sequence mining, Requirements Engineering 26 (2) (2021)
+255–271.
+[93] Y. Wang, I. L. M. Gutiérrez, K. Winbladh, H. Fang, Automatic detection of ambiguous
+terminology for software requirements, in: International Conference on Application of Natural
+Language to Information Systems, Springer, 2013, pp. 25–37.
+[94] T. Quirchmayr, B. Paech, R. Kohl, H. Karey, G. Kasdepke, Semi-automatic rule-based domain
+terminology and software feature-relevant information extraction from natural language user
+manuals, Empirical Software Engineering 23 (6) (2018) 3630–3683.
+[95] M. S. Haris, T. A. Kurniawan, F. Ramdani, Automated features extraction from software
+requirements specification (srs) documents as the basis of software product line (spl) engineering, JITeCS (Journal of Information Technology and Computer Science) 5 (3) (2020)
+279–292.
+[96] S. Abualhaija, C. Arora, M. Sabetzadeh, L. C. Briand, M. Traynor, Automated demarcation of
+requirements in textual specifications: a machine learning-based approach, Empirical Software
+Engineering 25 (6) (2020) 5454–5497.
+[97] M. Dollmann, M. Geierhos, On-and off-topic classification and semantic annotation of usergenerated software requirements, in: Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, 2016, pp. 1807–1816.
+46
+[98] A. Sainani, P. R. Anish, V. Joshi, S. Ghaisas, Extracting and classifying requirements from
+software engineering contracts, in: 2020 IEEE 28th International Requirements Engineering
+Conference (RE), IEEE, 2020, pp. 147–157.
+[99] H. Jiang, J. Zhang, X. Li, Z. Ren, D. Lo, X. Wu, Z. Luo, Recommending new features
+from mobile app descriptions, ACM Transactions on Software Engineering and Methodology
+(TOSEM) 28 (4) (2019) 1–29.
+[100] M. Abbas, M. Saadatmand, E. Enoiu, D. Sundamark, C. Lindskog, Automated reuse recommendation of product line assets based on natural language requirements, in: International
+Conference on Software and Software Reuse, Springer, 2020, pp. 173–189.
+[101] Q. A. Do, T. Bhowmik, G. L. Bradshaw, Capturing creative requirements via requirements
+reuse: A machine learning-based approach, Journal of Systems and Software 170 (2020)
+110730.
+[102] H. Femmer, D. M. Fernández, S. Wagner, S. Eder, Rapid quality assurance with requirements
+smells, Journal of Systems and Software 123 (2017) 190–213.
+[103] A. Ferrari, G. Gori, B. Rosadini, I. Trotta, S. Bacherini, A. Fantechi, S. Gnesi, Detecting
+requirements defects with nlp patterns: an industrial experience in the railway domain, Empirical Software Engineering 23 (6) (2018) 3684–3733.
+[104] S. Mishra, A. Sharma, On the use of word embeddings for identifying domain specific ambiguities in requirements, in: 2019 IEEE 27th International Requirements Engineering Conference
+Workshops (REW), IEEE, 2019, pp. 234–240.
+[105] J. Matsuoka, Y. Lepage, Ambiguity spotting using wordnet semantic similarity in support
+to recommended practice for software requirements specifications, in: 2011 7th International
+Conference on Natural Language Processing and Knowledge Engineering, IEEE, 2011, pp.
+479–484.
+[106] A. Ferrari, A. Esuli, An nlp approach for cross-domain ambiguity detection in requirements
+engineering, Automated Software Engineering 26 (3) (2019) 559–598.
+[107] J. Misra, S. Das, Entity disambiguation in natural language text requirements, in: 2013 20th
+Asia-Pacific Software Engineering Conference (APSEC), Vol. 1, IEEE, 2013, pp. 239–246.
+[108] M. Osama, A. Zaki-Ismail, M. Abdelrazek, J. Grundy, A. Ibrahim, Score-based automatic
+detection and resolution of syntactic ambiguity in natural language requirements, in: 2020
+IEEE International Conference on Software Maintenance and Evolution (ICSME), IEEE,
+2020, pp. 651–661.
+47
+[109] S. Ezzini, S. Abualhaija, C. Arora, M. Sabetzadeh, L. C. Briand, Using domain-specific
+corpora for improved handling of ambiguity in requirements, in: 2021 IEEE/ACM 43rd International Conference on Software Engineering (ICSE), IEEE, 2021, pp. 1485–1497.
+[110] A. Ferrari, S. Gnesi, Using collective intelligence to detect pragmatic ambiguities, in: 2012
+20th IEEE International Requirements Engineering Conference (RE), IEEE, 2012, pp. 191–
+200.
+[111] A. Ferrari, F. Dell’Orletta, G. O. Spagnolo, S. Gnesi, Measuring and improving the completeness of natural language requirements, in: International Working Conference on Requirements
+Engineering: Foundation for Software Quality, Springer, 2014, pp. 23–38.
+[112] C. Liu, Z. Zhao, L. Zhang, Z. Li, Automated conditional statements checking for complete
+natural language requirements specification, Applied Sciences 11 (17) (2021) 7892.
+[113] F. S. Bäumer, M. Geierhos, Flexible ambiguity resolution and incompleteness detection in
+requirements descriptions via an indicator-based configuration of text analysis pipelines, in:
+Proceedings of the 51st Hawaii International Conference on System Sciences, 2018.
+[114] C. Arora, M. Sabetzadeh, L. Briand, F. Zimmer, Automated checking of conformance to
+requirements templates using natural language processing, IEEE transactions on Software
+Engineering 41 (10) (2015) 944–968.
+[115] C. Rupp, K. Pohl, Requirements engineering fundamentals, Rocky Nook.
+[116] A. Mavin, P. Wilkinson, A. Harwood, M. Novak, Easy approach to requirements syntax
+(ears), in: 2009 17th IEEE International Requirements Engineering Conference, IEEE, 2009,
+pp. 317–322.
+[117] B. D. Cruz, B. Jayaraman, A. Dwarakanath, C. McMillan, Detecting vague words & phrases
+in requirements documents in a multilingual environment, in: 2017 IEEE 25th International
+Requirements Engineering Conference (RE), IEEE, 2017, pp. 233–242.
+[118] E. Parra, C. Dimou, J. Llorens, V. Moreno, A. Fraga, A methodology for the classification of
+quality of requirements using machine learning techniques, Information and Software Technology 67 (2015) 180–195.
+[119] M. Elallaoui, K. Nafil, R. Touahni, Automatic transformation of user stories into uml use
+case diagrams using nlp techniques, Procedia computer science 130 (2018) 42–49.
+[120] S. Tiwari, D. Ameta, A. Banerjee, An approach to identify use case scenarios from textual
+requirements specification, in: Proceedings of the 12th Innovations on Software Engineering
+Conference (Formerly Known As India Software Engineering Conference), 2019, pp. 1–11.
+48
+[121] Z. A. Hamza, M. Hammad, Generating uml use case models from software requirements using
+natural language processing, in: 2019 8th International Conference on Modeling Simulation
+and Applied Optimization (ICMSAO), IEEE, 2019, pp. 1–6.
+[122] A. Al-Hroob, A. T. Imam, R. Al-Heisa, The use of artificial neural networks for extracting
+actions and actors from requirements document, Information and Software Technology 101
+(2018) 1–15.
+[123] A. Sree-Kumar, E. Planas, R. Clarisó, Extracting software product line feature models from
+natural language specifications, in: Proceedings of the 22nd International Systems and Software Product Line Conference-Volume 1, 2018, pp. 43–53.
+[124] M. Hamza, R. J. Walker, Recommending features and feature relationships from requirements
+documents for software product lines, in: 2015 IEEE/ACM 4th International Workshop on
+Realizing Artificial Intelligence Synergies in Software Engineering, IEEE, 2015, pp. 25–31.
+[125] J. S. Thakur, A. Gupta, Identifying domain elements from textual specifications, in: Proceedings of the 31st IEEE/ACM International Conference on Automated Software Engineering,
+2016, pp. 566–577.
+[126] G. Lucassen, M. Robeer, F. Dalpiaz, J. M. E. Van Der Werf, S. Brinkkemper, Extracting
+conceptual models from user stories with visual narrator, Requirements Engineering 22 (3)
+(2017) 339–358.
+[127] C. Arora, M. Sabetzadeh, L. Briand, F. Zimmer, Automated extraction and clustering of
+requirements glossary terms, IEEE Transactions on Software Engineering 43 (10) (2016) 918–
+945.
+[128] K. Bhatia, S. Mishra, A. Sharma, Clustering glossary terms extracted from large-sized software requirements using fasttext, in: Proceedings of the 13th Innovations in Software Engineering Conference on Formerly known as India Software Engineering Conference, 2020, pp.
+1–11.
+[129] T. Güneş, F. B. Aydemir, Automated goal model extraction from user stories using nlp, in:
+2020 IEEE 28th International Requirements Engineering Conference (RE), IEEE, 2020, pp.
+382–387.
+[130] A. Haj, A. Jarrar, Y. Balouki, T. Gadir, The semantic of business vocabulary and business
+rules: An automatic generation from textual statements, IEEE Access 9 (2021) 56506–56522.
+[131] P. Tzortzopoulos, R. Cooper, P. Chan, M. Kagioglou, Clients’ activities at the design frontend, Design studies 27 (6) (2006) 657–683.
+49
+[132] S. Ali, Y. Hafeez, S. Hussain, S. Yang, M. Jamal, Requirement prioritization framework using
+case-based reasoning: A mining-based approach, Expert Systems 38 (8) (2021) e12770.
+[133] F. M. Kifetew, A. Perini, A. Susi, A. Siena, D. Muñante, I. Morales-Ramirez, Automating
+user-feedback driven requirements prioritization, Information and Software Technology 138
+(2021) 106635.
+[134] J. McZara, S. Sarkani, T. Holzer, T. Eveleigh, Software requirements prioritization and selection using linguistic tools and constraint solvers—a controlled experiment, Empirical Software
+Engineering 20 (6) (2015) 1721–1761.
+[135] J. Misra, S. Sengupta, S. Das, Latent semantic centrality based automated requirements
+prioritization, in: Proceedings of the 7th India Software Engineering Conference, 2014, pp.
+1–10.
+[136] S. Shafiq, A. Mashkoor, C. Mayr-Dorn, A. Egyed, Nlp4ip: Natural language processing-based
+recommendation approach for issues prioritization, in: 2021 47th Euromicro Conference on
+Software Engineering and Advanced Applications (SEAA), IEEE, 2021, pp. 99–108.
+[137] M. Choetkiertikul, H. K. Dam, T. Tran, T. Pham, A. Ghose, T. Menzies, A deep learning
+model for estimating story points, IEEE Transactions on Software Engineering 45 (7) (2018)
+637–656.
+[138] I. Hussain, L. Kosseim, O. Ormandjieva, Approximation of cosmic functional size to support
+early effort estimation in agile, Data & Knowledge Engineering 85 (2013) 2–14.
+[139] S. Mishra, A. Sharma, Crawling wikipedia pages to train word embeddings model for software
+engineering domain, in: 14th Innovations in Software Engineering Conference (formerly known
+as India Software Engineering Conference), 2021, pp. 1–5.
+[140] U. Shah, S. Patel, D. C. Jinwala, Detecting intra-conflicts in non-functional requirements,
+International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems 29 (03) (2021)
+435–461.
+[141] V. Silva-Rodrı́guez, S. E. Nava-Muñoz, L. A. Castro, F. E. Martı́nez-Pérez, H. G. PérezGonzález, F. Torres-Reyes, Classifying design-level requirements using machine learning for
+a recommender of interaction design patterns, IET Software 14 (5) (2020) 544–552.
+[142] C. F. Baker, C. J. Fillmore, J. B. Lowe, The berkeley framenet project, in: COLING 1998
+Volume 1: The 17th International Conference on Computational Linguistics, 1998.
+[143] Y. Li, T. Yang, Word embedding for understanding natural language: a survey, in: Guide to
+big data applications, Springer, 2018, pp. 83–104.
+50
+[144] F. Dalpiaz, I. Van Der Schalk, S. Brinkkemper, F. B. Aydemir, G. Lucassen, Detecting
+terminological ambiguity in user stories: Tool and experimentation, Information and Software
+Technology 110 (2019) 3–16.
+[145] C. De Boom, S. Van Canneyt, T. Demeester, B. Dhoedt, Representation learning for very
+short texts using weighted word embedding aggregation, Pattern Recognition Letters 80
+(2016) 150–156.
+[146] S. Dupond, A thorough review on the current advance of neural network structures, Annual
+Reviews in Control 14 (2019) 200–230.
+[147] Z. Liu, B. Li, J. Wang, R. Yang, Requirements engineering for crossover services: Issues,
+challenges and research directions, IET Software 15 (1) (2021) 107–125.
+[148] A. Mavin, P. Wilkinson, S. Teufl, H. Femmer, J. Eckhardt, J. Mund, Does goal-oriented
+requirements engineering achieve its goal?, in: 2017 IEEE 25th international requirements
+engineering conference (RE), IEEE, 2017, pp. 174–183.
+[149] U. Eklund, H. H. Olsson, N. J. Strøm, Industrial challenges of scaling agile in mass-produced
+embedded systems, in: International Conference on Agile Software Development, Springer,
+2014, pp. 30–42.
+[150] G. Fanmuy, A. Fraga, J. Llorens, Requirements verification in the industry, in: Complex
+systems design & management, Springer, 2012, pp. 145–160.
+[151] Y. Wautelet, S. Heng, M. Kolp, I. Mirbel, Unifying and extending user story models, in:
+International Conference on Advanced Information Systems Engineering, Springer, 2014, pp.
+211–225.
+[152] A. Di Thommazo, T. Ribeiro, G. Olivatto, V. Werneck, S. Fabbri, An automatic approach
+to detect traceability links using fuzzy logic, in: 2013 27th Brazilian Symposium on Software
+Engineering, IEEE, 2013, pp. 21–30.
+[153] Y. Wang, J. Zhang, Experiment on automatic functional requirements analysis with the efrf’s
+semantic cases, in: 2016 International Conference on Progress in Informatics and Computing
+(PIC), IEEE, 2016, pp. 636–642.
+51
+View publication stats
+

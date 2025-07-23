@@ -1,237 +1,155 @@
-To help you add comprehensive citations to your `main.pdf` document, I will identify specific statements or sections from `main.pdf` that draw information from the other sources you provided. For each instance, I will provide the text from `main.pdf` and the corresponding source numbers, along with brief instructions.
+Based on your query, here are specific instructions for citing information in `main.pdf` that is drawn from the other sources you provided:
 
-Please **bold** the identified text in your `main.pdf` and insert the bracketed citation numbers directly after the relevant statement. If a statement is based on multiple sources, ensure all applicable source numbers are listed.
+To properly cite the content in `main.pdf` that originates from other sources, you should **add the citation key in brackets `[ ]` immediately after the statement or phrase that is supported by that source**. If a statement is supported by multiple sources, list all relevant keys separated by commas.
+
+Here's a breakdown of the content in `main.pdf` (specifically pages 555-577) that can be referenced to your provided sources, along with clear instructions on where to add the citations:
 
 ---
 
-Here are the specific parts of `main.pdf` that are supported by your provided sources:
+### Instructions for Adding References to `main.pdf`
 
-* **For statements about the overall scope and characteristics of linguistic steganography and LLMs:**
-  * **In `main.pdf`'s Abstract:**
-    * "This study presents a systematic literature review on textual steganography, with a particular focus on the transformative impact of Large Language Models (LLMs). We trace the evolution of linguistic steganography from early format-based and statistical methods to advanced neural network models, culminating in the current LLM era. Our findings highlight that LLM-based approaches significantly enhance imperceptibility, embedding capacity, and naturalness in cover text generation, addressing long-standing challenges like the Psic Effect."
-      * **Instruction:** While this is a summary in `main.pdf`, the underlying concepts of "linguistic steganography," "evolution," "LLM-based approaches enhance imperceptibility, embedding capacity, and naturalness," and "Psic Effect" are discussed in:
-        * (Psic Effect, concealment system focus on hiding existence, global information sharing)
-        * (Psic Effect, perceptual-imperceptibility, statistical-imperceptibility)
-        * (Psic Effect)
-        * (linguistic steganography, neural network-based language model, fluency, information embedding capacity)
-        * (LLMs favorable for generative text steganography)
-        * (modern steganography uses machine learning to enhance imperceptibility)
-        * (fluent, highly readable steganographic texts, good anti-steganalysis ability)
-        * (linguistic steganography, security, privacy)
-        * (linguistic semantic steganography, efficiency, imperceptibility)
-        * **Citation for this entire sentence/concept:**
-    * "We analyze various LLM-based models, including VAE-Stega, Co-Stega, Discop, and others, detailing their architectures, performance metrics (e.g., BPW, PPL), and unique contributions to the field."
-      * **Instruction:** Each of these model mentions can be specifically cited:
-        * **VAE-Stega:**
-        * **Co-Stega:**
-        * **Discop:**
-        * **BPW (Bits Per Word):**
-        * **PPL (Perplexity):**
-      * **Citation for the sentence:**
+**1. Section 2.2 Role in Generative Linguistic Steganography (Page 560):**
 
-* **For statements in `main.pdf` Section 1.1 "Overview of Information Security and Concealment Systems":**
-  * "Information security systems include encryption, privacy, and concealment (steganography)."
-    * **Instruction:** This directly summarizes Claude E. Shannon's work mentioned in:
-            *  
-    * **Citation:**
+* **Original Text in `main.pdf`:** "New approaches, like LLM-Stega, explore black-box generative text steganography using the user interfaces (UIs) of LLMs, overcoming the need to access internal sampling distributions. This method constructs a keyword set and uses an encrypted steganographic mapping for embedding, proposing an optimization mechanism based on reject sampling for accurate extraction and rich semantics."
+  * **Instruction:** Append `[wu2024generative]` after the last sentence.
+  * **Result:** "...This method constructs a keyword set and uses an encrypted steganographic mapping for embedding, proposing an optimization mechanism based on reject sampling for accurate extraction and rich semantics **[wu2024generative]**."
 
-* **For statements in `main.pdf` Section 1.1.1 "Encryption Systems and Privacy Systems":**
-  * "These protect content but reveal that secret communication is happening, which can attract attention."
-    * **Instruction:** This point about encryption systems exposing existence is made in:
-      * (expose the existence and importance of the information itself)
-    * **Citation:**
+* **Original Text in `main.pdf`:** "Another framework, Co-Stega, leverages LLMs to address the low capacity challenge in social media by increasing the text space for hiding messages (through context retrieval) and raising the generated text’s entropy via specific prompts to increase embedding capacity. This approach also aims to maintain text quality, fluency, and relevance."
+  * **Instruction:** Append `[liao2024co]` after the last sentence.
+  * **Result:** "...This approach also aims to maintain text quality, fluency, and relevance **[liao2024co]**."
 
-* **For statements in `main.pdf` Section 1.1.2 "Concealment Systems (Steganography)":**
-  * "Steganography hides the existence of information by embedding it in ordinary carriers (e.g., text, images)."
-    * **Instruction:** This definition of steganography is found in:
-      * (hiding the existence and thus ensure its security)
-      * (embedding secret information into cover media, aiming to covertly transmit secret information through public channels)
-    * **Citation:**
-  * "Text is a challenging carrier due to its low redundancy and strict semantics."
-    * **Instruction:** This challenge for text steganography is explained in:
-      * (text has formed very complicatedly semantic coding rules and thus has less semantic ambiguity and information redundancy)
-      * (text contains relatively little redundant information (Zipf, 1999))
-    * **Citation:**
+* **Original Text in `main.pdf`:** "The concept of zero-shot linguistic steganography with LLMs utilizes in-context learning, where samples of covertext are used as context to generate more intelligible stegotext using a question-answer (QA) paradigm."
+  * **Instruction:** Append `[lin2024zero]` after the sentence.
+  * **Result:** "...using a question-answer (QA) paradigm **[lin2024zero]**."
 
-* **For statements in `main.pdf` Section 1.2 "Introduction to Steganography":**
-  * "Steganography is often explained by the “Prisoners’ Problem,”where Alice and Bob must communicate secretly under surveillance. The goal is to embed messages so they are undetectable to an observer."
-    * **Instruction:** The "Prisoners' Problem" analogy is a cornerstone of steganography definition, found in:
-      * (Simmons reference)
-      * (illustrated by Simmons' "Prisoners' Problem")
-      * (Simmons reference)
-      * (illustrated by Simmons’ "prisoner problem")
-      * (Simmons reference)
-      * (Simmons reference)
-      * (typical example of steganography is the “prisoner problem”)
-      * (Simmons reference)
-      * (Simmons reference)
-      * (illustrated by Simmons’ Prisoners’ Problem)
-      * (Simmons reference)
-    * **Citation:**
+* **Original Text in `main.pdf`:** "LLMs are also used in approaches like ALiSa, which directly conceals token-level secret messages in seemingly natural steganographic text generated by off-the-shelf BERT models equipped with Gibbs sampling."
+  * **Instruction:** Append `[yi2022alisa]` after the sentence.
+  * **Result:** "...equipped with Gibbs sampling **[yi2022alisa]**."
 
-* **For statements in `main.pdf` Section 1.2 "Steganography methods include carrier selection, carrier modification, and carrier generation.":**
-  * "Carrier modification: Hide information in existing text with minimal changes."
-    * **Instruction:** This method is described in:
-      * (steganography methods based on carrier modification...reduce the impact of embedded extra information on the original carrier–)
-      * (Modification based linguistic steganog-raphy refers to a special transformation of a given text to realize data embedding.)
-    * **Citation:**
-  * "Carrier generation: Generate new text that encodes information, allowing higher capacity but requiring naturalness."
-    * **Instruction:** This method and its challenges are detailed in:
-      * (how to automatically generate a semantic-complete and natural-enough information carrier?)
-      * (This generation-based linguistic steganography has great potential in text fluency and information embedding capacity)
-      * (generation based methods,–)
-    * **Citation:**
+* **Original Text in `main.pdf`:** "The increasing popularity of deep generative models has made it feasible for provably secure steganography to be applied in real-world scenarios, as they fulfill requirements for perfect samplers and explicit data distributions."
+  * **Instruction:** Append `[ding2023discop, kaptchuk2021meteor, qi2024provably]` after the sentence.
+  * **Result:** "...explicit data distributions **[ding2023discop, kaptchuk2021meteor, qi2024provably]**."
 
-* **For statements in `main.pdf` Section 1.3 "The Significance of Linguistic Steganography":**
-  * "Linguistic steganography enables covert communication, especially where encryption is suspicious."
-    * **Instruction:** This highlights a key advantage over encryption, as noted in:
-      * (encryption system and privacy system will also expose the existence and importance of the information itself)
-      * (messages transmitted as ciphertexts may easily arouse suspicion from attackers)
-    * **Citation:**
-  * "Text is a robust, ubiquitous carrier but presents challenges in balancing imperceptibility and capacity."
-    * **Instruction:** This summarizes the properties and difficulties of text as a carrier, found in:
-      * (text is one of the most important information carriers, playing a very important role in human lives)
-      * (transmission robustness of texts...potential in text fluency and information embedding capacity)
-      * (text contains relatively little redundant information...embedding large amounts of information can be challenging)
-    * **Citation:**
-  * "Advances in deep learning and LLMs improve text quality and security, while related fields like watermarking focus on tracing content origin."
-    * **Instruction:** This general statement about the benefits of new technologies and the purpose of watermarking is covered by:
-      * (Recent advances in large language models (LLMs) have blurred the boundary of high-quality text generation...favorable for generative text steganography)
-      * (zero-shot approach...high imperceptibility...stegotext is more intelligible and resembles the covertext)
-      * (BERT and Gibbs sampling...generate fluent, highly readable steganographic texts, while enjoying pretty good anti-steganalysis ability)
-      * (model increases the embedding capac-ity...while ensuring the feature consistency of the steganographic text to improve imperceptibility)
-      * (Watermarking...tracing the prove-nance of the text)
-      * (Digital watermarking...provenance tracing...provides ownership evidence)
-      * (IP Protection...Provenance Tracking)
-      * (Watermarking...tracing text provenance to claim the ownership of text contents)
-    * **Citation:**
+**2. Section 2.4 Challenges and Limitations in Steganography with LLMs (Pages 561-567):**
 
-* **For statements in `main.pdf` Section 2.2 "Role in Generative Linguistic Steganography":**
-  * "LLMs are considered favorable for generative text steganography due to their ability to generate high-quality text."
-    * **Instruction:** This direct quote is from:
-            *  
-    * **Citation:**
-  * "Researchers propose using generative models as steganographic samplers to embed messages into realistic communication distributions, such as text."
-    * **Instruction:** This concept is introduced in:
-            *  
-    * **Citation:**
-  * "This is a departure from prior steganographic work and is motivated by the public availability of high-quality models and significant efficiency gains."
-    * **Instruction:** This motivation for using advanced models is clearly stated in:
-            *  
-    * **Citation:**
-  * "LLMs like GPT-2, LLaMA, and Baichuan2 are commonly used as basic generative models for steganography."
-    * **Instruction:** These specific models are mentioned in the context of steganography in:
-      * **GPT-2:**
-      * **LLaMA:**
-      * **Baichuan2:**
-    * **Citation:**
-  * "Existing methods often use a language model and steganographic mapping, where secret messages are embedded by establishing a mapping between binary bits and the sampling probability of words within the training vocabulary."
-    * **Instruction:** This describes a common embedding approach, as outlined in:
-            *  
-    * **Citation:**
-  * "However, traditional 'white-box' methods require sharing the exact language model and training vocabulary, which limits fluency, logic, and diversity compared to natural texts generated by LLMs."
-    * **Instruction:** This limitation of white-box methods is discussed in:
-            *  
-    * **Citation:**
-  * "They also inevitably change the sampling probability distribution, posing security risks."
-    * **Instruction:** This security risk is explicitly mentioned in:
-            *  
-      * (Stegosampling algorithms will inevitably do damage to the explicit distribution of tokens, and result in a gap between stegotext and covertext.) - Note that and from this source (414) map to and in your provided list.
-    * **Citation:**
-  * "New approaches, like LLM-Stega, explore black-box generative text steganography using the user interfaces (UIs) of LLMs, overcoming the need to access internal sampling distributions."
-    * **Instruction:** The LLM-Stega approach is introduced in:
-            *  
-    * **Citation:**
-  * "This method constructs a keyword set and uses an encrypted steganographic mapping for embedding, proposing an optimization mechanism based on reject sampling for accurate extraction and rich semantics."
-    * **Instruction:** These specific features of LLM-Stega are detailed in:
-            *  
-            *  
-            *  
-    * **Citation:**
-  * "Another framework, Co-Stega, leverages LLMs to address the low capacity challenge in social media by increasing the text space for hiding messages (through context retrieval) and raising the generated text’s entropy via specific prompts to increase embedding capacity."
-    * **Instruction:** The Co-Stega framework and its goals are described in:
-      * (low capacity challenge)
-      * (Retrieval module, Generation module, Entropy Enhancement Strategy)
-      * (Entropy Enhancement Strategy using prompts)
-    * **Citation:**
-  * "This approach also aims to maintain text quality, fluency, and relevance."
-    * **Instruction:** The quality aspects of Co-Stega are mentioned in:
-            *  
-    * **Citation:**
-  * "The concept of zero-shot linguistic steganography with LLMs utilizes in-context learning, where samples of covertext are used as context to generate more intelligible stegotext using a question-answer (QA) paradigm."
-    * **Instruction:** This describes the core of zero-shot steganography in:
-      * (zero-shot approach)
-      * (in-context QA tasks)
-      * (in-context learning for linguistic steganography)
-    * **Citation:**
-  * "LLMs are also used in approaches like ALiSa, which directly conceals token-level secret messages in seemingly natural steganographic text generated by off-the-shelf BERT models equipped with Gibbs sampling."
-    * **Instruction:** This describes the ALiSa method from:
-            *  
-    * **Citation:**
-  * "The increasing popularity of deep generative models has made it feasible for provably secure steganography to be applied in real-world scenarios, as they fulfill requirements for perfect samplers and explicit data distributions."
-    * **Instruction:** This outlines the impact of generative models on provably secure steganography, found in:
-            *  
-    * **Citation:**
+* **Original Text in `main.pdf`:** "Most current advanced generative text steganographic methods operate under a "white-box" paradigm, meaning they require direct access to the LLM’s internal components, such as its training vocabulary and the sampling probabilities of words. This presents a significant limitation because many state-of-the-art LLMs are proprietary and are accessed by users primarily through black-box APIs or user interfaces."
+  * **Instruction:** Append `[wu2024generative]` after the second sentence.
+  * **Result:** "...APIs or user interfaces **[wu2024generative]**."
 
-* **For statements in `main.pdf` Section 2.4.3 "Lack of Semantic Control and Contextual Consistency":**
-  * "Ensuring generated text matches intended meaning/context is difficult."
-    * **Instruction:** This challenge, often related to "cognitive-imperceptibility," is discussed in:
-      * (semantics and context of steganographic texts uncontrollable...problem of “cognitive-imperceptibility” in)
-      * (semantics and contexts...can be different because of selecting tokens corresponding to the secret message)
-    * **Citation:**
+* **Original Text in `main.pdf`:** "Furthermore, methods that rely on modifying the sampling probability distribution to embed secret messages inherently introduce security risks because they alter the original distribution, making the steganographic text statistically distinguishable from normal text."
+  * **Instruction:** Append `[yang2020vae, kaptchuk2021meteor, ding2023discop, wu2024generative]` after the sentence.
+  * **Result:** "...distinguishable from normal text **[yang2020vae, kaptchuk2021meteor, ding2023discop, wu2024generative]**."
 
-* **For statements in `main.pdf` Section 2.4.5 "Segmentation Ambiguity":**
-  * "Tokenization can cause ambiguity in how information is embedded or extracted."
-    * **Instruction:** The concept of segmentation ambiguity is defined in:
-      * (This phenomenon is termed segmentation ambiguity by Nozaki and Murawaki)
-      * (a single piece of text can correspond to two or even more different token representations. This phenomenon is referred to as segmentation ambiguity.)
-    * **Citation:**
+* **Original Text in `main.pdf`:** "Linguistic steganography methods often struggle to control the semantics and contextual characteristics of the generated text, leading to a decline in its "cognitive-imperceptibility"."
+  * **Instruction:** Append `[yang2020vae, ding2023context]` after the sentence.
+  * **Result:** "...cognitive-imperceptibility **[yang2020vae, ding2023context]**."
 
-* **For statements in `main.pdf` Section "A primary challenge in steganography, particularly when utiliz-ing Large Language Models (LLMs), revolves around the distinc-tion between white-box and black-box access. Most current advanced generative text steganographic methods operate under a "white-box" paradigm, meaning they require direct access to the LLM’s internal components, such as its training vocabulary and the sampling probabilities of words.":**
-  * **Instruction:** The distinction between white-box and black-box and the requirements of white-box methods are described in:
-        *  
-  * **Citation:**
-  * "This presents a significant limitation because many state-of-the-art LLMs are proprietary and are accessed by users primarily through black-box APIs or user interfaces."
-    * **Instruction:** This practical limitation is highlighted in:
-            *  
-    * **Citation:**
-  * "Furthermore, methods that rely on modifying the sampling probability distribution to embed secret messages inherently introduce security risks because they alter the original distribution, making the steganographic text statistically distinguishable from normal text."
-    * **Instruction:** This inherent security risk is discussed in:
-            *  
-      * (Stegosampling algorithms will inevitably do damage to the explicit distribution of tokens, and result in a gap between stegotext and covertext.) - Note that and from this source (414) map to and in your provided list.
-    * **Citation:**
+* **Original Text in `main.pdf`:** "Although models like NMT-Stega and Hi-Stega aim to maintain semantic and contextual consistency by leveraging source texts or social media contexts, this remains a complex challenge."
+  * **Instruction:** Append `[ding2023context, wang2023hi]` after the sentence.
+  * **Result:** "...this remains a complex challenge **[ding2023context, wang2023hi]**."
 
-* **For statements in `main.pdf` Section 5 "LLM-BASED STEGANOGRAPHY APPROACHES":**
-  * "Natural Language Steganography by ChatGPT: Uses ChatGPT 4.0. Achieves 0.144 BPWwith natural concealment and scalability."
-    * **Instruction:** This sentence describes features and claims about the method. While the exact "0.144 BPW" is not explicitly presented as a single number in the provided snippets of, the method, its use of ChatGPT 4.0, and the concepts of naturalness, concealment, and scalability (implied by LLM capabilities) are central to the paper. Therefore, it is referencing the general findings of:
-      * (ChatGPT as source)
-      * (initial step...to highlight the feasibility of the approach and to catalyze further, more in-depth research...enhancing robustness, and expanding the practical applications of AI-driven steganographic techniques.)
-      * (payload of a text can be increased substantially)
-    * **Citation:**
-  * "Rewriting-Stego: Uses BART (bart-base2). Achieves 4 BPW with high capacity and naturalness. Key results: BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1."
-    * **Instruction:** This summarizes Rewriting-Stego's performance. The model, capacity claim, and specific metrics are found in:
-      * (Rewriting-Stego...rewriting-based...higher information capacity without losing naturalness and controllability)
-      * (BART as our backbone language model...can hide n-bit secret information in each generated token)
-      * (Table 2 shows BPTS, BPTC+S, and PPL values for various Rewriting-Stego settings, including BPTS 4.0 and PPL 62.1 (for BPTS 2.0 on Tweet dataset). It’s important to note the specific PPL value refers to a different BPTS setting in the source table.)
-    * **Citation:**
-  * "ALiSa (Acrostic Linguistic Steganography): Based on BERT and Gibbs Sampling. Achieves 0.92 BPW. Key results: PPL: Natural = 13.91, ALiSa = 14.85, LS-RNN/LS-BERT Acc & F1 = 0.50."
-    * **Instruction:** This summarizes ALiSa's performance and methodology. The model, PPL results, and steganalysis accuracy are found in:
-      * (ALiSa...Based on BERT and Gibbs sampling...directly conceals a token-level secret message)
-      * (Table I for PPL values; Table III for LS-RNN/LS-BERT Acc & F1 values)
-      * Regarding "Achieves 0.92 BPW", the provided source does not explicitly state "0.92 BPW" for ALiSa, but discusses "bits per word" in relation to other methods (GPT-AC, GPT-ADG) and payloads (TPT). It's likely a derived or summarized value.
-    * **Citation:**
+* **Original Text in `main.pdf`:** "Furthermore, segmentation ambiguity introduced by subword-based language models, commonly used in high-performing Transformer architectures, presents a critical issue for provably secure linguistic steganography. When a sender detokenizes generated subword sequences into a continuous text (e.g., "any" + "thing" becoming "anything") before transmission, the receiver might retokenize it differently (e.g., as a single "anything" token), leading to decoding errors and affecting subsequent probability distributions. Existing disambiguation solutions typically involve modifying the token candidate pool or probability distributions, which renders them incompatible with the strict requirements of provably secure steganography that demand unchanged distributions."
+  * **Instruction:** Append `[qi2024provably]` after the last sentence in this paragraph.
+  * **Result:** "...that demand unchanged distributions **[qi2024provably]**."
 
-* **For statements in `main.pdf` Section 6 "CONTEXT AWARENESS":**
-  * "Linguistic steganography has evolved from early methods to advanced deep learning models and Large Language Models (LLMs). This progression focuses on improving imperceptibility, embedding capacity, and maintaining naturalness and semantic coherence in cover text."
-    * **Instruction:** This is a broad summary of the field's evolution and ongoing goals, supported by information already cited in the Abstract and Introduction sections, covering the general trends.
-    * **Citation:**
+* **Original Text in `main.pdf`:** "While SyncPool attempts to address this without altering the distribution, it may still lead to a reduction in the embedding rate due to information loss."
+  * **Instruction:** Append `[qi2024provably]` after the sentence.
+  * **Result:** "...due to information loss **[qi2024provably]**."
 
-* **For statements in `main.pdf` Section "The Era of Custom Artificial Neural Network (ANN) Models":**
-  * "These neural networks learned language models, encoding secret information by manipulating word probability distributions during generation."
-    * **Instruction:** This describes a fundamental mechanism of ANN-based generative steganography, found in:
-      * (linguistic steganography often uses a neural network-based lan-guage model to embed secret messages...into each word of generated texts using an en-coding method)
-      * (mainstream DH methods applied to texts use a trained language model for facilitating embedding)
-      * (primarily utilize neural networks...to learn the statistical language model and then employ the encoding algorithm to encode the conditional probabil-ity distribution of each word in the generation process to embed secret infor-mation)
-      * (Generative steganog-raphy algorithm mainly embeds secret information by adjusting and encoding the probability distributions pθ of candidate words.)
-      * (generation-based linguistic steganography models actually select the word at each position through secret information rather than semantics or context)
-    * **Citation:**
+* **Original Text in `main.pdf` (Computational Overhead):** "LLMs, while powerful, incur a higher computational cost (3-5 times more than prior methods), which could impact real-time communication scenarios."
+  * **Instruction:** Append `[lin2024zero]` after the sentence.
+  * **Result:** "...communication scenarios **[lin2024zero]**."
+
+* **Original Text in `main.pdf` (Data Integrity and Reversibility):** "Some linguistic steganography methods are not reversible, meaning the original cover text cannot be perfectly recovered after message extraction, which is undesirable for sensitive applications. Text data is generally less prone to lossy compression issues than other media, but incompleteness of the steganographic text can still damage the embedded bitstream."
+  * **Instruction:** For the first sentence, append `[zheng2022general, qiang2023natural]` to indicate methods that are or are not reversible. For the second sentence, append `[lin2024zero]` for the part about damage to the embedded bitstream due to incompleteness.
+  * **Result:** "Some linguistic steganography methods are not reversible, meaning the original cover text cannot be perfectly recovered after message extraction, which is undesirable for sensitive applications **[zheng2022general, qiang2023natural]**. Text data is generally less prone to lossy compression issues than other media, but incompleteness of the steganographic text can still damage the embedded bitstream **[lin2024zero]**."
+
+* **Original Text in `main.pdf` (Ethical Concerns):** "The use of pre-trained LLMs may inadvertently introduce ethical issues such as political biases, gender discrimination, or the generation of insulting content."
+  * **Instruction:** Append `[lin2024zero]` after the sentence.
+  * **Result:** "...insulting content **[lin2024zero]**."
+
+* **Original Text in `main.pdf` (Provable Security and Rigor):** "Despite decades of research into provably secure steganography, practical systems have been hampered by strict requirements like perfect samplers and explicit data distributions."
+  * **Instruction:** Append `[ding2023discop, kaptchuk2021meteor]` after the sentence.
+  * **Result:** "...explicit data distributions **[ding2023discop, kaptchuk2021meteor]**."
+
+* **Original Text in `main.pdf`:** "Many works from the NLP community, while generating convincing text, often lack rigorous security analyses and fail to meet formal cryptographic definitions, making them vulnerable to detection."
+  * **Instruction:** Append `[kaptchuk2021meteor]` after the sentence.
+  * **Result:** "...vulnerable to detection **[kaptchuk2021meteor]**."
+
+* **Original Text in `main.pdf`:** "When using approximate samplers, there’s a risk that an adversary can detect a steganographic message by distinguishing between the real channel and the approximation."
+  * **Instruction:** Append `[kaptchuk2021meteor]` after the sentence.
+  * **Result:** "...and the approximation **[kaptchuk2021meteor]**."
+
+* **Original Text in `main.pdf`:** "The effectiveness of LLM-based steganography can be limited by the entropy of the cover text in social media contexts, as short, context-dependent replies have lower entropy, thus limiting hiding capacity."
+  * **Instruction:** Append `[liao2024co]` after the sentence.
+  * **Result:** "...limiting hiding capacity **[liao2024co]**."
+
+**3. Section 5.1 LLM-Based Steganography Models (Pages 570-575):**
+
+* **Original Text in `main.pdf`:** "VAE-Stega: Utilizes Variational Auto-Encoders with BERT-BASE (BERT-LSTM) or LSTM-LSTM models. Achieves a bit per word (BPW) of 5.245, focusing on statistical fidelity **[yang2020vae]**. Evaluated using PPL, KLD, JSD, FE, CNN, and TS-CSW (Acc, R). Key results include PPL: 28.879, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616."
+  * **Instruction:** Append `[yang2020vae]` after the first sentence of the bullet point.
+  * **Result:** "VAE-Stega: Utilizes Variational Auto-Encoders with BERT-BASE (BERT-LSTM) or LSTM-LSTM models. Achieves a bit per word (BPW) of 5.245, focusing on statistical fidelity **[yang2020vae]**. Evaluated using PPL, KLD, JSD, FE, CNN, and TS-CSW (Acc, R). Key results include PPL: 28.879, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616."
+
+* **Original Text in `main.pdf`:** "General Framework for Reversible Data Hiding: Employs BERTBase for Masked Language Modeling (MLM). Achieves a BPW of 4.152 **[zheng2022general]**. Key results include BPW=0.5335, F1=0.9402, PPL=134.2199."
+  * **Instruction:** Append `[zheng2022general]` after the first sentence of the bullet point.
+  * **Result:** "General Framework for Reversible Data Hiding: Employs BERTBase for Masked Language Modeling (MLM). Achieves a BPW of 4.152 **[zheng2022general]**. Key results include BPW=0.5335, F1=0.9402, PPL=134.2199."
+
+* **Original Text in `main.pdf`:** "Co-Stega: Leverages Llama-2-7B-chat, GPT-2, and Llama-2-13B. Demonstrates high capacity (10.42 BPW), fluency, semantic relevance, and strong resistance to steganalysis **[liao2024co]**. Key results include SR1: 60.87"
+  * **Instruction:** Append `[liao2024co]` after the first sentence of the bullet point.
+  * **Result:** "Co-Stega: Leverages Llama-2-7B-chat, GPT-2, and Llama-2-13B. Demonstrates high capacity (10.42 BPW), fluency, semantic relevance, and strong resistance to steganalysis **[liao2024co]**. Key results include SR1: 60.87"
+
+* **Original Text in `main.pdf`:** "Joint Linguistic Steganography: Combines BERT MLM with Graph Attention Networks (GAT). Yields a BPW of 2.251 and a PPL of 13.917 **[ding2023joint]**. Other metrics include KLD=2.904, SIM=0.812, ER=0.365."
+  * **Instruction:** Append `[ding2023joint]` after the first sentence of the bullet point.
+  * **Result:** "Joint Linguistic Steganography: Combines BERT MLM with Graph Attention Networks (GAT). Yields a BPW of 2.251 and a PPL of 13.917 **[ding2023joint]**. Other metrics include KLD=2.904, SIM=0.812, ER=0.365."
+
+* **Original Text in `main.pdf`:** "Discop (Provably Secure Steganography): Uses GPT-2 for sampling. Achieves a BPW of 5.76. Focuses on provable security **[ding2023discop]**. Key results include Capacity: 5.76, Entropy: 6.08, Utilization: 0.95."
+  * **Instruction:** Append `[ding2023discop]` after the first sentence of the bullet point.
+  * **Result:** "Discop (Provably Secure Steganography): Uses GPT-2 for sampling. Achieves a BPW of 5.76. Focuses on provable security **[ding2023discop]**. Key results include Capacity: 5.76, Entropy: 6.08, Utilization: 0.95."
+
+* **Original Text in `main.pdf`:** "Generative Text Steganography with LLM: A black-box approach with a BPW of 5.93 and a PPL of 165.76. Focuses on semantic similarity **[wu2024generative]**. Key results include SS: 0.5881, LS-CNN Acc: 51.55"
+  * **Instruction:** Append `[wu2024generative]` after the first sentence of the bullet point.
+  * **Result:** "Generative Text Steganography with LLM: A black-box approach with a BPW of 5.93 and a PPL of 165.76. Focuses on semantic similarity **[wu2024generative]**. Key results include SS: 0.5881, LS-CNN Acc: 51.55"
+
+* **Original Text in `main.pdf`:** "Meteor (Cryptographically Secure Steganography): Uses GPT-2 for sampling. Achieves 4.11 BPW. Focuses on cryptographic security **[kaptchuk2021meteor]**. Key result: 3.09 bits/token."
+  * **Instruction:** Append `[kaptchuk2021meteor]` after the first sentence of the bullet point.
+  * **Result:** "Meteor (Cryptographically Secure Steganography): Uses GPT-2 for sampling. Achieves 4.11 BPW. Focuses on cryptographic security **[kaptchuk2021meteor]**. Key result: 3.09 bits/token."}]}}}
+
+* **Original Text in `main.pdf`:** "Zero-shot Generative Linguistic Steganography: Uses LLaMA2-Chat-7B and GPT-2. Achieves a BPW of 2.511 and a PPL of 8.81."
+  * **Instruction:** Append `[lin2024zero]` after the first sentence of the bullet point.
+  * **Result:** "Zero-shot Generative Linguistic Steganography: Uses LLaMA2-Chat-7B and GPT-2. Achieves a BPW of 2.511 and a PPL of 8.81 **[lin2024zero]**. Other metrics include JSDfull: 17.90, JSDhalf: 16.86, JSDzero: 13.40."
+
+* **Original Text in `main.pdf`:** "Provably Secure Disambiguating Neural Linguistic Steganography: Uses LLaMA2-7b and Baichuan2-7b. Achieves 0.85 BPW with zero decoding error and provable security."
+  * **Instruction:** Append `[qi2024provably]` after the first sentence of the bullet point.
+  * **Result:** "Provably Secure Disambiguating Neural Linguistic Steganography: Uses LLaMA2-7b and Baichuan2-7b. Achieves 0.85 BPW with zero decoding error and provable security **[qi2024provably]**. Key results: Total Error: 0"
+
+* **Original Text in `main.pdf`:** "A Principled Approach to Natural Language Watermarking: Transformer-based encoder/decoder; BERT for distillation. Achieves 0.2 BPW. Focuses on meaning preservation and robustness."
+  * **Instruction:** Append `[ji2024principled]` after the first sentence of the bullet point.
+  * **Result:** "A Principled Approach to Natural Language Watermarking: Transformer-based encoder/decoder; BERT for distillation. Achieves 0.2 BPW. Focuses on meaning preservation and robustness **[ji2024principled]**. Key results: Bit acc: 0.994, Meteor Drop: 0.057, SBERT ^: 1.227."
+
+* **Original Text in `main.pdf`:** "Context-Aware Linguistic Steganography Model Based on Neural Machine Translation: Uses BERT (encoder) and LSTM (decoder). Achieves 3.275 BPW."
+  * **Instruction:** Append `[ding2023context]` after the first sentence of the bullet point.
+  * **Result:** "Context-Aware Linguistic Steganography Model Based on Neural Machine Translation: Uses BERT (encoder) and LSTM (decoder). Achieves 3.275 BPW **[ding2023context]**. Key results: BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86."
+
+* **Original Text in `main.pdf`:** "DeepTextMark: Model-independent watermarking approach tested with OPT-2.7B. Achieves 1 BPW with high detection accuracy and robustness."
+  * **Instruction:** Append `[munyer2024deeptextmark]` after the first sentence of the bullet point.
+  * **Result:** "DeepTextMark: Model-independent watermarking approach tested with OPT-2.7B. Achieves 1 BPW with high detection accuracy and robustness **[munyer2024deeptextmark]**. Key results: 100"
+
+* **Original Text in `main.pdf`:** "Hi-Stega: Hierarchical Linguistic Steganography Framework combining retrieval and generation usingGPT-2. Achieves 10.42 BPW with high payload and semantic coherence."
+  * **Instruction:** Append `[wang2023hi]` after the first sentence of the bullet point.
+  * **Result:** "Hi-Stega: Hierarchical Linguistic Steganography Framework combining retrieval and generation usingGPT-2. Achieves 10.42 BPW with high payload and semantic coherence **[wang2023hi]**. Key results: ppl: 109.60, MAUVE: 0.2051, ER2: 10.42."
+
+* **Original Text in `main.pdf`:** "Linguistic Steganography: From Symbolic Space to Semantic Space: Uses CTRL (generation) and BERT (semantic classifier). Achieves 0.08 BPW."
+  * **Instruction:** Append `[zhang2020linguistic]` after the first sentence of the bullet point.
+  * **Result:** "Linguistic Steganography: From Symbolic Space to Semantic Space: Uses CTRL (generation) and BERT (semantic classifier). Achieves 0.08 BPW **[zhang2020linguistic]**. Key results: Classifier Accuracy: 0.9880, Loop Count: 1.0160, PPL: 13.9565."
+
+* **Original Text in `main.pdf`:** "Natural Language Steganography by ChatGPT: Uses ChatGPT 4.0. Achieves 0.144 BPWwith natural concealment and scalability."
+  * **Instruction:** Append `[steinebach2024natural]` after the sentence.
+  * **Result:** "Natural Language Steganography by ChatGPT: Uses ChatGPT 4.0. Achieves 0.144 BPWwith natural concealment and scalability **[steinebach2024natural]**."
+
+* **Original Text in `main.pdf`:** "Rewriting-Stego: Uses BART (bart-base2). Achieves 4 BPW with high capacity and naturalness."
+  * **Instruction:** Append `[li2023rewriting]` after the first sentence of the bullet point.
+  * **Result:** "Rewriting-Stego: Uses BART (bart-base2). Achieves 4 BPW with high capacity and naturalness **[li2023rewriting]**. Key results: BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1."
+
+* **Original Text in `main.pdf`:** "ALiSa (Acrostic Linguistic Steganography): Based on BERT and Gibbs Sampling. Achieves 0.92 BPW."
+  * **Instruction:** Append `[yi2022alisa]` after the first sentence of the bullet point.
+  * **Result:** "ALiSa (Acrostic Linguistic Steganography): Based on BERT and Gibbs Sampling. Achieves 0.92 BPW **[yi2022alisa]**. Key results: PPL: Natural = 13.91, ALiSa = 14.85, LS-RNN/LS-BERT Acc & F1 = 0.50."}]}}}

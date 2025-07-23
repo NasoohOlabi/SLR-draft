@@ -6,24 +6,4 @@ This section summarizes the main findings from the systematic literature review,
 
 \subsection{LLM-Based Steganography Models}
 
-Our review identified several key LLM-based steganography models, each with unique approaches, strengths, and performance metrics:
-
-\begin{itemize}
-    \item \textbf{VAE-Stega:} Utilizes Variational Auto-Encoders with BERTBASE (BERT-LSTM) or LSTM-LSTM models. Achieves a bit per word (BPW) of 5.245, focusing on statistical fidelity. Evaluated using PPL, KLD, JSD, FE, CNN, and TS-CSW (Acc, R). Key results include PPL: 28.879, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616.
-    \item \textbf{General Framework for Reversible Data Hiding:} Employs BERTBase for Masked Language Modeling (MLM). Achieves a BPW of 4.152. Key results include BPW=0.5335, F1=0.9402, PPL=134.2199.
-    \item \textbf{Co-Stega:} Leverages Llama-2-7B-chat, GPT-2, and Llama-2-13B. Demonstrates high capacity (10.42 BPW), fluency, semantic relevance, and strong resistance to steganalysis. Key results include SR1: 60.87%, SR2: 98.55%, Gen. Capacity: 44.91 bits, Entropy: 49.21 bits, BPW: 2.31, PPL: 16.75, SimCSE: 0.69.
-    \item \textbf{Joint Linguistic Steganography:} Combines BERT MLM with Graph Attention Networks (GAT). Yields a BPW of 2.251 and a PPL of 13.917. Other metrics include KLD=2.904, SIM=0.812, ER=0.365.
-    \item \textbf{Discop (Provably Secure Steganography):} Uses GPT-2 for sampling. Achieves a BPW of 5.76. Focuses on provable security. Key results include Capacity: 5.76, Entropy: 6.08, Utilization: 0.95.
-    \item \textbf{Generative Text Steganography with LLM:} A black-box approach with a BPW of 5.93 and a PPL of 165.76. Focuses on semantic similarity. Key results include SS: 0.5881, LS-CNN Acc: 51.55%, BiLSTM-Dense Acc: 49.20%, Bert-FT Acc: 50.00%.
-    \item \textbf{Meteor (Cryptographically Secure Steganography):} Uses GPT-2 for sampling. Achieves 4.11 BPW. Focuses on cryptographic security. Key result: 3.09 bits/token.
-    \item \textbf{Zero-shot Generative Linguistic Steganography:} Uses LLaMA2-Chat-7B and GPT-2. Achieves a BPW of 2.511 and a PPL of 8.81. Other metrics include JSDfull: 17.90, JSDhalf: 16.86, JSDzero: 13.40.
-    \item \textbf{Provably Secure Disambiguating Neural Linguistic Steganography:} Uses LLaMA2-7b and Baichuan2-7b. Achieves 0.85 BPW with zero decoding error and provable security. Key results: Total Error: 0%, Ave KLD: 0, Max KLD: 0, Ave PPL: 3.19 (EN), 7.49 (ZH).
-    \item \textbf{A Principled Approach to Natural Language Watermarking:} Transformer-based encoder/decoder; BERT for distillation. Achieves 0.2 BPW. Focuses on meaning preservation and robustness. Key results: Bit acc: 0.994, Meteor Drop: ~0.057, SBERT ↑: ~1.227.
-    \item \textbf{Context-Aware Linguistic Steganography Model Based on Neural Machine Translation:} Uses BERT (encoder) and LSTM (decoder). Achieves 3.275 BPW. Key results: BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86.
-    \item \textbf{DeepTextMark:} Model-independent watermarking approach tested with OPT-2.7B. Achieves 1 BPW with high detection accuracy and robustness. Key results: 100% accuracy, mSMS: 0.9892, TPR: 0.83, FNR: 0.17.
-    \item \textbf{Hi-Stega:} Hierarchical Linguistic Steganography Framework combining retrieval and generation using GPT-2. Achieves 10.42 BPW with high payload and semantic coherence. Key results: ppl: 109.60, MAUVE: 0.2051, ER2: 10.42.
-    \item \textbf{Linguistic Steganography: From Symbolic Space to Semantic Space:} Uses CTRL (generation) and BERT (semantic classifier). Achieves 0.08 BPW. Key results: Classifier Accuracy: 0.9880, Loop Count: 1.0160, PPL: 13.9565.
-    \item \textbf{Natural Language Steganography by ChatGPT:} Uses ChatGPT 4.0. Achieves 0.144 BPW with natural concealment and scalability.
-    \item \textbf{Rewriting-Stego:} Uses BART (bart-base2). Achieves 4 BPW with high capacity and naturalness. Key results: BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1.
-    \item \textbf{ALiSa (Acrostic Linguistic Steganography):} Based on BERT and Gibbs Sampling. Achieves 0.92 BPW. Key results: PPL: Natural = 13.91, ALiSa = 14.85, LS-RNN/LS-BERT Acc \& F1 = ~0.50.
-\end{itemize}
+Our review identified several key LLM-based steganography models, each with unique approaches, strengths, and performance metrics. These models are discussed in terms of their underlying techniques, embedding capacities, and imperceptibility metrics, providing a comprehensive overview of the current landscape.
