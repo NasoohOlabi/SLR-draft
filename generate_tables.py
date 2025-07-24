@@ -21,7 +21,7 @@ def generate_latex_table(
     }
 
     # Compute column format
-    col_format = "|X|" + "|X|" * len(columns_to_display)
+    col_format = "|" + ("|".join(["X"] * (len(columns_to_display) + 1))) + "|"
 
     # Begin LaTeX table
     latex_code = (

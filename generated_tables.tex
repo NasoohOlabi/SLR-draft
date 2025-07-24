@@ -3,7 +3,7 @@
 \caption{Summary of Results from Reviewed Papers}
 \label{tab:results_summary}
 \small
-\begin{tabularx}{\linewidth}{|X||X|}
+\begin{tabularx}{\linewidth}{|X|X|}
 \hline
 Paper & Result \\\hline
 \allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & PPL: 28.879, \ensuremath{\Delta}MP: 0.242, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616 \\\hline
@@ -32,7 +32,7 @@ Paper & Result \\\hline
 \caption{Models and Datasets Used in Reviewed Papers}
 \label{tab:models_datasets}
 \small
-\begin{tabularx}{\linewidth}{|X||X||X|}
+\begin{tabularx}{\linewidth}{|X|X|X|}
 \hline
 Paper & Llm & Dataset \\\hline
 \allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & BERTBASE (BERT-LSTM)  (LSTM-LSTM) model was trained from scratch & Twitter (2.6M sentences) IMDB (1.2M sentences) preprocessed \\\hline
@@ -61,7 +61,7 @@ Paper & Llm & Dataset \\\hline
 \caption{Context-Related Fields in Reviewed Papers}
 \label{tab:context_fields}
 \small
-\begin{tabularx}{\linewidth}{|X||X||X||X||X|}
+\begin{tabularx}{\linewidth}{|X|X|X|X|X|}
 \hline
 Paper & Context Aware & Categ Context & Representation Context & Context Usage In Method Detail Text \\\hline
 \allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & non-explicit & pre-text & text & [Not specified] \\\hline
@@ -90,7 +90,7 @@ Paper & Context Aware & Categ Context & Representation Context & Context Usage I
 \caption{Categories, Main Strengths, and Weaknesses of Reviewed Papers}
 \label{tab:category_strengths_weaknesses}
 \small
-\begin{tabularx}{\linewidth}{|X||X||X||X|}
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
 \hline
 Paper & Type & Main Strengths & Main Weaknesses \\\hline
 \allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & Steganography & statistical fidelity & Not AutoRegressive \\\hline
@@ -119,7 +119,7 @@ Paper & Type & Main Strengths & Main Weaknesses \\\hline
 \caption{Approach/Pipeline Method Used in Reviewed Papers}
 \label{tab:approach_method}
 \small
-\begin{tabularx}{\linewidth}{|X||X|}
+\begin{tabularx}{\linewidth}{|X|X|}
 \hline
 Paper & Pipline Method Used \\\hline
 \allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & Input text → Encoder (LSTM/BERT) → latent vector z ~ N(0,1) z → Decoder (LSTM) → conditional distribution → top-m Candidate Pool Candidate Pool + secret bits → Coding (Huffman/Arithmetic) → word output Repeat → sentence with hidden bits Shared z + Decoder → conditional distribution → CP reconstruction Observed word + CP → decode bits \\\hline
