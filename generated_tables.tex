@@ -27,7 +27,7 @@ Paper & Result \\\hline
 \end{tabularx}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
 \caption{Models and Datasets Used in Reviewed Papers}
 \label{tab:models_datasets}
@@ -54,9 +54,9 @@ Paper & Llm & Dataset \\\hline
 17 & BART (bart-base2) & Movie, News, Tweet \\\hline
 18 & BERT (Google’s BERTBase, Uncased) & BookCorpus (10,000 natural texts for evaluation) \\\hline
 \end{tabularx}
-\end{table}
+\end{table*}
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
 \caption{Context-Related Fields in Reviewed Papers}
 \label{tab:context_fields}
@@ -83,9 +83,9 @@ Paper & Context Aware & Categ Context & Representation Context & Context Usage I
 17 & not Explicit & [Not specified] & [Not specified] & [Not specified] \\\hline
 18 & No & [Not specified] & [Not specified] & [Not specified] \\\hline
 \end{tabularx}
-\end{table}
+\end{table*}
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
 \caption{Categories, Main Strengths, and Weaknesses of Reviewed Papers}
 \label{tab:category_strengths_weaknesses}
@@ -112,9 +112,9 @@ Paper & Type & Main Strengths & Main Weaknesses \\\hline
 17 & Steganography & High capacity, naturalness, reduced vigilance, denoising, real-world efficiency & Similarity drops with high BPTS, may underperform in detection accuracy vs edit-based \\\hline
 18 & Steganography & Simple & Poor Quality, low cap \\\hline
 \end{tabularx}
-\end{table}
+\end{table*}
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
 \caption{Approach/Pipeline Method Used in Reviewed Papers}
 \label{tab:approach_method}
@@ -141,5 +141,5 @@ Paper & Pipline Method Used \\\hline
 17 & Cover text (Y) + Conditional Code → BART Encoder → encoded representation Secret message (S) → bit stream → 2\^{}n vocabulary groups, each with n-bit code BART Decoder + Group-Wise Masked Decoding → mask non-aligned token probabilities → stego text (Y') Beam search → K candidate stego texts GPT2 → Perplexity (PPL) scoring → select lowest PPL candidate as final stego text \\\hline
 18 & Secret tokens → initialize stego text s with [MASK] tokens Secret plaintext w → insert tokens at positions p in s Remaining [MASK] tokens → BERT MLM → probability distribution Gibbs sampling → sample tokens from conditional distribution → fill s Iterate T times → refine non-secret positions → fluent stego text BERT + Gibbs → low Perplexity (PPL) → high fluency Conditional sampling → distribution mimics natural text → strong anti-steganalysis Receiver → extract plaintext from positions p \\\hline
 \end{tabularx}
-\end{table}
+\end{table*}
 

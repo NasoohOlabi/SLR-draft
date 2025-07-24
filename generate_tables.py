@@ -3,7 +3,7 @@ import re
 
 
 def generate_latex_table(
-    data, columns_to_display, caption, label, bib_data, column_mapping
+    data, columns_to_display, caption, label, bib_data, column_mapping, env="table*"
 ):
     # Define replacements for special symbols (uses ensuremath for safe math mode)
     specific_replacements = {
@@ -20,8 +20,6 @@ def generate_latex_table(
         "≠": r"\ensuremath{\neq}",
     }
 
-    # Use single-column table environment
-    env = "table"
     # Compute column format
     col_format = "|c|" + "|X|" * len(columns_to_display)
 
@@ -131,18 +129,21 @@ if __name__ == "__main__":
     }
     tables = [
         {
+            "env": "table",
             "name": "results",
             "columns": ["result"],
             "caption": "Summary of Results from Reviewed Papers",
             "label": "results_summary",
         },
         {
+            "env": "table*",
             "name": "model_dataset",
             "columns": ["LLM", "dataset"],
             "caption": "Models and Datasets Used in Reviewed Papers",
             "label": "models_datasets",
         },
         {
+            "env": "table*",
             "name": "context_fields",
             "columns": [
                 "context aware",
@@ -154,12 +155,14 @@ if __name__ == "__main__":
             "label": "context_fields",
         },
         {
+            "env": "table*",
             "name": "category_strengths_weaknesses",
             "columns": ["Type", "Main strengths", "Main weaknesses"],
             "caption": "Categories, Main Strengths, and Weaknesses of Reviewed Papers",
             "label": "category_strengths_weaknesses",
         },
         {
+            "env": "table*",
             "name": "approach",
             "columns": ["pipline method used"],
             "caption": "Approach/Pipeline Method Used in Reviewed Papers",
@@ -169,7 +172,7 @@ if __name__ == "__main__":
     # Generate and write
     out = "".join(
         generate_latex_table(
-            data_rows, t["columns"], t["caption"], t["label"], bib, cmap
+            data_rows, t["columns"], t["caption"], t["label"], bib, cmap, t["env"]
         )
         for t in tables
     )
