@@ -21,7 +21,7 @@ def generate_latex_table(
     }
 
     # Compute column format
-    col_format = "|c|" + "|X|" * len(columns_to_display)
+    col_format = "|X|" + "|X|" * len(columns_to_display)
 
     # Begin LaTeX table
     latex_code = (
@@ -50,7 +50,8 @@ def generate_latex_table(
         if title_text:
             for key, title in bib_data.items():
                 if title_text == title:
-                    pid = f"\\cite{{{key}}}"
+                    # Added \\allowbreak before \\cite to permit line breaks
+                    pid = f"\\allowbreak {title_text} \\allowbreak\\cite{{{key}}}"
                     break
         cells = [pid]
         for col in columns_to_display:
