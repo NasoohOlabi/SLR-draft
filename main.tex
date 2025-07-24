@@ -4,7 +4,7 @@
 \settopmatter{printacmref=false} % Removes citation information below abstract
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \pagestyle{plain} % removes running headers
-
+\usepackage{tabularx}
 \usepackage{pifont} % used for \todo symbol
 \newcommand{\todo}[1]{\textcolor{blue}{#1}}
 
@@ -161,7 +161,6 @@ This study presents a systematic literature review on linguistic steganography, 
 \input{data_extraction.tex}
 \input{data_synthesis.tex}
 \input{results.tex} % This will be '4. LLM-based Steganography Approaches'
-\input{generated_tables.tex}
 \input{background.tex} % This will be '5. Context awareness' (content needs to be adapted)
 \input{discussion.tex}
 \input{conclusion.tex}
