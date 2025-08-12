@@ -1,5 +1,5 @@
 
-\documentclass[sigconf]{acmart} % Remove 'review' option
+\documentclass[sigconf]{sections/acmart} % Remove 'review' option
 \setcitestyle{acmauthoryear} % Replace \citestyle with ACM-recommended command
 \settopmatter{printacmref=false} % Removes citation information below abstract
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
@@ -154,18 +154,18 @@ This study presents a systematic literature review on linguistic steganography, 
 
 %\vspace{10pt}
 % IMPORTANT: Do not change or add any headers below this line.
-\input{introduction.tex}
-\input{llm_approaches.tex} % This will be '2. Steganography and Large Language Models'
-\input{study_design.tex} % This will be '3. Literature review methodology'
-\input{search_conducting.tex}
-\input{data_extraction.tex}
-\input{data_synthesis.tex}
-\input{results_and_discussion.tex} % Replaces results.tex and discussion.tex
-\input{main_findings.tex} % New section with main findings
-\input{conclusion.tex}
+\input{sections/introduction.tex}
+\input{sections/llm_approaches.tex} % This will be '2. Steganography and Large Language Models'
+\input{sections/study_design.tex} % This will be '3. Literature review methodology'
+\input{sections/search_conducting.tex}
+\input{sections/data_extraction.tex}
+\input{sections/data_synthesis.tex}
+\input{sections/results_and_discussion.tex} % Replaces results.tex and discussion.tex
+\input{sections/main_findings.tex} % New section with main findings
+\input{sections/conclusion.tex}
 
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{bibliography}
+\bibliography{references/bibliography}
 
 % 
 % If your work has an appendix, this is the place to put it.
