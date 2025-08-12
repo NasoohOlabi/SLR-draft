@@ -22,7 +22,7 @@ LLMs are considered \textbf{favorable for generative text steganography} due to 
 
 LLMs like \textbf{GPT-2, LLaMA, and Baichuan2} are commonly used as basic generative models for steganography. Existing methods often utilize a language model and steganographic mapping, where secret messages are embedded by establishing a mapping between binary bits and the sampling probability of words within the training vocabulary.
 
-New approaches, such as \textbf{LLM-Stega}, explore \textbf{black-box generative text steganography using the user interfaces (UIs) of LLMs}, thereby circumventing the requirement to access internal sampling distributions. This method constructs a keyword set and employs an encrypted steganographic mapping for embedding, proposing an optimization mechanism based on reject sampling for accurate extraction and rich semantics.
+New approaches, such as \textbf{LLM-Stega} \cite{wu2024generative}, explore \textbf{black-box generative text steganography using the user interfaces (UIs) of LLMs}, thereby circumventing the requirement to access internal sampling distributions. This method constructs a keyword set and employs an encrypted steganographic mapping for embedding, proposing an optimization mechanism based on reject sampling for accurate extraction and rich semantics.
 
 Another framework, \textbf{Co-Stega}, leverages LLMs to address the challenge of low capacity in social media by expanding the text space for hiding messages (through context retrieval) and \textbf{increasing the generated text's entropy via specific prompts} to enhance embedding capacity. This approach also aims to maintain text quality, fluency, and relevance.
 
