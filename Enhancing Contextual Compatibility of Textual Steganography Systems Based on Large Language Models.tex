@@ -1,4 +1,3 @@
-% \documentclass[sigconf]{sections/acmart} % Remove 'review' option
 \documentclass[manuscript,screen,review]{sections/acmart} % Preprint format
 \setcitestyle{acmauthoryear} % Replace \citestyle with ACM-recommended command
 \settopmatter{printacmref=false} % Removes citation information below abstract
@@ -10,6 +9,12 @@
 
 \usepackage{hyperref}
 \usepackage{float}
+% \usepackage{accsupp} % For accessibility support
+
+% % Suppress false positive accessibility warnings if all descriptions are present
+% \makeatletter
+% \renewcommand{\@acmart@checkdesc}{}
+% \makeatother
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08emT\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     
