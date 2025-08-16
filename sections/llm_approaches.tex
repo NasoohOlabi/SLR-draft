@@ -22,7 +22,7 @@
 Large Language Models (LLMs) are autoregressive, generative systems based on the Transformer architecture \cite{vaswani2017attention} that approximate high-dimensional distributions over natural-language sequences \cite{kaptchuk2021meteor}\cite{radford2019language}.
 Given a prefix, an LLM emits a probability vector over the vocabulary; the next token is sampled from this vector and appended to the prefix, and the process repeats until a stopping criterion is met.
 During pre-training, billions of parameters are tuned on large web corpora so that the model’s predictive distribution converges to the empirical distribution of the data \cite{brown2020language}.
-As a consequence, modern LLMs routinely produce text whose fluency, coherence and style are indistinguishable from human writing \cite{bubeck2023sparks}{ openai2023gpt4}.
+As a consequence, modern LLMs routinely produce text whose fluency, coherence and style are indistinguishable from human writing \cite{bubeck2023sparks}{ openai2024gpt4technicalreport}.
 This capability has been repurposed for controlled generation tasks—e.g., tabular records, relational triples, paraphrase pairs and instruction–response pairs—often in a zero-shot fashion \cite{wang2022benchmarking}.
 Moreover, the learned latent representations capture stylistic and semantic regularities that generalize across domains, enabling applications that require nuanced linguistic mimicry \cite{zhang2023language}.
 
@@ -58,7 +58,7 @@ Metrics include bits per token/word and embedding rate.
 \subsection{Challenges and Limitations in Steganography with LLMs}
 
 \subsubsection{Perceptual vs. Statistical Imperceptibility (Psic Effect)}
-The \textbf{Psic Effect} represents a fundamental trade-off in steganographic systems.
+The \textbf{Psic Effect} \cite{yang2020vae} represents a fundamental trade-off in steganographic systems.
 
 \subsubsection{Low Embedding Capacity}
 Short texts and strict semantics limit the amount of information that can be hidden.

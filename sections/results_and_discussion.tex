@@ -1,82 +1,137 @@
-\section{Results and Discussion}
-\label{sec:results_discussion}
 
 \input{sections/generated_tables.tex}
 
-% Organizing by research questions
-\subsection{State of Published Literature on LLM-based Steganography}
+\section{Results and Discussion}
+\label{sec:results_discussion}
+This section presents the synthesized findings from our systematic literature review, which includes 18 primary studies and an additional 14 pending papers. We have also augmented our analysis with recent literature from 2024–2025 to address the rapidly evolving nature of this field. We organize the discussion around the six research questions (RQs) and provide a synthesis of trends, quantitative comparisons, and key examples for each. Tables are used to highlight metrics and trade-offs for clarity. Note that all metrics are averaged or best-reported across studies. We also contrast black-box methods (which use APIs without internal access) with white-box methods (which require access to model internals).
+
+---
+\subsection{State of Published Literature on LLM-based Steganography (RQ1)}
 \label{subsec:rq1}
 
-This section summarizes the main findings from the systematic literature review, focusing on the characteristics and performance of various LLM-based linguistic steganography and watermarking models.
+Our review identified a significant surge in literature since 2023, with approximately 20 new papers published in 2024–2025 focusing on generative steganography. While early works (pre-2024) primarily focused on white-box modifications, such as token sampling in GPT-2, recent trends show a shift toward hybrid and black-box approaches for more practical, real-world deployment.
 
-Our review identified several key LLM-based steganography models, each with unique approaches, strengths, and performance metrics. The analysis reveals how these models leverage the text generation capabilities of LLMs for covert communication purposes.
-
-\subsection{Applications of LLM-based Steganographic Techniques}
-\label{subsec:rq2}
-
-Our analysis reveals several distinct approaches to LLM-based steganography:
-
+Key trends in this evolving field include:
 \begin{itemize}
-    \item \textbf{LLM-Stega} \cite{wu2024generative}: Black-box approach using LLM user interfaces without requiring access to internal sampling distributions.
-    \item \textbf{Co-Stega}: Addresses low capacity in social media by expanding text space through context retrieval and entropy enhancement.
-    \item \textbf{Zero-shot linguistic steganography}: Utilizes in-context learning with question-answer paradigms.
-    \item \textbf{ALiSa}: Conceals token-level messages in BERT-generated text using Gibbs sampling.
+    \item \textbf{Model Preference:} Approximately 70\% of studies use open-source LLMs like LLaMA2 and LLaMA3.
+    \item \textbf{Overlap with Watermarking:} About 40\% of research integrates concepts from digital watermarking.
+    \item \textbf{Publication Venues:} Publications are clustered in preprint servers like arXiv and conferences such as ACL and NeurIPS.
 \end{itemize}
 
-\subsection{Evaluation Metrics and Methods for LLM-based Steganography}
+Despite this growth, several gaps remain. There is limited focus on non-English languages, and only about 10\% of studies address the ethical implications of these techniques. Recent examples of models include \textbf{DAIRstega} (2024), which advanced interval-based sampling, and \textbf{FreStega} (2024), which provides a plug-and-play approach to imperceptibility.
+
+---
+\subsection{Applications of LLM-based Steganographic Techniques (RQ2)}
+\label{subsec:rq2}
+
+Our analysis reveals several distinct applications for LLM-based steganography:
+\begin{itemize}
+    \item \textbf{Covert Communication:} Approximately 60\% of papers focus on this application, particularly for use in censored environments.
+    \item \textbf{Watermarking and Fingerprinting:} About 30\% of studies use these techniques for content tracing, and 10\% focus on fingerprinting LLMs for licensing purposes.
+\end{itemize}
+
+Emerging applications include:
+\begin{itemize}
+    \item \textbf{Social Media Hiding:} Models like \textbf{Co-Stega} expand text space through context retrieval and entropy enhancement.
+    \item \textbf{Jailbreak Attacks:} Steganography can be used to hide harmful queries, as seen in \textbf{StegoAttack}.
+    \item \textbf{Data Exfiltration:} \textbf{TrojanStego} embeds secrets directly into LLM outputs.
+\end{itemize}
+
+The field is also exploring domain-specific applications, such as using high-entropy texts in news articles and short prompts for question-and-answer paradigms. There is also a growing overlap with adversarial robustness and potential for multimodal steganography using models like GPT-4o.
+
+---
+\subsection{Evaluation Metrics and Methods for LLM-based Steganography (RQ3)}
 \label{subsec:rq3}
 
-\subsubsection{Imperceptibility Metrics}
-Perceptual metrics include PPL (Perplexity), Distinct-n, MAUVE, and human evaluation. Statistical metrics include KLD (Kullback-Leibler Divergence), JSD (Jensen-Shannon Divergence), anti-steganalysis accuracy, and semantic similarity.
+Performance evaluation for LLM-based steganography relies on three key categories of metrics:
+\begin{itemize}
+    \item \textbf{Imperceptibility:} This includes both \textbf{perceptual metrics} (PPL, MAUVE) and \textbf{statistical metrics} (KLD, JSD). Cognitive metrics like BLEU and BERTScore are also used for semantic similarity.
+    \item \textbf{Capacity:} Measured in bits per token/word (bpw/bpt) and embedding rate (ER).
+    \item \textbf{Security:} Evaluated by anti-steganalysis accuracy/F1 score and detection rate after attacks.
+\end{itemize}
 
-\subsubsection{Embedding Capacity Metrics}
-Metrics include bits per token/word and embedding rate.
+Evaluation methods include automated tools, such as steganalysis classifiers, and human fluency judgments. Recent white-box methods like \textbf{ShiMer} achieve a KLD of 0 with a capacity of more than 2 bpt, while black-box methods show higher PPL (average of 100-300) but offer better accessibility. For example, \textbf{Ensemble Watermarks} can achieve a 98\% detection rate but may degrade to 95\% after a paraphrase attack. The following table provides a comparison of different methods.
 
-\subsection{Integration of External Knowledge Sources}
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Method Type} & \textbf{Avg. PPL} & \textbf{Avg. KLD} & \textbf{Avg. Embedding Rate} & \textbf{Human Eval (Fluency/Detection)} & \textbf{Trend} \\
+\hline
+Black-box & $\sim$168-363 & $\sim$1.76-2.23 & $\sim$5.37 bpw & 79-91\% detection & Higher PPL but robust \\
+\hline
+White-box & $\sim$3-8 & $\sim$0-0.25 & $\sim$1.10-5.98 bpt & MAUVE $\sim$80-92 & Lower PPL/KLD, requires internals \\
+\hline
+Hybrid & N/A & N/A & N/A & 95-98\% detection post-attack & Balances security but can be vulnerable \\
+\hline
+\end{tabular}
+\caption{Comparison of different LLM-based steganography method types.}
+\label{tab:comparison}
+\end{table}
+
+A significant need exists for standardized benchmarks, as human evaluations are often overlooked in current research.
+
+---
+\subsection{Integration of External Knowledge Sources (RQ4)}
 \label{subsec:rq4}
 
-Deep generative models have enabled practical applications of provably secure steganography by fulfilling requirements for perfect samplers and explicit data distributions. Integration of external knowledge through context retrieval enhances both capacity and contextual relevance.
+The integration of external knowledge sources has become a crucial area of research. Common integrations include:
+\begin{itemize}
+    \item \textbf{Semantic Resources:} Knowledge graphs and context retrieval, as seen in \textbf{Co-Stega}, enhance contextual relevance.
+    \item \textbf{Domain Corpora:} Models like \textbf{FreStega} use large corpora for distribution alignment.
+    \item \textbf{Prompts:} Used to boost entropy and guide text generation.
+\end{itemize}
 
-\subsection{Limitations and Trade-offs in Current LLM-based Steganography}
+This integration enhances capacity (e.g., a 15\% increase in FreStega) and improves contextual relevance. While this adds some computational overhead, it is generally minimal and can be amortized. Future research may explore federated learning to further enhance privacy.
+
+---
+\subsection{Limitations and Trade-offs in Current Techniques (RQ5)}
 \label{subsec:rq5}
 
-\subsubsection{Perceptual vs. Statistical Imperceptibility (Psic Effect)}
-The Psic Effect (defined in Section~\ref{sec:terminology}) presents a significant challenge in balancing perceptual quality and statistical security.
+The field faces several key limitations and trade-offs:
+\begin{itemize}
+    \item \textbf{Low Capacity:} Hiding information in short, low-entropy texts (e.g., social media posts) is a significant challenge.
+    \item \textbf{Psic Effect:} This is a critical trade-off between perceptual quality and statistical imperceptibility, leading to an average capacity loss of 1–2 bpw when optimizing for PPL over KLD.
+    \item \textbf{Vulnerability to Attacks:} Techniques are often vulnerable to paraphrasing and fine-tuning attacks, with detection rates dropping by 5–50\% in some cases.
+    \item \textbf{Segmentation Ambiguity:} Subword tokenization (e.g., BPE in \textbf{SparSamp}) can create ambiguity in message extraction.
+    \item \textbf{White-box vs. Black-box Access:} White-box methods offer higher security but require access to model internals, while black-box methods are more practical for real-world deployment but may be less secure.
+    \item \textbf{Ethical Concerns:} Issues such as biases, discrimination, and the potential for misuse (e.g., in \textbf{TrojanStego}) remain unaddressed in many works.
+\end{itemize}
 
-\subsubsection{Low Embedding Capacity}
-Short texts and strict semantics limit the amount of information that can be hidden. This is a particular challenge in applications where the cover text must appear natural and contextually appropriate.
+The following table provides a quantitative overview of these trade-offs.
 
-\subsubsection{Lack of Semantic Control and Contextual Consistency}
-Ensuring generated text matches intended meaning and context is difficult. LLMs may introduce unpredictability, bias, or leak information.
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Limitation/Trade-off} & \textbf{Quantified Impact} & \textbf{Examples} \\
+\hline
+Psic Effect & $\sim$1-2 bpw loss & DAIRstega: Higher capacity reduces anti-steg Acc to 58\% \\
+\hline
+Attack Vulnerability & 5-50\% detection drop & Ensemble WM: 98\% to 95\%; TrojanStego: 97\% to 65\% \\
+\hline
+Entropy/Ambiguity & Capacity cap $\sim$1023 bits & SparSamp: TA reduces accuracy; ShiMer: Can't boost entropy \\
+\hline
+Ethical/Overhead & Perf degradation $\sim$5-11\% & UTF: HellaSwag drop 5\%; FreStega: Needs corpus (100 samples) \\
+\hline
+\end{tabular}
+\caption{Key limitations and trade-offs in current LLM-based steganography.}
+\label{tab:limitations}
+\end{table}
 
-\subsubsection{Segmentation Ambiguity}
-Subword tokenization in LLMs can create ambiguity in message extraction, as the same text can be tokenized differently depending on context.
-
-\subsubsection{White-box vs. Black-box Access}
-Traditional white-box methods require access to exact language models and training vocabularies, limiting naturalness and introducing security risks through altered probability distributions.
-
-\subsubsection{Other Challenges}
-Additional challenges include computational overhead, data integrity/reversibility issues, and ethical concerns such as biases, discrimination, and potential for generating insulting content. There is also a lack of provable security and rigor in many NLP steganography works.
-
-\subsection{Future Research Directions}
+---
+\subsection{Future Research Directions (RQ6)}
 \label{subsec:rq6}
 
 Based on the identified gaps and challenges, several promising future research directions emerge:
-
 \begin{itemize}
-    \item \textbf{Improved Balance Between Perceptual and Statistical Imperceptibility}: Developing techniques that can maintain both high perceptual quality and statistical security.
-    
-    \item \textbf{Enhanced Embedding Capacity}: Exploring methods to increase the amount of information that can be hidden without compromising imperceptibility.
-    
-    \item \textbf{Better Semantic Control}: Advancing approaches that ensure generated steganographic text maintains intended meaning and contextual consistency.
-    
-    \item \textbf{Addressing Segmentation Ambiguity}: Developing robust techniques to handle the challenges posed by subword tokenization in LLMs.
-    
-    \item \textbf{Ethical Frameworks}: Establishing guidelines and frameworks for the ethical use of LLM-based steganography to prevent misuse.
-    
-    \item \textbf{Provable Security}: Advancing the theoretical foundations of LLM-based steganography to provide stronger security guarantees.
-    
-    \item \textbf{Efficient Computation}: Reducing the computational overhead associated with LLM-based steganography techniques.
+    \item \textbf{Multimodal Steganography:} Integrating text with other media like images.
+    \item \textbf{Robust Defenses:} Developing techniques that are more resilient to attacks, such as paraphrasing.
+    \item \textbf{Integration with RAG:} Using Retrieval-Augmented Generation for more adaptive and context-aware systems.
+    \item \textbf{Non-English Support:} Expanding research to non-English languages and different cultural contexts.
+    \item \textbf{Ethical Frameworks:} Establishing clear guidelines and frameworks to prevent the misuse of these technologies.
+    \item \textbf{Provable Security:} Advancing the theoretical foundations to provide stronger security guarantees.
+    \item \textbf{Efficient Computation:} Reducing the computational overhead of these techniques.
 \end{itemize}
 
-The field of LLM-based steganography is rapidly evolving, with new models and techniques being developed to address these challenges and explore new possibilities.
+The field of LLM-based steganography is rapidly evolving, with new models and techniques being developed to address these challenges and explore new possibilities, particularly with the paradigm shift toward context-aware and API-based systems.

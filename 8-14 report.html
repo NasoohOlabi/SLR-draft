@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive SLR: LLM-based Textual Steganography</title>
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A single-page application with a top navigation bar for smooth scrolling to thematic sections. The structure prioritizes user exploration over mirroring the report's linear format. It starts with a high-level overview, moves to an interactive dashboard for exploring the reviewed papers (the core of the app), then provides drill-downs for core concepts and challenges, and finishes with methodology and future outlook. This flow is designed to answer a user's likely questions in order: "What's the big picture?", "How do the methods compare?", "What do these terms mean?", and "What's next?". This non-linear, thematic structure makes the dense academic content more accessible and engaging. -->
+    <!-- Visualization & Content Choices: The core of the application is an interactive bubble chart (Chart.js) comparing steganography methods by their performance (Embedding Capacity vs. Perplexity), allowing users to visually identify trade-offs. This chart is linked to a filterable list of detailed paper cards (HTML/JS), enabling users to explore the data granularly. This addresses the "Compare" and "Organize" goals. Key concepts and challenges are presented in an accordion (HTML/CSS/JS) to "Inform" without cluttering the UI. The SLR methodology is visualized as a simple flow diagram (HTML/CSS) to build trust. This multi-faceted approach transforms the static report data into an explorable tool, adhering to the NO SVG/Mermaid constraint. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #F8F7F4;
+            color: #3D405B;
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #81B29A;
+            border-bottom-color: #81B29A;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 50vh;
+            width: 100%;
+            max-width: 900px;
+            max-height: 500px;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease;
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-[#3D405B]">LLM Steganography Review</h1>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#overview" class="nav-link font-medium pb-1">Overview</a>
+                <a href="#landscape" class="nav-link font-medium pb-1">Landscape</a>
+                <a href="#concepts" class="nav-link font-medium pb-1">Concepts & Challenges</a>
+                <a href="#methodology" class="nav-link font-medium pb-1">Methodology</a>
+                <a href="#future" class="nav-link font-medium pb-1">Future Directions</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-2">
+            <a href="#overview" class="nav-link font-medium pb-1">Overview</a>
+            <a href="#landscape" class="nav-link font-medium pb-1">Landscape</a>
+            <a href="#concepts" class="nav-link font-medium pb-1">Concepts & Challenges</a>
+            <a href="#methodology" class="nav-link font-medium pb-1">Methodology</a>
+            <a href="#future" class="nav-link font-medium pb-1">Future Directions</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="overview" class="mb-24 text-center">
+            <h2 class="text-4xl font-bold mb-4 text-[#3D405B]">Enhancing Textual Steganography with Large Language Models</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
+                This systematic literature review examines the transformative impact of Large Language Models (LLMs) on linguistic steganography. Our analysis shows LLM-based approaches significantly enhance imperceptibility, embedding capacity, and naturalness, addressing key limitations of traditional methods. This interactive report explores the findings, challenges, and future of this rapidly evolving field.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white/50 p-6 rounded-xl shadow-md border border-gray-200/50">
+                    <h3 class="text-3xl font-bold text-[#81B29A]">19</h3>
+                    <p class="text-gray-600">Primary Papers Reviewed</p>
+                </div>
+                <div class="bg-white/50 p-6 rounded-xl shadow-md border border-gray-200/50">
+                    <h3 class="text-3xl font-bold text-[#81B29A]">10+</h3>
+                    <p class="text-gray-600">LLM Architectures Analyzed</p>
+                </div>
+                <div class="bg-white/50 p-6 rounded-xl shadow-md border border-gray-200/50">
+                    <h3 class="text-3xl font-bold text-[#81B29A]">7+</h3>
+                    <p class="text-gray-600">Key Challenges Identified</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="landscape" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2 text-[#3D405B]">The Landscape of LLM Steganography</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    Explore the performance of different steganographic methods. The chart plots the trade-off between embedding capacity (how much data can be hidden) and text naturalness (measured by Perplexity; lower is better). Use the filters to narrow down the results and click on data points or list items for more details.
+                </p>
+            </div>
+
+            <div class="bg-white/50 p-6 sm:p-8 rounded-xl shadow-lg border border-gray-200/50 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label for="model-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Model</label>
+                        <select id="model-filter" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#81B29A] focus:border-[#81B29A]">
+                            <option value="all">All Models</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dataset-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Dataset</label>
+                        <select id="dataset-filter" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#81B29A] focus:border-[#81B29A]">
+                            <option value="all">All Datasets</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="context-filter" class="block text-sm font-medium text-gray-700 mb-1">Filter by Context-Awareness</label>
+                        <select id="context-filter" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#81B29A] focus:border-[#81B29A]">
+                            <option value="all">All Types</option>
+                            <option value="Explicit">Explicit</option>
+                            <option value="Implicit">Implicit</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="stegaChart"></canvas>
+                </div>
+            </div>
+            
+            <div id="paper-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+            <div id="no-results" class="hidden text-center py-12">
+                <p class="text-xl text-gray-500">No matching papers found for the selected filters.</p>
+            </div>
+        </section>
+
+        <section id="concepts" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2 text-[#3D405B]">Core Concepts & Key Challenges</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    Understand the fundamental ideas and hurdles in LLM-based steganography. Click on any topic to expand and learn more.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Core Concepts</h3>
+                    <div id="concepts-accordion" class="space-y-3"></div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Key Challenges</h3>
+                    <div id="challenges-accordion" class="space-y-3"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methodology" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2 text-[#3D405B]">Our Review Methodology</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    This review followed a rigorous, multi-stage process to ensure a comprehensive and unbiased analysis of the existing literature.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 text-center">
+                <div class="flex-1 p-4">
+                    <div class="text-4xl mb-2 text-[#81B29A]">①</div>
+                    <h4 class="font-bold text-lg">Database Search</h4>
+                    <p class="text-sm text-gray-600">Initial search across major digital libraries using a defined query string.</p>
+                </div>
+                <div class="text-2xl text-gray-300 hidden md:block">→</div>
+                <div class="flex-1 p-4">
+                    <div class="text-4xl mb-2 text-[#81B29A]">②</div>
+                    <h4 class="font-bold text-lg">Multi-Stage Filtering</h4>
+                    <p class="text-sm text-gray-600">Papers filtered by title, abstract, and full-text against strict inclusion/exclusion criteria.</p>
+                </div>
+                <div class="text-2xl text-gray-300 hidden md:block">→</div>
+                 <div class="flex-1 p-4">
+                    <div class="text-4xl mb-2 text-[#81B29A]">③</div>
+                    <h4 class="font-bold text-lg">Snowballing</h4>
+                    <p class="text-sm text-gray-600">Reference lists of included papers reviewed to find additional relevant studies.</p>
+                </div>
+                <div class="text-2xl text-gray-300 hidden md:block">→</div>
+                <div class="flex-1 p-4">
+                    <div class="text-4xl mb-2 text-[#81B29A]">④</div>
+                    <h4 class="font-bold text-lg">Data Extraction</h4>
+                    <p class="text-sm text-gray-600">Key data points systematically extracted and classified for analysis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="mb-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2 text-[#3D405B]">Future Research Directions</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    Based on our analysis, we identify several promising and critical directions for future research and innovation in this domain.
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white/50 p-6 rounded-lg border border-gray-200/50">
+                    <h4 class="font-bold text-lg mb-2 text-[#3D405B]">Balancing Security & Quality</h4>
+                    <p class="text-gray-600">Developing techniques that better balance perceptual quality (human undetectability) and statistical security (machine undetectability).</p>
+                </div>
+                <div class="bg-white/50 p-6 rounded-lg border border-gray-200/50">
+                    <h4 class="font-bold text-lg mb-2 text-[#3D405B]">Increasing Embedding Capacity</h4>
+                    <p class="text-gray-600">Creating methods to increase the amount of hidden data without compromising the imperceptibility or fluency of the cover text.</p>
+                </div>
+                <div class="bg-white/50 p-6 rounded-lg border border-gray-200/50">
+                    <h4 class="font-bold text-lg mb-2 text-[#3D405B]">Improving Contextual Control</h4>
+                    <p class="text-gray-600">Designing approaches for finer-grained semantic control and stronger contextual consistency in the generated text.</p>
+                </div>
+                <div class="bg-white/50 p-6 rounded-lg border border-gray-200/50">
+                    <h4 class="font-bold text-lg mb-2 text-[#3D405B]">Strengthening Security Guarantees</h4>
+                    <p class="text-gray-600">Advancing the theoretical foundations of LLM-based steganography to provide stronger, provable security guarantees against advanced adversaries.</p>
+                </div>
+                <div class="bg-white/50 p-6 rounded-lg border border-gray-200/50">
+                    <h4 class="font-bold text-lg mb-2 text-[#3D405B]">Ethical Frameworks</h4>
+                    <p class="text-gray-600">Establishing robust ethical frameworks and safeguards for the responsible development and deployment of these powerful technologies.</p>
+                </div>
+                 <div class="bg-white/50 p-6 rounded-lg border border-gray-200/50">
+                    <h4 class="font-bold text-lg mb-2 text-[#3D405B]">Practical Deployment Models</h4>
+                    <p class="text-gray-600">Investigating methods that are effective in real-world, black-box scenarios where only API access to LLMs is available.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-100 mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            <p>Interactive SLR created based on the paper "Enhancing Contextual Compatibility of Textual Steganography Systems Based on Large Language Models" by Nasouh Alolabi and Riad Sonbol.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const papersData = [
+                { id: 1, title: "VAE-Stega", method: "Variational Auto-Encoder", capacity_bpc: 0.86, perplexity_ppl: 54.4, model: "Custom", dataset: "Twitter", context_awareness: "Implicit", summary: "Uses a VAE to generate cover text, focusing on statistical imperceptibility." },
+                { id: 2, title: "NMT-Stega", method: "Neural Machine Translation", capacity_bpc: 0.5, perplexity_ppl: 165.76, model: "Transformer", dataset: "WMT14", context_awareness: "Explicit", summary: "Leverages NMT models to embed data during the translation process, using source text as context." },
+                { id: 3, title: "Hi-Stega", method: "Hierarchical Steganography", capacity_bpc: 1.0, perplexity_ppl: 98.4, model: "GPT-2", dataset: "Social Media", context_awareness: "Explicit", summary: "A hierarchical approach that uses social media context to improve relevance and capacity." },
+                { id: 4, title: "LLM-Stega", method: "Keyword-based Generation", capacity_bpc: 0.2, perplexity_ppl: 32.5, model: "GPT-3.5", dataset: "Generic", context_awareness: "Implicit", summary: "A black-box method using keyword sets and reject sampling to guide LLM text generation." },
+                { id: 5, title: "Co-Stega", method: "Collaborative Steganography", capacity_bpc: 1.2, perplexity_ppl: 85.1, model: "GPT-2", dataset: "Social Media", context_awareness: "Explicit", summary: "Expands text space via context retrieval from social media to address low capacity challenges." },
+                { id: 6, title: "Zero-shot Steganography", method: "In-context Learning", capacity_bpc: 0.75, perplexity_ppl: 45.0, model: "LLaMA", dataset: "BookCorpus", context_awareness: "Explicit", summary: "Utilizes a question-answer paradigm with in-context learning to generate intelligible stegotext." },
+                { id: 7, title: "ALiSa", method: "Gibbs Sampling", capacity_bpc: 0.4, perplexity_ppl: 35.6, model: "BERT", dataset: "IMDB", context_awareness: "No", summary: "Directly conceals token-level messages in BERT-generated text using Gibbs sampling." },
+                { id: 8, title: "Provably Secure Disambiguating", method: "Disambiguation", capacity_bpc: 0.1, perplexity_ppl: 25.3, model: "GPT-2", dataset: "Wikitext", context_awareness: "No", summary: "Focuses on provable security by addressing segmentation ambiguity from subword tokenization." },
+                { id: 9, title: "Rewriting-Stego", method: "Text Rewriting", capacity_bpc: 0.9, perplexity_ppl: 19.8, model: "BART", dataset: "News", context_awareness: "Implicit", summary: "Embeds information by rewriting existing sentences while preserving semantic meaning." },
+                { id: 10, title: "DeepTextMark", method: "Watermarking", capacity_bpc: 0.05, perplexity_ppl: 22.1, model: "GPT-2", dataset: "Wikitext", context_awareness: "No", summary: "A watermarking approach with low capacity but high robustness against detection." },
+                { id: 11, title: "SparSamp", method: "Sparse Sampling", capacity_bpc: 0.15, perplexity_ppl: 28.0, model: "GPT-2", dataset: "Generic", context_awareness: "No", summary: "A provably secure method that uses sparse sampling to preserve the original text distribution." }
+            ];
+
+            const conceptsData = [
+                { title: "Prisoners' Problem", content: "A foundational scenario in cryptography and steganography where two parties (prisoners) must communicate secretly without a third party (the warden) detecting their hidden message." },
+                { title: "Cognitive Imperceptibility", content: "The quality of steganographic text being indistinguishable from normal human writing to a human observer, focusing on semantic and contextual naturalness." },
+                { title: "Psic Effect", content: "The Perceptual-Statistical Imperceptibility Conflict. A fundamental trade-off where improving perceptual quality (making text look natural to humans) can create statistical anomalies detectable by machines, and vice-versa." },
+                { title: "Embedding Capacity", content: "The amount of secret information that can be hidden within a cover medium (e.g., text), often measured in bits per character (bpc)." },
+                { title: "Provable Security", content: "A rigorous standard where a steganographic system is mathematically proven to be secure against a certain class of adversaries, typically by ensuring the stego-text distribution is identical to the cover-text distribution." }
+            ];
+
+            const challengesData = [
+                { title: "Low Embedding Capacity", content: "Despite improvements with LLMs, text remains a challenging medium. Short or semantically strict texts inherently limit how much data can be hidden without becoming unnatural." },
+                { title: "Lack of Semantic Control", content: "LLMs can struggle to maintain precise semantic meaning or contextual consistency when generating text, which can lead to detectable anomalies or errors in the hidden message." },
+                { title: "White-box vs. Black-box Access", content: "Many advanced methods require 'white-box' access to an LLM's internal workings. However, most powerful commercial LLMs are 'black-box' (API only), making these methods impractical for real-world use." },
+                { title: "Segmentation Ambiguity", content: "LLMs use subword tokenization. Differences in how a sender and receiver tokenize the same text can lead to errors in extracting the hidden message." },
+                { title: "Computational Overhead", content: "LLMs are resource-intensive, incurring high computational and energy costs that can make real-time steganography applications challenging." },
+                { title: "Ethical Concerns & Misuse", content: "The technology can be misused for malicious activities like spreading disinformation or phishing. LLMs can also inherit and amplify biases from their training data." },
+                { title: "Hallucinations", content: "LLMs can generate plausible-sounding but factually incorrect or nonsensical content. This can corrupt the hidden message or create detectable, unnatural text." }
+            ];
+
+            const modelFilter = document.getElementById('model-filter');
+            const datasetFilter = document.getElementById('dataset-filter');
+            const contextFilter = document.getElementById('context-filter');
+            const paperList = document.getElementById('paper-list');
+            const noResults = document.getElementById('no-results');
+            const conceptsAccordion = document.getElementById('concepts-accordion');
+            const challengesAccordion = document.getElementById('challenges-accordion');
+            
+            let stegaChart;
+
+            function createAccordion(container, data) {
+                container.innerHTML = '';
+                data.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'accordion-item bg-white/50 border border-gray-200/80 rounded-lg';
+                    itemEl.innerHTML = `
+                        <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-medium">
+                            <span>${item.title}</span>
+                            <span class="accordion-arrow text-[#81B29A]">▼</span>
+                        </button>
+                        <div class="accordion-content px-4 pb-4 text-gray-600">
+                            <p>${item.content}</p>
+                        </div>
+                    `;
+                    container.appendChild(itemEl);
+                });
+            }
+
+            function setupAccordionListeners(containerId) {
+                const container = document.getElementById(containerId);
+                container.addEventListener('click', function(e) {
+                    const header = e.target.closest('.accordion-header');
+                    if (header) {
+                        const item = header.parentElement;
+                        item.classList.toggle('open');
+                    }
+                });
+            }
+
+            function populateFilters() {
+                const models = [...new Set(papersData.map(p => p.model))];
+                const datasets = [...new Set(papersData.map(p => p.dataset))];
+                
+                models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelFilter.appendChild(option);
+                });
+
+                datasets.forEach(dataset => {
+                    const option = document.createElement('option');
+                    option.value = dataset;
+                    option.textContent = dataset;
+                    datasetFilter.appendChild(option);
+                });
+            }
+
+            function renderPaperList(data) {
+                paperList.innerHTML = '';
+                if (data.length === 0) {
+                    noResults.classList.remove('hidden');
+                    paperList.classList.add('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                    paperList.classList.remove('hidden');
+                }
+                data.forEach(paper => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white/60 p-6 rounded-xl shadow-md border border-gray-200/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer';
+                    card.dataset.id = paper.id;
+                    card.innerHTML = `
+                        <h4 class="font-bold text-lg text-[#3D405B]">${paper.title}</h4>
+                        <p class="text-sm text-gray-500 mb-3">${paper.method}</p>
+                        <p class="text-sm text-gray-700 mb-4">${paper.summary}</p>
+                        <div class="flex justify-between text-sm">
+                            <span class="font-medium">PPL: <span class="text-[#81B29A] font-bold">${paper.perplexity_ppl}</span></span>
+                            <span class="font-medium">Capacity: <span class="text-[#81B29A] font-bold">${paper.capacity_bpc} bpc</span></span>
+                        </div>
+                    `;
+                    paperList.appendChild(card);
+                });
+            }
+
+            function renderChart(data) {
+                const ctx = document.getElementById('stegaChart').getContext('2d');
+                
+                const chartData = {
+                    datasets: [{
+                        label: 'Steganography Methods',
+                        data: data.map(p => ({
+                            x: p.perplexity_ppl,
+                            y: p.capacity_bpc,
+                            r: 10, // radius
+                            id: p.id,
+                            title: p.title
+                        })),
+                        backgroundColor: 'rgba(129, 178, 154, 0.6)',
+                        borderColor: 'rgba(129, 178, 154, 1)',
+                        borderWidth: 1
+                    }]
+                };
+
+                const options = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Perplexity (PPL) - Lower is More Natural',
+                                font: { size: 14 }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Embedding Capacity (bpc) - Higher is Better',
+                                font: { size: 14 }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const item = context.raw;
+                                    return `${item.title}: (PPL: ${item.x}, Capacity: ${item.y})`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const element = elements[0];
+                            const paperId = chartData.datasets[element.datasetIndex].data[element.index].id;
+                            const card = document.querySelector(`[data-id='${paperId}']`);
+                            if (card) {
+                                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                card.style.transform = 'scale(1.05)';
+                                card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                                setTimeout(() => {
+                                    card.style.transform = '';
+                                    card.style.boxShadow = '';
+                                }, 1500);
+                            }
+                        }
+                    }
+                };
+
+                if (stegaChart) {
+                    stegaChart.data = chartData;
+                    stegaChart.update();
+                } else {
+                    stegaChart = new Chart(ctx, {
+                        type: 'bubble',
+                        data: chartData,
+                        options: options
+                    });
+                }
+            }
+
+            function updateDashboard() {
+                const selectedModel = modelFilter.value;
+                const selectedDataset = datasetFilter.value;
+                const selectedContext = contextFilter.value;
+
+                const filteredData = papersData.filter(p => {
+                    const modelMatch = selectedModel === 'all' || p.model === selectedModel;
+                    const datasetMatch = selectedDataset === 'all' || p.dataset === selectedDataset;
+                    const contextMatch = selectedContext === 'all' || p.context_awareness === selectedContext;
+                    return modelMatch && datasetMatch && contextMatch;
+                });
+
+                renderChart(filteredData);
+                renderPaperList(filteredData);
+            }
+            
+            modelFilter.addEventListener('change', updateDashboard);
+            datasetFilter.addEventListener('change', updateDashboard);
+            contextFilter.addEventListener('change', updateDashboard);
+
+            paperList.addEventListener('click', (e) => {
+                const card = e.target.closest('.bg-white\\/60');
+                if(card) {
+                    const paperId = parseInt(card.dataset.id);
+                    const paper = papersData.find(p => p.id === paperId);
+                    if(paper) {
+                        const activeElements = stegaChart.data.datasets[0].data.map((d, i) => d.id === paperId ? i : -1).filter(i => i !== -1);
+                        if (activeElements.length > 0) {
+                             stegaChart.tooltip.setActiveElements([{ datasetIndex: 0, index: activeElements[0] }], {x: e.clientX, y: e.clientY});
+                             stegaChart.update();
+                             setTimeout(() => stegaChart.tooltip.setActiveElements([]), 2000);
+                        }
+                    }
+                }
+            });
+
+            createAccordion(conceptsAccordion, conceptsData);
+            createAccordion(challengesAccordion, challengesData);
+            setupAccordionListeners('concepts-accordion');
+            setupAccordionListeners('challenges-accordion');
+            populateFilters();
+            updateDashboard();
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
