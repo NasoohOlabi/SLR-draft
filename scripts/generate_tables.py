@@ -1,181 +1,243 @@
+# -*- coding: utf-8 -*-
+
 import csv
 import re
 
 
-def generate_latex_table(
-    data, columns_to_display, caption, label, bib_data, column_mapping, env="table*"
-):
-    # Define replacements for special symbols (uses ensuremath for safe math mode)
-    specific_replacements = {
-        "∆": r"\ensuremath{\Delta}",
-        "Δ": r"\ensuremath{\Delta}",
-        "α": r"\ensuremath{\alpha}",
-        "𝜖": r"\ensuremath{\epsilon}",
-        "𝑒": r"\ensuremath{\epsilon}",
-        "μ": r"\ensuremath{\mu}",
-        "∝": r"\ensuremath{\propto}",
-        "τ": r"\ensuremath{\tau}",
-        "θ": r"\ensuremath{\theta}",
-        "∩": r"\ensuremath{\cap}",
-        "≠": r"\ensuremath{\neq}",
+def generate_latex_table(data, columns_to_display, caption, label, bib_data, column_mapping):
+    """Generate a clean LaTeX longtable"""
+    
+    # Special character replacements
+    replacements = {
+        "∆": "\\ensuremath{\\Delta}",
+        "Δ": "\\ensuremath{\\Delta}",
+        "α": "\\ensuremath{\\alpha}", 
+        "μ": "\\ensuremath{\\mu}",
+        "~": "\\textasciitilde{}",
+        "^": "\\textasciicircum{}",
     }
 
-    # Compute column format
-    col_format = "|" + ("|".join(["X"] * (len(columns_to_display) + 1))) + "|"
+    # Create column format - use wider columns
+    num_cols = len(columns_to_display) + 1  # +1 for Paper column
+    if num_cols == 2:
+        col_format = "p{0.3\\linewidth}p{0.6\\linewidth}"
+    elif num_cols == 3:
+        col_format = "p{0.25\\linewidth}p{0.35\\linewidth}p{0.35\\linewidth}"
+    elif num_cols == 4:
+        col_format = "p{0.2\\linewidth}p{0.25\\linewidth}p{0.25\\linewidth}p{0.25\\linewidth}"
+    else:
+        col_format = "".join(["p{0.15\\linewidth}"] * num_cols)
 
-    # Begin LaTeX table
+
+    # Start table with proper longtable structure
     latex_code = (
-        f"\\begin{{{env}}}[htbp]\n"
-        f"\\centering\n"
-        f"\\caption{{{caption}}}\n"
-        f"\\label{{tab:{label}}}\n"
-        f"\\small\n"
-        f"\\begin{{tabularx}}{{\\linewidth}}{{{col_format}}}\n"
-        f"\\hline\n"
+        "\\renewcommand{\\arraystretch}{1.3}\n"
+        f"\\begin{{longtable}}{{{col_format}}}\n"
+        f"\\caption{{{caption}}} \\\\\n"
+        "\\toprule\n\n"
     )
 
-    # Header
+    # Headers
     headers = ["Paper"] + [col.replace("_", " ").title() for col in columns_to_display]
-    latex_code += " & ".join(headers) + r" \\\hline" + "\n"
+    latex_code += " & ".join(headers) + " \\\\\n"
+    latex_code += "\\midrule\n\n"
+    latex_code += "\\endfirsthead\n\n"
 
-    # Rows
+    # Continuation header
+    latex_code += (
+        f"\\multicolumn{{{num_cols}}}{{c}}{{\\bfseries \\tablename\\ \\thetable{{}} -- continued from previous page}} \\\\\n"
+        "\\toprule\n"
+        + " & ".join(headers) + " \\\\\n"
+        "\\midrule\n\n"
+        "\\endhead\n\n"
+    )
+
+    # Footer
+    latex_code += (
+        f"\\midrule\n"
+        f"\\multicolumn{{{num_cols}}}{{r}}{{Continued on next page}} \\\\\n"
+        "\\endfoot\n\n"
+        "\\bottomrule\n"
+        "\\endlastfoot\n\n"
+    )
+
+    # Process data rows
     for i, row in enumerate(data):
         if i >= 18:
             break
-        mapped = {n: row[idx] for n, idx in column_mapping.items()}
+
+        mapped = {n: row[idx] if idx < len(row) else "" for n, idx in column_mapping.items()}
+
+        # Skip header row
         if mapped.get("number", "").lower() == "number":
             continue
+
         title_text = mapped.get("title", "").strip()
-        pid = mapped.get("number", "").strip()
-        if title_text:
-            for key, title in bib_data.items():
-                if title_text == title:
-                    # Added \\allowbreak before \\cite to permit line breaks
-                    pid = f"\\allowbreak {title_text} \\allowbreak\\cite{{{key}}}"
-                    break
-        cells = [pid]
+        if not title_text or title_text == "[Not specified]":
+            continue
+
+        paper_id = create_paper_citation(title_text, bib_data)
+
+        # Build row with line breaks
+        row_cells = [paper_id]
         for col in columns_to_display:
-            cell = mapped.get(col, "[Not specified]").strip() or "[Not specified]"
-            tags = {}
-            for j, (char, sym) in enumerate(specific_replacements.items()):
-                tag = f"PH{j}TAG"
-                tags[tag] = sym
-                cell = cell.replace(char, tag)
-            cell = cell.replace("\n", " ")
-            cell = re.sub(r"(?<!\\)&", r"\\&", cell)
-            cell = re.sub(r"(?<!\\)%", r"\\%", cell)
-            cell = re.sub(r"(?<!\\)#", r"\\#", cell)
-            cell = re.sub(r"(?<!\\)_", r"\\_", cell)
-            # remove stray combining diacritics
-            cell = re.sub(r"[\u0300-\u036f]", "", cell)
+            cell_content = mapped.get(col, "[Not specified]").strip()
+            if not cell_content:
+                cell_content = "[Not specified]"
+            cell_content = clean_latex_text(cell_content, replacements)
+            row_cells.append(cell_content)
 
-            # now escape carets so they don’t break in text mode
-            cell = re.sub(r"(?<!\\)\^", r"\\^{}", cell)
-            # finally restore any special‐symbol tags
-            for tag, sym in tags.items():
-                cell = cell.replace(tag, sym)
+        latex_code += " & ".join(row_cells) + " \\\\\n\n"  # add blank line after each row
 
-            for tag, sym in tags.items():
-                cell = cell.replace(tag, sym)
-            cells.append(cell)
-        if len(cells) != len(headers):
-            raise ValueError(f"Row {i} has {len(cells)} cells; expected {len(headers)}")
-        latex_code += " & ".join(cells) + r" \\\hline" + "\n"
-
-    # End environments
-    latex_code += f"\\end{{tabularx}}\n\\end{{{env}}}\n\n"
+    latex_code += "\\end{longtable}\n\n"
     return latex_code
 
 
+
+def create_paper_citation(title_text, bib_data):
+    """Create a proper paper citation"""
+    # Try to find matching citation
+    citation_key = None
+    for key, bib_title in bib_data.items():
+        if title_text.lower() in bib_title.lower() or bib_title.lower() in title_text.lower():
+            citation_key = key
+            break
+    
+    # Truncate long titles and add citation
+    if len(title_text) > 50:
+        short_title = title_text[:47] + "..."
+    else:
+        short_title = title_text
+    
+    if citation_key:
+        return f"{short_title} \\cite{{{citation_key}}}"
+    else:
+        return short_title
+
+
+def clean_latex_text(text, replacements):
+    """Clean and escape text for LaTeX"""
+    if not text or text == "[Not specified]":
+        return "[Not specified]"
+    
+    # Handle special characters
+    for char, replacement in replacements.items():
+        text = text.replace(char, replacement)
+    
+    # Clean up text
+    text = text.replace("\n", " ").replace("\r", " ")
+    text = re.sub(r'\s+', ' ', text)  # Multiple spaces to single space
+    
+    # Escape LaTeX special characters
+    text = re.sub(r"(?<!\\)&", r"\\&", text)
+    text = re.sub(r"(?<!\\)%", r"\\%", text)
+    text = re.sub(r"(?<!\\)#", r"\\#", text)
+    text = re.sub(r"(?<!\\)_", r"\\_", text)
+    
+    # Remove diacritical marks
+    text = re.sub(r"[\u0300-\u036f]", "", text)
+    
+    # Truncate very long content
+    if len(text) > 150:
+        text = text[:147] + "..."
+    
+    return text.strip()
+
+
 def parse_bib_file(path):
+    """Parse bibliography file to extract citation keys and titles"""
     bib = {}
-    with open(path, "r", encoding="utf-8") as f:
-        content = f.read()
-    for entry in content.split("@")[1:]:
-        hdr, *lns = entry.split("\n")
-        if "{" in hdr:
-            key = hdr.split("{", 1)[1].split(",", 1)[0].strip()
-            for l in lns:
-                if "title=" in l:
-                    t = l.split("{", 1)[1].rsplit("}", 1)[0].strip()
-                    bib[key] = t
-                    break
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        for entry in content.split("@")[1:]:
+            lines = entry.split("\n")
+            if not lines:
+                continue
+                
+            header = lines[0]
+            if "{" in header:
+                key = header.split("{", 1)[1].split(",", 1)[0].strip()
+                
+                # Look for title
+                for line in lines[1:]:
+                    if "title=" in line.lower():
+                        # Extract title between braces
+                        title_match = re.search(r'title\s*=\s*\{([^}]+)\}', line, re.IGNORECASE)
+                        if title_match:
+                            title = title_match.group(1).strip()
+                            bib[key] = title
+                            break
+    except FileNotFoundError:
+        print(f"Warning: Bibliography file not found at {path}")
+    except Exception as e:
+        print(f"Warning: Error parsing bibliography file: {e}")
+    
     return bib
 
 
 if __name__ == "__main__":
-    # Paths
-    csv_path = "d:/Master/SLR draft/SLR - SLR-Deep.csv"
-    bib_path = "d:/Master/SLR draft/bibliography.bib"
-    # Read data
-    with open(csv_path, "r", encoding="utf-8") as cf:
-        rows = [r for r in csv.reader(cf) if r]
-    headers, data_rows = rows[0], rows[1:]
-    bib = parse_bib_file(bib_path)
-    # Mapping
-    cmap = {
-        "number": 0,
-        "title": 1,
-        "Type": 2,
-        "LLM": 4,
-        "dataset": 8,
-        "result": 11,
-        "Main strengths": 6,
-        "Main weaknesses": 7,
-        "pipline method used": 13,
-        "context aware": 14,
-        "categ context": 15,
-        "representation context": 16,
-        "context usage in method detail text": 17,
-    }
-    tables = [
-        {
-            "env": "table*",
-            "name": "results",
-            "columns": ["result"],
-            "caption": "Summary of Results from Reviewed Papers",
-            "label": "results_summary",
-        },
-        {
-            "env": "table*",
-            "name": "model_dataset",
-            "columns": ["LLM", "dataset"],
-            "caption": "Models and Datasets Used in Reviewed Papers",
-            "label": "models_datasets",
-        },
-        {
-            "env": "table*",
-            "name": "context_fields",
-            "columns": [
-                "context aware",
-                "categ context",
-                "representation context",
-            ],
-            "caption": "Context-Related Fields in Reviewed Papers",
-            "label": "context_fields",
-        },
-        # {
-        #     "env": "table*",
-        #     "name": "category_strengths_weaknesses",
-        #     "columns": ["Type", "Main strengths", "Main weaknesses"],
-        #     "caption": "Categories, Main Strengths, and Weaknesses of Reviewed Papers",
-        #     "label": "category_strengths_weaknesses",
-        # },
-        # {
-        #     "env": "table*",
-        #     "name": "approach",
-        #     "columns": ["pipline method used"],
-        #     "caption": "Approach/Pipeline Method Used in Reviewed Papers",
-        #     "label": "approach_method",
-        # },
-    ]
-    # Generate and write
-    out = "".join(
-        generate_latex_table(
-            data_rows, t["columns"], t["caption"], t["label"], bib, cmap, t["env"]
-        )
-        for t in tables
-    )
-    with open("generated_tables.tex", "w", encoding="utf-8") as fo:
-        fo.write(out)
-    print("Wrote generated_tables.tex")
+    # Paths - use relative paths
+    csv_path = "./data/SLR - SLR-Deep.csv"
+    bib_path = "./references/bibliography.bib"
+    
+    try:
+        # Read data
+        with open(csv_path, "r", encoding="utf-8") as cf:
+            rows = [r for r in csv.reader(cf) if r]
+        headers, data_rows = rows[0], rows[1:]
+        bib = parse_bib_file(bib_path)
+        
+        # Column mapping - adjust indices based on actual CSV structure
+        cmap = {
+            "number": 0,
+            "title": 1,
+            "Type": 2,
+            "LLM": 4,
+            "dataset": 8,
+            "result": 11,
+            "Main strengths": 6,
+            "Main weaknesses": 7,
+            "pipline method used": 13,
+            "context aware": 14,
+            "categ context": 15,
+            "representation context": 16,
+            "context usage in method detail text": 17,
+        }
+        
+        # Define tables to generate
+        tables = [
+           {
+                "env": "table*",
+                "name": "results",
+                "columns": ["LLM", "dataset","result", "context aware",
+                    "categ context",
+                    "representation context",],
+                "caption": "Summary of Results from Reviewed Papers",
+                "label": "results_summary",
+            },    
+        ]
+        
+        # Generate tables
+        output_content = ""
+        for table_config in tables:
+            output_content += generate_latex_table(
+                data_rows, 
+                table_config["columns"], 
+                table_config["caption"], 
+                table_config["label"], 
+                bib, 
+                cmap
+            )
+        
+        # Write to file
+        with open("./sections/generated_tables.tex", "w", encoding="utf-8") as fo:
+            fo.write(output_content)
+        print("Successfully wrote generated_tables.tex")
+        
+    except FileNotFoundError as e:
+        print(f"Error: Could not find file - {e}")
+        print("Please ensure the CSV and bibliography files exist in the correct locations.")
+    except Exception as e:
+        print(f"Error generating tables: {e}")

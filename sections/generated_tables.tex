@@ -1,97 +1,62 @@
-% Improve page breaking and spacing for tables
-\raggedbottom
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{p{0.12\linewidth}p{0.12\linewidth}p{0.12\linewidth}p{0.18\linewidth}p{0.12\linewidth}p{0.12\linewidth}p{0.12\linewidth}}
+\caption{Summary of Results from Reviewed Papers} \\
+\toprule
 
-\begin{table*}[!htbp]
-\centering
-\caption{Summary of Results from Reviewed Papers}
-\Description{A comprehensive table summarizing the quantitative results and performance metrics from all reviewed papers on LLM-based steganography. The table includes metrics such as perplexity (PPL), bits per word (BPW), accuracy scores, and various steganographic evaluation measures for each paper, providing a comparative overview of the effectiveness of different approaches.}
-\label{tab:results_summary}
-\small
-\begin{tabularx}{\linewidth}{|X|X|}
-\hline
-Paper & Result \\\hline
-\allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & PPL: 28.879, \ensuremath{\Delta}MP: 0.242, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616 \\\hline
-\allowbreak General framework for reversible data hiding in texts based on masked language modeling \allowbreak\cite{zheng2022general} & BPW=0.5335 F1=0.9402 PPL=134.2199 \\\hline
-\allowbreak Co-stega: Collaborative linguistic steganography for the low capacity challenge in social media \allowbreak\cite{liao2024co} & SR1: 60.87\%, SR2: 98.55\%, Gen. Capacity: 44.91 bits, Entropy: 49.21 bits, BPW: 2.31, PPL: 16.75, SimCSE: 0.69 \\\hline
-\allowbreak Joint linguistic steganography with BERT masked language model and graph attention network \allowbreak\cite{ding2023joint} & PPL=13.917 KLD=2.904 SIM=0.812 ER=0.365 (BN=2) Best Acc=0.575 (BERT classifier) FLOPs=1.834G \\\hline
-\allowbreak Discop: Provably secure steganography in practice based on" distribution copies" \allowbreak\cite{ding2023discop} & p=1.00 Total Time (seconds)=362.63 Ave Time ↓ (seconds/bit)=6.29E-03 Ave KLD ↓ (bits/token)=0 Max KLD ↓ (bits/token)=0 Capacity (bits/token)=5.76 Entropy (bits/token)=6.08 Utilization ↑=0.95 Text Generation (FCN): 50.10\%. Text Generation (R-BiLSTM-C): 50.45\%. Text Generation (BiLSTM-Dense): 49.95\% \\\hline
-\allowbreak Generative text steganography with large language model \allowbreak\cite{wu2024generative} & Length: 13.333 (words). BPW: 5.93 bpw PPL: 165.76. Semantic Similarity (SS): 0.5881 LS-CNN Acc: 51.55\%. BiLSTM-Dense Acc: 49.20\%. Bert-FT Acc: 50.00\%. KLD (Log, lower is better): 2.02 . \\\hline
-\allowbreak Meteor: Cryptographically secure steganography for realistic distributions \allowbreak\cite{kaptchuk2021meteor} & GPT-2: 3.09 bits/token \\\hline
-\allowbreak Zero-shot generative linguistic steganography \allowbreak\cite{lin2024zero} & PPL: 8.81. JSDfull: 17.90 (x10\^{}-2). JSDhalf: 16.86 (x10\^{}-2). JSDzero: 13.40 (x10\^{}-2) TS-BiRNN: 80.29\%. R-BiLSTM-C: 84.34\%. BERT-C: 89.61\% \\\hline
-\allowbreak Provably secure disambiguating neural linguistic steganography \allowbreak\cite{qi2024provably} & Total Error: 0\%, Ave KLD: 0, Max KLD: 0, Ave PPL: 3.19 (EN), 7.49 (ZH), Capacity: 1.03–3.05 bits/token, Utilization: 0.66–0.74, Ave Time: ~4\ensuremath{\mu}s/bit \\\hline
-\allowbreak A principled approach to natural language watermarking \allowbreak\cite{ji2024principled} & Bit acc: 0.994 (K=None), 1.000 (DAE), 0.978 (Adaptive+K=S); Meteor Drop: ~0.057; SBERT ↑: ~1.227; Ownership Rate: 1.0 (no attack), 0.978 (adaptive+K=S) \\\hline
-\allowbreak Context-aware linguistic steganography model based on neural machine translation \allowbreak\cite{ding2023context} & BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86, Stego detection ~16\% \\\hline
-\allowbreak DeepTextMark: a deep learning-driven text watermarking approach for identifying large language model generated text \allowbreak\cite{munyer2024deeptextmark} & 100\% accuracy (multi-synonym, 10-sentence), mSMS: 0.9892, TPR: 0.83, FNR: 0.17, Detection: 0.00188s, Insertion: 0.27931s \\\hline
-\allowbreak Hi-stega: A hierarchical linguistic steganography framework combining retrieval and generation \allowbreak\cite{wang2023hi} & ppl: 109.60, MAUVE: 0.2051, ER2: 10.42, \ensuremath{\Delta}(cosine): 0.0088, \ensuremath{\Delta}(simcse): 0.0191 \\\hline
-\allowbreak Linguistic steganography: From symbolic space to semantic space \allowbreak\cite{zhang2020linguistic} & Classifier Accuracy: 0.9880; Loop Count: 1.0160; PPL: 13.9565; Anti-Steganalysis Accuracy: ~0.5 \\\hline
-\allowbreak Natural language steganography by chatgpt \allowbreak\cite{steinebach2024natural} & [Not specified] \\\hline
-\allowbreak Natural language watermarking via paraphraser-based lexical substitution \allowbreak\cite{qiang2023natural} & LS07 P@1: 58.3, GAP: 65.1; CoInCo P@1: 62.6, GAP: 60.7; Text Recoverability: ~88–90\% \\\hline
-\allowbreak Rewriting-Stego: generating natural and controllable steganographic text with pre-trained language model \allowbreak\cite{li2023rewriting} & BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1, Mean: 44.4, Variance: 2.1e04, Acc: 8.9\% \\\hline
-\allowbreak ALiSa: Acrostic linguistic steganography based on BERT and Gibbs sampling \allowbreak\cite{yi2022alisa} & PPL: Natural = 13.91, ALiSa = 14.85; LS-RNN/LS-BERT Acc \& F1 = ~0.50; Outperforms GPT-AC/ADG in all cases \\\hline
-\end{tabularx}
-\end{table*}
+Paper & Llm & Dataset & Result & Context Aware & Categ Context & Representation Context \\
+\midrule
 
-\clearpage % Force page break between large tables
+\endfirsthead
 
-\begin{table*}[!htbp]
-\centering
-\caption{Models and Datasets Used in Reviewed Papers}
-\Description{A detailed table listing the Large Language Models and datasets employed in each reviewed paper. The table shows the variety of models used (including BERT, GPT-2, LLaMA, and others) alongside their corresponding training and evaluation datasets, illustrating the diversity of experimental setups in LLM-based steganography research.}
-\label{tab:models_datasets}
-\small
-\begin{tabularx}{\linewidth}{|X|X|X|}
-\hline
-Paper & Llm & Dataset \\\hline
-\allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & BERTBASE (BERT-LSTM)  (LSTM-LSTM) model was trained from scratch & Twitter (2.6M sentences) IMDB (1.2M sentences) preprocessed \\\hline
-\allowbreak General framework for reversible data hiding in texts based on masked language modeling \allowbreak\cite{zheng2022general} & BERTBase & BookCorpus \\\hline
-\allowbreak Co-stega: Collaborative linguistic steganography for the low capacity challenge in social media \allowbreak\cite{liao2024co} & Llama-2-7B-chat, GPT-2 (fine-tuned), Llama-2-13B & Tweet dataset (for GPT-2 fine-tuning), Twitter (real-time testing) \\\hline
-\allowbreak Joint linguistic steganography with BERT masked language model and graph attention network \allowbreak\cite{ding2023joint} & LSTM + attention for temporal context. GAT for spatial token relationships. BERT MLM for deep semantic context in substitution. & OPUS \\\hline
-\allowbreak Discop: Provably secure steganography in practice based on" distribution copies" \allowbreak\cite{ding2023discop} & GPT-2 & IMDB \\\hline
-\allowbreak Generative text steganography with large language model \allowbreak\cite{wu2024generative} & Any & [Not specified] \\\hline
-\allowbreak Meteor: Cryptographically secure steganography for realistic distributions \allowbreak\cite{kaptchuk2021meteor} & GPT-2 & Hutter Prize, HTTP GET requests \\\hline
-\allowbreak Zero-shot generative linguistic steganography \allowbreak\cite{lin2024zero} & LLaMA2-Chat-7B (as the stegotext generator / QA model). GPT-2 (for NLS baseline and JSD evaluation) & IMDB, Twitter \\\hline
-\allowbreak Provably secure disambiguating neural linguistic steganography \allowbreak\cite{qi2024provably} & LLaMA2-7b (English), Baichuan2-7b (Chinese) & IMDb dataset (100 texts/sample, 3 English sentences + Chinese translations) \\\hline
-\allowbreak A principled approach to natural language watermarking \allowbreak\cite{ji2024principled} & Transformer-based encoder/decoder; BERT for distillation & Web Transformer 2 \\\hline
-\allowbreak Context-aware linguistic steganography model based on neural machine translation \allowbreak\cite{ding2023context} & BERT (encoder), LSTM (decoder) & WMT18 News Commentary (train/test), Yang et al. bits, Doc2Vec, 5,000 stego pairs (8:1:1 split) \\\hline
-\allowbreak DeepTextMark: a deep learning-driven text watermarking approach for identifying large language model generated text \allowbreak\cite{munyer2024deeptextmark} & Model-independent; tested with OPT-2.7B & Dolly ChatGPT (train/validate), C4 (test), robustness \& sentence-level test sets \\\hline
-\allowbreak Hi-stega: A hierarchical linguistic steganography framework combining retrieval and generation \allowbreak\cite{wang2023hi} & GPT-2 & Yahoo! News (titles, bodies, comments); 2,400 titles used \\\hline
-\allowbreak Linguistic steganography: From symbolic space to semantic space \allowbreak\cite{zhang2020linguistic} & CTRL (generation), BERT (semantic classifier) & 5,000 CTRL-generated texts per semanteme (n = 2–16); 1,000 user-generated texts for anti-steganalysis \\\hline
-\allowbreak Natural language steganography by chatgpt \allowbreak\cite{steinebach2024natural} & [Not specified] & Custom word sets for specific topics (e.g., 16×10-word sets for music reviews) \\\hline
-\allowbreak Natural language watermarking via paraphraser-based lexical substitution \allowbreak\cite{qiang2023natural} & Transformer (Paraphraser), BART (BARTScore), BERT (BLEURT, comparisons) & ParaBank2, LS07, CoInCo, Novels, WikiText-2, IMDB, NgNews \\\hline
-\allowbreak Rewriting-Stego: generating natural and controllable steganographic text with pre-trained language model \allowbreak\cite{li2023rewriting} & BART (bart-base2) & Movie, News, Tweet \\\hline
-\allowbreak ALiSa: Acrostic linguistic steganography based on BERT and Gibbs sampling \allowbreak\cite{yi2022alisa} & BERT (Google’s BERTBase, Uncased) & BookCorpus (10,000 natural texts for evaluation) \\\hline
-\end{tabularx}
-\end{table*}
+\multicolumn{7}{c}{\bfseries \tablename\ \thetable{} -- continued from previous page} \\
+\toprule
+Paper & Llm & Dataset & Result & Context Aware & Categ Context & Representation Context \\
+\midrule
 
-\clearpage % Force page break between large tables
+\endhead
 
-\begin{table*}[!htbp]
-\centering
-\caption{Context-Related Fields in Reviewed Papers}
-\Description{A table analyzing the context-awareness capabilities of different steganographic approaches. The table categorizes papers based on whether they explicitly handle context, the type of contextual information they use (such as social media context or pre-text), and how they represent contextual information, providing insights into the evolution toward context-aware steganographic systems.}
-\label{tab:context_fields}
-\small
-\begin{tabularx}{\linewidth}{|X|X|X|X|}
-\hline
-Paper & Context Aware & Categ Context & Representation Context \\\hline
-\allowbreak VAE-Stega: linguistic steganography based on variational auto-encoder \allowbreak\cite{yang2020vae} & non-explicit & pre-text & text \\\hline
-\allowbreak General framework for reversible data hiding in texts based on masked language modeling \allowbreak\cite{zheng2022general} & non-explicit & pre-text & text \\\hline
-\allowbreak Co-stega: Collaborative linguistic steganography for the low capacity challenge in social media \allowbreak\cite{liao2024co} & explicit & Social Media & text \\\hline
-\allowbreak Joint linguistic steganography with BERT masked language model and graph attention network \allowbreak\cite{ding2023joint} & explicit & pre-text & text \\\hline
-\allowbreak Discop: Provably secure steganography in practice based on" distribution copies" \allowbreak\cite{ding2023discop} & non-explicit & tuning + pretext & text \\\hline
-\allowbreak Generative text steganography with large language model \allowbreak\cite{wu2024generative} & explicit & [Not specified] & [Not specified] \\\hline
-\allowbreak Meteor: Cryptographically secure steganography for realistic distributions \allowbreak\cite{kaptchuk2021meteor} & non-explicit & tuning + pretext & text \\\hline
-\allowbreak Zero-shot generative linguistic steganography \allowbreak\cite{lin2024zero} & explicit & zero-shot + prompt & text \\\hline
-\allowbreak Provably secure disambiguating neural linguistic steganography \allowbreak\cite{qi2024provably} & non-explicit & pretext & text \\\hline
-\allowbreak A principled approach to natural language watermarking \allowbreak\cite{ji2024principled} & Yes; semantic-level embedding; synonym substitution using BERT & Yes; watermark message assigned categorical label (e.g., 4-bit → 1-of-16) & Yes; semantic embeddings via transformer encoder and BERT; SBERT distance as metric \\\hline
-\allowbreak Context-aware linguistic steganography model based on neural machine translation \allowbreak\cite{ding2023context} & Yes & [Not specified] & GCF (global context), LMR (language model reference), Multi-head attention \\\hline
-\allowbreak DeepTextMark: a deep learning-driven text watermarking approach for identifying large language model generated text \allowbreak\cite{munyer2024deeptextmark} & NO & [Not specified] & [Not specified] \\\hline
-\allowbreak Hi-stega: A hierarchical linguistic steganography framework combining retrieval and generation \allowbreak\cite{wang2023hi} & explicit & Social Media & Text \\\hline
-\allowbreak Linguistic steganography: From symbolic space to semantic space \allowbreak\cite{zhang2020linguistic} & implicit & Text & Semanteme (\ensuremath{\alpha}) as a vector in semantic spac \\\hline
-\allowbreak Natural language steganography by chatgpt \allowbreak\cite{steinebach2024natural} & Explicit & Specific Genre/Topic Text & Text \\\hline
-\allowbreak Natural language watermarking via paraphraser-based lexical substitution \allowbreak\cite{qiang2023natural} & Explicit & [Not specified] & text \\\hline
-\allowbreak Rewriting-Stego: generating natural and controllable steganographic text with pre-trained language model \allowbreak\cite{li2023rewriting} & not Explicit & [Not specified] & [Not specified] \\\hline
-\allowbreak ALiSa: Acrostic linguistic steganography based on BERT and Gibbs sampling \allowbreak\cite{yi2022alisa} & No & [Not specified] & [Not specified] \\\hline
-\end{tabularx}
-\end{table*}
+\midrule
+\multicolumn{7}{r}{Continued on next page} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+VAE-Stega: linguistic steganography based on va... \cite{yang2020vae} & BERTBASE (BERT-LSTM) (LSTM-LSTM) model was trained from scratch & Twitter (2.6M sentences) IMDB (1.2M sentences) preprocessed & PPL: 28.879, \ensuremath{\Delta}MP: 0.242, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616 & non-explicit & pre-text & text \\
+
+General framework for reversible data hiding in... \cite{zheng2022general} & BERTBase & BookCorpus & BPW=0.5335 F1=0.9402 PPL=134.2199 & non-explicit & pre-text & text \\
+
+Co-stega: Collaborative linguistic steganograph... \cite{liao2024co} & Llama-2-7B-chat, GPT-2 (fine-tuned), Llama-2-13B & Tweet dataset (for GPT-2 fine-tuning), Twitter (real-time testing) & SR1: 60.87\%, SR2: 98.55\%, Gen. Capacity: 44.91 bits, Entropy: 49.21 bits, BPW: 2.31, PPL: 16.75, SimCSE: 0.69 & explicit & Social Media & text \\
+
+Joint linguistic steganography with BERT masked... \cite{ding2023joint} & LSTM + attention for temporal context. GAT for spatial token relationships. BERT MLM for deep semantic context in substitution. & OPUS & PPL=13.917 KLD=2.904 SIM=0.812 ER=0.365 (BN=2) Best Acc=0.575 (BERT classifier) FLOPs=1.834G & explicit & pre-text & text \\
+
+Discop: Provably secure steganography in practi... & GPT-2 & IMDB & p=1.00 Total Time (seconds)=362.63 Ave Time ↓ (seconds/bit)=6.29E-03 Ave KLD ↓ (bits/token)=0 Max KLD ↓ (bits/token)=0 Capacity (bits/token)=5.76 E... & non-explicit & tuning + pretext & text \\
+
+Generative text steganography with large langua... \cite{wu2024generative} & Any & [Not specified] & Length: 13.333 (words). BPW: 5.93 bpw PPL: 165.76. Semantic Similarity (SS): 0.5881 LS-CNN Acc: 51.55\%. BiLSTM-Dense Acc: 49.20\%. Bert-FT Acc: 50... & explicit & [Not specified] & [Not specified] \\
+
+Meteor: Cryptographically secure steganography ... \cite{kaptchuk2021meteor} & GPT-2 & Hutter Prize, HTTP GET requests & GPT-2: 3.09 bits/token & non-explicit & tuning + pretext & text \\
+
+Zero-shot generative linguistic steganography \cite{lin2024zero} & LLaMA2-Chat-7B (as the stegotext generator / QA model). GPT-2 (for NLS baseline and JSD evaluation) & IMDB, Twitter & PPL: 8.81. JSDfull: 17.90 (x10\textasciicircum{}-2). JSDhalf: 16.86 (x10\textasciicircum{}-2). JSDzero: 13.40 (x10\textasciicircum{}-2) TS-BiRNN: 8... & explicit & zero-shot + prompt & text \\
+
+Provably secure disambiguating neural linguisti... \cite{qi2024provably} & LLaMA2-7b (English), Baichuan2-7b (Chinese) & IMDb dataset (100 texts/sample, 3 English sentences + Chinese translations) & Total Error: 0\%, Ave KLD: 0, Max KLD: 0, Ave PPL: 3.19 (EN), 7.49 (ZH), Capacity: 1.03–3.05 bits/token, Utilization: 0.66–0.74, Ave Time: [truncated] & non-explicit & pretext & text \\
+
+A principled approach to natural language water... \cite{ji2024principled} & Transformer-based encoder/decoder; BERT for distillation & Web Transformer 2 & Bit acc: 0.994 (K=None), 1.000 (DAE), 0.978 (Adaptive+K=S); Meteor Drop: \textasciitilde{}0.057; SBERT ↑: \textasciitilde{}1.227; Ownership Rate: 1... & Yes; semantic-level embedding; synonym substitution using BERT & Yes; watermark message assigned categorical label (e.g., 4-bit → 1-of-16) & Yes; semantic embeddings via transformer encoder and BERT; SBERT distance as metric \\
+
+Context-aware linguistic steganography model ba... \cite{ding2023context} & BERT (encoder), LSTM (decoder) & WMT18 News Commentary (train/test), Yang et al. bits, Doc2Vec, 5,000 stego pairs (8:1:1 split) & BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86, Stego detection \textasciitilde{}16\% & Yes & [Not specified] & GCF (global context), LMR (language model reference), Multi-head attention \\
+
+DeepTextMark: a deep learning-driven text water... \cite{munyer2024deeptextmark} & Model-independent; tested with OPT-2.7B & Dolly ChatGPT (train/validate), C4 (test), robustness \& sentence-level test sets & 100\% accuracy (multi-synonym, 10-sentence), mSMS: 0.9892, TPR: 0.83, FNR: 0.17, Detection: 0.00188s, Insertion: 0.27931s & NO & [Not specified] & [Not specified] \\
+
+Hi-stega: A hierarchical linguistic steganograp... \cite{wang2023hi} & GPT-2 & Yahoo! News (titles, bodies, comments); 2,400 titles used & ppl: 109.60, MAUVE: 0.2051, ER2: 10.42, \ensuremath{\Delta}(cosine): 0.0088, \ensuremath{\Delta}(simcse): 0.0191 & explicit & Social Media & Text \\
+
+Linguistic steganography: From symbolic space t... \cite{zhang2020linguistic} & CTRL (generation), BERT (semantic classifier) & 5,000 CTRL-generated texts per semanteme (n = 2–16); 1,000 user-generated texts for anti-steganalysis & Classifier Accuracy: 0.9880; Loop Count: 1.0160; PPL: 13.9565; Anti-Steganalysis Accuracy: \textasciitilde{}0.5 & implicit & Text & Semanteme (\ensuremath{\alpha}) as a vector in semantic spac \\
+
+Natural language steganography by chatgpt \cite{steinebach2024natural} & [Not specified] & Custom word sets for specific topics (e.g., 16×10-word sets for music reviews) & [Not specified] & Explicit & Specific Genre/Topic Text & Text \\
+
+Natural language watermarking via paraphraser-b... \cite{qiang2023natural} & Transformer (Paraphraser), BART (BARTScore), BERT (BLEURT, comparisons) & ParaBank2, LS07, CoInCo, Novels, WikiText-2, IMDB, NgNews & LS07 P@1: 58.3, GAP: 65.1; CoInCo P@1: 62.6, GAP: 60.7; Text Recoverability: \textasciitilde{}88–90\% & Explicit & [Not specified] & text \\
+
+Rewriting-Stego: generating natural and control... \cite{li2023rewriting} & BART (bart-base2) & Movie, News, Tweet & BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1, Mean: 44.4, Variance: 2.1e04, Acc: 8.9\% & not Explicit & [Not specified] & [Not specified] \\
+
+ALiSa: Acrostic linguistic steganography based ... \cite{yi2022alisa} & BERT (Google’s BERTBase, Uncased) & BookCorpus (10,000 natural texts for evaluation) & PPL: Natural = 13.91, ALiSa = 14.85; LS-RNN/LS-BERT Acc \& F1 = \textasciitilde{}0.50; Outperforms GPT-AC/ADG in all cases & No & [Not specified] & [Not specified] \\
+
+\end{longtable}
 
