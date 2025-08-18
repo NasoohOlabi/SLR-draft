@@ -17,7 +17,7 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
         "^": "\\textasciicircum{}",
     }
 
-    # Create column format - use wider columns
+    # Create column format - use appropriate widths that sum to less than 1.0
     num_cols = len(columns_to_display) + 1  # +1 for Paper column
     if num_cols == 2:
         col_format = "p{0.3\\linewidth}p{0.6\\linewidth}"
@@ -25,8 +25,13 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
         col_format = "p{0.25\\linewidth}p{0.35\\linewidth}p{0.35\\linewidth}"
     elif num_cols == 4:
         col_format = "p{0.2\\linewidth}p{0.25\\linewidth}p{0.25\\linewidth}p{0.25\\linewidth}"
+    elif num_cols == 7:
+        # For 7 columns: Paper, LLM, Dataset, Result, Context Aware, Categ Context, Representation Context
+        col_format = "p{0.12\\linewidth}p{0.12\\linewidth}p{0.12\\linewidth}p{0.18\\linewidth}p{0.12\\linewidth}p{0.12\\linewidth}p{0.12\\linewidth}"
     else:
-        col_format = "".join(["p{0.15\\linewidth}"] * num_cols)
+        # For other cases, distribute evenly but keep under 0.9 total width
+        col_width = 0.9 / num_cols
+        col_format = "".join([f"p{{{col_width:.2f}\\linewidth}}"] * num_cols)
 
 
     # Start table with proper longtable structure
@@ -127,6 +132,9 @@ def clean_latex_text(text, replacements):
     # Clean up text
     text = text.replace("\n", " ").replace("\r", " ")
     text = re.sub(r'\s+', ' ', text)  # Multiple spaces to single space
+    
+    # Fix problematic LaTeX commands
+    text = re.sub(r'\\textasc[^a-zA-Z]*', '[truncated]', text)  # Replace \textasc with [truncated]
     
     # Escape LaTeX special characters
     text = re.sub(r"(?<!\\)&", r"\\&", text)
