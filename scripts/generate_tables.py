@@ -17,52 +17,53 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
         "^": "\\textasciicircum{}",
     }
 
-    # Create column format - use appropriate widths that sum to less than 1.0
+    # Create column format with vertical lines - use appropriate widths that sum to less than 1.0
     num_cols = len(columns_to_display) + 1  # +1 for Paper column
     if num_cols == 2:
-        col_format = "p{0.3\\linewidth}p{0.6\\linewidth}"
+        col_format = "|p{0.3\\linewidth}|p{0.6\\linewidth}|"
     elif num_cols == 3:
-        col_format = "p{0.25\\linewidth}p{0.35\\linewidth}p{0.35\\linewidth}"
+        col_format = "|p{0.25\\linewidth}|p{0.35\\linewidth}|p{0.35\\linewidth}|"
     elif num_cols == 4:
-        col_format = "p{0.2\\linewidth}p{0.25\\linewidth}p{0.25\\linewidth}p{0.25\\linewidth}"
+        col_format = "|p{0.2\\linewidth}|p{0.25\\linewidth}|p{0.25\\linewidth}|p{0.25\\linewidth}|"
     elif num_cols == 7:
         # For 7 columns: Paper, LLM, Dataset, Result, Context Aware, Categ Context, Representation Context
-        col_format = "p{0.12\\linewidth}p{0.12\\linewidth}p{0.12\\linewidth}p{0.18\\linewidth}p{0.12\\linewidth}p{0.12\\linewidth}p{0.12\\linewidth}"
+        col_format = "|p{0.12\\linewidth}|p{0.12\\linewidth}|p{0.12\\linewidth}|p{0.18\\linewidth}|p{0.12\\linewidth}|p{0.12\\linewidth}|p{0.12\\linewidth}|"
     else:
         # For other cases, distribute evenly but keep under 0.9 total width
         col_width = 0.9 / num_cols
-        col_format = "".join([f"p{{{col_width:.2f}\\linewidth}}"] * num_cols)
+        col_specs = [f"p{{{col_width:.2f}\\linewidth}}"] * num_cols
+        col_format = "|" + "|".join(col_specs) + "|"
 
 
-    # Start table with proper longtable structure
+    # Start table with proper longtable structure using hline for vertical line compatibility
     latex_code = (
         "\\renewcommand{\\arraystretch}{1.3}\n"
         f"\\begin{{longtable}}{{{col_format}}}\n"
         f"\\caption{{{caption}}} \\\\\n"
-        "\\toprule\n\n"
+        "\\hline\n\n"
     )
 
     # Headers
     headers = ["Paper"] + [col.replace("_", " ").title() for col in columns_to_display]
     latex_code += " & ".join(headers) + " \\\\\n"
-    latex_code += "\\midrule\n\n"
+    latex_code += "\\hline\n\n"
     latex_code += "\\endfirsthead\n\n"
 
     # Continuation header
     latex_code += (
-        f"\\multicolumn{{{num_cols}}}{{c}}{{\\bfseries \\tablename\\ \\thetable{{}} -- continued from previous page}} \\\\\n"
-        "\\toprule\n"
+        f"\\multicolumn{{{num_cols}}}{{|c|}}{{\\bfseries \\tablename\\ \\thetable{{}} -- continued from previous page}} \\\\\n"
+        "\\hline\n"
         + " & ".join(headers) + " \\\\\n"
-        "\\midrule\n\n"
+        "\\hline\n\n"
         "\\endhead\n\n"
     )
 
     # Footer
     latex_code += (
-        f"\\midrule\n"
-        f"\\multicolumn{{{num_cols}}}{{r}}{{Continued on next page}} \\\\\n"
+        f"\\hline\n"
+        f"\\multicolumn{{{num_cols}}}{{|r|}}{{Continued on next page}} \\\\\n"
         "\\endfoot\n\n"
-        "\\bottomrule\n"
+        "\\hline\n"
         "\\endlastfoot\n\n"
     )
 

@@ -1,0 +1,73 @@
+\section{Background}
+\label{sec:background}
+
+\subsection{Overview of Information Security and Concealment Systems}
+Information security systems include \textbf{encryption}, \textbf{privacy}, and \textbf{concealment} (steganography).
+
+\subsubsection{Encryption Systems and Privacy Systems}
+These protect content but reveal that secret communication is happening, which can attract attention.
+
+\subsubsection{Concealment Systems (Steganography)}
+Steganography hides the existence of information by embedding it in ordinary carriers (e.g., text, images). The fundamental goal is to achieve \textbf{imperceptibility}. Text is a challenging carrier due to its low redundancy and strict semantics.
+
+\subsection{Introduction to Steganography}
+Steganography is frequently illustrated through the ``Prisoners' Problem'' \cite{simmons1984prisoners}, wherein Alice and Bob must communicate covertly under surveillance. The objective is to embed messages such that they remain undetectable to observers.
+
+Steganography methods include \textbf{carrier selection}, \textbf{carrier modification}, and \textbf{carrier generation} \cite{fridrich2009steganography}.
+\begin{itemize}
+    \item \textbf{Carrier modification:} Hide information in existing text with minimal changes.
+    \item \textbf{Carrier generation:} Generate new text that encodes information, allowing higher capacity but requiring naturalness.
+\end{itemize}
+
+\subsection{The Significance of Linguistic Steganography}
+Linguistic steganography enables covert communication, especially where encryption is suspicious. Text is a robust, ubiquitous carrier but presents challenges in balancing imperceptibility and capacity. 
+
+Traditional non-LLM steganographic methods typically employ synonym substitution, syntactic transformations, or statistical modifications of existing text. These approaches frequently exhibit limited embedding capacity (typically <1 bit per word) and detectable statistical anomalies. Conversely, advances in deep learning and LLMs enhance text quality and security through generative approaches, while related fields such as watermarking concentrate on tracing content origin.
+
+\subsection{Key Terminology and Definitions}
+\label{sec:terminology}
+To ensure accessibility for readers from diverse academic backgrounds, formal definitions of critical technical terms employed throughout this review are provided:
+
+\begin{itemize}
+    \item \textbf{Perceptual Imperceptibility}: The property that steganographic text appears natural and indistinguishable from normal text to human observers, maintaining linguistic fluency and contextual appropriateness.
+    
+    \item \textbf{Statistical Imperceptibility}: The property that the statistical characteristics of steganographic text match those of the cover medium, making it undetectable by automated statistical analysis.
+    
+    \item \textbf{Cognitive Imperceptibility}: The property that the semantic content and contextual coherence of steganographic text remain consistent with expected communication patterns and domain-specific knowledge \cite{ding2023context}.
+    
+    \item \textbf{Channel Entropy}: A measure of uncertainty or randomness in the communication medium that determines the theoretical capacity for information hiding. Higher entropy allows for greater embedding capacity.
+    
+    \item \textbf{Perfect Samplers}: Algorithms that can generate samples from a probability distribution with perfect accuracy, ensuring no statistical deviation from the target distribution—a requirement for provably secure steganography.
+    
+    \item \textbf{Explicit Data Distributions}: Clearly defined mathematical representations of the probability distributions governing the cover medium, enabling precise security analysis and theoretical guarantees.
+    
+    \item \textbf{Large Language Models (LLMs)}: A large language model (LLM) is a transformer-based model trained on massive text datasets, often with billions of parameters, enabling it to generate and understand human language across a wide variety of tasks \cite{shanahan2024talking}.
+    
+    \item \textbf{Hallucinations (in LLMs)}: Instances where language models generate plausible-sounding but factually incorrect, nonsensical, or contextually inappropriate content due to limitations in training data or model architecture. In steganography, hallucinations pose specific risks by introducing detectable patterns, compromising message integrity, and potentially revealing the presence of hidden information through inconsistent or anomalous text generation.
+    
+    \item \textbf{Psic Effect} \cite{yang2020vae}: The Perceptual-Statistical Imperceptibility Conflict Effect, representing the fundamental trade-off where optimizations for perceptual quality may compromise statistical security and vice versa.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Quick Reference Glossary of Key Terms}
+\label{tab:glossary}
+\begin{tabular}{|p{3cm}|p{9cm}|}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+Steganography & The practice of hiding information within ordinary carriers to conceal the existence of communication \\
+\hline
+Imperceptibility & The quality of steganographic content being undetectable to observers (perceptual, statistical, cognitive) \\
+\hline
+Psic Effect & Perceptual-Statistical Imperceptibility Conflict—trade-off between perceptual quality and statistical security \\
+\hline
+Embedding Capacity & Amount of secret information that can be hidden, measured in bits per token/word (bpt/bpw) \\
+\hline
+Black-box Access & Using LLMs through APIs without access to internal parameters or sampling distributions \\
+\hline
+White-box Access & Direct access to LLM internals, parameters, and sampling probabilities \\
+\hline
+\end{tabular}
+\end{table}
