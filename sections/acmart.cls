@@ -2384,7 +2384,7 @@ Computing Machinery]
       \fancyhead[RE]{\@shortauthors}%
       \fancyhead[LO]{\ACM@linecountL\shorttitle}%
       \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize Manuscript submitted to ACM}
+        \fancyfoot[RO,LE]{\footnotesize [Placeholder footnote]}
       \fi%
     \or % acmsmall
       \fancyhead[LE]{\ACM@linecountL\@headfootfont\@acmArticlePage}%
@@ -2546,7 +2546,7 @@ Computing Machinery]
     \ifnum\ACM@format@nr=0\relax % Manuscript
     \fancyfoot[LO,RE]{\ACM@timestamp\quad
       \if@ACM@nonacm\else
-        \footnotesize Manuscript submitted to ACM
+        \footnotesize Manuscript1 submitted to ACM
       \fi}
     \else
     \fancyfoot[LO,RE]{\ACM@timestamp}
