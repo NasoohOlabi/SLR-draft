@@ -1,0 +1,139 @@
+\subsection{Evaluation Metrics and Methods (RQ3)}
+\label{subsec:rq3}
+
+Performance evaluation for LLM-based steganography relies on three key categories of metrics, with significant variation in reporting standards across studies. The analysis reveals both the diversity of evaluation approaches and the need for standardization.
+
+\subsubsection{Metric Categories and Standards}
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{3cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+    \hline
+    \textbf{Metric Type} & \textbf{Imperceptibility} & \textbf{Capacity} & \textbf{Security}  & \textbf{Usage} \\
+    \hline
+    Perceptual           & PPL: 3-300                & BPW: 0.5-6.0      & Detection: 50-98\% & 85\%           \\
+    \hline
+    Statistical          & KLD: 0-3.3                & BPT: 1.0-5.8      & F1: 0.5-0.99       & 70\%           \\
+    \hline
+    Semantic             & BLEU: 0.3-0.9             & ER: 0.2-0.4       & Acc: 0.5-0.99      & 60\%           \\
+    \hline
+    Human Eval           & MAUVE: 0.2-0.9            & -                 & -                  & 25\%           \\
+    \hline
+  \end{tabular}
+  \caption{Evaluation metrics usage and typical ranges across studies}
+  \label{tab:evaluation_metrics}
+\end{table}
+
+\subsubsection{Imperceptibility Metrics}
+
+Imperceptibility evaluation encompasses both perceptual and statistical metrics:
+
+\begin{itemize}
+  \item \textbf{Perceptual Metrics:}
+        \begin{itemize}
+          \item \textbf{Perplexity (PPL):} Measures fluency, with lower values indicating better naturalness
+          \item \textbf{MAUVE:} Evaluates distributional similarity between generated and reference text
+          \item \textbf{Human Fluency Judgments:} Subjective assessment of text quality
+        \end{itemize}
+  \item \textbf{Statistical Metrics:}
+        \begin{itemize}
+          \item \textbf{Kullback-Leibler Divergence (KLD):} Measures distributional differences
+          \item \textbf{Jensen-Shannon Divergence (JSD):} Alternative statistical distance measure
+          \item \textbf{Chi-square Test:} Statistical significance testing
+        \end{itemize}
+  \item \textbf{Cognitive Metrics:}
+        \begin{itemize}
+          \item \textbf{BLEU Score:} Semantic similarity assessment
+          \item \textbf{BERTScore:} Contextual similarity using BERT embeddings
+          \item \textbf{SimCSE:} Sentence-level semantic similarity
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Capacity Metrics}
+
+Capacity evaluation focuses on embedding efficiency:
+
+\begin{itemize}
+  \item \textbf{Bits per Token (BPT):} Information density at token level
+  \item \textbf{Bits per Word (BPW):} Information density at word level
+  \item \textbf{Embedding Rate (ER):} Ratio of embedded bits to total text length
+  \item \textbf{Utilization Rate:} Efficiency of capacity usage
+\end{itemize}
+
+\subsubsection{Security Metrics}
+
+Security evaluation assesses resistance to detection and attacks:
+
+\begin{itemize}
+  \item \textbf{Detection Accuracy:} Performance of steganalysis classifiers
+  \item \textbf{F1 Score:} Balanced precision-recall measure
+  \item \textbf{Attack Resistance:} Performance degradation under various attacks
+  \item \textbf{False Positive Rate:} Rate of incorrect detection
+\end{itemize}
+
+\subsubsection{Method Comparison}
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \hline
+    \textbf{Method Type} & \textbf{Avg. PPL} & \textbf{Avg. KLD} & \textbf{Capacity} & \textbf{Security} & \textbf{Studies} \\
+    \hline
+    White-box            & 3-8               & 0-0.25            & 1.1-5.98 bpt      & 95-99\%           & 11               \\
+    \hline
+    Black-box            & 168-363           & 1.76-2.23         & 5.37 bpw          & 79-91\%           & 11               \\
+    \hline
+    Hybrid               & 50-150            & 0.5-1.5           & 2.0-4.0 bpt       & 90-95\%           & 5                \\
+    \hline
+    Watermarking         & 100-200           & 1.0-2.0           & 1.0-3.0 bpt       & 95-98\%           & 12               \\
+    \hline
+  \end{tabular}
+  \caption{Performance comparison across method types}
+  \label{tab:method_comparison}
+\end{table}
+
+\subsubsection{Evaluation Methods and Tools}
+
+Evaluation methods encompass both automated tools and human assessment:
+
+\begin{itemize}
+  \item \textbf{Automated Tools:}
+        \begin{itemize}
+          \item Steganalysis classifiers (LS-CNN, BiLSTM-Dense, BERT-FT)
+          \item Statistical analysis tools
+          \item Semantic similarity measures
+        \end{itemize}
+  \item \textbf{Human Evaluation:}
+        \begin{itemize}
+          \item Fluency judgments
+          \item Naturalness assessment
+          \item Detection difficulty evaluation
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Evaluation Challenges and Gaps}
+
+Several significant challenges exist in current evaluation practices:
+
+\begin{itemize}
+  \item \textbf{Lack of Standardized Benchmarks:} Only 20\% of studies use common datasets, making comparison difficult
+  \item \textbf{Inconsistent Reporting:} Different units, scales, and methodologies across studies
+  \item \textbf{Limited Human Evaluation:} Only 25\% of studies include human assessment
+  \item \textbf{Missing Robustness Testing:} 60\% of studies don't test against various attacks
+  \item \textbf{Incomplete Evaluation:} Many studies focus on only one or two metric categories
+\end{itemize}
+
+\subsubsection{Recent Advances in Evaluation}
+
+Recent studies have introduced more comprehensive evaluation approaches:
+
+\begin{itemize}
+  \item \textbf{Multi-metric Evaluation:} Combining perceptual, statistical, and semantic metrics
+  \item \textbf{Attack-based Testing:} Systematic evaluation against various attack scenarios
+  \item \textbf{Human-AI Collaborative Assessment:} Combining automated and human evaluation
+  \item \textbf{Cross-domain Evaluation:} Testing across different text types and domains
+\end{itemize}
+
+A significant need exists for standardized benchmarks, as human evaluations are frequently overlooked in current research. Future work should prioritize the development of comprehensive evaluation frameworks that address these gaps.

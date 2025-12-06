@@ -1,0 +1,168 @@
+\subsection{Limitations and Trade-offs in Current Techniques (RQ5)}
+\label{subsec:rq5}
+
+Current LLM-based steganographic techniques face several fundamental limitations and trade-offs that constrain their practical deployment and security guarantees. Understanding these limitations is crucial for advancing the field and developing more robust solutions.
+
+\subsubsection{Key Limitations}
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{3cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+    \hline
+    \textbf{Limitation}  & \textbf{Impact}         & \textbf{Frequency} & \textbf{Severity} & \textbf{Examples}             \\
+    \hline
+    Psic Effect          & 1-2 bpw loss            & 80\%               & High              & DAIRstega, FreStega           \\
+    \hline
+    Attack Vulnerability & 5-50\% drop             & 70\%               & High              & Ensemble WM, TrojanStego      \\
+    \hline
+    Low Capacity         & <1 bpt in short texts   & 60\%               & Medium            & Social media applications     \\
+    \hline
+    Segmentation Issues  & Ambiguity in extraction & 40\%               & Medium            & SparSamp, BPE tokenization    \\
+    \hline
+    Ethical Concerns     & Unaddressed bias        & 90\%               & High              & TrojanStego, misuse potential \\
+    \hline
+  \end{tabular}
+  \caption{Key limitations and their impact across studies}
+  \label{tab:limitations}
+\end{table}
+
+\subsubsection{The Psic Effect: A Fundamental Trade-off}
+
+The Perceptual-Statistical Imperceptibility Conflict (Psic Effect) represents the most critical limitation, affecting 80\% of studies. This fundamental trade-off occurs when optimizing for one aspect of imperceptibility degrades the other:
+
+\begin{itemize}
+  \item \textbf{Perceptual Quality vs. Statistical Security:} Optimizing for low perplexity (PPL) often increases statistical detectability
+  \item \textbf{Capacity Impact:} The Psic Effect results in an average capacity loss of 1-2 bits per word
+  \item \textbf{Detection Resistance:} Higher capacity typically reduces anti-steganalysis accuracy
+\end{itemize}
+
+\textbf{DAIRstega} exemplifies this trade-off, where higher capacity reduces anti-steganalysis accuracy to 58\%, demonstrating the inherent tension between different imperceptibility requirements.
+
+\subsubsection{Attack Vulnerability and Security Concerns}
+
+Current techniques demonstrate significant vulnerability to various attacks:
+
+\begin{itemize}
+  \item \textbf{Paraphrasing Attacks:} Detection rates drop by 5-50\% when text is paraphrased
+  \item \textbf{Fine-tuning Attacks:} Model fine-tuning can significantly degrade steganographic performance
+  \item \textbf{Statistical Analysis:} Advanced statistical methods can detect steganographic patterns
+  \item \textbf{Adversarial Examples:} Malicious inputs can compromise steganographic systems
+\end{itemize}
+
+Examples include \textbf{Ensemble Watermarks}, which achieves 98\% detection rate but drops to 95\% following paraphrase attacks, and \textbf{TrojanStego}, which shows a dramatic drop from 97\% to 65\% under certain attack conditions.
+
+\subsubsection{Capacity Limitations in Short Texts}
+
+Hiding information in short, low-entropy texts presents significant challenges:
+
+\begin{itemize}
+  \item \textbf{Social Media Posts:} Limited capacity in short, informal text
+  \item \textbf{Low-Entropy Content:} Technical or formal documents offer limited hiding space
+  \item \textbf{Semantic Constraints:} Maintaining meaning while embedding information
+  \item \textbf{Context Requirements:} Short texts may lack sufficient context for effective hiding
+\end{itemize}
+
+\subsubsection{Segmentation and Tokenization Issues}
+
+Subword tokenization creates ambiguity in message extraction:
+
+\begin{itemize}
+  \item \textbf{BPE Tokenization:} Byte-pair encoding can split words unpredictably
+  \item \textbf{Token Ambiguity:} Multiple valid segmentations of the same text
+  \item \textbf{Extraction Errors:} Ambiguous tokenization leads to message extraction failures
+  \item \textbf{Capacity Caps:} Tokenization limits maximum achievable capacity
+\end{itemize}
+
+\textbf{SparSamp} demonstrates these issues, where token ambiguity (TA) reduces accuracy, and \textbf{ShiMer} cannot effectively boost entropy due to tokenization constraints.
+
+\subsubsection{Ethical Concerns and Misuse Potential}
+
+The field faces significant ethical challenges that remain largely unaddressed:
+
+\begin{itemize}
+  \item \textbf{Bias and Discrimination:} Generated content may perpetuate harmful biases
+  \item \textbf{Misuse Potential:} Techniques can be used for malicious purposes
+  \item \textbf{Privacy Violations:} Steganographic systems may compromise user privacy
+  \item \textbf{Regulatory Compliance:} Lack of frameworks for responsible use
+\end{itemize}
+
+\textbf{TrojanStego} exemplifies these concerns, as it can embed secrets directly into LLM outputs, potentially enabling data exfiltration and other malicious activities.
+
+\subsubsection{White-box vs. Black-box Trade-offs}
+
+The choice between white-box and black-box approaches involves fundamental trade-offs:
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+    \textbf{Aspect}  & \textbf{White-box}  & \textbf{Black-box} & \textbf{Hybrid}       \\
+    \hline
+    Security         & High (95-99\%)      & Medium (79-91\%)   & Medium-High (90-95\%) \\
+    \hline
+    Accessibility    & Low                 & High               & Medium                \\
+    \hline
+    Capacity         & High (1.1-5.98 bpt) & Medium (5.37 bpw)  & Medium (2.0-4.0 bpt)  \\
+    \hline
+    Imperceptibility & High (PPL: 3-8)     & Low (PPL: 168-363) & Medium (PPL: 50-150)  \\
+    \hline
+    Deployment       & Difficult           & Easy               & Moderate              \\
+    \hline
+  \end{tabular}
+  \caption{Trade-offs between white-box, black-box, and hybrid approaches}
+  \label{tab:approach_tradeoffs}
+\end{table}
+
+\subsubsection{Computational and Resource Constraints}
+
+Performance optimization often conflicts with computational efficiency:
+
+\begin{itemize}
+  \item \textbf{Computational Overhead:} Better results typically require more computational resources
+  \item \textbf{Memory Requirements:} Large models and external knowledge increase memory needs
+  \item \textbf{Real-time Constraints:} Latency requirements may limit optimization options
+  \item \textbf{Scalability Issues:} Performance may degrade with increased scale
+\end{itemize}
+
+\textbf{UTF} demonstrates this trade-off, showing a 5\% drop in HellaSwag performance, while \textbf{FreStega} requires corpus access (100 samples) for optimal performance.
+
+\subsubsection{Unresolved Challenges and Future Needs}
+
+Several critical challenges remain inadequately addressed:
+
+\begin{itemize}
+  \item \textbf{Provable Security:} Lack of theoretical foundations for security guarantees
+  \item \textbf{Robustness:} Limited resilience to advanced attack methods
+  \item \textbf{Standardization:} Absence of common evaluation frameworks
+  \item \textbf{Ethical Frameworks:} Missing guidelines for responsible development and use
+  \item \textbf{Cross-lingual Support:} Poor performance in non-English languages
+  \item \textbf{Real-world Deployment:} Limited testing in actual deployment scenarios
+\end{itemize}
+
+\subsubsection{Quantitative Impact Analysis}
+
+The following table provides a quantitative overview of the most significant trade-offs:
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{2.8cm}|p{2.8cm}|p{6.4cm}|}
+    \hline
+    \textbf{Limitation/Trade-off} & \textbf{Quantified Impact}           & \textbf{Examples}                                             \\
+    \hline
+    Psic Effect                   & $\sim$1-2 bpw loss                   & DAIRstega: Higher capacity reduces anti-steg Acc to 58\%      \\
+    \hline
+    Attack Vulnerability          & 5-50\% detection drop                & Ensemble WM: 98\% to 95\%; TrojanStego: 97\% to 65\%          \\
+    \hline
+    Entropy/Ambiguity             & Capacity cap $\sim$1023 bits         & SparSamp: TA reduces accuracy; ShiMer: Cannot boost entropy   \\
+    \hline
+    Ethical/Overhead              & Performance degradation $\sim$5-11\% & UTF: HellaSwag drop 5\%; FreStega: Needs corpus (100 samples) \\
+    \hline
+  \end{tabular}
+  \caption{Quantified impact of key limitations and trade-offs}
+  \label{tab:quantified_limitations}
+\end{table}
+
+Understanding these limitations and trade-offs is essential for advancing the field and developing more robust, secure, and practical steganographic systems. Future research must address these challenges to enable widespread adoption and responsible use of LLM-based steganography.

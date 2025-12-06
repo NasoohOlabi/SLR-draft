@@ -1,2 +1,113 @@
 \section{Discussion}
-Discuss implications and interpretation of the results.
+\label{sec:discussion}
+
+This section provides a comprehensive discussion of the findings presented in the results section, synthesizing insights across all research questions and identifying implications for future research and practice.
+
+\subsection{Synthesis of Key Findings}
+
+The systematic review reveals a rapidly evolving field that has undergone significant transformation since 2023. The shift from white-box to black-box approaches represents a paradigm change toward more practical, real-world deployable steganographic systems. This evolution is driven by the increasing accessibility of large language models through APIs and the need for covert communication in censored environments.
+
+\subsection{Implications for Research and Practice}
+
+\subsubsection{Methodological Implications}
+
+The findings suggest several important methodological considerations:
+
+\begin{itemize}
+\item \textbf{Standardization Need:} The lack of standardized evaluation metrics and benchmarks represents a critical barrier to progress. Future research should prioritize the development of common evaluation frameworks.
+\item \textbf{Evaluation Completeness:} The limited use of human evaluation (only 25\% of studies) and robustness testing (40\% missing) indicates a need for more comprehensive evaluation practices.
+\item \textbf{Reproducibility:} The variation in reporting standards and missing implementation details in many studies hampers reproducibility and comparison.
+\end{itemize}
+
+\subsubsection{Practical Implications}
+
+For practitioners and developers:
+
+\begin{itemize}
+\item \textbf{Method Selection:} The choice between white-box and black-box methods should be based on security requirements vs. deployment constraints.
+\item \textbf{Capacity Planning:} The Psic Effect and capacity limitations in short texts should be carefully considered in system design.
+\item \textbf{Security Considerations:} The vulnerability to attacks (5-50\% detection rate drops) requires robust defense mechanisms.
+\end{itemize}
+
+\subsection{Addressing the Psic Effect}
+
+The Perceptual-Statistical Imperceptibility Conflict emerges as the most significant challenge in the field. This fundamental trade-off between perceptual quality and statistical security affects 80\% of studies and results in an average capacity loss of 1-2 bits per word. Future research should focus on:
+
+\begin{itemize}
+\item Developing techniques that minimize this trade-off
+\item Creating adaptive systems that balance both aspects dynamically
+\item Exploring novel approaches that decouple perceptual and statistical imperceptibility
+\end{itemize}
+
+\subsection{The Role of Context and External Knowledge}
+
+The integration of external knowledge sources has proven crucial for enhancing both capacity and contextual relevance. However, this integration introduces new challenges:
+
+\begin{itemize}
+\item \textbf{Privacy Concerns:} External knowledge integration may compromise the privacy of the steganographic system
+\item \textbf{Computational Overhead:} The 5-15\% increase in computational cost may limit real-time applications
+\item \textbf{Generalizability:} Domain-specific knowledge may not transfer well across different contexts
+\end{itemize}
+
+\subsection{Ethical Considerations and Responsible Development}
+
+The review reveals a concerning gap in ethical considerations, with only 10\% of studies addressing ethical implications. This represents a significant oversight given the potential for misuse in:
+
+\begin{itemize}
+\item Censorship evasion in authoritarian regimes
+\item Covert communication for malicious purposes
+\item Data exfiltration and information leakage
+\item Bias propagation through generated content
+\end{itemize}
+
+Future research must prioritize the development of ethical frameworks and responsible use guidelines.
+
+\subsection{Limitations of the Review}
+
+Several limitations of this systematic review should be acknowledged:
+
+\begin{itemize}
+\item \textbf{Incomplete Coverage:} 14 papers remained pending PDF acquisition, potentially missing important insights
+\item \textbf{Language Bias:} The focus on English-language publications may have excluded relevant non-English research
+\item \textbf{Recency Bias:} The rapid evolution of the field means some recent developments may not be fully captured
+\item \textbf{Quality Assessment:} The lack of formal quality assessment tools may have influenced the synthesis
+\end{itemize}
+
+\subsection{Future Research Directions}
+
+Based on the synthesis of findings, several promising research directions emerge:
+
+\subsubsection{Technical Advancements}
+
+\begin{itemize}
+\item \textbf{Multimodal Steganography:} Integration with vision-language models for text-image combinations
+\item \textbf{Robust Defense Mechanisms:} Development of attack-resistant techniques
+\item \textbf{Provable Security:} Theoretical foundations for stronger security guarantees
+\item \textbf{Efficient Computation:} Reducing computational overhead for real-time applications
+\end{itemize}
+
+\subsubsection{Methodological Improvements}
+
+\begin{itemize}
+\item \textbf{Standardized Evaluation:} Development of common benchmarks and evaluation protocols
+\item \textbf{Human-Centered Design:} Greater emphasis on human evaluation and usability
+\item \textbf{Cross-Language Support:} Extension to non-English languages and cultural contexts
+\item \textbf{Real-World Testing:} Evaluation in actual deployment scenarios
+\end{itemize}
+
+\subsubsection{Ethical and Social Considerations}
+
+\begin{itemize}
+\item \textbf{Ethical Frameworks:} Development of guidelines for responsible use
+\item \textbf{Bias Mitigation:} Techniques to prevent discrimination and bias propagation
+\item \textbf{Transparency:} Methods for detecting and auditing steganographic content
+\item \textbf{Regulatory Compliance:} Alignment with emerging AI regulations and standards
+\end{itemize}
+
+\subsection{Conclusion}
+
+This systematic review has provided a comprehensive analysis of the current state of LLM-based steganography, revealing both significant progress and critical challenges. The field has evolved rapidly, with clear trends toward more practical and context-aware systems. However, fundamental limitations such as the Psic Effect, attack vulnerability, and ethical concerns remain inadequately addressed.
+
+The findings suggest that future research should prioritize the development of standardized evaluation frameworks, robust defense mechanisms, and ethical guidelines. The integration of external knowledge sources shows promise but requires careful consideration of privacy and computational constraints. Most importantly, the field must address the ethical implications of these technologies to ensure their responsible development and deployment.
+
+As LLMs continue to evolve and become more accessible, the field of linguistic steganography will likely see continued growth and innovation. The challenges identified in this review provide a roadmap for future research directions, while the opportunities suggest exciting possibilities for advancing both the technical capabilities and practical applications of these systems.

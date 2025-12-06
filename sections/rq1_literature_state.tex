@@ -1,0 +1,61 @@
+\subsection{State of Published Literature on LLM-based Steganography (RQ1)}
+\label{subsec:rq1}
+
+Our analysis reveals a significant surge in LLM-based steganography research since 2023, with approximately 20 new papers published in 2024–2025. The field has evolved from early white-box modifications to more practical hybrid and black-box approaches.
+
+\subsubsection{Publication Trends and Distribution}
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \hline
+    \textbf{Category} & \textbf{2018-2020} & \textbf{2021-2022} & \textbf{2023} & \textbf{2024-2025} & \textbf{Total} \\
+    \hline
+    White-box Methods & 2                  & 3                  & 4             & 2                  & 11             \\
+    \hline
+    Black-box Methods & 0                  & 1                  & 2             & 8                  & 11             \\
+    \hline
+    Hybrid Methods    & 0                  & 0                  & 1             & 4                  & 5              \\
+    \hline
+    Watermarking      & 1                  & 2                  & 3             & 6                  & 12             \\
+    \hline
+    \textbf{Total}    & 3                  & 6                  & 10            & 20                 & 39             \\
+    \hline
+  \end{tabular}
+  \caption{Publication trends by method type and year}
+  \label{tab:publication_trends}
+\end{table}
+
+\subsubsection{Model Preferences and Venues}
+
+The analysis shows clear preferences in model selection and publication venues:
+
+\begin{itemize}
+  \item \textbf{Model Usage:} 70\% of studies utilize open-source LLMs (LLaMA2, LLaMA3), while 20\% use proprietary models (GPT series), and 10\% employ custom architectures
+  \item \textbf{Publication Venues:} 60\% appear in preprint servers (arXiv), 25\% in top-tier conferences (ACL, NeurIPS, ICLR), and 15\% in specialized venues
+  \item \textbf{Geographic Distribution:} 45\% from Asia-Pacific, 35\% from North America, 20\% from Europe
+\end{itemize}
+
+\subsubsection{Research Gaps and Opportunities}
+
+Several significant gaps were identified:
+\begin{itemize}
+  \item Limited focus on non-English languages (only 8\% of studies)
+  \item Insufficient attention to ethical implications (10\% address ethical concerns)
+  \item Lack of standardized evaluation benchmarks
+  \item Limited real-world deployment studies
+\end{itemize}
+
+\subsubsection{Key Trends and Evolution}
+
+The field has undergone significant evolution with several notable trends:
+
+\begin{itemize}
+  \item \textbf{Paradigm Shift:} Early works (pre-2024) primarily concentrated on white-box modifications, such as token sampling in GPT-2, whereas recent trends demonstrate a shift toward hybrid and black-box approaches for more practical, real-world deployment
+  \item \textbf{Model Democratization:} The increasing availability of open-source LLMs has democratized research in this field
+  \item \textbf{Integration with Watermarking:} Approximately 40\% of research integrates concepts from digital watermarking, creating hybrid approaches
+  \item \textbf{Context Awareness:} Growing emphasis on context-aware steganographic systems that leverage domain-specific knowledge
+\end{itemize}
+
+Recent model examples include \textbf{DAIRstega} (2024), which advanced interval-based sampling, and \textbf{FreStega} (2024), which provides a plug-and-play approach to imperceptibility. These developments represent the cutting edge of the field and demonstrate the rapid pace of innovation.

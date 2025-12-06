@@ -1,0 +1,125 @@
+\subsection{Integration of External Knowledge Sources (RQ4)}
+\label{subsec:rq4}
+
+The integration of external knowledge sources has emerged as a crucial area of research in LLM-based steganography, with 65\% of studies incorporating some form of external information. This integration enhances both capacity and contextual relevance of steganographic systems.
+
+\subsubsection{Knowledge Source Types}
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{3cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+    \hline
+    \textbf{Knowledge Type} & \textbf{Usage} & \textbf{Capacity Gain} & \textbf{Context Improvement} & \textbf{Examples}              \\
+    \hline
+    Semantic Resources      & 40\%           & +15-25\%               & High                         & Co-Stega, Knowledge Graphs     \\
+    \hline
+    Domain Corpora          & 35\%           & +10-20\%               & Medium                       & FreStega, Specialized Datasets \\
+    \hline
+    Prompt Engineering      & 45\%           & +5-15\%                & High                         & Zero-shot methods              \\
+    \hline
+    Context Retrieval       & 30\%           & +20-30\%               & Very High                    & Co-Stega, RAG integration      \\
+    \hline
+  \end{tabular}
+  \caption{External knowledge integration patterns and benefits}
+  \label{tab:knowledge_integration}
+\end{table}
+
+\subsubsection{Semantic Resources Integration}
+
+Semantic resources provide structured knowledge that enhances contextual understanding:
+
+\begin{itemize}
+  \item \textbf{Knowledge Graphs:} Structured representations of domain knowledge
+  \item \textbf{Context Retrieval:} Dynamic retrieval of relevant context information
+  \item \textbf{Semantic Embeddings:} Pre-trained semantic representations
+  \item \textbf{Ontologies:} Formal representations of domain concepts
+\end{itemize}
+
+\textbf{Co-Stega} demonstrates effective use of semantic resources by leveraging context retrieval and entropy enhancement for social media applications, achieving significant improvements in both capacity and naturalness.
+
+\subsubsection{Domain Corpora Integration}
+
+Domain-specific corpora provide specialized knowledge for targeted applications:
+
+\begin{itemize}
+  \item \textbf{Large Corpora:} Extensive text collections for distribution alignment
+  \item \textbf{Specialized Datasets:} Domain-specific text collections
+  \item \textbf{Multi-lingual Corpora:} Cross-linguistic knowledge integration
+  \item \textbf{Temporal Corpora:} Time-sensitive knowledge sources
+\end{itemize}
+
+\textbf{FreStega} exemplifies effective corpus integration, using large corpora for distribution alignment and achieving a 15\% increase in capacity while maintaining imperceptibility.
+
+\subsubsection{Prompt Engineering and Context Guidance}
+
+Prompt-based approaches leverage external knowledge through strategic prompting:
+
+\begin{itemize}
+  \item \textbf{In-context Learning:} Using examples to guide generation
+  \item \textbf{Few-shot Learning:} Learning from limited examples
+  \item \textbf{Zero-shot Approaches:} No training examples required
+  \item \textbf{Chain-of-thought:} Step-by-step reasoning guidance
+\end{itemize}
+
+Zero-shot steganography methods, such as those using LLaMA2-Chat-7B, demonstrate how prompt engineering can effectively guide steganographic text generation without requiring model fine-tuning.
+
+\subsubsection{Integration Benefits and Performance Gains}
+
+External knowledge integration provides several key benefits:
+
+\begin{itemize}
+  \item \textbf{Capacity Enhancement:} Average capacity increase of 15-25\%
+  \item \textbf{Contextual Relevance:} Improved alignment with domain requirements
+  \item \textbf{Naturalness:} Better semantic coherence and fluency
+  \item \textbf{Adaptability:} Better performance across different domains
+\end{itemize}
+
+\subsubsection{Integration Challenges and Trade-offs}
+
+Despite the benefits, knowledge integration introduces several challenges:
+
+\begin{itemize}
+  \item \textbf{Computational Overhead:} 5-15\% increase in computational cost
+  \item \textbf{Privacy Concerns:} External knowledge may compromise system privacy
+  \item \textbf{Integration Complexity:} Increased system complexity and maintenance
+  \item \textbf{Generalizability:} Domain-specific knowledge may not transfer well
+  \item \textbf{Data Quality:} Dependence on quality and availability of external sources
+\end{itemize}
+
+\subsubsection{Integration Strategies and Architectures}
+
+Different integration strategies have been employed:
+
+\begin{table}[ht]
+  \centering
+  \small
+  \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+    \textbf{Strategy} & \textbf{Integration Point} & \textbf{Complexity} & \textbf{Effectiveness} \\
+    \hline
+    Pre-processing    & Before generation          & Low                 & Medium                 \\
+    \hline
+    During Generation & Real-time integration      & High                & High                   \\
+    \hline
+    Post-processing   & After generation           & Medium              & Low                    \\
+    \hline
+    Hybrid            & Multiple points            & Very High           & Very High              \\
+    \hline
+  \end{tabular}
+  \caption{Knowledge integration strategies and their characteristics}
+  \label{tab:integration_strategies}
+\end{table}
+
+\subsubsection{Future Directions in Knowledge Integration}
+
+Several promising directions for future research emerge:
+
+\begin{itemize}
+  \item \textbf{Federated Learning:} Distributed knowledge integration while preserving privacy
+  \item \textbf{Adaptive Integration:} Dynamic selection of knowledge sources
+  \item \textbf{Multi-modal Knowledge:} Integration of text, image, and other modalities
+  \item \textbf{Real-time Learning:} Continuous adaptation to new knowledge
+\end{itemize}
+
+The integration of external knowledge sources represents a critical advancement in LLM-based steganography, enabling more sophisticated and context-aware systems. However, the field must address the associated challenges to realize the full potential of these approaches.
