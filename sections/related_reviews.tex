@@ -1,1 +1,32 @@
 \section{Related Reviews}
+\label{sec:related_reviews}
+
+This section examines existing surveys and reviews on text steganography to position this systematic literature review within the broader literature. We analyze the scope, methodology, and limitations of prior reviews, then articulate how this review extends and differs from existing work.
+
+\subsection{Majeed et al. (2021)}
+
+Majeed et al. \cite{math9212829} conducted a comprehensive survey of text steganography techniques, covering methods published up to 2021. The review provides a broad overview of linguistic steganography, categorizing approaches into format-based and content-based methods, and identifying classical techniques such as synonym replacement, spacing manipulation, and Huffman coding. However, this review was published before the widespread adoption of LLM-based approaches and therefore does not systematically cover the transformative impact of large language models on the field. The review focuses primarily on pre-LLM techniques and does not address the design space, evaluation challenges, or context-handling approaches that have emerged with LLM-based methods.
+
+\subsection{Setiadi et al. (2025)}
+
+Setiadi et al. \cite{Setiadi_Ghosal_Sahu_2025} present a more recent review that acknowledges the revitalization of linguistic steganography by LLMs. The review examines AI-powered steganography methods from the last three years (post-2021), detailing techniques that utilize models like GPT-2 \cite{radford2019gpt2}, GPT-3 \cite{brown2020languagemodelsfewshotlearners}, LLaMA2 \cite{touvron2023llama2openfoundation}, and Baichuan2 \cite{xiao2024baichuan2suminstructionfinetunebaichuan27b}. However, Setiadi et al. explicitly state that their work is not a systematic literature review—it is a "concise and critical examination" rather than an exhaustive survey. Consequently, it does not include all relevant papers published between 2021 and 2025, does not follow established SLR guidelines (e.g., PRISMA), and does not provide a systematic protocol for search, selection, and data extraction. Additionally, while the review covers LLM-based methods, it does not systematically analyze context handling approaches, evaluation standardization challenges, or provide a quantitative synthesis of performance metrics across studies.
+
+\subsection{Other Surveys and Reviews}
+
+Several other surveys exist on steganography more broadly, covering image, audio, and text modalities. However, these typically either: (1) focus on image steganography with limited coverage of text methods, (2) cover text steganography but predate the LLM era, or (3) mix modalities without providing deep analysis of LLM-specific techniques and challenges. None provide the systematic, LLM-focused analysis that this review offers.
+
+\subsection{This Systematic Literature Review}
+
+This review addresses the gaps identified above by:
+
+\begin{enumerate}
+    \item \textbf{Systematic methodology}: Following established SLR guidelines (Petersen et al. \cite{slr_guidelines}), with a rigorous search protocol across multiple digital libraries, explicit inclusion/exclusion criteria, and systematic data extraction.
+    \item \textbf{Exclusive LLM focus}: Concentrating specifically on LLM-based linguistic steganography methods, excluding pre-LLM techniques and mixed-modality approaches, to provide deep analysis of how LLMs have transformed the field.
+    \item \textbf{Context handling taxonomy}: Systematically classifying and analyzing how methods handle contextual compatibility (explicit, implicit, no context) and how context representation affects performance, addressing a gap not covered in prior reviews.
+    \item \textbf{Quantitative synthesis}: Providing systematic compilation and comparison of performance metrics (embedding capacity, imperceptibility measures) across method categories, identifying inconsistencies in evaluation practices.
+    \item \textbf{Application domain mapping}: Systematically analyzing application domains (covert communication, watermarking, fingerprinting, adversarial attacks) and their specific requirements, enabling understanding of method suitability.
+    \item \textbf{Comprehensive coverage}: Including all relevant papers identified through systematic search up to 2025, with explicit documentation of search dates, selection process, and handling of pending studies.
+    \item \textbf{Research question framework}: Organizing findings around six explicit research questions covering state of literature, applications, evaluation metrics, knowledge integration, limitations, and future directions.
+\end{enumerate}
+
+The timing of this review is well-justified by the significant surge in LLM-based steganography publications since 2023, with approximately 70\% of recent studies using open-source LLMs, and the emergence of novel paradigms (black-box methods, context-aware systems, provably secure approaches) that warrant systematic analysis. This review provides the first comprehensive, systematic analysis of how LLMs have reshaped linguistic steganography, establishing a foundation for future research and practice.
