@@ -24,11 +24,11 @@ To ensure the selection of high-quality and relevant studies, the following crit
 Studies were included if they:
 
 \begin{enumerate}[label=IC\arabic*:]
-    \item Provided full-text access.
-    \item Were published in English from 2018 onwards.
-    \item Appeared in peer-reviewed journals, conferences, or workshops.
-    \item Directly addressed steganography, watermarking, or information hiding techniques involving or significantly impacted by LLMs, BERT, LAMA, or GPT architectures.
-    \item Represented empirical studies, surveys, reviews, or theoretical contributions.
+	\item Provided full-text access.
+	\item Were published in English from 2018 onwards.
+	\item Appeared in peer-reviewed journals, conferences, or workshops.
+	\item Directly addressed steganography, watermarking, or information hiding techniques involving or significantly impacted by LLMs, BERT, LAMA, or GPT architectures.
+	\item Represented empirical studies, surveys, reviews, or theoretical contributions.
 \end{enumerate}
 
 
@@ -36,27 +36,27 @@ Studies were included if they:
 Studies were excluded if they:
 
 \begin{enumerate}[label=EC\arabic*:]
-    \item Were duplicates (retaining the most complete or recent version).
-    \item Were incomplete, abstract-only, or irrelevant to steganography with LLMs.
-    \item Were non-English publications.
-    \item Came from non-peer-reviewed sources (e.g., preprints, dissertations, theses, books, book chapters), unless extended from peer-reviewed conference papers.
+	\item Were duplicates (retaining the most complete or recent version).
+	\item Were incomplete, abstract-only, or irrelevant to steganography with LLMs.
+	\item Were non-English publications.
+	\item Came from non-peer-reviewed sources (e.g., preprints, dissertations, theses, books, book chapters), unless extended from peer-reviewed conference papers.
 \end{enumerate}
 
 
 
 \subsection{Conducting the Search}
-The initial automated search across the selected digital libraries yielded a total of 1043 candidate papers. The distribution by source was: ACM Digital Library (346), IEEE Digital Library (61), Science@Direct (209), Scopus (151), and Springer Link (276). Duplicated papers were automatically eliminated using Parsifal tool \footnote{\href{https://parsif.al}{https://parsif.al}}. After removing all duplicates, 1,573 papers remained. Following this the papers underwent a multi-stage filtering process based on their titles, abstracts, and full texts, guided by the predefined inclusion and exclusion criteria. After title and abstract filtering, 58 papers remained. Of these, 18 were accepted with readily available PDFs, while 14 were pending PDF acquisition at the time of analysis.
+The initial automated search across the selected digital libraries yielded a total of 1043 candidate papers. The distribution by source was: ACM Digital Library (346), IEEE Digital Library (61), Science@Direct (209), Scopus (151), and Springer Link (276). Duplicated papers were automatically eliminated using Parsifal tool \footnote{\href{https://parsif.al}{https://parsif.al}}. After removing all duplicates, 1,573 papers remained. Following this the papers underwent a multi-stage filtering process based on their titles, abstracts, and full texts, guided by the predefined inclusion and exclusion criteria. After title and abstract filtering, 58 papers remained. Of these, 26 were accepted with readily available PDFs, while 6 were pending PDF acquisition at the time of analysis.
 
 \subsection{Data Extraction and Classification}
 A Data Extraction Form (DEF) was developed to systematically collect data from each primary study to address our research questions. The form is designed in a table format consisting of the following types of information:
 
 \begin{itemize}
-    \item Bibliometric Information: paper title, type (Steganography or Watermarking), author(s), publication year, and publication venue.
-    \item Model Details: input and output formats, key characteristics, approach classification (three-term categorical), specific LLM used (if applicable), embedding process description, and code availability.
-    \item Datasets: all datasets employed, including their sizes.
-    \item Context Awareness: whether the method is "Explicit," "Implicit," or "No," the context keyword (e.g., "Social Media," "Formal Document"), how context is represented (e.g., "Text," "Pretext," "Graph," "Vector"), and how it is utilized in the method.
-    \item Evaluation Details: evaluation metrics, steganalysis models used, and the best numerical results for each reported metric.
-    \item Strengths and Limitations: main strengths and weaknesses of the approach or model.
+	\item Bibliometric Information: paper title, type (Steganography or Watermarking), author(s), publication year, and publication venue.
+	\item Model Details: input and output formats, key characteristics, approach classification (three-term categorical), specific LLM used (if applicable), embedding process description, and code availability.
+	\item Datasets: all datasets employed, including their sizes.
+	\item Context Awareness: whether the method is "Explicit," "Implicit," or "No," the context keyword (e.g., "Social Media," "Formal Document"), how context is represented (e.g., "Text," "Pretext," "Graph," "Vector"), and how it is utilized in the method.
+	\item Evaluation Details: evaluation metrics, steganalysis models used, and the best numerical results for each reported metric.
+	\item Strengths and Limitations: main strengths and weaknesses of the approach or model.
 \end{itemize}
 
 Following data extraction, studies were classified based on predefined categories derived from the research questions to identify trends, patterns, and gaps in the literature. The results are summarized using tables, figures  \ref{fig:sunburst_chart}), and descriptive statistics. Each research question is addressed individually with interpretation of findings and identification of future research directions.

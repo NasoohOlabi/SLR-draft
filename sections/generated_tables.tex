@@ -58,5 +58,17 @@ Rewriting-Stego: generating natural and control... \cite{li2023rewriting} & BART
 
 ALiSa: Acrostic linguistic steganography based ... \cite{yi2022alisa} & BERT (Google’s BERTBase, Uncased) & BookCorpus (10,000 natural texts for evaluation) & PPL: Natural = 13.91, ALiSa = 14.85; LS-RNN/LS-BERT Acc \& F1 = [truncated]iitilde{}0.50; Outperforms GPT-AC/ADG in all cases & No & [Not specified] & [Not specified] \\
 
+Imperceptible Text Steganography based on Group... & Qwen-7B-Chat & HC3, DailyDialogue, COCO Descriptions & HC3: Bit 188.94, Stego 131.99, PPL 34.07, Mean 20.19, Var 0.1e04, F1 90.01\%; DailyDialogue: Bit 188.94, Stego 89.37, PPL 53.88, Mean 20.13, Var 0.... & Explicit & Social Media / Group Chat & Text (chat history and current input) \\
+
+A Semantic Controllable Long Text Steganography... & Llama 7B Chat, Meta LLaMA2 7B Chat & Story (ChatGPT), Post (Recipe Kaggle + ChatGPT), Ad (Mobile Kaggle + ChatGPT) & ppl ↓ >23\%, \ensuremath{\Delta}ppl ↓ >72\% vs ADG/HC/Bin; detection accuracy ↓ >10\% vs baselines & Explicit & Topical Content & KG triplets (e1, r, e2), task descriptions (D) \\
+
+Beyond Binary Classification: Customizable Text... & gpt-3.5-turbo-instruct, OPT-6.7b, babbage-002, davinci-002 (others: ChatGPT, GPT-2–4, LLaMA) & Realnewslike (C4, 500 samples, 100-token prompts + completions); Custom watermark dataset (short info <10 tokens) & AUC 0.98, FPR 0.00, FNR 0.00, [truncated]iitilde{}100\% single-letter decoding, PPL close to human text & Implicit & General Text Generation & Text (evolving prompt + generated output) \\
+
+CPG-LS: Causal Perception Guided Linguistic Ste... & BERTBase, Cased & CC-100 corpus; 10k cover texts; 7:3 train-test split & PPL 36.5; Mauve 0.871; Payload 0.150 bits/word; BiLSTM-D Acc 0.387 F1 0.375; R-BI-C Acc 0.378 F1 0.366; TS-RNN Acc 0.380 F1 0.368 & Implicit & Natural Language Text & Text, embeddings, vector matrix \\
+
+Controllable Semantic Linguistic Steganography ... & BERT + CRF & Gigaword; CNN/Daily Mail & Rouge-1: 0.2212; Rouge-2: 0.0268; Rouge-L: 0.1609; Meteor: 0.1384; Cosine: 0.5911; Euclidean: 5.6386; Manhattan: 87.9534; Jaccard: 0.2022; Anti-ste... & Explicit & Social Media & Semantic features of input text; 384-dim dense vectors for evaluation \\
+
+FREmax: A Simple Method Towards Truly Secure Ge... & GPT-2 & Tweet corpus (2.6M sents, 26.8M tokens), IMDB corpus (1.05M sents, 25.3M tokens) & Tweet: PPL 361.83, Entropy 48.21, Tokens 10.83, Distinct3 0.98, BPS 62.79, SI\% 73.03. IMDB: PPL 169.66, Entropy 103.39, Tokens 23.80, Distinct3 0.... & Implicit & General Text & N-gram frequency distribution stored in a look-up table \\
+
 \end{longtable}
 
