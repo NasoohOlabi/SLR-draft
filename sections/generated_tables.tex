@@ -1,74 +1,74 @@
 \renewcommand{\arraystretch}{1.3}
-\begin{longtable}{|p{0.12\linewidth}|p{0.12\linewidth}|p{0.12\linewidth}|p{0.18\linewidth}|p{0.12\linewidth}|p{0.12\linewidth}|p{0.12\linewidth}|}
+\begin{longtable}{|p{0.11\linewidth}|p{0.11\linewidth}|p{0.11\linewidth}|p{0.11\linewidth}|p{0.11\linewidth}|p{0.11\linewidth}|p{0.11\linewidth}|p{0.11\linewidth}|}
 \caption{Summary of Results from Reviewed Papers} \\
 \hline
 
-Paper & Llm & Dataset & Result & Context Aware & Categ Context & Representation Context \\
+Paper & Llm & Year & Dataset & Result & Context Aware & Categ Context & Representation Context \\
 \hline
 
 \endfirsthead
 
-\multicolumn{7}{|c|}{\bfseries \tablename\ \thetable{} -- continued from previous page} \\
+\multicolumn{8}{|c|}{\bfseries \tablename\ \thetable{} -- continued from previous page} \\
 \hline
-Paper & Llm & Dataset & Result & Context Aware & Categ Context & Representation Context \\
+Paper & Llm & Year & Dataset & Result & Context Aware & Categ Context & Representation Context \\
 \hline
 
 \endhead
 
 \hline
-\multicolumn{7}{|r|}{Continued on next page} \\
+\multicolumn{8}{|r|}{Continued on next page} \\
 \endfoot
 
 \hline
 \endlastfoot
 
-VAE-Stega: linguistic steganography based on va... \cite{yang2020vae} & BERTBASE (BERT-LSTM) (LSTM-LSTM) model was trained from scratch & Twitter (2.6M sentences) IMDB (1.2M sentences) preprocessed & PPL: 28.879, \ensuremath{\Delta}MP: 0.242, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616 & non-explicit & pre-text & text \\
+VAE-Stega: linguistic steganography based on va... \cite{yang2020vae} & BERTBASE (BERT-LSTM) (LSTM-LSTM) model was trained from scratch & 2020.0 & Twitter (2.6M sentences) IMDB (1.2M sentences) preprocessed & PPL: 28.879, \ensuremath{\Delta}MP: 0.242, KLD: 3.302, JSD: 10.411, Acc: 0.600, R: 0.616 & non-explicit & pre-text & text \\
 
-General framework for reversible data hiding in... \cite{zheng2022general} & BERTBase & BookCorpus & BPW=0.5335 F1=0.9402 PPL=134.2199 & non-explicit & pre-text & text \\
+General framework for reversible data hiding in... \cite{zheng2022general} & BERTBase & 2022.0 & BookCorpus & BPW=0.5335 F1=0.9402 PPL=134.2199 & non-explicit & pre-text & text \\
 
-Co-stega: Collaborative linguistic steganograph... \cite{liao2024co} & Llama-2-7B-chat, GPT-2 (fine-tuned), Llama-2-13B & Tweet dataset (for GPT-2 fine-tuning), Twitter (real-time testing) & SR1: 60.87\%, SR2: 98.55\%, Gen. Capacity: 44.91 bits, Entropy: 49.21 bits, BPW: 2.31, PPL: 16.75, SimCSE: 0.69 & explicit & Social Media & text \\
+Co-stega: Collaborative linguistic steganograph... \cite{liao2024co} & Llama-2-7B-chat, GPT-2 (fine-tuned), Llama-2-13B & 2024.0 & Tweet dataset (for GPT-2 fine-tuning), Twitter (real-time testing) & SR1: 60.87\%, SR2: 98.55\%, Gen. Capacity: 44.91 bits, Entropy: 49.21 bits, BPW: 2.31, PPL: 16.75, SimCSE: 0.69 & explicit & Social Media & text \\
 
-Joint linguistic steganography with BERT masked... \cite{ding2023joint} & LSTM + attention for temporal context. GAT for spatial token relationships. BERT MLM for deep semantic context in substitution. & OPUS & PPL=13.917 KLD=2.904 SIM=0.812 ER=0.365 (BN=2) Best Acc=0.575 (BERT classifier) FLOPs=1.834G & explicit & pre-text & text \\
+Joint linguistic steganography with BERT masked... \cite{ding2023joint} & LSTM + attention for temporal context. GAT for spatial token relationships. BERT MLM for deep semantic context in substitution. & 2023.0 & OPUS & PPL=13.917 KLD=2.904 SIM=0.812 ER=0.365 (BN=2) Best Acc=0.575 (BERT classifier) FLOPs=1.834G & explicit & pre-text & text \\
 
-Discop: Provably secure steganography in practi... & GPT-2 & IMDB & p=1.00 Total Time (seconds)=362.63 Ave Time ↓ (seconds/bit)=6.29E-03 Ave KLD ↓ (bits/token)=0 Max KLD ↓ (bits/token)=0 Capacity (bits/token)=5.76 E... & non-explicit & tuning + pretext & text \\
+Discop: Provably secure steganography in practi... & GPT-2 & 2023.0 & IMDB & p=1.00 Total Time (seconds)=362.63 Ave Time ↓ (seconds/bit)=6.29E-03 Ave KLD ↓ (bits/token)=0 Max KLD ↓ (bits/token)=0 Capacity (bits/token)=5.76 E... & non-explicit & tuning + pretext & text \\
 
-Generative text steganography with large langua... \cite{wu2024generative} & Any & [Not specified] & Length: 13.333 (words). BPW: 5.93 bpw PPL: 165.76. Semantic Similarity (SS): 0.5881 LS-CNN Acc: 51.55\%. BiLSTM-Dense Acc: 49.20\%. Bert-FT Acc: 50... & explicit & [Not specified] & [Not specified] \\
+Generative text steganography with large langua... \cite{wu2024generative} & Any & 2024.0 & [Not specified] & Length: 13.333 (words). BPW: 5.93 bpw PPL: 165.76. Semantic Similarity (SS): 0.5881 LS-CNN Acc: 51.55\%. BiLSTM-Dense Acc: 49.20\%. Bert-FT Acc: 50... & explicit & [Not specified] & [Not specified] \\
 
-Meteor: Cryptographically secure steganography ... \cite{kaptchuk2021meteor} & GPT-2 & Hutter Prize, HTTP GET requests & GPT-2: 3.09 bits/token & non-explicit & tuning + pretext & text \\
+Meteor: Cryptographically secure steganography ... \cite{kaptchuk2021meteor} & GPT-2 & 2021.0 & Hutter Prize, HTTP GET requests & GPT-2: 3.09 bits/token & non-explicit & tuning + pretext & text \\
 
-Zero-shot generative linguistic steganography \cite{lin2024zero} & LLaMA2-Chat-7B (as the stegotext generator / QA model). GPT-2 (for NLS baseline and JSD evaluation) & IMDB, Twitter & PPL: 8.81. JSDfull: 17.90 (x10[truncated]iicircum{}-2). JSDhalf: 16.86 (x10[truncated]iicircum{}-2). JSDzero: 13.40 (x10[truncated]iicircum{}-2) TS... & explicit & zero-shot + prompt & text \\
+Zero-shot generative linguistic steganography \cite{lin2024zero} & LLaMA2-Chat-7B (as the stegotext generator / QA model). GPT-2 (for NLS baseline and JSD evaluation) & 2024.0 & IMDB, Twitter & PPL: 8.81. JSDfull: 17.90 (x10[truncated]iicircum{}-2). JSDhalf: 16.86 (x10[truncated]iicircum{}-2). JSDzero: 13.40 (x10[truncated]iicircum{}-2) TS... & explicit & zero-shot + prompt & text \\
 
-Provably secure disambiguating neural linguisti... \cite{qi2024provably} & LLaMA2-7b (English), Baichuan2-7b (Chinese) & IMDb dataset (100 texts/sample, 3 English sentences + Chinese translations) & Total Error: 0\%, Ave KLD: 0, Max KLD: 0, Ave PPL: 3.19 (EN), 7.49 (ZH), Capacity: 1.03–3.05 bits/token, Utilization: 0.66–0.74, Ave Time: [truncat... & non-explicit & pretext & text \\
+Provably secure disambiguating neural linguisti... \cite{qi2024provably} & LLaMA2-7b (English), Baichuan2-7b (Chinese) & 2024.0 & IMDb dataset (100 texts/sample, 3 English sentences + Chinese translations) & Total Error: 0\%, Ave KLD: 0, Max KLD: 0, Ave PPL: 3.19 (EN), 7.49 (ZH), Capacity: 1.03–3.05 bits/token, Utilization: 0.66–0.74, Ave Time: [truncat... & non-explicit & pretext & text \\
 
-A principled approach to natural language water... \cite{ji2024principled} & Transformer-based encoder/decoder; BERT for distillation & Web Transformer 2 & Bit acc: 0.994 (K=None), 1.000 (DAE), 0.978 (Adaptive+K=S); Meteor Drop: [truncated]iitilde{}0.057; SBERT ↑: [truncated]iitilde{}1.227; Ownership R... & Yes; semantic-level embedding; synonym substitution using BERT & Yes; watermark message assigned categorical label (e.g., 4-bit → 1-of-16) & Yes; semantic embeddings via transformer encoder and BERT; SBERT distance as metric \\
+A principled approach to natural language water... \cite{ji2024principled} & Transformer-based encoder/decoder; BERT for distillation & 2024.0 & Web Transformer 2 & Bit acc: 0.994 (K=None), 1.000 (DAE), 0.978 (Adaptive+K=S); Meteor Drop: [truncated]iitilde{}0.057; SBERT ↑: [truncated]iitilde{}1.227; Ownership R... & Yes; semantic-level embedding; synonym substitution using BERT & Yes; watermark message assigned categorical label (e.g., 4-bit → 1-of-16) & Yes; semantic embeddings via transformer encoder and BERT; SBERT distance as metric \\
 
-Context-aware linguistic steganography model ba... \cite{ding2023context} & BERT (encoder), LSTM (decoder) & WMT18 News Commentary (train/test), Yang et al. bits, Doc2Vec, 5,000 stego pairs (8:1:1 split) & BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86, Stego detection [truncated]iitilde{}16\% & Yes & [Not specified] & GCF (global context), LMR (language model reference), Multi-head attention \\
+Context-aware linguistic steganography model ba... \cite{ding2023context} & BERT (encoder), LSTM (decoder) & 2024.0 & WMT18 News Commentary (train/test), Yang et al. bits, Doc2Vec, 5,000 stego pairs (8:1:1 split) & BLEU: 30.5, PPL: 22.5, ER: 0.29, KL: 0.02, SIM: 0.86, Stego detection [truncated]iitilde{}16\% & Yes & [Not specified] & GCF (global context), LMR (language model reference), Multi-head attention \\
 
-DeepTextMark: a deep learning-driven text water... \cite{munyer2024deeptextmark} & Model-independent; tested with OPT-2.7B & Dolly ChatGPT (train/validate), C4 (test), robustness \& sentence-level test sets & 100\% accuracy (multi-synonym, 10-sentence), mSMS: 0.9892, TPR: 0.83, FNR: 0.17, Detection: 0.00188s, Insertion: 0.27931s & NO & [Not specified] & [Not specified] \\
+DeepTextMark: a deep learning-driven text water... \cite{munyer2024deeptextmark} & Model-independent; tested with OPT-2.7B & 2024.0 & Dolly ChatGPT (train/validate), C4 (test), robustness \& sentence-level test sets & 100\% accuracy (multi-synonym, 10-sentence), mSMS: 0.9892, TPR: 0.83, FNR: 0.17, Detection: 0.00188s, Insertion: 0.27931s & NO & [Not specified] & [Not specified] \\
 
-Hi-stega: A hierarchical linguistic steganograp... \cite{wang2023hi} & GPT-2 & Yahoo! News (titles, bodies, comments); 2,400 titles used & ppl: 109.60, MAUVE: 0.2051, ER2: 10.42, \ensuremath{\Delta}(cosine): 0.0088, \ensuremath{\Delta}(simcse): 0.0191 & explicit & Social Media & Text \\
+Hi-stega: A hierarchical linguistic steganograp... \cite{wang2023hi} & GPT-2 & 2024.0 & Yahoo! News (titles, bodies, comments); 2,400 titles used & ppl: 109.60, MAUVE: 0.2051, ER2: 10.42, \ensuremath{\Delta}(cosine): 0.0088, \ensuremath{\Delta}(simcse): 0.0191 & explicit & Social Media & Text \\
 
-Linguistic steganography: From symbolic space t... \cite{zhang2020linguistic} & CTRL (generation), BERT (semantic classifier) & 5,000 CTRL-generated texts per semanteme (n = 2–16); 1,000 user-generated texts for anti-steganalysis & Classifier Accuracy: 0.9880; Loop Count: 1.0160; PPL: 13.9565; Anti-Steganalysis Accuracy: [truncated]iitilde{}0.5 & implicit & Text & Semanteme (\ensuremath{\alpha}) as a vector in semantic spac \\
+Linguistic steganography: From symbolic space t... \cite{zhang2020linguistic} & CTRL (generation), BERT (semantic classifier) & 2020.0 & 5,000 CTRL-generated texts per semanteme (n = 2–16); 1,000 user-generated texts for anti-steganalysis & Classifier Accuracy: 0.9880; Loop Count: 1.0160; PPL: 13.9565; Anti-Steganalysis Accuracy: [truncated]iitilde{}0.5 & implicit & Text & Semanteme (\ensuremath{\alpha}) as a vector in semantic spac \\
 
-Natural language steganography by chatgpt \cite{steinebach2024natural} & [Not specified] & Custom word sets for specific topics (e.g., 16×10-word sets for music reviews) & [Not specified] & Explicit & Specific Genre/Topic Text & Text \\
+Natural language steganography by chatgpt \cite{steinebach2024natural} & [Not specified] & 2024.0 & Custom word sets for specific topics (e.g., 16×10-word sets for music reviews) & [Not specified] & Explicit & Specific Genre/Topic Text & Text \\
 
-Natural language watermarking via paraphraser-b... \cite{qiang2023natural} & Transformer (Paraphraser), BART (BARTScore), BERT (BLEURT, comparisons) & ParaBank2, LS07, CoInCo, Novels, WikiText-2, IMDB, NgNews & LS07 P@1: 58.3, GAP: 65.1; CoInCo P@1: 62.6, GAP: 60.7; Text Recoverability: [truncated]iitilde{}88–90\% & Explicit & [Not specified] & text \\
+Natural language watermarking via paraphraser-b... \cite{qiang2023natural} & Transformer (Paraphraser), BART (BARTScore), BERT (BLEURT, comparisons) & 2023.0 & ParaBank2, LS07, CoInCo, Novels, WikiText-2, IMDB, NgNews & LS07 P@1: 58.3, GAP: 65.1; CoInCo P@1: 62.6, GAP: 60.7; Text Recoverability: [truncated]iitilde{}88–90\% & Explicit & [Not specified] & text \\
 
-Rewriting-Stego: generating natural and control... \cite{li2023rewriting} & BART (bart-base2) & Movie, News, Tweet & BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1, Mean: 44.4, Variance: 2.1e04, Acc: 8.9\% & not Explicit & [Not specified] & [Not specified] \\
+Rewriting-Stego: generating natural and control... \cite{li2023rewriting} & BART (bart-base2) & 2023.0 & Movie, News, Tweet & BPTS: 4.0, BPTC+S: 4.0, PPL: 62.1, Mean: 44.4, Variance: 2.1e04, Acc: 8.9\% & not Explicit & [Not specified] & [Not specified] \\
 
-ALiSa: Acrostic linguistic steganography based ... \cite{yi2022alisa} & BERT (Google’s BERTBase, Uncased) & BookCorpus (10,000 natural texts for evaluation) & PPL: Natural = 13.91, ALiSa = 14.85; LS-RNN/LS-BERT Acc \& F1 = [truncated]iitilde{}0.50; Outperforms GPT-AC/ADG in all cases & No & [Not specified] & [Not specified] \\
+ALiSa: Acrostic linguistic steganography based ... \cite{yi2022alisa} & BERT (Google’s BERTBase, Uncased) & 2022.0 & BookCorpus (10,000 natural texts for evaluation) & PPL: Natural = 13.91, ALiSa = 14.85; LS-RNN/LS-BERT Acc \& F1 = [truncated]iitilde{}0.50; Outperforms GPT-AC/ADG in all cases & No & [Not specified] & [Not specified] \\
 
-Imperceptible Text Steganography based on Group... & Qwen-7B-Chat & HC3, DailyDialogue, COCO Descriptions & HC3: Bit 188.94, Stego 131.99, PPL 34.07, Mean 20.19, Var 0.1e04, F1 90.01\%; DailyDialogue: Bit 188.94, Stego 89.37, PPL 53.88, Mean 20.13, Var 0.... & Explicit & Social Media / Group Chat & Text (chat history and current input) \\
+Imperceptible Text Steganography based on Group... & Qwen-7B-Chat & 2024.0 & HC3, DailyDialogue, COCO Descriptions & HC3: Bit 188.94, Stego 131.99, PPL 34.07, Mean 20.19, Var 0.1e04, F1 90.01\%; DailyDialogue: Bit 188.94, Stego 89.37, PPL 53.88, Mean 20.13, Var 0.... & Explicit & Social Media / Group Chat & Text (chat history and current input) \\
 
-A Semantic Controllable Long Text Steganography... & Llama 7B Chat, Meta LLaMA2 7B Chat & Story (ChatGPT), Post (Recipe Kaggle + ChatGPT), Ad (Mobile Kaggle + ChatGPT) & ppl ↓ >23\%, \ensuremath{\Delta}ppl ↓ >72\% vs ADG/HC/Bin; detection accuracy ↓ >10\% vs baselines & Explicit & Topical Content & KG triplets (e1, r, e2), task descriptions (D) \\
+A Semantic Controllable Long Text Steganography... & Llama 7B Chat, Meta LLaMA2 7B Chat & 2024.0 & Story (ChatGPT), Post (Recipe Kaggle + ChatGPT), Ad (Mobile Kaggle + ChatGPT) & ppl ↓ >23\%, \ensuremath{\Delta}ppl ↓ >72\% vs ADG/HC/Bin; detection accuracy ↓ >10\% vs baselines & Explicit & Topical Content & KG triplets (e1, r, e2), task descriptions (D) \\
 
-Beyond Binary Classification: Customizable Text... & gpt-3.5-turbo-instruct, OPT-6.7b, babbage-002, davinci-002 (others: ChatGPT, GPT-2–4, LLaMA) & Realnewslike (C4, 500 samples, 100-token prompts + completions); Custom watermark dataset (short info <10 tokens) & AUC 0.98, FPR 0.00, FNR 0.00, [truncated]iitilde{}100\% single-letter decoding, PPL close to human text & Implicit & General Text Generation & Text (evolving prompt + generated output) \\
+Beyond Binary Classification: Customizable Text... & gpt-3.5-turbo-instruct, OPT-6.7b, babbage-002, davinci-002 (others: ChatGPT, GPT-2–4, LLaMA) & 2024.0 & Realnewslike (C4, 500 samples, 100-token prompts + completions); Custom watermark dataset (short info <10 tokens) & AUC 0.98, FPR 0.00, FNR 0.00, [truncated]iitilde{}100\% single-letter decoding, PPL close to human text & Implicit & General Text Generation & Text (evolving prompt + generated output) \\
 
-CPG-LS: Causal Perception Guided Linguistic Ste... & BERTBase, Cased & CC-100 corpus; 10k cover texts; 7:3 train-test split & PPL 36.5; Mauve 0.871; Payload 0.150 bits/word; BiLSTM-D Acc 0.387 F1 0.375; R-BI-C Acc 0.378 F1 0.366; TS-RNN Acc 0.380 F1 0.368 & Implicit & Natural Language Text & Text, embeddings, vector matrix \\
+CPG-LS: Causal Perception Guided Linguistic Ste... & BERTBase, Cased & 2023.0 & CC-100 corpus; 10k cover texts; 7:3 train-test split & PPL 36.5; Mauve 0.871; Payload 0.150 bits/word; BiLSTM-D Acc 0.387 F1 0.375; R-BI-C Acc 0.378 F1 0.366; TS-RNN Acc 0.380 F1 0.368 & Implicit & Natural Language Text & Text, embeddings, vector matrix \\
 
-Controllable Semantic Linguistic Steganography ... & BERT + CRF & Gigaword; CNN/Daily Mail & Rouge-1: 0.2212; Rouge-2: 0.0268; Rouge-L: 0.1609; Meteor: 0.1384; Cosine: 0.5911; Euclidean: 5.6386; Manhattan: 87.9534; Jaccard: 0.2022; Anti-ste... & Explicit & Social Media & Semantic features of input text; 384-dim dense vectors for evaluation \\
+Controllable Semantic Linguistic Steganography ... & BERT + CRF & 2024.0 & Gigaword; CNN/Daily Mail & Rouge-1: 0.2212; Rouge-2: 0.0268; Rouge-L: 0.1609; Meteor: 0.1384; Cosine: 0.5911; Euclidean: 5.6386; Manhattan: 87.9534; Jaccard: 0.2022; Anti-ste... & Explicit & Social Media & Semantic features of input text; 384-dim dense vectors for evaluation \\
 
-FREmax: A Simple Method Towards Truly Secure Ge... & GPT-2 & Tweet corpus (2.6M sents, 26.8M tokens), IMDB corpus (1.05M sents, 25.3M tokens) & Tweet: PPL 361.83, Entropy 48.21, Tokens 10.83, Distinct3 0.98, BPS 62.79, SI\% 73.03. IMDB: PPL 169.66, Entropy 103.39, Tokens 23.80, Distinct3 0.... & Implicit & General Text & N-gram frequency distribution stored in a look-up table \\
+FREmax: A Simple Method Towards Truly Secure Ge... & GPT-2 & 2024.0 & Tweet corpus (2.6M sents, 26.8M tokens), IMDB corpus (1.05M sents, 25.3M tokens) & Tweet: PPL 361.83, Entropy 48.21, Tokens 10.83, Distinct3 0.98, BPS 62.79, SI\% 73.03. IMDB: PPL 169.66, Entropy 103.39, Tokens 23.80, Distinct3 0.... & Implicit & General Text & N-gram frequency distribution stored in a look-up table \\
 
 \end{longtable}
 

@@ -218,17 +218,18 @@ if __name__ == "__main__":
         cmap = {
             "number": 0,
             "title": 1,
-            "Type": 2,
-            "LLM": 4,
-            "dataset": 8,
-            "result": 11,
-            "Main strengths": 6,
-            "Main weaknesses": 7,
-            "pipline method used": 13,
-            "context aware": 14,
-            "categ context": 15,
-            "representation context": 16,
-            "context usage in method detail text": 17,
+            "Year": 2,
+            "Type": 3,
+            "LLM": 5,
+            "dataset": 9,
+            "result": 12,
+            "Main strengths": 7,
+            "Main weaknesses": 8,
+            "pipline method used": 14,
+            "context aware": 15,
+            "categ context": 16,
+            "representation context": 17,
+            "context usage in method detail text": 18,
         }
 
         # Define tables to generate
@@ -236,7 +237,7 @@ if __name__ == "__main__":
             {
                 "env": "table*",
                 "name": "results",
-                "columns": ["LLM", "dataset", "result", "context aware",
+                "columns": ["LLM", "Year", "dataset", "result", "context aware",
                             "categ context",
                             "representation context",],
                 "caption": "Summary of Results from Reviewed Papers",

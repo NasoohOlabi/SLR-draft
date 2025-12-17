@@ -7,6 +7,7 @@
 \usepackage{hyperref}
 \usepackage{tabularx}
 \usepackage{longtable}
+\usepackage{pdflscape}
 \usepackage{pifont} % used for \todo symbol
 \newcommand{\todo}[1]{\textcolor{blue}{#1}}
 
@@ -153,11 +154,15 @@
 \input{sections/results.tex}
 \input{sections/discussion.tex}
 \input{sections/conclusion.tex}
-\input{sections/generated_tables.tex}
-
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references/bibliography}
+
+\clearpage
+\begin{landscape}
+\input{sections/generated_tables.tex}
+\end{landscape}
+\clearpage
 
 % 
 % If your work has an appendix, this is the place to put it.

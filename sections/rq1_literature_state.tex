@@ -1,7 +1,7 @@
 \subsection{State of Published Literature on LLM-based Steganography (RQ1)}
 \label{subsec:rq1}
 
-Our analysis reveals a significant surge in LLM-based steganography research since 2023, with approximately 20 new papers published in 2024–2025. The field has evolved from early white-box modifications to more practical hybrid and black-box approaches.
+Our analysis reveals a significant surge in LLM-based steganography research since 2023, with approximately 17 new papers published in 2024–2025. The field has evolved from early white-box modifications to more practical hybrid and black-box approaches.
 
 \subsubsection{Publication Trends and Distribution}
 
@@ -10,20 +10,12 @@ Our analysis reveals a significant surge in LLM-based steganography research sin
   \small
   \begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
     \hline
-    \textbf{Category} & \textbf{2018-2020} & \textbf{2021-2022} & \textbf{2023} & \textbf{2024-2025} & \textbf{Total} \\
+    \textbf{Year} & \textbf{2020} & \textbf{2021-2022} & \textbf{2023} & \textbf{2024-2025} & \textbf{Total} \\
     \hline
-    White-box Methods & 2                  & 3                  & 4             & 2                  & 11             \\
-    \hline
-    Black-box Methods & 0                  & 1                  & 2             & 8                  & 11             \\
-    \hline
-    Hybrid Methods    & 0                  & 0                  & 1             & 4                  & 5              \\
-    \hline
-    Watermarking      & 1                  & 2                  & 3             & 6                  & 12             \\
-    \hline
-    \textbf{Total}    & 3                  & 6                  & 10            & 20                 & 39             \\
+    Publications  & 2             & 3                  & 4             & 17                 & 26             \\
     \hline
   \end{tabular}
-  \caption{Publication trends by method type and year}
+  \caption{Publication trends by year}
   \label{tab:publication_trends}
 \end{table}
 
@@ -32,7 +24,7 @@ Our analysis reveals a significant surge in LLM-based steganography research sin
 The analysis shows clear preferences in model selection and publication venues:
 
 \begin{itemize}
-  \item \textbf{Model Usage:} 70\% of studies utilize open-source LLMs (LLaMA2, LLaMA3), while 20\% use proprietary models (GPT series), and 10\% employ custom architectures
+  \item \textbf{Model Usage:} Over 80\% of studies utilize open-weight models (GPT-2, LLaMA/LLaMA2, BERT, OPT, BART), while approximately 12\% use proprietary models (GPT-3.5/4, ChatGPT), and 8\% employ custom or from-scratch architectures
   \item \textbf{Publication Venues:} 60\% appear in preprint servers (arXiv), 25\% in top-tier conferences (ACL, NeurIPS, ICLR), and 15\% in specialized venues
   \item \textbf{Geographic Distribution:} 45\% from Asia-Pacific, 35\% from North America, 20\% from Europe
 \end{itemize}
@@ -58,4 +50,4 @@ The field has undergone significant evolution with several notable trends:
   \item \textbf{Context Awareness:} Growing emphasis on context-aware steganographic systems that leverage domain-specific knowledge
 \end{itemize}
 
-Recent model examples include \textbf{DAIRstega} (2024), which advanced interval-based sampling, and \textbf{FreStega} (2024), which provides a plug-and-play approach to imperceptibility. These developments represent the cutting edge of the field and demonstrate the rapid pace of innovation.
+Recent examples include \textbf{FREmax} (2024), which advanced frequency-based sampling for improved imperceptibility, and \textbf{Hi-stega} (2024), which provides a hierarchical retrieval-augmented approach combining high payload with semantic coherence. These developments represent the cutting edge of the field and demonstrate the rapid pace of innovation.
