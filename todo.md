@@ -78,19 +78,20 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
 
 ## Human Review
 
+### Title: "Systematic Literature Review on LLM-based Steganography"
+
 - [X] Section 1: Introduction
 - [X] Section 2: Background
-- [ ] Section 3: Steganography and Large Language Models
-  - [ ] 3.1 Capabilities and Approximating Natural Communication
-  - [X] 3.2 Role in Generative Linguistic Steganography
-  - [ ] 3.3 Challenges and Limitations in Steganography with LLMs
-    - [ ] 3.3.1 Perceptual vs. Statistical Imperceptibility (Psic Effect)
-    - [ ] 3.3.2 Low Embedding Capacity
-    - [ ] 3.3.3 Lack of Semantic Control and Contextual Consistency
-    - [ ] 3.3.4 Challenges with LLMs in Steganography
-    - [ ] 3.3.5 Segmentation Ambiguity
-- [ ] Section 4: Related Reviews
-- [ ] Section 5: Research Method
+  - [X] 2.1 Capabilities and Approximating Natural Communication
+  - [X] 2.2 Role in Generative Linguistic Steganography
+  - [X] 2.3 Challenges and Limitations in Steganography with LLMs
+    - [X] 2.3.1 Perceptual vs. Statistical Imperceptibility (Psic Effect)
+    - [ ] 2.3.2 Low Embedding Capacity
+    - [ ] 2.3.3 Lack of Semantic Control and Contextual Consistency
+    - [ ] 2.3.4 Challenges with LLMs in Steganography
+    - [ ] 2.3.5 Segmentation Ambiguity
+- [ ] Section 3: Related Reviews
+- [ ] Section 4: Research Method
   - [ ] 5.1 Planning
     - [ ] 5.1.1 Research Questions
     - [ ] 5.1.2 Search Strategies
@@ -159,3 +160,45 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
   - [ ] Check page numbers are accurate
   - [ ] Confirm subsection and subsubsection hierarchy is correct
   - [ ] Ensure "Steganography and Large Language Models" section appears properly
+
+@sections/llm_approaches.tex:55-59 I want a new line between the subsub section and what's after it
+
+---
+
+## Paragraph-Level Review Time Schedule
+
+- **Assumptions**
+  - You will review and finalize the paper paragraph by paragraph, focusing on clarity, coherence, citations, and alignment with the SLR goals.
+  - Paragraph sizes are approximated as:
+    - **Short**: \(\approx\) 3–5 lines (\(\approx\) 60–120 words)
+    - **Medium**: \(\approx\) 6–10 lines (\(\approx\) 120–200 words)
+    - **Long**: \(\ge\) 11 lines (\(\ge\) 200–300+ words)
+
+- **Per-paragraph time budget**
+  - **Short paragraphs** (e.g., brief motivation, linking sentences, simple definitions): **8–10 minutes** each.
+  - **Medium paragraphs** (most body paragraphs, related work, method descriptions): **12–15 minutes** each.
+  - **Long paragraphs** (dense results discussion, limitations, or multi-point arguments): **18–20 minutes** each.
+
+- **Suggested daily schedule (2–3 hours/day)**
+  - **Day 1** – Sections 1 & 2 (Introduction + Background)  
+    - 4–6 **short/medium** paragraphs in Introduction \(\Rightarrow\) ~1–1.5 hours  
+    - 6–8 **medium/long** paragraphs in Background (incl. terminology, challenges) \(\Rightarrow\) ~1–1.5 hours  
+    - Goal: finalize all intro/background paragraphs and mark any missing citations/tables for follow-up.
+  - **Day 2** – Sections 3 & 4 (Related Reviews + Research Method)  
+    - 3–5 **medium** paragraphs in Related Reviews \(\Rightarrow\) ~45–60 minutes  
+    - 6–8 **medium/long** paragraphs in Research Method \(\Rightarrow\) ~1–1.5 hours  
+    - Goal: ensure methodological narrative is clear, reproducible, and consistently cited.
+  - **Day 3** – Section 6.1–6.3 (Results: RQ1–RQ3)  
+    - 8–10 **medium/long** paragraphs describing trends, applications, and metrics linked to tables \(\Rightarrow\) ~2–2.5 hours  
+    - Goal: for each paragraph, explicitly tie statements to data in Tables 1–3 and refine transitions.
+  - **Day 4** – Section 6.4–6.5 (Knowledge Integration & Limitations/Trade-offs)  
+    - 6–8 **long** analytical paragraphs \(\Rightarrow\) ~2–2.5 hours  
+    - Goal: sharpen argumentation, ensure each limitation/trade-off paragraph is well-supported and clearly scoped.
+  - **Day 5** – Sections 7 & 8 (Discussion & Conclusion) + TOC/Formatting  
+    - 4–6 **medium** discussion/conclusion paragraphs \(\Rightarrow\) ~1.5–2 hours  
+    - 30–45 minutes for **global pass** (TOC, cross-references, redundant sentences, consistent terminology).
+
+- **How to use this schedule**
+  - At the start of each session, count how many **short**, **medium**, and **long** paragraphs you have in the target section and multiply by the per-paragraph time above to set a concrete block.
+  - After completing each block, tick off the corresponding bullets in this `todo.md` (e.g., sections and subsections under *Human Review*).
+  - If you finish early, use leftover time for a quick read-through of already finalized paragraphs to check global coherence and style.
