@@ -19,17 +19,95 @@ Our analysis reveals a significant surge in LLM-based steganography research sin
   \label{tab:publication_trends}
 \end{table}
 
-\subsubsection{Model Preferences and Venues}
 
-The analysis shows clear preferences in model selection and publication venues:
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{p{4cm} p{9cm}}
+    \hline
+    \textbf{Model Type (\%)}     & \textbf{Models and Representative Works}  \\
+    \hline
+    Open-weight Models ($>$80\%) &
+    GPT-2 \cite{ding2023discop,pang2024fremax,kaptchuk2021meteor,wang2023hi},
+    LLaMA/LLaMA2 \cite{liao2024co,lin2024zero,qi2024provably,li2024semantic},
+    BERT \cite{zheng2022general,zhang2024controllable,ding2023joint,ding2023context,ji2024principled,xiang2023cpg,zhang2020linguistic,qiang2023natural,yi2022alisa},
+    OPT \cite{munyer2024deeptextmark},
+    BART \cite{qiang2023natural,li2023rewriting},
+    Qwen \cite{li2024imperceptible}                                          \\
+    Proprietary Models (12\%)    &
+    GPT-3.5/4, ChatGPT
+    \cite{xu2024beyond,steinebach2024natural,wu2024generative,hao2025robust} \\
+    Custom Architectures (8\%)   &
+    From-scratch or task-specific models
+    \cite{yang2020vae}                                                       \\
+    \hline
+  \end{tabular}
+  \caption{Model usage across surveyed studies}
+\end{table}
 
-% Drawing from the provided sources, here are the LLM models used by each paper:
 
-\begin{itemize}
-  \item \textbf{Model Usage:} Over 80\% of studies utilize open-weight models (GPT-2 \cite{ding2023discop,pang2024fremax,kaptchuk2021meteor,wang2023hi}, LLaMA/LLaMA2 \cite{liao2024co,lin2024zero,qi2024provably,li2024semantic}, BERT \cite{zheng2022general,zhang2024controllable,ding2023joint,ding2023context,ji2024principled,xiang2023cpg,zhang2020linguistic,qiang2023natural,yi2022alisa}, OPT \cite{munyer2024deeptextmark}, BART \cite{qiang2023natural,li2023rewriting}, Qwen \cite{li2024imperceptible}), while approximately 12\% use proprietary models (GPT-3.5/4, ChatGPT \cite{xu2024beyond,steinebach2024natural,wu2024generative,hao2025robust}), and 8\% employ custom or from-scratch architectures \cite{yang2020vae}
-  \item \textbf{Publication Venues:} Research appears across diverse venues: approximately 4\% in preprint servers (arXiv \cite{lin2024zero}), where foundational and contemporary works are released before peer review; 29\% in top-tier venues including security conferences (ACM CCS \cite{kaptchuk2021meteor}, IEEE S\&P \cite{ding2023discop}), AI journals (Artificial Intelligence \cite{qiang2023natural}), signal processing journals (IEEE/ACM TASLP \cite{ding2023context}), and multimedia conferences (ACM MM \cite{ji2024principled,wu2024generative}); and 67\% in specialized venues such as IEEE Signal Processing Letters \cite{yi2022alisa,zhang2020linguistic,xiang2023cpg,li2024semantic}, IEEE Transactions on Information Forensics and Security \cite{yang2020vae}, ARES \cite{steinebach2024natural}, IH\&MMSec \cite{liao2024co}, ICONIP \cite{wang2023hi}, IEEE TCDS \cite{ding2023joint}, DASFAA \cite{li2023rewriting}, IEEE Access \cite{munyer2024deeptextmark}, MMSP \cite{zheng2022general}, IEEE TDSC \cite{qi2024provably}, ICASSP \cite{zhang2024controllable,pang2024fremax}, ICME \cite{li2024imperceptible}, IJCNN \cite{xu2024beyond}, and Frontiers of Computer Science \cite{hao2025robust}
-  \item \textbf{Geographic Distribution:} 45\% from Asia-Pacific, 35\% from North America, 20\% from Europe
-\end{itemize}
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{p{3.5cm} p{9.5cm}}
+    \hline
+    \textbf{Region (\%)} & \textbf{Institutions (Representative Works)}                                                                                                                                                                                                                                                                     \\
+    \hline
+    Asia-Pacific (84\%)  &
+    Primarily China-based institutions, notably Tsinghua University, University of Science and Technology of China, Beijing University of Posts and Telecommunications, Shanghai University, Yunnan University, and Zhongguancun Laboratory, with additional contributions from Nanyang Technological University (Singapore) and MM~’24 (Australia)
+    \cite{yang2020vae,ding2023discop,li2023rewriting,ding2023context,wu2024generative,lin2024zero,ji2024principled,yi2022alisa,li2024semantic,xiang2023cpg,liao2024co,zhang2024controllable,pang2024fremax,zheng2022general,wang2023hi,li2024imperceptible,ding2023joint,zhang2020linguistic,qiang2023natural,qi2024provably,hao2025robust} \\
+    North America (12\%) &
+    Boston University, Johns Hopkins University, Texas Tech University, University of Nebraska Omaha
+    \cite{kaptchuk2021meteor,xu2024beyond,munyer2024deeptextmark}                                                                                                                                                                                                                                                                           \\
+    Europe (4\%)         &
+    Fraunhofer SIT|ATHENE, Germany
+    \cite{steinebach2024natural}                                                                                                                                                                                                                                                                                                            \\
+    \hline
+  \end{tabular}
+  \caption{Geographic distribution of the papers}
+\end{table}
+
+% \subsubsection{Publication Venues}
+% \begin{description}[leftmargin=1cm, labelwidth=2cm]
+%   \item[Preprint Servers (4\%)] Foundational and contemporary works released prior to peer review, such as arXiv \cite{lin2024zero}.
+%   \item[Top-Tier Venues (29\%)] High-impact research across security conferences (ACM CCS \cite{kaptchuk2021meteor}, IEEE S\&P \cite{ding2023discop}), AI journals (Artificial Intelligence \cite{qiang2023natural}), signal processing journals (IEEE/ACM TASLP \cite{ding2023context}), and multimedia conferences (ACM MM \cite{ji2024principled,wu2024generative}).
+
+%   \item[Specialized Venues (67\%)] Targeted research in signal processing and forensics, including IEEE Signal Processing Letters \cite{yi2022alisa,zhang2020linguistic,xiang2023cpg,li2024semantic}, IEEE Transactions on Information Forensics and Security \cite{yang2020vae}, ARES \cite{steinebach2024natural}, IH\&MMSec \cite{liao2024co}, ICONIP \cite{wang2023hi}, IEEE TCDS \cite{ding2023joint}, DASFAA \cite{li2023rewriting}, IEEE Access \cite{munyer2024deeptextmark}, MMSP \cite{zheng2022general}, IEEE TDSC \cite{qi2024provably}, ICASSP \cite{zhang2024controllable,pang2024fremax}, ICME \cite{li2024imperceptible}, IJCNN \cite{xu2024beyond}, and Frontiers of Computer Science \cite{hao2025robust}.
+% \end{description}
+% \subsubsection{Publication Venues}
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{p{4cm} p{9cm}}
+    \hline
+    \textbf{Venue Category (\%)} & \textbf{Representative Venues and Works}                                                                                                                                     \\
+    \hline
+    Preprint Servers (4\%)       &
+    arXiv
+    \cite{lin2024zero}                                                                                                                                                                                          \\
+    Top-Tier Venues (29\%)       &
+    ACM CCS \cite{kaptchuk2021meteor}, IEEE S\&P \cite{ding2023discop}, Artificial Intelligence \cite{qiang2023natural}, IEEE/ACM TASLP \cite{ding2023context}, ACM MM \cite{ji2024principled,wu2024generative} \\
+    Specialized Venues (67\%)    &
+    IEEE Signal Processing Letters \cite{yi2022alisa,zhang2020linguistic,xiang2023cpg,li2024semantic},
+    IEEE Transactions on Information Forensics and Security \cite{yang2020vae},
+    ARES \cite{steinebach2024natural},
+    IH\&MMSec \cite{liao2024co},
+    ICONIP \cite{wang2023hi},
+    IEEE TCDS \cite{ding2023joint},
+    DASFAA \cite{li2023rewriting},
+    IEEE Access \cite{munyer2024deeptextmark},
+    MMSP \cite{zheng2022general},
+    IEEE TDSC \cite{qi2024provably},
+    ICASSP \cite{zhang2024controllable,pang2024fremax},
+    ICME \cite{li2024imperceptible},
+    IJCNN \cite{xu2024beyond},
+    Frontiers of Computer Science \cite{hao2025robust}                                                                                                                                                          \\
+    \hline
+  \end{tabular}
+  \caption{Distribution of publication venues}
+\end{table}
+
 
 \subsubsection{Research Gaps and Opportunities}
 

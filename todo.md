@@ -100,8 +100,8 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
   - [ ] 5.3 Data Extraction and Classification
 - [ ] Section 6: Results
   - [-] 6.1 State of Published Literature on LLM-based Steganography (RQ1)
-    - [ ] 6.1.1 Publication Trends and Distribution
-    - [ ] 6.1.2 Model Preferences and Venues
+    - [X] 6.1.1 Publication Trends and Distribution
+    - [X] 6.1.2 Model Preferences and Venues
     - [ ] 6.1.3 Research Gaps and Opportunities
     - [ ] 6.1.4 Key Trends and Evolution
   - [ ] 6.2 Applications of LLM-based Steganographic Techniques (RQ2)
