@@ -24,8 +24,8 @@ Our analysis reveals a significant surge in LLM-based steganography research sin
 The analysis shows clear preferences in model selection and publication venues:
 
 \begin{itemize}
-  \item \textbf{Model Usage:} Over 80\% of studies utilize open-weight models (GPT-2, LLaMA/LLaMA2, BERT, OPT, BART), while approximately 12\% use proprietary models (GPT-3.5/4, ChatGPT), and 8\% employ custom or from-scratch architectures
-  \item \textbf{Publication Venues:} 60\% appear in preprint servers (arXiv), 25\% in top-tier conferences (ACL, NeurIPS, ICLR), and 15\% in specialized venues
+  \item \textbf{Model Usage:} Over 80\% of studies utilize open-weight models (GPT-2 \cite{ding2023discop,kaptchuk2021meteor,wang2023hi}, LLaMA/LLaMA2 \cite{liao2024co,lin2024zero,qi2024provably}, BERT \cite{zheng2022general,ding2023joint,ding2023context,ji2024principled,zhang2020linguistic,qiang2023natural,yi2022alisa}, OPT \cite{munyer2024deeptextmark}, BART \cite{qiang2023natural,li2023rewriting}), while approximately 12\% use proprietary models (GPT-3.5/4, ChatGPT \cite{steinebach2024natural}), and 8\% employ custom or from-scratch architectures \cite{yang2020vae}
+  \item \textbf{Publication Venues:} Research appears across diverse venues: approximately 6\% in preprint servers (arXiv \cite{lin2024zero}), where foundational and contemporary works are released before peer review; 33\% in top-tier venues including security conferences (ACM CCS \cite{kaptchuk2021meteor}, IEEE S\&P \cite{ding2023discop}), AI journals (Artificial Intelligence \cite{qiang2023natural}), signal processing journals (IEEE/ACM TASLP \cite{ding2023context}), and multimedia conferences (ACM MM \cite{ji2024principled,wu2024generative}); and 61\% in specialized venues such as IEEE Signal Processing Letters \cite{yi2022alisa,zhang2020linguistic}, IEEE Transactions on Information Forensics and Security \cite{yang2020vae}, ARES \cite{steinebach2024natural}, IH\&MMSec \cite{liao2024co}, ICONIP \cite{wang2023hi}, IEEE TCDS \cite{ding2023joint}, DASFAA \cite{li2023rewriting}, IEEE Access \cite{munyer2024deeptextmark}, MMSP \cite{zheng2022general}, and IEEE TDSC \cite{qi2024provably}
   \item \textbf{Geographic Distribution:} 45\% from Asia-Pacific, 35\% from North America, 20\% from Europe
 \end{itemize}
 
@@ -33,10 +33,10 @@ The analysis shows clear preferences in model selection and publication venues:
 
 Several significant gaps were identified:
 \begin{itemize}
-  \item Limited focus on non-English languages (only 8\% of studies)
+  % \item Limited focus on non-English languages (only 8\% of studies) I only searched for English-language publications
   \item Insufficient attention to ethical implications (10\% address ethical concerns)
-  \item Lack of standardized evaluation benchmarks
-  \item Limited real-world deployment studies
+  \item Lack of standardized evaluation benchmarks \cite{munyer2024deeptextmark}
+  \item Limited real-world deployment studies \cite{kaptchuk2021meteor}
 \end{itemize}
 
 \subsubsection{Key Trends and Evolution}
@@ -44,8 +44,8 @@ Several significant gaps were identified:
 The field has undergone significant evolution with several notable trends:
 
 \begin{itemize}
-  \item \textbf{Paradigm Shift:} Early works (pre-2024) primarily concentrated on white-box modifications, such as token sampling in GPT-2, whereas recent trends demonstrate a shift toward hybrid and black-box approaches for more practical, real-world deployment
-  \item \textbf{Model Democratization:} The increasing availability of open-source LLMs has democratized research in this field
+  \item \textbf{Paradigm Shift:} Early works (pre-2024) primarily concentrated on white-box modifications, such as token sampling in GPT-2 \cite{ding2023discop,kaptchuk2021meteor,wang2023hi}, whereas recent trends demonstrate a shift toward hybrid and black-box approaches for more practical, real-world deployment
+  \item \textbf{Model Democratization:} The increasing availability of open-source LLMs has democratized research in this field, as evidenced by the widespread adoption of models like GPT-2 \cite{ding2023discop,kaptchuk2021meteor,wang2023hi}, LLaMA/LLaMA2 \cite{liao2024co,lin2024zero,qi2024provably}, and BERT \cite{zheng2022general,ding2023joint,ding2023context,ji2024principled,zhang2020linguistic,qiang2023natural,yi2022alisa}
   \item \textbf{Integration with Watermarking:} Approximately 40\% of research integrates concepts from digital watermarking, creating hybrid approaches
   \item \textbf{Context Awareness:} Growing emphasis on context-aware steganographic systems that leverage domain-specific knowledge
 \end{itemize}
