@@ -90,7 +90,7 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
     - [ ] 2.3.3 Lack of Semantic Control and Contextual Consistency
     - [ ] 2.3.4 Challenges with LLMs in Steganography
     - [ ] 2.3.5 Segmentation Ambiguity
-- [ ] Section 3: Related Reviews
+- [X] Section 3: Related Reviews
 - [ ] Section 4: Research Method
   - [ ] 5.1 Planning
     - [ ] 5.1.1 Research Questions
@@ -99,7 +99,7 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
   - [ ] 5.2 Conducting the Search
   - [ ] 5.3 Data Extraction and Classification
 - [ ] Section 6: Results
-  - [ ] 6.1 State of Published Literature on LLM-based Steganography (RQ1)
+  - [-] 6.1 State of Published Literature on LLM-based Steganography (RQ1)
     - [ ] 6.1.1 Publication Trends and Distribution
     - [ ] 6.1.2 Model Preferences and Venues
     - [ ] 6.1.3 Research Gaps and Opportunities
