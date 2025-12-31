@@ -3,100 +3,111 @@
 
 The review identified six primary application domains, with covert communication being the dominant use case. The analysis reveals several distinct applications for LLM-based steganography, each with specific characteristics and requirements.
 
-\subsubsection{Primary Applications}
 
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{4cm}|p{2cm}|p{2cm}|p{4cm}|}
-    \hline
-    \textbf{Application Domain} & \textbf{Percentage} & \textbf{Studies} & \textbf{Key Examples}              \\
-    \hline
-    Covert Communication        & 60\%                & 19               & DAIRstega, Co-Stega, FreStega      \\
-    \hline
-    Content Watermarking        & 25\%                & 8                & DeepTextMark, Natural Watermarking \\
-    \hline
-    Fingerprinting              & 8\%                 & 3                & Model identification, licensing    \\
-    \hline
-    Adversarial Attacks         & 4\%                 & 1                & StegoAttack                        \\
-    \hline
-    Data Exfiltration           & 2\%                 & 1                & TrojanStego                        \\
-    \hline
-    Social Media Hiding         & 1\%                 & 1                & Hi-stega                           \\
-    \hline
-  \end{tabular}
-  \caption{Distribution of applications across reviewed studies}
-  \label{tab:applications}
-\end{table}
+LLM-based steganographic techniques embed covert information within seemingly benign text, with applications spanning \textbf{secure communication}, \textbf{intellectual property protection}, and \textbf{forensic linguistics}. The Calgacus protocol \cite{norelli2025llms} demonstrates how secret messages can be hidden inside different cover text of identical length by matching token rank sequences, enabling political critiques to masquerade as innocuous product reviews, while black-box methods like LLM-Stega operate through commercial APIs using encrypted keyword mapping and reject sampling \cite{wu2024generative}. For \textbf{intellectual property}, watermarking via logit biasing \cite{kirchenbauer2023watermark} embeds imperceptible statistical signals that identify AI authorship, attribute harmful content to specific users, and filter synthetic data to prevent model collapse. In \textbf{forensic linguistics}, adversarial stylometry allows LLMs to mask author identity or imitate others by adjusting stylistic features, reducing forensic tool accuracy to random guessing—protecting whistleblowers while enabling impersonation\cite{brennan2012adversarial,mikros2025large}.
 
-\subsubsection{Covert Communication Applications}
+These same techniques pose significant risks to AI safety and cybersecurity, bypassing governance mechanisms and enabling sophisticated attacks. The "Linguistic Trojan Horse" embeds unsafe content in benign responses to evade safety filters, while Chain-of-Thought auditing reveals that models can hide true reasoning in seemingly innocuous steps, complicating oversight and enabling covert multi-agent collusion. In cybersecurity, steganographic prompt injection in vision-language models achieves over 31\% success by hiding malicious instructions in images, while SteganoBackdoor embeds semantic triggers in training data with 99\% success at low poisoning rates. Model weights can be exfiltrated through subtle token variations, and watermark stealing enables spoofing and scrubbing attacks that bypass accountability measures. Detection methods include cross-model probability scoring, low-entropy token analysis, and symbolic anomaly detection, though these face ongoing vulnerabilities that demand adaptive defense architectures \cite{kuo2025h,zolkowski2025early,menke2025annotating,jiang2025safechain}.
 
-Covert communication represents the primary application domain, with approximately 60\% of papers focusing on this use case. Key characteristics include:
+% ---------------------------------------------
+% ---------------------------------------------
+% Incorrect during the filtering phase I focused on stego discarding watermarks.
+% ---------------------------------------------
+% ---------------------------------------------
 
-\begin{itemize}
-  \item \textbf{Censored Environments:} Particularly important for use in environments with restricted communication
-  \item \textbf{High Imperceptibility Requirements:} Need for both perceptual and statistical imperceptibility
-  \item \textbf{Context Awareness:} Many systems leverage contextual information to enhance naturalness
-  \item \textbf{Real-time Deployment:} Emphasis on practical, deployable solutions
-\end{itemize}
+% \subsubsection{Primary Applications}
 
-Notable examples include \textbf{Co-Stega}, which expands text space through context retrieval and entropy enhancement for social media applications, and \textbf{FreStega}, which provides a plug-and-play approach to imperceptibility.
+% \begin{table}[ht]
+%   \centering
+%   \small
+%   \begin{tabular}{|p{4cm}|p{2cm}|p{2cm}|p{4cm}|}
+%     \hline
+%     \textbf{Application Domain} & \textbf{Percentage} & \textbf{Studies} & \textbf{Key Examples}              \\
+%     \hline
+%     Covert Communication        & 60\%                & 19               & DAIRstega, Co-Stega, FreStega      \\
+%     \hline
+%     Content Watermarking        & 25\%                & 8                & DeepTextMark, Natural Watermarking \\
+%     \hline
+%     Fingerprinting              & 8\%                 & 3                & Model identification, licensing    \\
+%     \hline
+%     Adversarial Attacks         & 4\%                 & 1                & StegoAttack                        \\
+%     \hline
+%     Data Exfiltration           & 2\%                 & 1                & TrojanStego                        \\
+%     \hline
+%     Social Media Hiding         & 1\%                 & 1                & Hi-stega                           \\
+%     \hline
+%   \end{tabular}
+%   \caption{Distribution of applications across reviewed studies}
+%   \label{tab:applications}
+% \end{table}
 
-\subsubsection{Watermarking and Fingerprinting Applications}
+% \subsubsection{Covert Communication Applications}
 
-About 30\% of studies focus on watermarking and fingerprinting applications:
+% Covert communication represents the primary application domain, with approximately 60\% of papers focusing on this use case. Key characteristics include:
 
-\begin{itemize}
-  \item \textbf{Content Tracing:} Watermarking for tracking content origin and ownership
-  \item \textbf{Model Fingerprinting:} Identifying and licensing LLMs for commercial use
-  \item \textbf{Copyright Protection:} Embedding ownership information in generated content
-  \item \textbf{Attribution:} Ensuring proper credit for content creators
-\end{itemize}
+% \begin{itemize}
+%   \item \textbf{Censored Environments:} Particularly important for use in environments with restricted communication
+%   \item \textbf{High Imperceptibility Requirements:} Need for both perceptual and statistical imperceptibility
+%   \item \textbf{Context Awareness:} Many systems leverage contextual information to enhance naturalness
+%   \item \textbf{Real-time Deployment:} Emphasis on practical, deployable solutions
+% \end{itemize}
 
-\subsubsection{Emerging Applications}
+% Notable examples include \textbf{Co-Stega}, which expands text space through context retrieval and entropy enhancement for social media applications, and \textbf{FreStega}, which provides a plug-and-play approach to imperceptibility.
 
-Recent studies demonstrate novel applications that expand the traditional scope:
+% \subsubsection{Watermarking and Fingerprinting Applications}
 
-\begin{itemize}
-  \item \textbf{Social Media Hiding:} Models such as \textbf{Co-Stega} expand text space through context retrieval and entropy enhancement
-  \item \textbf{Jailbreak Attacks:} Steganography can conceal harmful queries, as demonstrated in \textbf{StegoAttack}
-  \item \textbf{Data Exfiltration:} \textbf{TrojanStego} embeds secrets directly into LLM outputs
-  \item \textbf{Multimodal Steganography:} Integration with vision-language models for text-image combinations
-\end{itemize}
+% About 30\% of studies focus on watermarking and fingerprinting applications:
 
-\subsubsection{Domain-Specific Applications}
+% \begin{itemize}
+%   \item \textbf{Content Tracing:} Watermarking for tracking content origin and ownership
+%   \item \textbf{Model Fingerprinting:} Identifying and licensing LLMs for commercial use
+%   \item \textbf{Copyright Protection:} Embedding ownership information in generated content
+%   \item \textbf{Attribution:} Ensuring proper credit for content creators
+% \end{itemize}
 
-The field further investigates domain-specific applications, including:
+% \subsubsection{Emerging Applications}
 
-\begin{itemize}
-  \item \textbf{High-Entropy Texts:} Utilization in news articles and formal documents
-  \item \textbf{Short Prompts:} Question-and-answer paradigms for conversational AI
-  \item \textbf{Specialized Corpora:} Medical, legal, and technical document steganography
-  \item \textbf{Cultural Contexts:} Adaptation to different cultural and linguistic contexts
-\end{itemize}
+% Recent studies demonstrate novel applications that expand the traditional scope:
 
-\subsubsection{Application Requirements and Constraints}
+% \begin{itemize}
+%   \item \textbf{Social Media Hiding:} Models such as \textbf{Co-Stega} expand text space through context retrieval and entropy enhancement
+%   \item \textbf{Jailbreak Attacks:} Steganography can conceal harmful queries, as demonstrated in \textbf{StegoAttack}
+%   \item \textbf{Data Exfiltration:} \textbf{TrojanStego} embeds secrets directly into LLM outputs
+%   \item \textbf{Multimodal Steganography:} Integration with vision-language models for text-image combinations
+% \end{itemize}
 
-Different applications impose varying requirements on steganographic systems:
+% \subsubsection{Domain-Specific Applications}
 
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
-    \hline
-    \textbf{Application} & \textbf{Capacity Requirement} & \textbf{Security Level} & \textbf{Imperceptibility} \\
-    \hline
-    Covert Communication & High (2-6 bpt)                & Very High               & Very High                 \\
-    \hline
-    Watermarking         & Medium (1-3 bpt)              & High                    & High                      \\
-    \hline
-    Fingerprinting       & Low (0.5-2 bpt)               & Medium                  & Medium                    \\
-    \hline
-    Social Media         & High (3-5 bpt)                & High                    & Very High                 \\
-    \hline
-  \end{tabular}
-  \caption{Application-specific requirements and constraints}
-  \label{tab:application_requirements}
-\end{table}
+% The field further investigates domain-specific applications, including:
 
-The growing overlap with adversarial robustness and potential for multimodal steganography using models such as GPT-4o suggests exciting future directions for the field.
+% \begin{itemize}
+%   \item \textbf{High-Entropy Texts:} Utilization in news articles and formal documents
+%   \item \textbf{Short Prompts:} Question-and-answer paradigms for conversational AI
+%   \item \textbf{Specialized Corpora:} Medical, legal, and technical document steganography
+%   \item \textbf{Cultural Contexts:} Adaptation to different cultural and linguistic contexts
+% \end{itemize}
+
+% \subsubsection{Application Requirements and Constraints}
+
+% Different applications impose varying requirements on steganographic systems:
+
+% \begin{table}[ht]
+%   \centering
+%   \small
+%   \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+%     \hline
+%     \textbf{Application} & \textbf{Capacity Requirement} & \textbf{Security Level} & \textbf{Imperceptibility} \\
+%     \hline
+%     Covert Communication & High (2-6 bpt)                & Very High               & Very High                 \\
+%     \hline
+%     Watermarking         & Medium (1-3 bpt)              & High                    & High                      \\
+%     \hline
+%     Fingerprinting       & Low (0.5-2 bpt)               & Medium                  & Medium                    \\
+%     \hline
+%     Social Media         & High (3-5 bpt)                & High                    & Very High                 \\
+%     \hline
+%   \end{tabular}
+%   \caption{Application-specific requirements and constraints}
+%   \label{tab:application_requirements}
+% \end{table}
+
+% The growing overlap with adversarial robustness and potential for multimodal steganography using models such as GPT-4o suggests exciting future directions for the field.
