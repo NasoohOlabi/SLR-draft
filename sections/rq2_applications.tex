@@ -8,6 +8,47 @@ LLM-based steganographic techniques embed covert information within seemingly be
 
 These same techniques pose significant risks to AI safety and cybersecurity, bypassing governance mechanisms and enabling sophisticated attacks. The "Linguistic Trojan Horse" embeds unsafe content in benign responses to evade safety filters, while Chain-of-Thought auditing reveals that models can hide true reasoning in seemingly innocuous steps, complicating oversight and enabling covert multi-agent collusion. In cybersecurity, steganographic prompt injection in vision-language models achieves over 31\% success by hiding malicious instructions in images, while SteganoBackdoor embeds semantic triggers in training data with 99\% success at low poisoning rates. Model weights can be exfiltrated through subtle token variations, and watermark stealing enables spoofing and scrubbing attacks that bypass accountability measures. Detection methods include cross-model probability scoring, low-entropy token analysis, and symbolic anomaly detection, though these face ongoing vulnerabilities that demand adaptive defense architectures \cite{kuo2025h,zolkowski2025early,menke2025annotating,jiang2025safechain}.
 
+% The sources provide strong support for several of your claims regarding **secure communication** and **intellectual property protection**, specifically concerning **black-box methods** and **logit-based watermarking**. However, some specific terms and protocols (like Calgacus and forensic linguistics) are not explicitly detailed in the provided materials.
+
+% Supported Claims
+
+% *   **LLM-Based Steganography for Secure Communication:** Steganography is used to conceal secret messages within ordinary carriers to bypass censorship and ensure **behavioral security**. LLMs are favored as steganographic samplers because they approximate high-dimensional natural language distributions, making the "stegotext" look like human-written content.
+% *   **Black-Box Methods (LLM-Stega):** The sources explicitly describe **LLM-Stega** as a black-box method that generates stego texts using Large Language Model user interfaces (UIs) without requiring internal model parameters. It embeds messages by constructing a **keyword set** (including subjects, predicates, objects, and emotions) and using an **encrypted steganographic mapping**. It also employs a feedback mechanism based on **reject sampling** to ensure the secret information is extracted accurately.
+% *   **Intellectual Property (IP) and Watermarking:** Watermarking is confirmed as a primary technique for **tracing the provenance** of text and identifying LLM authorship to defend against IP theft.
+% *   **Logit-Based Watermarking:** The sources describe a method that manipulates token sampling by creating a "green list" of tokens. These green tokens receive a **positive adjustment in their logits** (logit biasing) to increase their selection probability, allowing authorized detectors to identify the watermark. This is used to attribute content and verify AI involvement.
+
+% Claims with Partial or No Source Support
+
+% *   **Calgacus Protocol:** There is **no mention** of the "Calgacus protocol" or matching token rank sequences to turn political critiques into product reviews in the provided sources.
+% *   **Forensic Linguistics and Adversarial Stylometry:** While the sources do not use the terms "**forensic linguistics**" or "**adversarial stylometry**," they do note that LLMs are capable of **nuanced linguistic mimicry** and can generate text that is indistinguishable from human writing in terms of style, coherence, and fluency. This mimicry is used to improve the "cognitive-imperceptibility" of steganography so that text conforms to expected communication patterns.
+% *   **Model Collapse:** The specific claim that watermarking is used to filter synthetic data to prevent "**model collapse**" is not present in the sources, although tracing provenance to identify machine-generated text is a major theme.
+
+% **Analogy:**
+% LLM steganography is like a spy hiding a secret code within a generic-looking grocery list; to anyone else, it’s just a list of items, but to the recipient, the specific choice of words reveals a hidden message.
+
+% Based on the sources, many of your claims regarding the potential risks and mechanisms of linguistic steganography are supported, though some specific terms like "Chain-of-Thought auditing" are not explicitly mentioned.
+
+% Risks to AI Safety and Cybersecurity
+% The sources confirm that linguistic steganography poses significant risks by enabling the **covert transmission of information** that bypasses governance and monitoring systems.
+% *   **Bypassing Governance:** Techniques are designed to evade "massive surveillance and censorship mechanisms" by making subversive messages look like mundane, natural human communication.
+% *   **Enabling Attacks:** LLMs can be misused for **"Jailbreak Attacks"** (e.g., StegoAttack), which conceal harmful queries to bypass safety filters, and **"TrojanStego,"** which embeds secrets directly into model outputs for data exfiltration.
+
+% The "Linguistic Trojan Horse"
+% While the sources do not use the exact phrase "Linguistic Trojan Horse," they describe the same concept through **generative and rewriting-based steganography**.
+% *   **Embedding Unsafe Content:** These methods hide secret bitstreams within high-quality, fluent text generated by LLMs.
+% *   **Evading Filters:** Because the resulting "stego-text" is statistically and perceptually indistinguishable from normal text, it can pass through safety filters and human review without detection.
+
+% Covert Multi-Agent Collusion
+% The sources directly support the claim that these techniques enable **covert collusion between multiple agents**.
+% *   **GCStego Framework:** A framework called **GCStego** specifically enables secret transmission in **group chat scenarios**.
+% *   **Coordinated Secrecy:** Multiple agents can pass secret messages through stego-texts that appear to be regular, coherent conversations. This enhances "behavioral imperceptibility," making the coordinated exchange of information nearly impossible for an external monitor to identify.
+
+% ***
+
+% **Note on Missing Information:** The provided sources do not contain specific information regarding **"Chain-of-Thought auditing"** or models hiding their **"true reasoning"** in innocuous steps. You may wish to verify those specific concepts through independent technical safety research.
+
+% **Analogy:** Linguistic steganography is like a **spy writing a secret code using the first letter of every word in a grocery list.** To a security guard, it looks like a harmless errand, but to another agent, it is a set of coordinates for a mission.
+
 % ---------------------------------------------
 % ---------------------------------------------
 % Incorrect during the filtering phase I focused on stego discarding watermarks.
