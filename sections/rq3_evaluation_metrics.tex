@@ -119,55 +119,32 @@ Recent works reveal additional distortions: loop-count overhead, dictionary-size
 
 \subsubsection{Security Metrics}
 
-Security evaluation assesses resistance to detection and attacks:
-
+The sources evaluate security and reliability through the following integrated metrics:
 \begin{itemize}
-  \item \textbf{Detection Accuracy:} Performance of steganalysis classifiers
-  \item \textbf{F1 Score:} Balanced precision-recall measure
-  \item \textbf{Attack Resistance:} Performance degradation under various attacks
-  \item \textbf{False Positive Rate:} Rate of incorrect detection
+  \item \textbf{Detection Accuracy (Acc) / Error Rate (PE):} Measures a classifier's ability to distinguish between cover and stego text. An accuracy of \textbf{50\%} (or PE of 50\%) is the gold standard, indicating the stego text is statistically identical to normal text.
+  \item \textbf{F1 Score:} The harmonic mean of precision and recall, used to verify detection reliability, especially when datasets are balanced.
+  \item \textbf{Robustness (Attack Resistance):} Evaluated via the \textbf{Mean Impact of Attack (mIOA)} or \textbf{Bit Accuracy} after removal attempts such as DAE (Denoising Auto-Encoder), word substitution, or sentence deletion.
+  \item \textbf{False Positive Rate (FPR):} Measures how often human or normal model-generated texts are incorrectly flagged as containing secret messages.
 \end{itemize}
 
+% \begin{table}[h]
+%   \centering
+%   \begin{tabular}{l l c c c c c}
+%     \hline
+%     \textbf{Method Type}                     & \textbf{Primary Approach}               & \textbf{Avg. PPL} & \textbf{Avg. KLD} & \textbf{Capacity (bpw)} & \textbf{Security (Det. Acc)} & \textbf{Studies} \\
+%     \hline
+%     \textbf{Black-box}                       & LLM User Interfaces / Keyword Mapping   & 118--165          & 1.76--2.23 (Log)  & \textbf{5.93}           & \textbf{\(\sim 50\%\)}       & 3                \\
+%     \textbf{White-box (Provably Secure)}     & Distribution Copies / Adaptive Grouping & 46--63            & \textbf{0.00}     & 1.30--4.76              & 50\%--60\%                   & 5                \\
+%     \textbf{White-box (Standard Generative)} & RNN/VAE/Transformer Sampling            & 10--60            & 11.0--19.5        & 1.0--4.0                & 65\%--95\%                   & 9                \\
+%     Rewriting / Summarization                & Paraphrasing / NMT / BERT-CRF           & 62--114           & $<1.0$ (Semantic) & 1.0--4.0                & 70\%--85\%                   & 3                \\
+%     Hybrid / Multichannel                    & Retrieval + Generation                  & 16--110           & $<0.20$           & \textbf{9.16--10.42}    & 60\%--75\%                   & 2                \\
+%     Post-hoc Watermarking                    & Metadata Embedding in LLM text          & 134--185          & N/A               & $<0.20$ bpt             & 86\%--98\% (AUC)             & 3                \\
+%     \hline
+%   \end{tabular}
+%   \caption{Comparison of text steganography and watermarking methods.}
+% \end{table}
+% \pagebreak
 
-
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
-    \hline
-    \textbf{Method Type} & \textbf{Avg. PPL} & \textbf{Avg. KLD} & \textbf{Capacity} & \textbf{Security} & \textbf{Studies} \\
-    \hline
-    White-box            & 3-8               & 0-0.25            & 1.1-5.98 bpt      & 95-99\%           & 11               \\
-    \hline
-    Black-box            & 168-363           & 1.76-2.23         & 5.37 bpw          & 79-91\%           & 11               \\
-    \hline
-    Hybrid               & 50-150            & 0.5-1.5           & 2.0-4.0 bpt       & 90-95\%           & 5                \\
-    \hline
-    Watermarking         & 100-200           & 1.0-2.0           & 1.0-3.0 bpt       & 95-98\%           & 12               \\
-    \hline
-  \end{tabular}
-  \caption{Performance comparison across method types}
-  \label{tab:method_comparison}
-\end{table}
-
-\subsubsection{Evaluation Methods and Tools}
-
-Evaluation methods encompass both automated tools and human assessment:
-
-\begin{itemize}
-  \item \textbf{Automated Tools:}
-        \begin{itemize}
-          \item Steganalysis classifiers (LS-CNN, BiLSTM-Dense, BERT-FT)
-          \item Statistical analysis tools
-          \item Semantic similarity measures
-        \end{itemize}
-  \item \textbf{Human Evaluation:}
-        \begin{itemize}
-          \item Fluency judgments
-          \item Naturalness assessment
-          \item Detection difficulty evaluation
-        \end{itemize}
-\end{itemize}
 
 \subsubsection{Evaluation Challenges and Gaps}
 
@@ -180,16 +157,3 @@ Several significant challenges exist in current evaluation practices:
   \item \textbf{Missing Robustness Testing:} 60\% of studies don't test against various attacks
   \item \textbf{Incomplete Evaluation:} Many studies focus on only one or two metric categories
 \end{itemize}
-
-\subsubsection{Recent Advances in Evaluation}
-
-Recent studies have introduced more comprehensive evaluation approaches:
-
-\begin{itemize}
-  \item \textbf{Multi-metric Evaluation:} Combining perceptual, statistical, and semantic metrics
-  \item \textbf{Attack-based Testing:} Systematic evaluation against various attack scenarios
-  \item \textbf{Human-AI Collaborative Assessment:} Combining automated and human evaluation
-  \item \textbf{Cross-domain Evaluation:} Testing across different text types and domains
-\end{itemize}
-
-A significant need exists for standardized benchmarks, as human evaluations are frequently overlooked in current research. Future work should prioritize the development of comprehensive evaluation frameworks that address these gaps.
