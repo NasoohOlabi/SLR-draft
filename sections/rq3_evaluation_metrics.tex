@@ -57,23 +57,23 @@ However, real-world application reveals critical reliability failures, most nota
 
 \subsubsection{Capacity Metrics}
 
-Capacity evaluation focuses on embedding efficiency:
+Capacity is judged by four metrics:
 
 \begin{itemize}
-  \item \textbf{Bits per Token (BPT):} Information density at token level
+  \item \textbf{Bits per Token (BPT):}
         \begin{equation}
           \text{BPT} = \frac{\text{Total Secret Bits}}{\text{Total Tokens}}
         \end{equation}
-  \item \textbf{Bits per Word (BPW):} Information density at word level
+  \item \textbf{Bits per Word (BPW):}
         \begin{equation}
           \text{BPW} = \frac{\text{Total Secret Bits}}{\text{Total Words}}
         \end{equation}
-  \item \textbf{Embedding Rate (ER):} Ratio of embedded bits to total text length
-        % Bits Per Word
+  \item \textbf{Embedding Rate (ER):} Average density of hidden information per textual unit
         \begin{equation}
           \text{ER} = \frac{1}{N} \sum_{i=1}^{N} \text{bits}_i
         \end{equation}
-  \item \textbf{Utilization Rate:} Efficiency of capacity usage
+        where $N$ is the number of textual units (words, tokens, or sentences) and $\text{bits}_i$ is the number of bits embedded in the $i$-th unit.v
+  \item \textbf{Utilization Rate:}
         \begin{equation}
           H = -\sum_{x \in \mathcal{X}} P(x) \log_2 P(x)
         \end{equation}
@@ -82,9 +82,7 @@ Capacity evaluation focuses on embedding efficiency:
         \end{equation}
 \end{itemize}
 
-Capacity metrics in linguistic steganography quantify the efficiency of embedding secret information, where Bits Per Token (BPT) is calculated by dividing the total secret bits by the number of tokens generated, while Bits Per Word (BPW) performs the same ratio using word-level segmentation rather than sub-word tokenization; Embedding Rate (ER) generalizes this concept as the average density of hidden information per textual unit—variously defined as bits per word, sentence, or token depending on methodology—and Utilization Rate evaluates encoding efficiency by comparing the actual embedded payload against the theoretical maximum entropy derived from the language model's probability distribution, with theoretical entropy representing the Shannon information limit calculated from token probabilities and utilization expressed as the percentage of this limit achieved in practice.
-
-Capacity metrics such as Bits Per Token (BPT), Bits Per Word (BPW), Embedding Rate (ER), and Utilization Rate provide essential baselines for comparing steganographic systems, yet they suffer from fundamental biases and inaccuracies that undermine their capacity for universal fair comparison. These limitations manifest across five major domains, each introducing distinct distortions that researchers must acknowledge when evaluating system performance.
+These quantities quantify how densely a secret is packed, yet they are riddled with systematic biases that invalidate cross-system comparison.
 
 \begin{table}[ht]
   \centering
@@ -108,45 +106,16 @@ Capacity metrics such as Bits Per Token (BPT), Bits Per Word (BPW), Embedding Ra
   \label{tab:capacity_bias_categories}
 \end{table}
 
-Tokenization inconsistencies represent perhaps the most immediate source of measurement failure. When researchers report capacity metrics, they implicitly embed the characteristics of their chosen tokenization scheme into the results. Modern language models regularly fracture single words into multiple sub-word units, creating a scenario where a sender might encode data assuming "ing" functions as an independent token while a receiver employing a different tokenizer cannot decode the message. This segmentation ambiguity renders capacity calculations not merely unreliable but operationally void. A system achieving 1 BPT under sub-word tokenization achieves something fundamentally different from another achieving 1 BPT under word-level tokenization. The SyncPool research explicitly confronts this challenge by mandating rigid tokenization strategy definitions to enforce sender-receiver consistency, thereby acknowledging that without such constraints, cross-paper comparisons between systems like VAE-Stega and LLM-Stega become inherently misleading.
+Tokenization differences make “1 BPT” from one paper incomparable to “1 BPT” from another due to the use of different tokenizers.
+The Psic effect shows that higher density can hurt human fluency yet help statistical evasion.
+Model frequency preferences shrink the real alphabet to high-probability tokens, so naive entropy limits overstate usable space.
+Ambiguous reporting—practice vs.\ effective payload, ER1 vs.\ ER2, Bit Length vs.\ Stego Length—lets authors cherry-pick flattering numbers.
+Finally, BPW/BPT ignore semantics, rewarding gibberish that is obviously steganographic.
 
-The "Psic Effect," or perceptual-statistical conflict, introduces a more subtle but equally significant distortion. Capacity metrics operate under the simplifying assumption that higher embedding density directly correlates with superior performance, yet this ignores the fundamental tension between human imperceptibility and machine detectability. As BPW increases, textual quality inevitably degrades, producing stilted, unnatural language that humans readily identify as suspicious. Ironically, this same degradation can enhance statistical security by pushing the generated text further into the high-entropy regions of the model's distribution, making it more difficult for automated detectors to distinguish steganographic content from legitimate model output. Consequently, a high BPW score might simultaneously indicate system failure from a user experience perspective and system success from an evasion standpoint—a trade-off that standard metrics cannot capture. VAE-Stega's research demonstrates this conflict empirically, showing how perplexity (text quality) and embedding capacity move in opposing directions, yet neither capacity metrics nor their derivatives account for this inverse relationship.
+Recent works reveal additional distortions: loop-count overhead, dictionary-size caps, baseline-dependent “improvements,” watermarking goals that invert the desired signal, conversational filler that dilutes BPW, and nonlinear ER curves that make any single threshold misleading.
 
-Model training bias distorts Utilization Rate calculations by introducing a gap between theoretical and practical entropy space. The theoretical limits that anchor utilization measurements assume all tokens in a vocabulary are equally available for encoding, but language models are trained to strongly favor high-frequency tokens, creating a constrained actual hiding space. This preference pattern means that methods relying on naive random sampling, such as older arithmetic coding schemes, waste substantial portions of the theoretically available capacity. More sophisticated approaches like FREmax attempt to reshape the probability distribution to reclaim this lost space, achieving utilization rates of 92-95\% compared to the baseline methods' approximately 50\%. Discop's analysis reinforces this finding, demonstrating that standard capacity baselines systematically overestimate practical hiding potential by ignoring model-induced frequency biases.
+% In short, capacity metrics are necessary but blind: they tell us how heavy the truck is, not whether the cargo is broken, the units match, or the load fell off on the way.
 
-Reporting ambiguities further complicate comparative analysis by failing to establish universal definitions for what constitutes capacity. Research papers variously report Embedding Rate as an average density metric, raw Payload as total bits transmitted, or create artificial distinctions between practice versus effective payloads. Hi-Stega exemplifies this confusion by differentiating ER1, the practice payload measuring bits generated during encoding, from ER2, the effective payload accounting for decoded bits plus retrieval side information. A system appearing highly efficient under ER1 might prove substantially less capable when evaluated by ER2, yet both metrics could appear in literature without clear labeling. GCStego introduces similar confusion by reporting both Bit Length and Stego Length, where comparing systems purely on BPW obscures whether the underlying text maintains coherence or merely achieves density through semantic sacrifice. A system encoding 100 bits in 10 words achieves 10 BPW, while another achieves 20 BPW in 5 words, but if the latter produces incoherent output, the comparison becomes not merely unfair but actively deceptive.
-
-Context blindness reveals the most fundamental conceptual flaw in density-centric metrics. BPW and BPT treat text as a neutral container for bits, entirely ignoring whether the resulting language maintains semantic relationships between words. It remains trivially possible to achieve high capacity by selecting words based exclusively on their bit-carrying potential while disregarding grammatical and semantic constraints. Such output represents a profound security failure—the text is obviously steganographic regardless of its capacity score—yet standard metrics do not penalize this incoherence in any way. Co-Stega and NMT-Stega specifically address this challenge in social media contexts, where short-text environments make context preservation particularly difficult. Their work demonstrates that simple BPW metrics become essentially useless for evaluating real-world success when the encoding scheme cannot maintain natural language structure.
-
-Beyond these five primary biases, a deeper examination reveals additional methodological nuances missing from general analyses. These specific findings from recent research highlight how capacity metrics fail to capture efficiency measures, dictionary constraints, relative performance contexts, watermarking-specific requirements, conversational overhead, and threshold dependencies.
-
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{4cm}|}
-    \hline
-    \textbf{Source}                                                                 & \textbf{Main Idea}                                                 & \textbf{Key Metric}                                        & \textbf{Specific Bias/Inaccuracy}                                                                                \\
-    \hline
-    Linguistic Steganography: From Symbolic to Semantic Space (2020)                & Semantic zone encoding replaces word substitution                  & Average Loop Count \& Semantic Zone Encoding (log(n) bits) & Loop Count Bias—ignores computational cost of failed encoding attempts                                           \\
-    \hline
-    Natural Language Steganography by ChatGPT (2024)                                & Key Set methodology uses word existence rather than substitution   & Bits per specific word based on key set size               & Key-Set Dependency—capacity capped by dictionary size, incompatible with open-vocabulary BPW                     \\
-    \hline
-    Natural Language Watermarking via Paraphraser-based Lexical Substitution (2023) & Paraphrasing increases density while preserving fluency (Para-NLW) & Payload (average information per word)                     & Relative Comparison Bias—raw values meaningless without baseline context                                         \\
-    \hline
-    Robust and Semantic-faithful Post-hoc Watermarking (2025)                       & Post-hoc watermarking modifies existing text for robustness        & z-score, TPR/FPR                                           & Strength vs. Capacity Conflict—high capacity (z-score) indicates detectability, opposite of steganographic goals \\
-    \hline
-    Imperceptible Text Steganography based on Group Chat (GCStego) (2024)           & Group chat context uses conversational filler as cover             & Bit Length vs. Stego Length                                & Dilution Bias—conversational overhead artificially lowers BPW, hiding actual encoding efficiency                 \\
-    \hline
-    Joint Linguistic Steganography With BERT MLM and GAT (2023)                     & Patient-Arithmetic coding with GAT balances rate and quality       & Embedding Rate (ER) average bits per sentence              & Threshold-Dependent Reporting—ER values non-linear across embedding thresholds, single values are misleading     \\
-    \hline
-  \end{tabular}
-  \caption{Specific methodological biases and inaccuracies in capacity metrics across recent research}
-  \label{tab:capacity_metric_biases}
-\end{table}
-
-These specific methodological nuances expand the critique of capacity metrics in six critical directions. First, they introduce efficiency measures beyond simple density, such as Average Loop Count, which reveals how systems might appear efficient while requiring massive computational resources due to repeated encoding failures. Second, they expose dictionary and key-set constraints that fundamentally limit capacity in ways standard BPW cannot capture, particularly in closed-vocabulary systems. Third, they highlight the importance of relative rather than absolute performance, where a payload of 0.3 represents a threefold improvement over a 0.1 baseline, yet both might be considered "low" in isolation. Fourth, they demonstrate how watermarking contexts invert the capacity-security relationship, where high statistical strength (z-score) indicates failure rather than success. Fifth, they reveal contextual overhead in conversational settings, where dilution by filler words artificially depresses BPW calculations while masking efficient core encoding. Sixth, they show threshold dependency in capacity reporting, where Embedding Rate varies nonlinearly with parameter settings, making any single reported value inherently inaccurate.
-
-The cumulative impact of these biases can be visualized through an analogy comparing steganographic systems to delivery trucks. Standard BPW and BPT metrics measure only how much weight a truck carries, completely ignoring whether the cargo is fragile or whether the suspension is broken. Tokenization bias functions like measuring weight in pounds versus kilograms without labeling the units, making cross-paper comparisons impossible. The Psic Effect resembles driving so fast to meet delivery deadlines that the cargo falls out, destroying quality even while satisfying statistical security requirements. Utilization Rate checks whether the truck uses all available cargo space, yet remains blind to the fact that heavy shelving—model training bias—occupies space the cargo cannot actually use. This analogy demonstrates how capacity metrics, while providing necessary baselines, systematically fail to capture the multidimensional nature of steganographic system quality.
 
 \subsubsection{Security Metrics}
 
