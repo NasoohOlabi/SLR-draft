@@ -3,12 +3,11 @@
 
 The integration of external knowledge sources has emerged as a crucial area of research in LLM-based steganography, with 65\% of studies incorporating some form of external information. This integration enhances both capacity and contextual relevance of steganographic systems.
 
-\subsubsection{Knowledge Source Types}
 
 \begin{table}[ht]
   \centering
   \small
-  \begin{tabular}{|p{3cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+  \begin{tabular}{|p{3cm}|p{1cm}|p{2cm}|p{2cm}|p{4cm}|}
     \hline
     \textbf{Knowledge Type} & \textbf{Usage} & \textbf{Capacity Gain} & \textbf{Context Improvement} & \textbf{Examples}              \\
     \hline
@@ -27,99 +26,93 @@ The integration of external knowledge sources has emerged as a crucial area of r
 
 \subsubsection{Semantic Resources Integration}
 
-Semantic resources provide structured knowledge that enhances contextual understanding:
+Instead of asking the LLM to improvise, modern steganographic pipelines hand it a curated set of “conversation props” drawn from outside the model. A fast retriever first fetches a real tweet or headline that already whispers part of the secret; this authentic fragment becomes the semantic runway \cite{wang2023hi}. A lightweight knowledge-graph layer then appiles a handful of entity–relation–entity triples that tell the generator which facts must appear, guaranteeing long-range coherence without extra training \cite{li2024semantic}. Finally, an external n-gram frequency table nudges the softmax so that the token distribution clones everyday human chatter, erasing the statistical scar that detectors hunt for \cite{pang2024fremax}. The LLM never changes; it just speaks through a stack of plug-ins that supply context, vocabulary variety and statistical camouflage—turning a solo monologue into a culturally grounded, high-capacity, statistically invisible conversation.
 
-\begin{itemize}
-  \item \textbf{Knowledge Graphs:} Structured representations of domain knowledge
-  \item \textbf{Context Retrieval:} Dynamic retrieval of relevant context information
-  \item \textbf{Semantic Embeddings:} Pre-trained semantic representations
-  \item \textbf{Ontologies:} Formal representations of domain concepts
-\end{itemize}
-
-\textbf{Co-Stega} demonstrates effective use of semantic resources by leveraging context retrieval and entropy enhancement for social media applications, achieving significant improvements in both capacity and naturalness.
 
 \subsubsection{Domain Corpora Integration}
 
-Domain-specific corpora provide specialized knowledge for targeted applications:
 
-\begin{itemize}
-  \item \textbf{Large Corpora:} Extensive text collections for distribution alignment
-  \item \textbf{Specialized Datasets:} Domain-specific text collections
-  \item \textbf{Multi-lingual Corpora:} Cross-linguistic knowledge integration
-  \item \textbf{Temporal Corpora:} Time-sensitive knowledge sources
-\end{itemize}
+Linguistic steganography now works by letting a model \textbf{absorb} a domain instead of hand-crafting rules.
 
-\textbf{FreStega} exemplifies effective corpus integration, using large corpora for distribution alignment and achieving a 15\% increase in capacity while maintaining imperceptibility.
+Feed it enough examples-2.6 M tweets, 1.2 M IMDB reviews, 530 k HTTP headers, 3.8 M news articles-and the internal weights re-shape themselves until the generated text statistically \textbf{is} that channel.
 
-\subsubsection{Prompt Engineering and Context Guidance}
+VAE-Stega \cite{yang2020vae}, Meteor \cite{kaptchuk2021meteor}, Hi-Stega \cite{wang2023hi}, FREmax \cite{pang2024fremax}, Rewriting-Stego \cite{li2023rewriting} and Summarization-Stego \cite{zhang2024controllable} all follow this recipe: a specialised encoder/decoder (BERT, LSTM, GPT-2, BART) is fine-tuned on the target corpus so that every sentence it later produces already carries the right n-gram fingerprint, long-tail rare-word spectrum, or “news→comment” coherence.
 
-Prompt-based approaches leverage external knowledge through strategic prompting:
+Even hybrid systems such as Joint Linguistic Steganography add graph attention and CRF layers, but they still rely on the same premise—see enough real data and the distribution sticks.
 
-\begin{itemize}
-  \item \textbf{In-context Learning:} Using examples to guide generation
-  \item \textbf{Few-shot Learning:} Learning from limited examples
-  \item \textbf{Zero-shot Approaches:} No training examples required
-  \item \textbf{Chain-of-thought:} Step-by-step reasoning guidance
-\end{itemize}
+When re-training is impossible or undesirable, black-box methods move the “domain memory” from parameters to prompts.
+Zero-shot Generative drops a handful of raw IMDB/Twitter samples into the context window and tells the LLM “write like this”; LLM-Stega wraps the request in an elaborated theme prompt (“entertainment news”); Co-Stega retrieves actual posts from the past seven days and feeds them in via an entropy-boosting template; Semantic Controllable injects Knowledge-Graph triples to steer long-form generation; ChatGPT Steganography simply lays down a microscopic rule set (exact word sequence, no plurals, no derivations) and lets the commercial API do the rest.
+No weights are changed, yet the output lands inside the desired statistical valley because the context itself has become the temporary training data.
 
-Zero-shot steganography methods, such as those using LLaMA2-Chat-7B, demonstrate how prompt engineering can effectively guide steganographic text generation without requiring model fine-tuning.
+% \subsubsection{Prompt Engineering and Context Guidance}
 
-\subsubsection{Integration Benefits and Performance Gains}
+% Prompt-based approaches leverage external knowledge through strategic prompting:
 
-External knowledge integration provides several key benefits:
+% \begin{itemize}
+%   \item \textbf{In-context Learning:} Using examples to guide generation
+%   \item \textbf{Few-shot Learning:} Learning from limited examples
+%   \item \textbf{Zero-shot Approaches:} No training examples required
+%   \item \textbf{Chain-of-thought:} Step-by-step reasoning guidance
+% \end{itemize}
 
-\begin{itemize}
-  \item \textbf{Capacity Enhancement:} Average capacity increase of 15-25\%
-  \item \textbf{Contextual Relevance:} Improved alignment with domain requirements
-  \item \textbf{Naturalness:} Better semantic coherence and fluency
-  \item \textbf{Adaptability:} Better performance across different domains
-\end{itemize}
+% Zero-shot steganography methods, such as those using LLaMA2-Chat-7B, demonstrate how prompt engineering can effectively guide steganographic text generation without requiring model fine-tuning.
 
-\subsubsection{Integration Challenges and Trade-offs}
+% \subsubsection{Integration Benefits and Performance Gains}
 
-Despite the benefits, knowledge integration introduces several challenges:
+% External knowledge integration provides several key benefits:
 
-\begin{itemize}
-  \item \textbf{Computational Overhead:} 5-15\% increase in computational cost
-  \item \textbf{Privacy Concerns:} External knowledge may compromise system privacy
-  \item \textbf{Integration Complexity:} Increased system complexity and maintenance
-  \item \textbf{Generalizability:} Domain-specific knowledge may not transfer well
-  \item \textbf{Data Quality:} Dependence on quality and availability of external sources
-\end{itemize}
+% \begin{itemize}
+%   \item \textbf{Capacity Enhancement:} Average capacity increase of 15-25\%
+%   \item \textbf{Contextual Relevance:} Improved alignment with domain requirements
+%   \item \textbf{Naturalness:} Better semantic coherence and fluency
+%   \item \textbf{Adaptability:} Better performance across different domains
+% \end{itemize}
 
-\subsubsection{Integration Strategies and Architectures}
+% \subsubsection{Integration Challenges and Trade-offs}
 
-Different integration strategies have been employed:
+% Despite the benefits, knowledge integration introduces several challenges:
 
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
-    \hline
-    \textbf{Strategy} & \textbf{Integration Point} & \textbf{Complexity} & \textbf{Effectiveness} \\
-    \hline
-    Pre-processing    & Before generation          & Low                 & Medium                 \\
-    \hline
-    During Generation & Real-time integration      & High                & High                   \\
-    \hline
-    Post-processing   & After generation           & Medium              & Low                    \\
-    \hline
-    Hybrid            & Multiple points            & Very High           & Very High              \\
-    \hline
-  \end{tabular}
-  \caption{Knowledge integration strategies and their characteristics}
-  \label{tab:integration_strategies}
-\end{table}
+% \begin{itemize}
+%   \item \textbf{Computational Overhead:} 5-15\% increase in computational cost
+%   \item \textbf{Privacy Concerns:} External knowledge may compromise system privacy
+%   \item \textbf{Integration Complexity:} Increased system complexity and maintenance
+%   \item \textbf{Generalizability:} Domain-specific knowledge may not transfer well
+%   \item \textbf{Data Quality:} Dependence on quality and availability of external sources
+% \end{itemize}
 
-\subsubsection{Future Directions in Knowledge Integration}
+% \subsubsection{Integration Strategies and Architectures}
 
-Several promising directions for future research emerge:
+% Different integration strategies have been employed:
 
-\begin{itemize}
-  \item \textbf{Federated Learning:} Distributed knowledge integration while preserving privacy
-  \item \textbf{Adaptive Integration:} Dynamic selection of knowledge sources
-  \item \textbf{Multi-modal Knowledge:} Integration of text, image, and other modalities
-  \item \textbf{Real-time Learning:} Continuous adaptation to new knowledge
-\end{itemize}
+% \begin{table}[ht]
+%   \centering
+%   \small
+%   \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+%     \hline
+%     \textbf{Strategy} & \textbf{Integration Point} & \textbf{Complexity} & \textbf{Effectiveness} \\
+%     \hline
+%     Pre-processing    & Before generation          & Low                 & Medium                 \\
+%     \hline
+%     During Generation & Real-time integration      & High                & High                   \\
+%     \hline
+%     Post-processing   & After generation           & Medium              & Low                    \\
+%     \hline
+%     Hybrid            & Multiple points            & Very High           & Very High              \\
+%     \hline
+%   \end{tabular}
+%   \caption{Knowledge integration strategies and their characteristics}
+%   \label{tab:integration_strategies}
+% \end{table}
 
-The integration of external knowledge sources represents a critical advancement in LLM-based steganography, enabling more sophisticated and context-aware systems. However, the field must address the associated challenges to realize the full potential of these approaches.
+% \subsubsection{Future Directions in Knowledge Integration}
+
+% Several promising directions for future research emerge:
+
+% \begin{itemize}
+%   \item \textbf{Federated Learning:} Distributed knowledge integration while preserving privacy
+%   \item \textbf{Adaptive Integration:} Dynamic selection of knowledge sources
+%   \item \textbf{Multi-modal Knowledge:} Integration of text, image, and other modalities
+%   \item \textbf{Real-time Learning:} Continuous adaptation to new knowledge
+% \end{itemize}
+
+% The integration of external knowledge sources represents a critical advancement in LLM-based steganography, enabling more sophisticated and context-aware systems. However, the field must address the associated challenges to realize the full potential of these approaches.
