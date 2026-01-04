@@ -90,8 +90,9 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
     - [ ] 2.3.3 Lack of Semantic Control and Contextual Consistency
     - [ ] 2.3.4 Challenges with LLMs in Steganography
     - [ ] 2.3.5 Segmentation Ambiguity
-- [X] Section 3: Related Reviews
-- [ ] Section 4: Research Method
+- [X] Section 3: Steganography and Large Language Models
+- [X] Section 4: Related Reviews
+- [ ] Section 5: Research Method
   - [ ] 5.1 Planning
     - [ ] 5.1.1 Research Questions
     - [ ] 5.1.2 Search Strategies
@@ -102,7 +103,7 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
   - [-] 6.1 State of Published Literature on LLM-based Steganography (RQ1)
     - [X] 6.1.1 Publication Trends and Distribution
     - [X] 6.1.2 Model Preferences and Venues
-    - [ ] 6.1.3 Research Gaps and Opportunities
+    <!-- - [ ] 6.1.3 Research Gaps and Opportunities %% moved -->
     - [ ] 6.1.4 Key Trends and Evolution
   - [ ] 6.2 Applications of LLM-based Steganographic Techniques (RQ2)
     - [ ] 6.2.1 Primary Applications
@@ -165,40 +166,56 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
 
 ---
 
-## Paragraph-Level Review Time Schedule
+## Paragraph-Level Review Time Schedule (Updated per TOC)
 
 - **Assumptions**
   - You will review and finalize the paper paragraph by paragraph, focusing on clarity, coherence, citations, and alignment with the SLR goals.
   - Paragraph sizes are approximated as:
-    - **Short**: \(\approx\) 3–5 lines (\(\approx\) 60–120 words)
-    - **Medium**: \(\approx\) 6–10 lines (\(\approx\) 120–200 words)
-    - **Long**: \(\ge\) 11 lines (\(\ge\) 200–300+ words)
+    - **Short**: $\approx$ 3–5 lines ($\approx$ 60–120 words)
+    - **Medium**: $\approx$ 6–10 lines ($\approx$ 120–200 words)
+    - **Long**: $\ge$ 11 lines ($\ge$ 200–300+ words)
 
 - **Per-paragraph time budget**
-  - **Short paragraphs** (e.g., brief motivation, linking sentences, simple definitions): **8–10 minutes** each.
-  - **Medium paragraphs** (most body paragraphs, related work, method descriptions): **12–15 minutes** each.
-  - **Long paragraphs** (dense results discussion, limitations, or multi-point arguments): **18–20 minutes** each.
+  - **Short paragraphs**: **8–10 minutes** each.
+  - **Medium paragraphs**: **12–15 minutes** each.
+  - **Long paragraphs**: **18–20 minutes** each.
 
-- **Suggested daily schedule (2–3 hours/day)**
-  - **Day 1** – Sections 1 & 2 (Introduction + Background)  
-    - 4–6 **short/medium** paragraphs in Introduction \(\Rightarrow\) ~1–1.5 hours  
-    - 6–8 **medium/long** paragraphs in Background (incl. terminology, challenges) \(\Rightarrow\) ~1–1.5 hours  
-    - Goal: finalize all intro/background paragraphs and mark any missing citations/tables for follow-up.
-  - **Day 2** – Sections 3 & 4 (Related Reviews + Research Method)  
-    - 3–5 **medium** paragraphs in Related Reviews \(\Rightarrow\) ~45–60 minutes  
-    - 6–8 **medium/long** paragraphs in Research Method \(\Rightarrow\) ~1–1.5 hours  
-    - Goal: ensure methodological narrative is clear, reproducible, and consistently cited.
-  - **Day 3** – Section 6.1–6.3 (Results: RQ1–RQ3)  
-    - 8–10 **medium/long** paragraphs describing trends, applications, and metrics linked to tables \(\Rightarrow\) ~2–2.5 hours  
-    - Goal: for each paragraph, explicitly tie statements to data in Tables 1–3 and refine transitions.
-  - **Day 4** – Section 6.4–6.5 (Knowledge Integration & Limitations/Trade-offs)  
-    - 6–8 **long** analytical paragraphs \(\Rightarrow\) ~2–2.5 hours  
-    - Goal: sharpen argumentation, ensure each limitation/trade-off paragraph is well-supported and clearly scoped.
-  - **Day 5** – Sections 7 & 8 (Discussion & Conclusion) + TOC/Formatting  
-    - 4–6 **medium** discussion/conclusion paragraphs \(\Rightarrow\) ~1.5–2 hours  
-    - 30–45 minutes for **global pass** (TOC, cross-references, redundant sentences, consistent terminology).
+- **Suggested 7-Day Schedule (2–3 hours/day)**
+
+  - **Day 1 – Section 1 (Introduction) & Section 2 (Background)**
+    - **Intro**: 8 paragraphs (Mostly Medium) $\Rightarrow$ ~2 hours.
+    - **Background**: 7 paragraphs (Medium/Long) $\Rightarrow$ ~1.5 hours.
+    - *Goal*: Finalize theoretical foundations and ensure the "Psic Effect" and model access trade-offs are clearly articulated.
+
+  - **Day 2 – Section 2 (LLM Approaches) & Section 3 (Related Reviews)**
+    - **LLM Approaches**: ~33 paragraphs (Mixed Short/Medium) $\Rightarrow$ ~2–3 hours. (Note: This is a dense section covering specific models like GPT, LLaMA, and Baichuan).
+    - **Related Reviews**: 3 paragraphs (Medium) $\Rightarrow$ ~45 minutes.
+    - *Goal*: Ensure technical mechanisms of different LLM-stega approaches are accurate.
+
+  - **Day 3 – Section 4 (Research Method) & Section 5.1 (RQ1: Literature State)**
+    - **Research Method**: 27 paragraphs (Mostly Medium, methodology steps) $\Rightarrow$ ~2 hours.
+    - **RQ1**: 21 paragraphs (Medium, trends and venues) $\Rightarrow$ ~1.5 hours.
+    - *Goal*: Verify reproducibility of the search and selection process.
+
+  - **Day 4 – Section 5.2 (RQ2: Applications) & Section 5.3 (RQ3: Evaluation Metrics)**
+    - **RQ2**: 37 paragraphs (Mixed Medium/Long) $\Rightarrow$ ~2.5 hours.
+    - **RQ3**: 33 paragraphs (Mixed Medium/Long) $\Rightarrow$ ~2.5 hours.
+    - *Goal*: Link application domains and evaluation metrics directly to the synthesized data in Tables 1 and 2.
+
+  - **Day 5 – Section 5.4 (RQ4: Knowledge Integration) & Section 5.5 (RQ5: Trade-offs)**
+    - **RQ4**: 30 paragraphs (Mixed Medium) $\Rightarrow$ ~2 hours.
+    - **RQ5**: 36 paragraphs (Long, dense analysis of Psic effect and security) $\Rightarrow$ ~3 hours.
+    - *Goal*: Refine the critical analysis of knowledge sources and the fundamental trade-offs in current techniques.
+
+  - **Day 6 – Section 6 (Discussion)**
+    - **Discussion**: 35 paragraphs (Mixed Medium/Long) $\Rightarrow$ ~3 hours.
+    - *Goal*: Synthesize findings across RQs and sharpen the implications for future research.
+
+  - **Day 7 – Section 7 (Conclusion) + Final Polishing**
+    - **Conclusion**: 4 paragraphs (Medium) $\Rightarrow$ ~1 hour.
+    - **Global Pass**: 1 hour for TOC, references, cross-section consistency, and acronym checks.
+    - *Goal*: Final wrap-up and ensuring the paper tells a cohesive story.
 
 - **How to use this schedule**
   - At the start of each session, count how many **short**, **medium**, and **long** paragraphs you have in the target section and multiply by the per-paragraph time above to set a concrete block.
-  - After completing each block, tick off the corresponding bullets in this `todo.md` (e.g., sections and subsections under *Human Review*).
-  - If you finish early, use leftover time for a quick read-through of already finalized paragraphs to check global coherence and style.
+  - After completing each block, tick off the corresponding bullets in the *Human Review* section above.
