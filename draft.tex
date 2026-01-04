@@ -1,5 +1,5 @@
 \documentclass[manuscript,screen,review]{sections/acmart} % Preprint format
-\setcitestyle{acmauthoryear} % Replace \citestyle with ACM-recommended command
+\setcitestyle{numbers,sort&compress} % Use numeric citations in order of appearance
 \settopmatter{printacmref=false} % Removes citation information below abstract
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \pagestyle{plain} % removes running headers
@@ -155,7 +155,7 @@
 \input{sections/discussion.tex}
 \input{sections/conclusion.tex}
 
-\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{unsrtnat}
 \bibliography{references/bibliography}
 
 \clearpage

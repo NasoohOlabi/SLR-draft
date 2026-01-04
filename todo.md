@@ -90,9 +90,8 @@ This action plan focuses on refining the narrative, deepening the analysis, and 
     - [ ] 2.3.3 Lack of Semantic Control and Contextual Consistency
     - [ ] 2.3.4 Challenges with LLMs in Steganography
     - [ ] 2.3.5 Segmentation Ambiguity
-- [X] Section 3: Steganography and Large Language Models
-- [X] Section 4: Related Reviews
-- [ ] Section 5: Research Method
+- [X] Section 3: Related Reviews
+- [ ] Section 4: Research Method
   - [ ] 5.1 Planning
     - [ ] 5.1.1 Research Questions
     - [ ] 5.1.2 Search Strategies
