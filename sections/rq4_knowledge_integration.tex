@@ -26,7 +26,7 @@ The integration of external knowledge sources has emerged as a crucial area of r
 
 \subsubsection{Semantic Resources Integration}
 
-Instead of asking the LLM to improvise, modern steganographic pipelines hand it a curated set of “conversation props” drawn from outside the model. A fast retriever first fetches a real tweet or headline that already whispers part of the secret; this authentic fragment becomes the semantic runway \cite{wang2023hi}. A lightweight knowledge-graph layer then appiles a handful of entity–relation–entity triples that tell the generator which facts must appear, guaranteeing long-range coherence without extra training \cite{li2024semantic}. Finally, an external n-gram frequency table nudges the softmax so that the token distribution clones everyday human chatter, erasing the statistical scar that detectors hunt for \cite{pang2024fremax}. The LLM never changes; it just speaks through a stack of plug-ins that supply context, vocabulary variety and statistical camouflage—turning a solo monologue into a culturally grounded, high-capacity, statistically invisible conversation.
+Instead of asking the LLM to improvise, modern steganographic pipelines hand it a curated set of “conversation props” drawn from outside the model. A fast retriever first fetches a real tweet or headline that already whispers part of the secret; this authentic fragment becomes the semantic runway \cite{wang2023hi}. A lightweight knowledge-graph layer then appiles a handful of entity–relation–entity triples that tell the generator which facts must appear, guaranteeing long-range coherence without extra training \cite{li2024semantic}. Finally, an external n-gram frequency table nudges the softmax so that the token distribution clones everyday human chatter, erasing the statistical scar that detectors hunt for \cite{pang2024fremax}. The LLM never changes; it just speaks through a stack of plug-ins that supply context, vocabulary variety and statistical camouflage-turning a solo monologue into a culturally grounded, high-capacity, statistically invisible conversation.
 
 
 \subsubsection{Domain Corpora Integration}
@@ -34,11 +34,11 @@ Instead of asking the LLM to improvise, modern steganographic pipelines hand it 
 
 Linguistic steganography now works by letting a model \textbf{absorb} a domain instead of hand-crafting rules.
 
-Feed it enough examples-2.6 M tweets, 1.2 M IMDB reviews, 530 k HTTP headers, 3.8 M news articles-and the internal weights re-shape themselves until the generated text statistically \textbf{is} that channel.
+Feed it enough examples-2.6 M tweets, 1.2 M IMDB reviews \cite{10.5555/2002472.2002491}, BookCorpus \cite{Zhu_2015_ICCV}, 530 k HTTP headers, 3.8 M news articles-and the internal weights re-shape themselves until the generated text statistically \textbf{is} that channel.
 
 VAE-Stega \cite{yang2020vae}, Meteor \cite{kaptchuk2021meteor}, Hi-Stega \cite{wang2023hi}, FREmax \cite{pang2024fremax}, Rewriting-Stego \cite{li2023rewriting} and Summarization-Stego \cite{zhang2024controllable} all follow this recipe: a specialised encoder/decoder (BERT, LSTM, GPT-2, BART) is fine-tuned on the target corpus so that every sentence it later produces already carries the right n-gram fingerprint, long-tail rare-word spectrum, or “news→comment” coherence.
 
-Even hybrid systems such as Joint Linguistic Steganography add graph attention and CRF layers, but they still rely on the same premise—see enough real data and the distribution sticks.
+Even hybrid systems such as Joint Linguistic Steganography add graph attention and CRF layers, but they still rely on the same premise-see enough real data and the distribution sticks.
 
 When re-training is impossible or undesirable, black-box methods move the “domain memory” from parameters to prompts.
 Zero-shot Generative drops a handful of raw IMDB/Twitter samples into the context window and tells the LLM “write like this”; LLM-Stega wraps the request in an elaborated theme prompt (“entertainment news”); Co-Stega retrieves actual posts from the past seven days and feeds them in via an entropy-boosting template; Semantic Controllable injects Knowledge-Graph triples to steer long-form generation; ChatGPT Steganography simply lays down a microscopic rule set (exact word sequence, no plurals, no derivations) and lets the commercial API do the rest.

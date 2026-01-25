@@ -3,6 +3,8 @@
 
 Performance evaluation for LLM-based steganography relies on three key categories of metrics, with significant variation in reporting standards across studies. The analysis reveals both the diversity of evaluation approaches and the need for standardization.
 
+
+% While metric inconsistency plagues many AI fields, linguistic steganography faces a structurally distinct *re-implementation barrier*: its core units of measurement-"perplexity," "bits per token"-are model-dependent and semantically incompatible across papers. Unlike computer vision's model-agnostic pixels or NLP's fixed benchmarks, a tokenizer or LLM change fundamentally alters what these metrics quantify, making direct comparison impossible without costly re-implementation. This compounds with steganography's inherently multi-objective nature (imperceptibility, capacity, security, robustness), forcing researchers to reconstruct rather than verify prior work, and rendering claims of improvement inherently noisy.
 % \subsubsection{Metric Categories and Standards}
 
 \begin{table}[ht]
@@ -27,7 +29,7 @@ Performance evaluation for LLM-based steganography relies on three key categorie
 
 \subsubsection{Perplexity (PPL)}
 
-An imperceptibility metric that measures fluency, with lower values indicating better naturalness. It is recognized as a sensitive and unreliable metric for language model evaluation due to several intrinsic limitations. First, it suffers from a "confidently wrong" problem: as Baeldung, et al. \cite{wang2022perplexity} notes, perplexity measures only internal consistency, allowing models to assign low perplexity to grammatically perfect but factually absurd statements like "The cat is on the ceiling," since it cannot assess truth or logic. Second, it exhibits a short-text bias  as Fang, et al. \cite{fang2024wrong} demonstrated that perplexity scores are artificially inflated for short sequences despite potentially higher fluency, making it an "unqualified referee" for fair evaluation. Third, comparability across models is impossible without identical tokenization, vocabulary size directly scales perplexity - a model with fewer tokens appears deceptively better \cite{morgan2024perplexity}. Fourth, perplexity fails to capture long-range dependencies in modern LLMs; Fang, et al. \cite{fang2024wrong} argue that averaging log-likelihood across all tokens obscures performance on crucial "key tokens" by favoring predictable filler words. Finally, the metric is easily gamed through repetition, Wang, et al. \cite{wang2022perplexity} finds that "perplexity cannot distinguish between right emphasis and abnormal repetition," rewarding redundant text with artificially low scores. These flaws-sensitivity to length, architectural incompatibility, semantic blindness, and exploitability-collectively render perplexity an inadequate benchmark for steganographic text quality assessment.
+An imperceptibility metric \cite{10.1121/1.2016299} that measures fluency, with lower values indicating better naturalness. It is recognized as a sensitive and unreliable metric for language model evaluation due to several intrinsic limitations. First, it suffers from a "confidently wrong" problem: as Baeldung, et al. \cite{wang2022perplexity} notes, perplexity measures only internal consistency, allowing models to assign low perplexity to grammatically perfect but factually absurd statements like "The cat is on the ceiling," since it cannot assess truth or logic. Second, it exhibits a short-text bias  as Fang, et al. \cite{fang2024wrong} demonstrated that perplexity scores are artificially inflated for short sequences despite potentially higher fluency, making it an "unqualified referee" for fair evaluation. Third, comparability across models is impossible without identical tokenization, vocabulary size directly scales perplexity - a model with fewer tokens appears deceptively better \cite{morgan2024perplexity}. Fourth, perplexity fails to capture long-range dependencies in modern LLMs; Fang, et al. \cite{fang2024wrong} argue that averaging log-likelihood across all tokens obscures performance on crucial "key tokens" by favoring predictable filler words. Finally, the metric is easily gamed through repetition, Wang, et al. \cite{wang2022perplexity} finds that "perplexity cannot distinguish between right emphasis and abnormal repetition," rewarding redundant text with artificially low scores. These flaws-sensitivity to length, architectural incompatibility, semantic blindness, and exploitability-collectively render perplexity an inadequate benchmark for steganographic text quality assessment.
 
 
 \subsubsection{MAUVE}
@@ -40,7 +42,7 @@ Architectural differences further complicate matters: CPG-LS employs BERT-based 
 Like comparing temperatures without knowing Celsius from Fahrenheit, a "30" only makes sense in its original context. Consequently, MAUVE scores work best as \textit{internal benchmarks} for comparing variants within a single study, not as universal performance indicators across different steganographic frameworks.
 
 \subsubsection{Statistical Metrics}
-Kullback-Leibler Divergence (KLD) and Jensen-Shannon Divergence (JSD) are information-theoretic metrics used to evaluate steganographic security. KLD quantifies information loss by measuring the relative entropy between cover and stego distributions, serving as the theoretical standard for security modeling despite being asymmetric and failing as a strict distance measure. JSD improves upon this as a symmetric, bounded variant that measures how far each distribution lies from their average, providing a more stable basis for formulating statistical imperceptibility bounds-particularly when language models approximate human text distributions. Together, these two attempt to capture how closely steganographic outputs mimic legitimate communication channels.
+Kullback-Leibler Divergence (KLD) \cite{1320776d-9e76-337e-a755-73010b6e4b64} and Jensen-Shannon Divergence (JSD) are information-theoretic metrics used to evaluate steganographic security. KLD quantifies information loss by measuring the relative entropy between cover and stego distributions, serving as the theoretical standard for security modeling despite being asymmetric and failing as a strict distance measure. JSD improves upon this as a symmetric, bounded variant that measures how far each distribution lies from their average, providing a more stable basis for formulating statistical imperceptibility bounds-particularly when language models approximate human text distributions. Together, these two attempt to capture how closely steganographic outputs mimic legitimate communication channels.
 
 However, real-world application reveals critical reliability failures, most notably the Perceptual-Statistical Imperceptibility Conflict (Psic Effect). KLD and JSD scores increasingly diverge from human judgment as statistical optimization progresses: methods achieving superior divergence metrics often produce chaotic, low-quality text easily detected by human observers. This discrepancy manifests acutely in dataset dependency-identical methods yield KLDs of 19.507 on IMDB versus 8.295 on Twitter at equivalent embedding rates, rendering cross-paper comparisons meaningless. Further compounding this, researchers employ incompatible formulas (some using latent BERT features versus direct word distributions), feature spaces, and measurement scales, evidenced by Meteor's KLD ranging from 0.045 in one study to 7.491-11.845 in others. Consequently, these metrics function like rulers measuring paintings: they confirm technical dimensional accuracy while completely missing perceptual naturalness, necessitating parallel evaluation with human-centric measures to achieve genuine security.
 
@@ -68,7 +70,7 @@ Capacity is judged by four metrics:
         \begin{equation}
           \text{BPW} = \frac{\text{Total Secret Bits}}{\text{Total Words}}
         \end{equation}
-  \item \textbf{Embedding Rate (ER):} Average density of hidden information per textual unit
+  \item \textbf{Embedding Rate (ER) \cite{10.1007/3-540-49380-8_21}:} Average density of hidden information per textual unit
         \begin{equation}
           \text{ER} = \frac{1}{N} \sum_{i=1}^{N} \text{bits}_i
         \end{equation}
@@ -109,7 +111,7 @@ These quantities quantify how densely a secret is packed, yet they are riddled w
 Tokenization differences make “1 BPT” from one paper incomparable to “1 BPT” from another due to the use of different tokenizers.
 The Psic effect shows that higher density can hurt human fluency yet help statistical evasion.
 Model frequency preferences shrink the real alphabet to high-probability tokens, so naive entropy limits overstate usable space.
-Ambiguous reporting—practice vs.\ effective payload, ER1 vs.\ ER2, Bit Length vs.\ Stego Length—lets authors cherry-pick flattering numbers.
+Ambiguous reporting-practice vs.\ effective payload, ER1 vs.\ ER2, Bit Length vs.\ Stego Length-lets authors cherry-pick flattering numbers.
 Finally, BPW/BPT ignore semantics, rewarding gibberish that is obviously steganographic.
 
 Recent works reveal additional distortions: loop-count overhead, dictionary-size caps, baseline-dependent “improvements,” watermarking goals that invert the desired signal, conversational filler that dilutes BPW, and nonlinear ER curves that make any single threshold misleading.
@@ -151,7 +153,7 @@ The sources evaluate security and reliability through the following integrated m
 Several significant challenges exist in current evaluation practices:
 
 \begin{itemize}
-  \item \textbf{Lack of Standardized Benchmarks:} Only 20\% of studies use common datasets, making comparison difficult
+  \item \textbf{Lack of Standardized Benchmarks:} The absence of shared benchmarks means only 20\% of studies use common datasets, making comparison difficult
   \item \textbf{Inconsistent Reporting:} Different units, scales, and methodologies across studies
   \item \textbf{Limited Human Evaluation:} Only 25\% of studies include human assessment
   \item \textbf{Missing Robustness Testing:} 60\% of studies don't test against various attacks

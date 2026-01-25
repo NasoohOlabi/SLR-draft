@@ -3851,7 +3851,7 @@ case-based reasoning: A mining-based approach, Expert Systems 38 (8) (2021) e127
 [133] F. M. Kifetew, A. Perini, A. Susi, A. Siena, D. Muñante, I. Morales-Ramirez, Automating
 user-feedback driven requirements prioritization, Information and Software Technology 138
 (2021) 106635.
-[134] J. McZara, S. Sarkani, T. Holzer, T. Eveleigh, Software requirements prioritization and selection using linguistic tools and constraint solvers—a controlled experiment, Empirical Software
+[134] J. McZara, S. Sarkani, T. Holzer, T. Eveleigh, Software requirements prioritization and selection using linguistic tools and constraint solvers-a controlled experiment, Empirical Software
 Engineering 20 (6) (2015) 1721–1761.
 [135] J. Misra, S. Sengupta, S. Das, Latent semantic centrality based automated requirements
 prioritization, in: Proceedings of the 7th India Software Engineering Conference, 2014, pp.

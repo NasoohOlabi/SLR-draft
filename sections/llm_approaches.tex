@@ -56,12 +56,12 @@ We now turn to the principal challenges these models face, including the trade-o
 \subsubsection{Perceptual vs. Statistical Imperceptibility (Psic Effect)}
 
 The \textbf{Psic Effect} \cite{yang2020vae} represents a fundamental trade-off in steganographic systems. it's the inverse relationship between \textbf{text quality} and \textbf{resistance to
-	statistical steganalysis} in generative steganography. Two components govern it:
+  statistical steganalysis} in generative steganography. Two components govern it:
 \begin{itemize}
-	\item \textbf{Perceptual imperceptibility}: fluency/naturalness of a single sentence,
-	      gauged by human ratings or perplexity (PPL).
-	\item \textbf{Statistical imperceptibility}: divergence between the distribution of stego and human text as measured by an
-	      automated steganalyzer.
+  \item \textbf{Perceptual imperceptibility}: fluency/naturalness of a single sentence,
+        gauged by human ratings or perplexity (PPL).
+  \item \textbf{Statistical imperceptibility}: divergence between the distribution of stego and human text as measured by an
+        automated steganalyzer.
 \end{itemize}
 
 Human social-media prose is casual and high-variance; it does not hug the optimal language-model peak.
@@ -72,21 +72,23 @@ Experiments show that the most fluent stego sentences are the first ones caught 
 
 \subsubsection{Limited Embedding Capacity}
 
-Text steganography faces a fundamental constraint: natural language offers far less redundancy than other media for hiding data\cite{yi2022alisa}. Its rigid semantic rules leave minimal room for covert encoding. Compounding this, traditional methods require sustained \textbf{minimum entropy} to function, yet real-world communication frequently exhibits \textbf{low- or zero-entropy} moments-highly predictable word sequences (e.g., "Tyrannosaurus Rex") where no natural alternatives exist. In these cases, rejection sampling fails outright \cite{kaptchuk2021meteor}. The brevity-driven nature of social media further compresses the already scarce embedding space \cite{liao2024co}.
+Even with advanced generative capabilities, LLMs cannot overcome natural language's fundamental low-redundancy constraint, which limits embedding capacity. This issue is acute in common applications such as social media and dialogue systems, where communication is brief or predictable. In low-entropy scenarios (e.g., replying to "Happy birthday!"), the model has few natural-sounding alternatives. Consequently, steganographic techniques like rejection sampling face higher failure rates, and channel capacity for hiding data diminishes significantly \cite{kaptchuk2021meteor, liao2024co}.
 
 \subsubsection{Poor Semantic Control and Contextual Drift}
 
-Early generative methods produced fluent but \textbf{semantically arbitrary} text, violating \textbf{cognitive imperceptibility} \cite{ding2023context}. By conditioning only on preceding tokens, these models generated replies that drifted from the original logic, producing irrelevant or repetitive content. On social media, a mismatched response (e.g., "Today is beautiful" to a steganography post) triggers immediate suspicion. Maintaining \textbf{long-term coherence} remains difficult when secret bits-not semantic intent-drive token selection.
+Early generative methods produced fluent but \textbf{semantically arbitrary} text, violating \textbf{cognitive imperceptibility} \cite{ding2023context}. By conditioning only on preceding tokens, these models generated replies that drifted from the original logic-a mismatch that triggers immediate suspicion on social media (e.g., replying "Today is beautiful" to a technical post). Many white-box, sampling-based techniques face a deeper problem: they must continue generating until an arbitrarily large payload is fully embedded. The model may exhaust its topic and terminate prematurely, or the user might provide a broad topic to sustain output, risking unnaturally verbose text that is highly detectable outside long-form media like blog posts. This raises a critical question often unaddressed: given a large payload like an image, how do these methods handle segmentation and embedding across messages without violating contextual norms?
+
+Generating long stego texts introduces further technical and security hurdles. Extended generation strains coherence and contextual consistency \cite{li2024semantic, xiang2023cpg}, and minor early deviations compound over time to degrade decoding accuracy \cite{steinebach2024natural, xu2024beyond}. This issue is magnified in low-entropy channels, where embedding even small messages requires impractically long cover text \cite{kaptchuk2021meteor}. The resulting verbosity is not merely inefficient; on platforms like social media where brevity is the norm, abnormally long posts signal anomalous activity and increase detection risk \cite{liao2024co}. Consequently, effective information load remains limited, with performance often diminishing when embedded messages exceed just a few tokens \cite{xu2024beyond}.
 
 \subsubsection{LLM-Specific Obstacles}
 
 Deploying steganography with LLMs introduces distinct challenges:
 \begin{itemize}
-	\item \textbf{Computational Burden:} 3–5× higher time and resource costs versus prior neural methods
-	\item \textbf{Black-Box Access:} Hosted APIs (whether proprietary or open-weight models) limit visibility into internal sampling probabilities, blocking white-box steganographic mappings. However, they provide significant advantages: access to state-of-the-art models that deliver substantially better text quality, faster generation speeds through optimized infrastructure, and minimal local resource requirements without the computational overhead of running large models locally
-	\item \textbf{Hallucinations:} Factually incorrect or nonsensical output can corrupt the covert bitstream or create detectable patterns
-	\item \textbf{Escalating Detection:} As LLM capabilities advance, so do machine learning-based \textbf{steganalysis} tools that distinguish synthetic from human text
-	\item \textbf{Data Fragility:} Lossy compression or incomplete transmission of stegotext causes irreversible bitstream corruption
+  \item \textbf{Computational Burden:} 3–5× higher time and resource costs versus prior neural methods
+  \item \textbf{Black-Box Access:} Hosted APIs (whether proprietary or open-weight models) limit visibility into internal sampling probabilities, blocking white-box steganographic mappings. However, they provide significant advantages: access to state-of-the-art models that deliver substantially better text quality, faster generation speeds through optimized infrastructure, and minimal local resource requirements without the computational overhead of running large models locally
+  \item \textbf{Hallucinations:} Factually incorrect or nonsensical output can corrupt the covert bitstream or create detectable patterns
+  \item \textbf{Escalating Detection:} As LLM capabilities advance, so do machine learning-based \textbf{steganalysis} tools that distinguish synthetic from human text
+  \item \textbf{Data Fragility:} Lossy compression or incomplete transmission of stegotext causes irreversible bitstream corruption
 \end{itemize}
 
 \subsubsection{Tokenization Mismatch}
@@ -101,7 +103,7 @@ Methods that rely on modifying the sampling probability distribution to embed se
 
 Additional limitations include:
 \begin{itemize}
-	\item \textbf{Data Integrity and Reversibility}: Some methods cannot perfectly recover the original cover text after message extraction \cite{zheng2022general, qiang2023natural}.
-	\item \textbf{Ethical Concerns}: Pre-trained LLMs may introduce biases, discrimination, or inappropriate content \cite{lin2024zero, bender2021dangers}.
-	\item \textbf{Provable Security}: Many NLP steganography works lack rigorous security analyses and fail to meet formal cryptographic definitions \cite{kaptchuk2021meteor}.
+  \item \textbf{Data Integrity and Reversibility}: Some methods cannot perfectly recover the original cover text after message extraction \cite{zheng2022general, qiang2023natural}.
+  \item \textbf{Ethical Concerns}: Pre-trained LLMs may introduce biases, discrimination, or inappropriate content \cite{lin2024zero, bender2021dangers}.
+  \item \textbf{Provable Security}: Many NLP steganography works lack rigorous security analyses and fail to meet formal cryptographic definitions \cite{kaptchuk2021meteor}.
 \end{itemize}
