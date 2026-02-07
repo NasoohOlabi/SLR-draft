@@ -3,41 +3,9 @@
 
 Current LLM-based steganographic techniques face several fundamental limitations and trade-offs that constrain their practical deployment and security guarantees. Understanding these limitations is crucial for advancing the field and developing more robust solutions.
 
-\subsubsection{Key Limitations}
 
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{3cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
-    \hline
-    \textbf{Limitation}  & \textbf{Impact}         & \textbf{Frequency} & \textbf{Severity} & \textbf{Examples}             \\
-    \hline
-    Psic Effect          & 1-2 bpw loss            & 80\%               & High              & DAIRstega, FreStega           \\
-    \hline
-    Attack Vulnerability & 5-50\% drop             & 70\%               & High              & Ensemble WM, TrojanStego      \\
-    \hline
-    Low Capacity         & <1 bpt in short texts   & 60\%               & Medium            & Social media applications     \\
-    \hline
-    Segmentation Issues  & Ambiguity in extraction & 40\%               & Medium            & SparSamp, BPE tokenization    \\
-    \hline
-    Ethical Concerns     & Unaddressed bias        & 90\%               & High              & TrojanStego, misuse potential \\
-    \hline
-  \end{tabular}
-  \caption{Key limitations and their impact across studies}
-  \label{tab:limitations}
-\end{table}
 
-\subsubsection{The Psic Effect: A Fundamental Trade-off}
-
-The Perceptual-Statistical Imperceptibility Conflict (Psic Effect) represents the most critical limitation, affecting 80\% of studies. This fundamental trade-off occurs when optimizing for one aspect of imperceptibility degrades the other:
-
-\begin{itemize}
-  \item \textbf{Perceptual Quality vs. Statistical Security:} Optimizing for low perplexity (PPL) often increases statistical detectability
-  \item \textbf{Capacity Impact:} The Psic Effect results in an average capacity loss of 1-2 bits per word
-  \item \textbf{Detection Resistance:} Higher capacity typically reduces anti-steganalysis accuracy
-\end{itemize}
-
-\textbf{DAIRstega} exemplifies this trade-off, where higher capacity reduces anti-steganalysis accuracy to 58\%, demonstrating the inherent tension between different imperceptibility requirements.
+\subsubsection{The Perceptual-Statistical Imperceptibility Conflict (Psic Effect)} constitutes a fundamental paradigm in generative steganography wherein optimization for perceptual fidelity inevitably degrades statistical security. This tension arises because aggressive minimization of perplexity (PPL) yields text with unnaturally ``sharp'' distributional characteristics that deviate markedly from the high variance inherent to human writing, thereby increasing vulnerability to statistical detection. Consequently, as the embedding rate (bits per word) escalates, the model's forced selection of lower-probability tokens to encode payload systematically degrades text quality; however, this same expansion of the candidate pool paradoxically enhances anti-steganalysis resistance. At higher capacities, the resulting output distribution asymptotically approaches the chaotic, high-entropy patterns of natural language, effectively camouflaging the steganographic signal within the statistical noise of legitimate human text \cite{yang2020vae}.
 
 \subsubsection{Attack Vulnerability and Security Concerns}
 
@@ -49,8 +17,6 @@ Current techniques demonstrate significant vulnerability to various attacks:
   \item \textbf{Statistical Analysis:} Advanced statistical methods can detect steganographic patterns
   \item \textbf{Adversarial Examples:} Malicious inputs can compromise steganographic systems
 \end{itemize}
-
-Examples include \textbf{Ensemble Watermarks}, which achieves 98\% detection rate but drops to 95\% following paraphrase attacks, and \textbf{TrojanStego}, which shows a dramatic drop from 97\% to 65\% under certain attack conditions.
 
 \subsubsection{Capacity Limitations in Short Texts}
 
