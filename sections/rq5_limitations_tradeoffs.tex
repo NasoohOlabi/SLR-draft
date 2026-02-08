@@ -1,134 +1,69 @@
 \subsection{Limitations and Trade-offs in Current Techniques (RQ5)}
 \label{subsec:rq5}
 
-Current LLM-based steganographic techniques face several fundamental limitations and trade-offs that constrain their practical deployment and security guarantees. Understanding these limitations is crucial for advancing the field and developing more robust solutions.
+\subsubsection{The Perceptual-Statistical Imperceptibility Conflict (PSIC Effect)}
 
-
-
-\subsubsection{The Perceptual-Statistical Imperceptibility Conflict (Psic Effect)} constitutes a fundamental paradigm in generative steganography wherein optimization for perceptual fidelity inevitably degrades statistical security. This tension arises because aggressive minimization of perplexity (PPL) yields text with unnaturally ``sharp'' distributional characteristics that deviate markedly from the high variance inherent to human writing, thereby increasing vulnerability to statistical detection. Consequently, as the embedding rate (bits per word) escalates, the model's forced selection of lower-probability tokens to encode payload systematically degrades text quality; however, this same expansion of the candidate pool paradoxically enhances anti-steganalysis resistance. At higher capacities, the resulting output distribution asymptotically approaches the chaotic, high-entropy patterns of natural language, effectively camouflaging the steganographic signal within the statistical noise of legitimate human text \cite{yang2020vae}.
+Generative steganography faces an intrinsic tension: optimizing for perceptual fidelity degrades statistical security. Aggressive perplexity (PPL) minimization produces unnaturally ``sharp'' distributions that deviate from high-variance human writing, increasing detection vulnerability. Higher embedding rates force selection of lower-probability tokens, degrading text quality but expanding the candidate pool to enhance anti-steganalysis resistance. At elevated capacities, output distributions asymptotically approach natural language's high-entropy chaos, camouflaging signals within legitimate statistical noise \cite{yang2020vae}.
 
 \subsubsection{Attack Vulnerability and Security Concerns}
 
-Current techniques demonstrate significant vulnerability to various attacks:
+Current techniques exhibit a substantial attack surface across multiple vectors, including word-level deletions and lexical substitutions that disrupt dependency parsing. Polishing and re-translation attacks progressively erase watermarks; at high intensities, these structural changes can reduce detection performance to an F1 score of 0.5, rendering the watermark undetectable. Furthermore, adversarial machine learning enables the extraction of secret model parameters from black-box systems, potentially compromising integrity entirely. To mitigate these risks, Variational Auto-Encoders (VAE) are employed to learn the statistical distribution of normal text, aiming to reduce the KL divergence between cover and stego distributions and resolve the conflict between perceptual and statistical imperceptibility \cite{hao2025robust}.
 
-\begin{itemize}
-  \item \textbf{Paraphrasing Attacks:} Detection rates drop by 5-50\% when text is paraphrased
-  \item \textbf{Fine-tuning Attacks:} Model fine-tuning can significantly degrade steganographic performance
-  \item \textbf{Statistical Analysis:} Advanced statistical methods can detect steganographic patterns
-  \item \textbf{Adversarial Examples:} Malicious inputs can compromise steganographic systems
-\end{itemize}
+\subsubsection{Capacity and Contextual Constraints}
 
-\subsubsection{Capacity Limitations in Short Texts}
+Short, low-entropy contexts severely constrain embedding capacity. Social media posts and technical documents offer minimal redundancy for hiding \cite{liao2024co}, while semantic preservation requirements compete directly with information embedding objectives. Brief texts further lack sufficient contextual support for effective steganographic operations \cite{ding2023context}.
 
-Hiding information in short, low-entropy texts presents significant challenges:
+\subsubsection{Segmentation and Tokenization Barriers}
 
-\begin{itemize}
-  \item \textbf{Social Media Posts:} Limited capacity in short, informal text
-  \item \textbf{Low-Entropy Content:} Technical or formal documents offer limited hiding space
-  \item \textbf{Semantic Constraints:} Maintaining meaning while embedding information
-  \item \textbf{Context Requirements:} Short texts may lack sufficient context for effective hiding
-\end{itemize}
+Subword tokenization introduces critical extraction ambiguities that are \textbf{fundamental to white-box steganographic methods}. Byte-pair encoding splits words unpredictably, creating multiple valid segmentations that corrupt message boundaries and cause decoding failures. These ambiguities impose hard capacity caps regardless of algorithmic sophistication---\textbf{SparSamp} suffers accuracy degradation from token ambiguity (TA), while \textbf{ShiMer} cannot effectively boost entropy due to tokenization constraints \cite{qi2024provably}.
 
-\subsubsection{Segmentation and Tokenization Issues}
+The core issue lies in \textbf{segmentation and tokenization barriers}—also termed \textbf{segmentation ambiguity}—which persist \textbf{even when sender and receiver employ identical Large Language Models and tokenizers}. Because modern LLMs decompose words into subword units, and vocabularies frequently contain both complete words and their constituent components, any given text string admits multiple valid token representations. This multiplicity is compounded by the \textbf{detokenization-retokenization gap}: senders must convert tokens to plain text to conceal their transmission, while receivers must subsequently retokenize this text to recover hidden messages. Despite shared tokenization rules, receivers may select different token sequences than senders intended—senders might encode messages using separate tokens (" any" and "thing"), only for receivers to retokenize "anything" as a \textbf{single token} (" anything"). Because LLMs operate \textbf{autoregressively}, a single divergent token choice alters the probability distribution for all subsequent predictions, causing \textbf{total decoding failure} for the remainder of the message. To address this \textbf{white-box-specific challenge}, researchers propose \textbf{SyncPool}, a mechanism that aggregates ambiguous tokens into pools and employs synchronized random number generators to ensure both parties select \textbf{identical tokens}, thereby eliminating ambiguity and guaranteeing reliable message extraction. \cite{qi2024provably}
 
-Segmentation ambiguities, primarily from subword tokenization, create ambiguity in message extraction:
 
-\begin{itemize}
-  \item \textbf{BPE Tokenization:} Byte-pair encoding can split words unpredictably
-  \item \textbf{Token Ambiguity:} Multiple valid segmentations of the same text
-  \item \textbf{Extraction Errors:} Ambiguous tokenization leads to message extraction failures
-  \item \textbf{Capacity Caps:} Tokenization limits maximum achievable capacity
-\end{itemize}
+% \subsubsection{Ethical Risks and Misuse Potential}
 
-\textbf{SparSamp} demonstrates these issues, where token ambiguity (TA) reduces accuracy, and \textbf{ShiMer} cannot effectively boost entropy due to tokenization constraints.
+% The field operates within an evolving ethical landscape where pre-trained LLMs risk perpetuating harmful biases, including political bias, gender discrimination, and insults \cite{lin2024zero}. The dual-use potential of generative technology enables malicious applications such as fake news, misinformation, and academic dishonesty, with significant societal implications. While the capacity to embed secrets directly into digital carriers enables covert communication to bypass surveillance, this same capability is increasingly misused by unauthorized parties, necessitating text provenance tracing for authenticity verification \cite{wu2024generative,xu2024beyond}.
 
-\subsubsection{Ethical Concerns and Misuse Potential}
+\subsubsection{White-box versus Black-box Trade-offs}
 
-The field faces significant ethical challenges that remain largely unaddressed:
+The architectural choice between white-box and black-box access paradigms involves fundamental trade-offs. White-box methods require shared language models and training vocabularies, achieving statistical imperceptibility through distribution learning (e.g., VAE-Stega), but suffer from low accessibility and deployment complexity. Black-box alternatives (e.g., LLM-Stega) offer high accessibility via standard user interfaces with capacity of 5.93 bpw and PPL of 165.76, yet exhibit the "Psic Effect" where quality and security conflict. These dimensions are orthogonal to methodological hybrids: \textbf{Hi-Stega}\cite{wang2023hi} combines retrieval-based and generation-based paradigms; \textbf{Rewriting-Stego}\cite{li2023rewriting} merges edit-based and generation-based approaches using a denoising Seq2Seq model (BART); \textbf{Joint Linguistic Steganography}\cite{ding2023joint} integrates conditional generation with BERT-based substitution and hybrid temporal-spatial feature extraction via Graph Attention Networks; \textbf{Co-Stega}\cite{liao2024co} fuses efficient retrieval with generative replies; and \textbf{Patient-Arithmetic}\cite{ding2023context} in NMT-Stega hybridizes arithmetic coding with waiting mechanisms to avoid probabilistic cliffs during translation.
 
-\begin{itemize}
-  \item \textbf{Bias and Discrimination:} Generated content may perpetuate harmful biases
-  \item \textbf{Misuse Potential:} Techniques can be used for malicious purposes
-  \item \textbf{Privacy Violations:} Steganographic systems may compromise user privacy
-  \item \textbf{Regulatory Compliance:} Lack of frameworks for responsible use
-\end{itemize}
-
-\textbf{TrojanStego} exemplifies these concerns, as it can embed secrets directly into LLM outputs, potentially enabling data exfiltration and other malicious activities.
-
-\subsubsection{White-box vs. Black-box Trade-offs}
-
-The choice between white-box and black-box approaches involves fundamental trade-offs:
-
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
-    \hline
-    \textbf{Aspect}  & \textbf{White-box}  & \textbf{Black-box} & \textbf{Hybrid}       \\
-    \hline
-    Security         & High (95-99\%)      & Medium (79-91\%)   & Medium-High (90-95\%) \\
-    \hline
-    Accessibility    & Low                 & High               & Medium                \\
-    \hline
-    Capacity         & High (1.1-5.98 bpt) & Medium (5.37 bpw)  & Medium (2.0-4.0 bpt)  \\
-    \hline
-    Imperceptibility & High (PPL: 3-8)     & Low (PPL: 168-363) & Medium (PPL: 50-150)  \\
-    \hline
-    Deployment       & Difficult           & Easy               & Moderate              \\
-    \hline
-  \end{tabular}
-  \caption{Trade-offs between white-box, black-box, and hybrid approaches}
-  \label{tab:approach_tradeoffs}
-\end{table}
 
 \subsubsection{Computational and Resource Constraints}
 
-Computational overhead, stemming from performance optimization, often conflicts with computational efficiency:
+Performance optimization conflicts directly with computational efficiency \cite{kaptchuk2021meteor}. Superior results demand increased resources and memory, particularly for large models with external knowledge bases \cite{ding2023discop}. Real-time latency constraints limit optimization depth, while performance degradation emerges at operational scale. Variable length sampling and rejection sampling significantly increase encoding times, and LLM-based steganography requires 3x to 5x more time than prior methods \cite{qi2024provably}. The \textbf{Meteor} system exemplifies hardware constraints, running nearly 50$\times$ slower on mobile devices compared to GPU environments.
 
-\begin{itemize}
-  \item \textbf{Computational Overhead:} Better results typically require more computational resources
-  \item \textbf{Memory Requirements:} Large models and external knowledge increase memory needs
-  \item \textbf{Real-time Constraints:} Latency requirements may limit optimization options
-  \item \textbf{Scalability Issues:} Performance may degrade with increased scale
-\end{itemize}
+\paragraph{Black-Box State Considerations}
+Most users operate in a \textbf{black-box state}, accessing LLMs solely through APIs or UIs without internal visibility. This restriction denies access to training vocabulary and sampling probabilities essential for traditional white-box steganographic mapping. Consequently, researchers have developed \textbf{black-box generative steganography} (e.g., LLM-Stega) utilizing prompts and keyword sets rather than direct logit manipulation. The black-box nature has also shifted watermarking toward \textbf{post-hoc injection}, embedding marks into pre-generated text since the generation process itself remains unmodifiable by end users.
 
-\textbf{UTF} demonstrates this trade-off, showing a 5\% drop in HellaSwag performance, while \textbf{FreStega} requires corpus access (100 samples) for optimal performance.
 
-\subsubsection{Unresolved Challenges and Future Needs}
+\subsubsection{Critical Unresolved Challenges}
 
-Several critical challenges remain inadequately addressed:
+Foundational gaps persist across the research landscape: theoretical security guarantees remain unestablished, resilience to advanced attacks is limited, evaluation frameworks lack standardization, responsible development guidelines are absent, non-English performance lags substantially, and real-world deployment testing remains insufficient.
 
-\begin{itemize}
-  \item \textbf{Provable Security:} Lack of theoretical foundations for security guarantees
-  \item \textbf{Robustness:} Limited resilience to advanced attack methods
-  \item \textbf{Standardization:} Absence of common evaluation frameworks
-  \item \textbf{Ethical Frameworks:} Missing guidelines for responsible development and use
-  \item \textbf{Cross-lingual Support:} Poor performance in non-English languages
-  \item \textbf{Real-world Deployment:} Limited testing in actual deployment scenarios
-\end{itemize}
+\subsubsection{Quantified Impact Summary}
 
-\subsubsection{Quantitative Impact Analysis}
+Quantitative evidence highlights several constraints on current steganographic systems. The Perceptual-Statistical Imperceptibility Conflict (PSIC) effect creates a trade-off where increasing the embedding rate (e.g., to ~5 bpw) strengthens anti-steganalysis but significantly degrades perceptual text quality \cite{yang2020vae}. Attack vulnerability is notable; for example, adaptive attacks can reduce bit accuracy to near-random levels (~0.6) \cite{ji2024principled}. Segmentation ambiguity and entropy variability in communication channels are major impediments that lead to decoding failures and restricted practical capacity \cite{kaptchuk2021meteor}. Finally, computational optimizations induce significant overhead, with some reordering algorithms causing up to 69\% performance degradation in processing speed \cite{ding2023discop}.
 
-Table \ref{tab:quantified_limitations} provides a quantitative overview of the most significant trade-offs:
 
-\begin{table}[ht]
-  \centering
-  \small
-  \begin{tabular}{|p{2.8cm}|p{2.8cm}|p{6.4cm}|}
-    \hline
-    \textbf{Limitation/Trade-off} & \textbf{Quantified Impact}           & \textbf{Examples}                                             \\
-    \hline
-    Psic Effect                   & $\sim$1-2 bpw loss                   & DAIRstega: Higher capacity reduces anti-steg Acc to 58\%      \\
-    \hline
-    Attack Vulnerability          & 5-50\% detection drop                & Ensemble WM: 98\% to 95\%; TrojanStego: 97\% to 65\%          \\
-    \hline
-    Entropy/Ambiguity             & Capacity cap $\sim$1023 bits         & SparSamp: TA reduces accuracy; ShiMer: Cannot boost entropy   \\
-    \hline
-    Ethical/Overhead              & Performance degradation $\sim$5-11\% & UTF: HellaSwag drop 5\%; FreStega: Needs corpus (100 samples) \\
-    \hline
-  \end{tabular}
-  \caption{Quantified impact of key limitations and trade-offs}
-  \label{tab:quantified_limitations}
-\end{table}
+% \begin{table}[ht]
+%   \centering
+%   \small
+%   \begin{tabular}{|p{2.8cm}|p{2.8cm}|p{6.4cm}|}
+%     \hline
+%     \textbf{Limitation}  & \textbf{Quantified Impact}   & \textbf{Examples}                                             \\
+%     \hline
+%     PSIC Effect          & $\sim$1--2 bpw loss          & DAIRstega: Higher capacity reduces anti-steg Acc to 58\%      \\
+%     \hline
+%     Attack Vulnerability & 5--50\% detection drop       & Ensemble WM: 98\% to 95\%; TrojanStego: 97\% to 65\%          \\
+%     \hline
+%     Entropy/Ambiguity    & Capacity cap $\sim$1023 bits & SparSamp: TA reduces accuracy; ShiMer: Cannot boost entropy   \\
+%     \hline
+%     Ethical/Overhead     & $\sim$5--11\% degradation    & UTF: HellaSwag drop 5\%; FreStega: Needs corpus (100 samples) \\
+%     \hline
+%   \end{tabular}
+%   \caption{Quantified impact of key limitations and trade-offs}
+%   \label{tab:quantified_limitations}
+% \end{table}
 
-Understanding these limitations and trade-offs is essential for advancing the field and developing more robust, secure, and practical steganographic systems. Future research must address these challenges to enable widespread adoption and responsible use of LLM-based steganography.
+% Resolving these constraints is essential for developing robust, secure, and practical steganographic systems capable of responsible real-world adoption.
