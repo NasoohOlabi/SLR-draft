@@ -1,5 +1,20 @@
 # To-Do List: Writing Enhancements for the SLR Draft
 
+## Added Tasks from Editorial Review (Feb 8, 2026)
+
+- [ ] **Roadmap Alignment (Section 1.5):** Update the paper structure description to correctly map Results to Section 5, Discussion to Section 6, and Conclusion to Section 7.
+- [ ] **Citation Population (Section 6 - Results):**
+  - [ ] `rq1_literature_state.tex`: Fill `[citation/reference needed]` for GPT-3/4, open model availability, GPT-2, LLaMA2, and LLaMA3.
+  - [ ] `rq2_applications.tex`: Fill `[citation/reference needed]` for classic steganography limitations.
+- [ ] **Content Verification:** Verify "Calgacus protocol" in `rq2_applications.tex`. (Internal note: Possible hallucination or missing source).
+- [ ] **Results Cleanup:** Remove extensive commented-out feedback blocks and internal notes from `rq2_applications.tex` and other RQ files.
+- [ ] **Table Formatting:** ensure vertical padding and consistency in the generated tables (currently in Section 6/Appendix).
+
+---
+
+# To-Do List: Writing Enhancements for the SLR Draft
+
+
 This action plan focuses on refining the narrative, deepening the analysis, and ensuring the academic rigor and clarity of your systematic literature review.
 
 ---
