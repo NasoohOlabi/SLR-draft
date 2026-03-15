@@ -1,6 +1,8 @@
 \subsection{Limitations and Trade-offs in Current Techniques (RQ5)}
 \label{subsec:rq5}
 
+This subsection consolidates the practical limitations previously introduced in the background discussion and reframes them as findings from the reviewed literature. Across the surveyed studies, the main constraints recur around imperceptibility, effective payload, semantic coherence, tokenization reliability, deployment assumptions, and attack robustness.
+
 \subsubsection{The Perceptual-Statistical Imperceptibility Conflict (PSIC Effect)}
 
 Generative steganography faces an intrinsic tension: optimizing for perceptual fidelity degrades statistical security. Aggressive perplexity (PPL) minimization produces unnaturally ``sharp'' distributions that deviate from high-variance human writing, increasing detection vulnerability. Higher embedding rates force selection of lower-probability tokens, degrading text quality but expanding the candidate pool to enhance anti-steganalysis resistance. At elevated capacities, output distributions asymptotically approach natural language's high-entropy chaos, camouflaging signals within legitimate statistical noise \cite{yang2020vae}.
@@ -12,6 +14,8 @@ Current techniques exhibit a substantial attack surface across multiple vectors,
 \subsubsection{Capacity and Contextual Constraints}
 
 Short, low-entropy contexts severely constrain embedding capacity. Social media posts and technical documents offer minimal redundancy for hiding \cite{liao2024co}, while semantic preservation requirements compete directly with information embedding objectives. Brief texts further lack sufficient contextual support for effective steganographic operations \cite{ding2023context}.
+
+Early generative methods also produced fluent but semantically arbitrary text, violating cognitive imperceptibility \cite{ding2023context}. When generation is conditioned only on local token history, the output may drift away from the source topic or conversational logic, which is especially suspicious in low-entropy channels such as social media replies. This contextual drift worsens when methods must keep generating until an arbitrarily large payload is fully embedded: texts become unnaturally long, coherence decays over time, and practical payload efficiency drops even when reported bit capacity appears high \cite{li2024semantic,xiang2023cpg,steinebach2024natural,xu2024beyond}.
 
 \subsubsection{Segmentation and Tokenization Barriers}
 
@@ -33,13 +37,15 @@ The architectural choice between white-box and black-box access paradigms involv
 
 Performance optimization conflicts directly with computational efficiency \cite{kaptchuk2021meteor}. Superior results demand increased resources and memory, particularly for large models with external knowledge bases \cite{ding2023discop}. Real-time latency constraints limit optimization depth, while performance degradation emerges at operational scale. Variable length sampling and rejection sampling significantly increase encoding times, and LLM-based steganography requires 3x to 5x more time than prior methods \cite{qi2024provably}. The \textbf{Meteor} system exemplifies hardware constraints, running nearly 50$\times$ slower on mobile devices compared to GPU environments.
 
+LLM-specific deployment obstacles compound these costs. Hallucinations and nonsensical continuations can corrupt the covert bitstream or create detectable artifacts, while lossy transmission, editing, or platform-side normalization can irreversibly damage extraction. As model quality improves, steganalysis systems also improve, producing an arms race in which better generation does not automatically translate into better security.
+
 \paragraph{Black-Box State Considerations}
 Most users operate in a \textbf{black-box state}, accessing LLMs solely through APIs or UIs without internal visibility. This restriction denies access to training vocabulary and sampling probabilities essential for traditional white-box steganographic mapping. Consequently, researchers have developed \textbf{black-box generative steganography} (e.g., LLM-Stega) utilizing prompts and keyword sets rather than direct logit manipulation. The black-box nature has also shifted watermarking toward \textbf{post-hoc injection}, embedding marks into pre-generated text since the generation process itself remains unmodifiable by end users.
 
 
 \subsubsection{Critical Unresolved Challenges}
 
-Foundational gaps persist across the research landscape: theoretical security guarantees remain unestablished, resilience to advanced attacks is limited, evaluation frameworks lack standardization, responsible development guidelines are absent, non-English performance lags substantially, and real-world deployment testing remains insufficient.
+Foundational gaps persist across the research landscape: theoretical security guarantees remain unestablished, resilience to advanced attacks is limited, evaluation frameworks lack standardization, responsible development guidelines are absent, non-English performance lags substantially, and real-world deployment testing remains insufficient. Several studies also surface unresolved concerns around reversibility, bias, and misuse potential, indicating that robust engineering alone will not be enough without clearer security and governance models \cite{zheng2022general,qiang2023natural,lin2024zero,bender2021dangers}.
 
 \subsubsection{Quantified Impact Summary}
 
