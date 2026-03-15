@@ -1,48 +1,39 @@
 \subsection{Integration of External Knowledge Sources (RQ4)}
 \label{subsec:rq4}
 
-The integration of external knowledge sources has emerged as a crucial area of research in LLM-based steganography, with 65\% of studies incorporating some form of external information. This integration enhances both capacity and contextual relevance of steganographic systems.
+The integration of external knowledge sources has emerged as a recurring design pattern in LLM-based steganography. Across the reviewed studies, external information is used primarily to improve contextual plausibility, maintain topic consistency, and in some cases expand the effective space available for embedding.
 
 
 \begin{table}[ht]
   \centering
   \small
-  \begin{tabular}{|p{3cm}|p{1cm}|p{2cm}|p{2cm}|p{4cm}|}
+  \begin{tabular}{|p{3cm}|p{2.2cm}|p{3cm}|p{5.2cm}|}
     \hline
-    \textbf{Knowledge Type} & \textbf{Usage} & \textbf{Capacity Gain} & \textbf{Context Improvement} & \textbf{Examples}              \\
+    \textbf{Knowledge Type} & \textbf{Typical Role} & \textbf{Primary Benefit} & \textbf{Examples}              \\
     \hline
-    Semantic Resources      & 40\%           & +15-25\%               & High                         & Co-Stega, Knowledge Graphs     \\
+    Semantic Resources      & Topic and entity guidance & Better semantic control      & Co-Stega, knowledge-graph guided methods     \\
     \hline
-    Domain Corpora          & 35\%           & +10-20\%               & Medium                       & FreStega, Specialized Datasets \\
+    Domain Corpora          & Domain adaptation         & Better stylistic fit         & FREmax, specialized datasets \\
     \hline
-    Prompt Engineering      & 45\%           & +5-15\%                & High                         & Zero-shot methods              \\
+    Prompt Engineering      & In-context control        & Better task alignment        & Zero-shot methods              \\
     \hline
-    Context Retrieval       & 30\%           & +20-30\%               & Very High                    & Co-Stega, RAG integration      \\
+    Context Retrieval       & Evidence or example retrieval & Higher contextual plausibility & Co-Stega, retrieval-augmented pipelines      \\
     \hline
   \end{tabular}
-  \caption{External knowledge integration patterns and benefits}
+  \caption{Representative patterns of external knowledge integration}
   \label{tab:knowledge_integration}
 \end{table}
 
 \subsubsection{Semantic Resources Integration}
 
-Instead of asking the LLM to improvise, modern steganographic pipelines hand it a curated set of “conversation props” drawn from outside the model. A fast retriever first fetches a real tweet or headline that already whispers part of the secret; this authentic fragment becomes the semantic runway \cite{wang2023hi}. A lightweight knowledge-graph layer then appiles a handful of entity–relation–entity triples that tell the generator which facts must appear, guaranteeing long-range coherence without extra training \cite{li2024semantic}. Finally, an external n-gram frequency table nudges the softmax so that the token distribution clones everyday human chatter, erasing the statistical scar that detectors hunt for \cite{pang2024fremax}. The LLM never changes; it just speaks through a stack of plug-ins that supply context, vocabulary variety and statistical camouflage-turning a solo monologue into a culturally grounded, high-capacity, statistically invisible conversation.
+Rather than relying only on the internal prior of the language model, several recent systems inject external guidance during generation. Retrieved posts, headlines, or comments can provide a realistic discourse context for the cover text \cite{wang2023hi}. Knowledge-graph triples can constrain the content that should appear in the output, improving semantic consistency over longer spans \cite{li2024semantic}. Frequency-based external statistics can also be used to steer generation toward distributions that better match the target channel \cite{pang2024fremax}. Taken together, these strategies show that contextual conditioning has become an important mechanism for balancing plausibility, control, and payload.
 
 
 \subsubsection{Domain Corpora Integration}
 
+Another recurring pattern is the use of domain-specific corpora. Fine-tuning or conditioning on domain data helps align the generated text with the vocabulary, stylistic conventions, and topical expectations of the intended communication channel. This pattern appears in systems such as VAE-Stega \cite{yang2020vae}, Meteor \cite{kaptchuk2021meteor}, Hi-Stega \cite{wang2023hi}, FREmax \cite{pang2024fremax}, Rewriting-Stego \cite{li2023rewriting}, and Summarization-Stego \cite{zhang2024controllable}. Although the underlying architectures differ, these methods share the assumption that better alignment with a target domain improves both naturalness and practical usability.
 
-Linguistic steganography now works by letting a model \textbf{absorb} a domain instead of hand-crafting rules.
-
-Feed it enough examples-2.6 M tweets, 1.2 M IMDB reviews \cite{10.5555/2002472.2002491}, BookCorpus \cite{Zhu_2015_ICCV}, 530 k HTTP headers, 3.8 M news articles-and the internal weights re-shape themselves until the generated text statistically \textbf{is} that channel.
-
-VAE-Stega \cite{yang2020vae}, Meteor \cite{kaptchuk2021meteor}, Hi-Stega \cite{wang2023hi}, FREmax \cite{pang2024fremax}, Rewriting-Stego \cite{li2023rewriting} and Summarization-Stego \cite{zhang2024controllable} all follow this recipe: a specialised encoder/decoder (BERT, LSTM, GPT-2, BART) is fine-tuned on the target corpus so that every sentence it later produces already carries the right n-gram fingerprint, long-tail rare-word spectrum, or “news→comment” coherence.
-
-Even hybrid systems such as Joint Linguistic Steganography add graph attention and CRF layers, but they still rely on the same premise-see enough real data and the distribution sticks.
-
-When re-training is impossible or undesirable, black-box methods move the “domain memory” from parameters to prompts.
-Zero-shot Generative drops a handful of raw IMDB/Twitter samples into the context window and tells the LLM “write like this”; LLM-Stega wraps the request in an elaborated theme prompt (“entertainment news”); Co-Stega retrieves actual posts from the past seven days and feeds them in via an entropy-boosting template; Semantic Controllable injects Knowledge-Graph triples to steer long-form generation; ChatGPT Steganography simply lays down a microscopic rule set (exact word sequence, no plurals, no derivations) and lets the commercial API do the rest.
-No weights are changed, yet the output lands inside the desired statistical valley because the context itself has become the temporary training data.
+When additional training is not possible, black-box methods move this domain adaptation into the prompt or retrieval stage. Zero-shot approaches provide examples directly in the context window, LLM-Stega frames the generation request with topic-constrained prompts, and Co-Stega retrieves recent posts to anchor the generated reply in a plausible local context \cite{lin2024zero,wu2024generative,liao2024co}. In these settings, external context functions as a lightweight substitute for model adaptation.
 
 % \subsubsection{Prompt Engineering and Context Guidance}
 

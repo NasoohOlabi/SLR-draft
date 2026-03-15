@@ -1,59 +1,11 @@
 \subsection{Applications of LLM-based Steganographic Techniques (RQ2)}
 \label{subsec:rq2}
 
-The review identified six primary application domains, with covert communication being the dominant use case. The analysis reveals several distinct applications for LLM-based steganography, each with specific characteristics and requirements.
+The reviewed studies show that \textbf{covert communication} remains the dominant application of LLM-based linguistic steganography. In this setting, secret information is embedded into seemingly benign text so that the message can pass through ordinary communication channels with minimal suspicion. LLM-based methods improve this use case by producing more fluent and contextually plausible outputs than earlier rule-based or local-substitution systems \cite{yang2020vae,kaptchuk2021meteor,wu2024generative}.
 
+Within this application space, the reviewed papers explore several operational variants. Some methods generate stego text from scratch using a shared model or sampling strategy \cite{ding2023discop,kaptchuk2021meteor}. Others rely on paraphrasing or rewriting so that a pre-existing cover text can be transformed while preserving its apparent meaning \cite{li2023rewriting}. Recent black-box approaches such as \textbf{LLM-Stega} show that covert communication can also be implemented through commercial or hosted interfaces without direct access to token probabilities, using prompt design, keyword sets, and reject-sampling style verification instead \cite{wu2024generative}. Context-aware systems such as \textbf{Co-Stega} and \textbf{Hi-Stega} further adapt the generated text to specific domains, topics, or social settings in order to improve plausibility and increase effective payload \cite{liao2024co,wang2023hi}.
 
-LLM-based steganographic techniques embed covert information within seemingly benign text, with applications spanning \textbf{secure communication}. This enables secure clandestine messaging in environments where classical steganography was too limited or suspicious [citation/reference needed]. These techniques also extend to \textbf{intellectual property protection} and \textbf{forensic linguistics}. The Calgacus protocol \cite{norelli2025llms} demonstrates how secret messages can be hidden inside different cover text of identical length by matching token rank sequences, enabling political critiques to masquerade as innocuous product reviews, while black-box methods like LLM-Stega operate through commercial APIs using encrypted keyword mapping and reject sampling \cite{wu2024generative}. For \textbf{intellectual property}, watermarking via logit biasing \cite{kirchenbauer2023watermark} embeds imperceptible statistical signals that identify AI authorship, attribute harmful content to specific users, and filter synthetic data to prevent model collapse. In \textbf{forensic linguistics}, adversarial stylometry allows LLMs to mask author identity or imitate others by adjusting stylistic features, reducing forensic tool accuracy to random guessing-protecting whistleblowers while enabling impersonation\cite{brennan2012adversarial,mikros2025large}.
-
-These same techniques pose significant risks to AI safety and cybersecurity, bypassing governance mechanisms and enabling sophisticated attacks. The "Linguistic Trojan Horse" embeds unsafe content in benign responses to evade safety filters, while Chain-of-Thought auditing reveals that models can hide true reasoning in seemingly innocuous steps, complicating oversight and enabling covert multi-agent collusion. In cybersecurity, steganographic prompt injection in vision-language models achieves over 31\% success by hiding malicious instructions in images, while SteganoBackdoor embeds semantic triggers in training data with 99\% success at low poisoning rates. Model weights can be exfiltrated through subtle token variations, and watermark stealing enables spoofing and scrubbing attacks that bypass accountability measures. Detection methods include cross-model probability scoring, low-entropy token analysis, and symbolic anomaly detection, though these face ongoing vulnerabilities that demand adaptive defense architectures \cite{kuo2025h,zolkowski2025early,menke2025annotating,jiang2025safechain}.
-
-% The sources provide strong support for several of your claims regarding **secure communication** and **intellectual property protection**, specifically concerning **black-box methods** and **logit-based watermarking**. However, some specific terms and protocols (like Calgacus and forensic linguistics) are not explicitly detailed in the provided materials.
-
-% Supported Claims
-
-% *   **LLM-Based Steganography for Secure Communication:** Steganography is used to conceal secret messages within ordinary carriers to bypass censorship and ensure **behavioral security**. LLMs are favored as steganographic samplers because they approximate high-dimensional natural language distributions, making the "stegotext" look like human-written content.
-% *   **Black-Box Methods (LLM-Stega):** The sources explicitly describe **LLM-Stega** as a black-box method that generates stego texts using Large Language Model user interfaces (UIs) without requiring internal model parameters. It embeds messages by constructing a **keyword set** (including subjects, predicates, objects, and emotions) and using an **encrypted steganographic mapping**. It also employs a feedback mechanism based on **reject sampling** to ensure the secret information is extracted accurately.
-% *   **Intellectual Property (IP) and Watermarking:** Watermarking is confirmed as a primary technique for **tracing the provenance** of text and identifying LLM authorship to defend against IP theft.
-% *   **Logit-Based Watermarking:** The sources describe a method that manipulates token sampling by creating a "green list" of tokens. These green tokens receive a **positive adjustment in their logits** (logit biasing) to increase their selection probability, allowing authorized detectors to identify the watermark. This is used to attribute content and verify AI involvement.
-
-% Claims with Partial or No Source Support
-
-% *   **Calgacus Protocol:** There is **no mention** of the "Calgacus protocol" or matching token rank sequences to turn political critiques into product reviews in the provided sources.
-% *   **Forensic Linguistics and Adversarial Stylometry:** While the sources do not use the terms "**forensic linguistics**" or "**adversarial stylometry**," they do note that LLMs are capable of **nuanced linguistic mimicry** and can generate text that is indistinguishable from human writing in terms of style, coherence, and fluency. This mimicry is used to improve the "cognitive-imperceptibility" of steganography so that text conforms to expected communication patterns.
-% *   **Model Collapse:** The specific claim that watermarking is used to filter synthetic data to prevent "**model collapse**" is not present in the sources, although tracing provenance to identify machine-generated text is a major theme.
-
-% **Analogy:**
-% LLM steganography is like a spy hiding a secret code within a generic-looking grocery list; to anyone else, it’s just a list of items, but to the recipient, the specific choice of words reveals a hidden message.
-
-% Based on the sources, many of your claims regarding the potential risks and mechanisms of linguistic steganography are supported, though some specific terms like "Chain-of-Thought auditing" are not explicitly mentioned.
-
-% Risks to AI Safety and Cybersecurity
-% The sources confirm that linguistic steganography poses significant risks by enabling the **covert transmission of information** that bypasses governance and monitoring systems.
-% *   **Bypassing Governance:** Techniques are designed to evade "massive surveillance and censorship mechanisms" by making subversive messages look like mundane, natural human communication.
-% *   **Enabling Attacks:** LLMs can be misused for **"Jailbreak Attacks"** (e.g., StegoAttack), which conceal harmful queries to bypass safety filters, and **"TrojanStego,"** which embeds secrets directly into model outputs for data exfiltration.
-
-% The "Linguistic Trojan Horse"
-% While the sources do not use the exact phrase "Linguistic Trojan Horse," they describe the same concept through **generative and rewriting-based steganography**.
-% *   **Embedding Unsafe Content:** These methods hide secret bitstreams within high-quality, fluent text generated by LLMs.
-% *   **Evading Filters:** Because the resulting "stego-text" is statistically and perceptually indistinguishable from normal text, it can pass through safety filters and human review without detection.
-
-% Covert Multi-Agent Collusion
-% The sources directly support the claim that these techniques enable **covert collusion between multiple agents**.
-% *   **GCStego Framework:** A framework called **GCStego** specifically enables secret transmission in **group chat scenarios**.
-% *   **Coordinated Secrecy:** Multiple agents can pass secret messages through stego-texts that appear to be regular, coherent conversations. This enhances "behavioral imperceptibility," making the coordinated exchange of information nearly impossible for an external monitor to identify.
-
-% ***
-
-% **Note on Missing Information:** The provided sources do not contain specific information regarding **"Chain-of-Thought auditing"** or models hiding their **"true reasoning"** in innocuous steps. You may wish to verify those specific concepts through independent technical safety research.
-
-% **Analogy:** Linguistic steganography is like a **spy writing a secret code using the first letter of every word in a grocery list.** To a security guard, it looks like a harmless errand, but to another agent, it is a set of coordinates for a mission.
-
-% ---------------------------------------------
-% ---------------------------------------------
-% Incorrect during the filtering phase I focused on stego discarding watermarks.
-% ---------------------------------------------
-% ---------------------------------------------
+Although adjacent topics such as watermarking, authorship attribution, or prompt-hiding attacks are relevant to the broader landscape of information hiding, they were not the primary focus of the final reviewed corpus. For that reason, this review treats them as related areas rather than as central application categories within the included LLM-based steganography studies.
 
 % \subsubsection{Primary Applications}
 

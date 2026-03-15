@@ -1,41 +1,41 @@
 \section{Discussion}
 \label{sec:discussion}
 
-This section synthesizes the findings across the five research questions, exploring how the emergence of Large Language Models has transformed linguistic steganography from a discipline of "statistical survival" into one of "contextual compatibility."
+This section synthesizes the findings across the five research questions and discusses how recent LLM-based approaches are changing the design priorities of linguistic steganography.
 
 \subsection{The Emergence of Meaning-Based Steganography}
 
-The most significant insight from this review is the paradigm shift from white-box, probability-based methods toward black-box, meaning-based approaches. Early linguistic steganography was characterized by "linguistic creaking"—awkward synonyms and syntactic shifts that modern automated sentries caught with ease. The survey results show that since 2023, the field has leveraged the "uncanny fluency" of LLMs to move beyond token-level hiding. We observe a transition where the secret is no longer just buried in a probability vector, but is ground into the narrative itself through zero-shot prompts and context-aware retrieval.
+One of the clearest patterns in the reviewed studies is the shift from strictly white-box, probability-driven methods toward broader black-box and context-aware approaches. Earlier linguistic steganography often depended on local lexical or sampling manipulations that were difficult to scale and easy to distort semantically. More recent work uses LLMs to support full-text generation, rewriting, prompting, and retrieval, thereby moving the problem from isolated token selection toward broader control of discourse and context.
 
 \subsection{Resolving the PSIC Effect through Contextual Compatibility}
 
-The Perceptual-Statistical Imperceptibility Conflict (PSIC) remains the primary technical hurdle, affecting the majority of the reviewed studies. However, the synthesis suggests that \textbf{Contextual Compatibility} is more than just a capacity booster; it is the theoretical antidote to the PSIC effect.
+The Perceptual-Statistical Imperceptibility Conflict (PSIC) remains one of the main technical hurdles identified across the reviewed studies. The synthesis suggests that \textbf{contextual compatibility} is not simply an optional enhancement, but an increasingly important strategy for mitigating this conflict.
 
-By integrating external knowledge sources (RQ4), researchers are moving the "steganographic scatter" away from random statistical noise and toward authentic, domain-specific variance. When a steganographic system "absorbs" a domain—be it Twitter gossip or medical news—the output no longer hugs the predictable peak of a vanilla language model. Instead, it mimics the high-entropy chaos of real human communication. This transition suggests that future security will rely not on mathematical indistinguishability from a static model, but on semantic indistinguishability from a living context.
+By integrating external knowledge sources (RQ4), recent systems can better align generated text with the topic, style, and discourse expectations of a target channel. In practical terms, this means that security is increasingly tied not only to distributional similarity, but also to whether the text remains semantically plausible within a recognizable communicative setting.
 
 \subsection{Implications for Research and Practice}
 
 \subsubsection{The Democratization of Covertness}
 
-The shift toward black-box approaches (RQ1, RQ2) represents a "democratization" of steganographic capabilities. By treating models as opaque APIs, covert communication is no longer limited by the computational resources required to share and run massive weights locally. This has profound implications for privacy in censored environments, but as noted in RQ5, it also lowers the barrier for adversarial misuse.
+The shift toward black-box approaches (RQ1, RQ2) lowers the practical barrier to deployment. By treating models as opaque APIs or hosted services, covert communication is no longer limited to settings where both parties can share and run the same model locally. This may improve accessibility in constrained environments, but as noted in RQ5 it also lowers the barrier for misuse.
 
 \subsubsection{The Need for Semantic-First Evaluation}
 
-The evaluation metrics (RQ3) currently reveal a field that still weighs the "truck" rather than checking the "cargo." The heavy reliance on Perplexity (85\% of studies) vs. the sparse use of human or semantic evaluation (25\%) indicates a lingering obsession with statistical stealth over cognitive plausibility. Our findings argue for a transition toward semantic-first benchmarks that can detect the "contextual drift" that occurs when an LLM prioritizes bit-embedding over logical coherence.
+The evaluation metrics reviewed in RQ3 show that the field still relies heavily on surface-level or model-dependent metrics such as perplexity and bit-density measures, while human and semantic evaluation remain less common. This imbalance makes it difficult to assess whether apparently strong results also preserve coherence, relevance, and contextual plausibility. Future benchmarking should therefore place more emphasis on semantic and human-centered evaluation alongside statistical measures.
 
 \subsection{Ethical Responsibility and the Forensics Arms Race}
 
-The concerning gap in ethical documentation (only 10\% of studies) highlights a disconnect between technical innovation and societal risk. As steganographic prompt injection and multi-agent collusion become technically feasible, the field must develop ethical frameworks that anticipate misuse. Simultaneously, the rise of LLM-based steganography is triggering an arms race in forensics; as generators become more fluent, steganalysis tools are forced to move from n-gram analysis to symbolic anomaly detection and symbolic reasoning.
+The reviewed literature also highlights a gap between technical innovation and explicit discussion of misuse, governance, and defensive implications. As LLM-based steganography becomes more fluent and easier to deploy, steganalysis and provenance research will likely need to adapt beyond traditional lexical or shallow statistical features.
 
 \subsection{Limitations of the Review}
 
-While comprehensive, this review is constrained by the extreme volatility of the LLM landscape. The 6 papers pending PDF acquisition represent the "bleeding edge" of 2026 research, and their absence suggests that the quantitative findings on capacity and attack resistance should be viewed as a snapshot of a moving target rather than a final verdict.
+This review should be interpreted as a structured snapshot of a rapidly changing field. The pace of LLM development, the heterogeneity of evaluation settings, and the exclusion of six records pending PDF acquisition all limit the stability of any quantitative summary.
 
 \subsection{Future Research Directions}
 
-Based on the identified gaps, the field's trajectory points toward three critical frontiers:
+Based on the identified gaps, three research directions appear especially important:
 \begin{itemize}
-    \item \textbf{Provable Semantic Security}: Moving beyond statistical bounds to create formal proofs that stego-text is cognitively indistinguishable within a specific communicative context.
-    \item \textbf{Multimodal Grounding}: Leveraging vision-language models to hide secrets across text and image boundaries, further diluting the signal across redundant sensory channels.
-    \item \textbf{Adaptive Context Synthesis}: Developing systems that dynamically retrieve and synthesize real-time news and social media trends to provide the ultimate "semantic runway" for covert payloads.
+    \item \textbf{Provable Semantic Security}: Extending security analysis beyond token distributions toward stronger guarantees about contextual plausibility and recoverability.
+    \item \textbf{Multimodal Grounding}: Studying how text-based hiding strategies interact with multimodal systems without collapsing the review boundary between steganography and adjacent security problems.
+    \item \textbf{Adaptive Context Synthesis}: Designing retrieval and prompting pipelines that improve realism without making systems excessively fragile, slow, or difficult to evaluate.
 \end{itemize}

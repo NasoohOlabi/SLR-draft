@@ -33,7 +33,7 @@ An imperceptibility metric \cite{10.1121/1.2016299} that measures fluency, with 
 
 
 \subsubsection{MAUVE}
-Another imperceptibility metric that Evaluates distributional similarity between generated and reference text by quantifying the gap between neural and human-authored text using divergence frontiers.While MAUVE provides a theoretically elegant way to measure distributional gaps between generated and reference text, it remains curiously underused-appearing in just 3 of 26 reviewed sources. The deeper issue is that reported scores are \textit{not directly comparable} across studies.
+Another imperceptibility metric that Evaluates distributional similarity between generated and reference text by quantifying the gap between neural and human-authored text using divergence frontiers.While MAUVE provides a theoretically elegant way to measure distributional gaps between generated and reference text, it remains curiously underused-appearing in just 3 of 25 reviewed sources. The deeper issue is that reported scores are \textit{not directly comparable} across studies.
 
 Scaling conventions alone create immediate confusion: CPG-LS reports on a 0.0-1.0 scale (achieving 0.9412) while other work uses 0-100 (with advanced white-box LLM samplers reaching 80-92). Hi-Stega's scores (0.1341-0.2051) look low by comparison, but actually represent nearly 10× improvement over its own baseline (0.0135)-demonstrating that absolute values only matter within their own context.
 
@@ -44,7 +44,7 @@ Like comparing temperatures without knowing Celsius from Fahrenheit, a "30" only
 \subsubsection{Statistical Metrics}
 Kullback-Leibler Divergence (KLD) \cite{1320776d-9e76-337e-a755-73010b6e4b64} and Jensen-Shannon Divergence (JSD) are information-theoretic metrics used to evaluate steganographic security. KLD quantifies information loss by measuring the relative entropy between cover and stego distributions, serving as the theoretical standard for security modeling despite being asymmetric and failing as a strict distance measure. JSD improves upon this as a symmetric, bounded variant that measures how far each distribution lies from their average, providing a more stable basis for formulating statistical imperceptibility bounds-particularly when language models approximate human text distributions. Together, these two attempt to capture how closely steganographic outputs mimic legitimate communication channels.
 
-However, real-world application reveals critical reliability failures, most notably the Perceptual-Statistical Imperceptibility Conflict (Psic Effect). KLD and JSD scores increasingly diverge from human judgment as statistical optimization progresses: methods achieving superior divergence metrics often produce chaotic, low-quality text easily detected by human observers. This discrepancy manifests acutely in dataset dependency-identical methods yield KLDs of 19.507 on IMDB versus 8.295 on Twitter at equivalent embedding rates, rendering cross-paper comparisons meaningless. Further compounding this, researchers employ incompatible formulas (some using latent BERT features versus direct word distributions), feature spaces, and measurement scales, evidenced by Meteor's KLD ranging from 0.045 in one study to 7.491-11.845 in others. Consequently, these metrics function like rulers measuring paintings: they confirm technical dimensional accuracy while completely missing perceptual naturalness, necessitating parallel evaluation with human-centric measures to achieve genuine security.
+However, real-world application reveals critical reliability failures, most notably the Perceptual-Statistical Imperceptibility Conflict (PSIC effect). KLD and JSD scores increasingly diverge from human judgment as statistical optimization progresses: methods achieving superior divergence metrics often produce chaotic, low-quality text easily detected by human observers. This discrepancy manifests acutely in dataset dependency-identical methods yield KLDs of 19.507 on IMDB versus 8.295 on Twitter at equivalent embedding rates, rendering cross-paper comparisons meaningless. Further compounding this, researchers employ incompatible formulas (some using latent BERT features versus direct word distributions), feature spaces, and measurement scales, evidenced by Meteor's KLD ranging from 0.045 in one study to 7.491-11.845 in others. Consequently, these metrics function like rulers measuring paintings: they confirm technical dimensional accuracy while completely missing perceptual naturalness, necessitating parallel evaluation with human-centric measures to achieve genuine security.
 
 
 % \subsubsection{Cognitive Metrics}
@@ -95,7 +95,7 @@ These quantities quantify how densely a secret is packed, yet they are riddled w
     \hline
     Tokenization Inconsistencies & Metrics depend entirely on specific tokenizers (e.g., GPT-2 BPE vs. word-level) & Direct comparisons across papers become meaningless when tokenization strategies differ    \\
     \hline
-    The "Psic Effect"            & Conflicts between imperceptibility and statistical security are ignored         & High capacity may degrade human fluency while paradoxically improving detection resistance \\
+    The "PSIC Effect"            & Conflicts between imperceptibility and statistical security are ignored         & High capacity may degrade human fluency while paradoxically improving detection resistance \\
     \hline
     Model Training Bias          & Utilization Rate calculations assume uniform token availability                 & Actual hiding space is smaller than theoretical entropy due to model frequency preferences \\
     \hline
@@ -109,7 +109,7 @@ These quantities quantify how densely a secret is packed, yet they are riddled w
 \end{table}
 
 Tokenization differences make “1 BPT” from one paper incomparable to “1 BPT” from another due to the use of different tokenizers.
-The Psic effect shows that higher density can hurt human fluency yet help statistical evasion.
+The PSIC effect shows that higher density can hurt human fluency yet help statistical evasion.
 Model frequency preferences shrink the real alphabet to high-probability tokens, so naive entropy limits overstate usable space.
 Ambiguous reporting-practice vs.\ effective payload, ER1 vs.\ ER2, Bit Length vs.\ Stego Length-lets authors cherry-pick flattering numbers.
 Finally, BPW/BPT ignore semantics, rewarding gibberish that is obviously steganographic.

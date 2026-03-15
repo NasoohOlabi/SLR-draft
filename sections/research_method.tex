@@ -1,7 +1,7 @@
 \section{Research Method}\label{sec:design}
 
 
-This study was undertaken as a systematic mapping review using the guidelines presented in
+This study was undertaken as a systematic literature review using the guidelines presented in
 Petersen et al. \cite{slr_guidelines}. The goal of this review is to identify, categorize, and analyze existing literature
 published between 2018 and 2025 and use syntactic and semantics aspects to represent context handling in linguistic steganographic methods.
 
@@ -21,7 +21,7 @@ This systematic literature review is guided by five research questions:
 \end{itemize}
 
 \subsubsection{Search Strategies}
-The initial literature search employed a specific query string: `(steganography or watermark or "Information Hiding") and ("Large Language Model" or LLM or BERT or LAMA or GPT)`. This query was executed across several digital libraries, including ACM Digital Library, IEEE Digital Library, Science@Direct, Scopus, and Springer Link, to ensure broad coverage. To complement this automated search and identify additional relevant studies, a snowballing technique was also applied. This involved examining the reference lists of included studies. While snowballing primarily yielded older steganographic techniques not explicitly mentioning LLMs, these papers often utilized similar methodological approaches to contemporary LLM-based steganography, providing valuable contextual information.
+The initial literature search employed a specific query string: `(steganography or watermark or "Information Hiding") and ("Large Language Model" or LLM or BERT or LAMA or GPT)`. The query was intentionally broad to maximize recall during the identification stage, even though the final synthesis focuses on LLM-based linguistic steganography. It was executed across several digital libraries, including ACM Digital Library, IEEE Digital Library, Science@Direct, Scopus, and Springer Link, to ensure broad coverage. To complement this automated search and identify additional relevant studies, a snowballing technique was also applied. This involved examining the reference lists of included studies. While snowballing primarily yielded older steganographic techniques not explicitly mentioning LLMs, these papers often utilized similar methodological approaches to contemporary LLM-based steganography, providing valuable contextual information.
 
 
 \subsubsection{Inclusion and Exclusion Criteria}
@@ -34,7 +34,7 @@ Studies were included if they:
 	\item Provided full-text access.
 	\item Were published in English from 2018 onwards.
 	\item Appeared in peer-reviewed journals, conferences, or workshops.
-	\item Directly addressed steganography, watermarking, or information hiding techniques involving or significantly impacted by LLMs, BERT, LAMA, or GPT architectures.
+	\item Directly addressed linguistic steganography or closely related information-hiding techniques involving or significantly impacted by LLMs, BERT, LAMA, or GPT architectures.
 	\item Represented empirical studies, surveys, reviews, or theoretical contributions.
 \end{enumerate}
 
@@ -52,7 +52,7 @@ Studies were excluded if they:
 
 
 \subsection{Conducting the Search}
-The initial automated search across the selected digital libraries yielded a total of 1043 candidate papers. The distribution by source was: ACM Digital Library (346), IEEE Digital Library (61), Science@Direct (209), Scopus (151), and Springer Link (276). Consistent with the scope of this review, only studies published between 2018 and 2025 were considered during screening and selection. Duplicated papers were automatically eliminated using Parsifal tool \footnote{\href{https://parsif.al}{https://parsif.al}}. After removing all duplicates, 1,573 papers remained. Following this the papers underwent a multi-stage filtering process based on their titles, abstracts, and full texts, guided by the predefined inclusion and exclusion criteria. After title and abstract filtering, 58 papers remained. Of these, 26 were accepted with readily available PDFs, while 6 were pending PDF acquisition at the time of analysis.
+The initial automated search across the selected digital libraries yielded a total of 1043 candidate papers. The distribution by source was: ACM Digital Library (346), IEEE Digital Library (61), Science@Direct (209), Scopus (151), and Springer Link (276). Consistent with the scope of this review, only studies published between 2018 and 2025 were considered during screening and selection. Duplicate papers were eliminated using the Parsifal tool \footnote{\href{https://parsif.al}{https://parsif.al}} before the remaining papers underwent a multi-stage filtering process based on title, abstract, and full-text review, guided by the predefined inclusion and exclusion criteria. After title and abstract filtering, 58 papers remained. Of these, 26 were accepted for analysis with readily available PDFs, while 6 additional papers were identified as potentially relevant but were still pending PDF acquisition at the time of analysis.
 
 \subsection{Data Extraction and Classification}
 A Data Extraction Form (DEF) was developed to systematically collect data from each primary study to address our research questions. The form is designed in a table format consisting of the following types of information:
@@ -69,7 +69,8 @@ A Data Extraction Form (DEF) was developed to systematically collect data from e
 Following data extraction, studies were classified based on predefined categories derived from the research questions to identify trends, patterns, and gaps in the literature. The results are summarized using tables and descriptive statistics. Each research question is addressed individually with interpretation of findings and identification of future research directions.
 
 % \subsection{Threats to Validity}
-% While this systematic literature review (SLR) adheres to established guidelines such as PRISMA to ensure methodological rigor, several potential threats to validity must be acknowledged. These threats primarily relate to the comprehensiveness of the literature search, selection biases, and practical constraints in data acquisition. The search strategy may introduce publication and selection biases, as it was limited to English-language publications from 2018 onward, potentially excluding relevant non-English studies or foundational pre-2018 works on linguistic steganography that predate widespread LLM adoption. Although LLMs emerged prominently around 2018 with models such as BERT, this cutoff might overlook influential earlier contributions that inform current techniques. Additionally, the selected databases provide broad coverage but may miss papers in other repositories, and the search terms, while comprehensive, could overlook synonyms or emerging variants despite efforts to include related phrases such as "Information Hiding." Biases in study selection and quality assessment could also affect the review's internal validity; the inclusion criteria focused on peer-reviewed sources, which enhances reliability but may introduce publication bias by favoring positive or novel results. No formal risk-of-bias tool (e.g., ROBIS) was applied beyond basic relevance checks, potentially allowing lower-quality studies to influence findings. To mitigate this, multi-stage filtering with title, abstract, and full-text reviews was employed, and snowballing was used to identify additional references, though it primarily yielded older non-LLM works. Practical limitations also posed threats to completeness, as 14 papers remained pending PDF acquisition at the time of analysis, which could lead to incomplete coverage if these contain critical insights. This issue was addressed by prioritizing accessible studies and planning follow-up acquisition, but it highlights retrieval challenges in SLR processes. Overall, these threats were minimized through transparent documentation of the methodology, adherence to PRISMA reporting standards, and supplementary snowballing. Future updates to this review could expand database coverage and incorporate automated tools for bias assessment to further enhance validity.
+
+% Several threats to validity should be acknowledged. First, the search was limited to English-language studies published from 2018 onward, which may have excluded relevant earlier or non-English work. Second, although the selected databases provide broad coverage, the query terms may still have missed studies that used different terminology for closely related methods. Third, the review focused on peer-reviewed sources, which improves baseline quality but may introduce publication bias by underrepresenting negative or null findings. Fourth, six potentially relevant papers were not included in the final synthesis because full PDFs were not available at the time of analysis. Finally, no formal risk-of-bias instrument was applied beyond relevance-based screening and structured extraction. These limitations do not invalidate the review, but they should be considered when interpreting the reported trends and proportions.
 
 
 
