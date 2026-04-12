@@ -61,6 +61,13 @@ pdflatex "Enhancing Contextual Compatibility of Textual Steganography Systems Ba
 The `scripts/` directory contains Python scripts for:
 - Generating tables from the SLR data
 - Creating visualizations (sunburst charts, treemaps)
+- Converting the merged Scopus export to BibTeX for Parsif.al import
+
+To generate the BibTeX file:
+
+```bash
+python scripts/convert_scopus_to_bibtex.py
+```
 
 ## Output Files
 
