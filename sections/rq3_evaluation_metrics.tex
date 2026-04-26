@@ -33,7 +33,7 @@ An imperceptibility metric \cite{10.1121/1.2016299} that measures fluency, with 
 
 
 \subsubsection{MAUVE}
-Another imperceptibility metric that Evaluates distributional similarity between generated and reference text by quantifying the gap between neural and human-authored text using divergence frontiers.While MAUVE provides a theoretically elegant way to measure distributional gaps between generated and reference text, it remains curiously underused-appearing in just 3 of 26 reviewed sources. The deeper issue is that reported scores are \textit{not directly comparable} across studies.
+Another imperceptibility metric that Evaluates distributional similarity between generated and reference text by quantifying the gap between neural and human-authored text using divergence frontiers.While MAUVE provides a theoretically elegant way to measure distributional gaps between generated and reference text, it remains curiously underused-appearing in only a small minority of the 34 reviewed sources. The deeper issue is that reported scores are \textit{not directly comparable} across studies.
 
 Scaling conventions alone create immediate confusion: CPG-LS reports on a 0.0-1.0 scale (achieving 0.9412) while other work uses 0-100 (with advanced white-box LLM samplers reaching 80-92). Hi-Stega's scores (0.1341-0.2051) look low by comparison, but actually represent nearly 10× improvement over its own baseline (0.0135)-demonstrating that absolute values only matter within their own context.
 
@@ -116,6 +116,8 @@ Finally, BPW/BPT ignore semantics, rewarding gibberish that is obviously stegano
 
 Recent works reveal additional distortions: loop-count overhead, dictionary-size caps, baseline-dependent “improvements,” watermarking goals that invert the desired signal, conversational filler that dilutes BPW, and nonlinear ER curves that make any single threshold misleading.
 
+The added 2025 studies reinforce this point. DeepStego emphasizes high capacity and recovery accuracy, multi-criteria optimization reports reliable stylistic decoding, and RS-Stega reports simultaneous PPL reduction and BPW improvement through token-level quality control \cite{kuznetsov2025deepstego,wozniak2025multicriteria,wang2025rsstega}. These results are promising, but they also make cross-paper comparison harder because the reported gains depend on different baselines, prompts, datasets, and decoding assumptions.
+
 % In short, capacity metrics are necessary but blind: they tell us how heavy the truck is, not whether the cargo is broken, the units match, or the load fell off on the way.
 
 \subsubsection{Practical Capacity Analysis}
@@ -192,6 +194,8 @@ The sources evaluate security and reliability through the following integrated m
   \item \textbf{Robustness (Attack Resistance):} Evaluated via the \textbf{Mean Impact of Attack (mIOA)} or \textbf{Bit Accuracy} after removal attempts such as DAE (Denoising Auto-Encoder), word substitution, or sentence deletion.
   \item \textbf{False Positive Rate (FPR):} Measures how often human or normal model-generated texts are incorrectly flagged as containing secret messages.
 \end{itemize}
+
+Recent robustness-oriented work broadens this evaluation set. Position-agnostic generation tests perturbation tolerance across multiple attack types, active-attack repair methods evaluate message integrity after tampering, and contrastive semantic watermarking reports F1 under rewriting and substitution attacks \cite{lin2025positionagnostic,chen2025activetwo,wang2025contrastive}. This shift suggests that future evaluations should report not only clean-channel capacity and fluency, but also degradation curves under realistic editing.
 
 % \begin{table}[h]
 %   \centering

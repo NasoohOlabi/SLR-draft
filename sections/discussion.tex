@@ -5,7 +5,7 @@ This section synthesizes the findings across the five research questions and dis
 
 \subsection{The Emergence of Meaning-Based Steganography}
 
-One of the clearest patterns in the reviewed studies is the shift from strictly white-box, probability-driven methods toward broader black-box and context-aware approaches. Earlier linguistic steganography often depended on local lexical or sampling manipulations that were difficult to scale and easy to distort semantically. More recent work uses LLMs to support full-text generation, rewriting, prompting, and retrieval, thereby moving the problem from isolated token selection toward broader control of discourse and context.
+One of the clearest patterns in the reviewed studies is the shift from strictly white-box, probability-driven methods toward broader black-box, context-aware, and robustness-oriented approaches. Earlier linguistic steganography often depended on local lexical or sampling manipulations that were difficult to scale and easy to distort semantically. More recent work uses LLMs to support full-text generation, rewriting, prompting, retrieval, stylistic control, and token-level quality control, thereby moving the problem from isolated token selection toward broader control of discourse, context, and transmission resilience.
 
 \subsection{Resolving the PSIC Effect through Contextual Compatibility}
 
@@ -21,7 +21,7 @@ The shift toward black-box approaches (RQ1, RQ2) lowers the practical barrier to
 
 \subsubsection{The Need for Semantic-First Evaluation}
 
-The evaluation metrics reviewed in RQ3 show that the field still relies heavily on surface-level or model-dependent metrics such as perplexity and bit-density measures, while human and semantic evaluation remain less common. This imbalance makes it difficult to assess whether apparently strong results also preserve coherence, relevance, and contextual plausibility. Future benchmarking should therefore place more emphasis on semantic and human-centered evaluation alongside statistical measures.
+The evaluation metrics reviewed in RQ3 show that the field still relies heavily on surface-level or model-dependent metrics such as perplexity and bit-density measures, while human and semantic evaluation remain less common. The new 2025 studies add stronger robustness and capacity claims, but they also reinforce the same comparability problem because reported improvements depend on different baselines, datasets, prompt settings, and attack models. Future benchmarking should therefore place more emphasis on semantic and human-centered evaluation alongside statistical measures and realistic perturbation tests.
 
 \subsection{Ethical Responsibility and the Forensics Arms Race}
 
@@ -33,9 +33,10 @@ This review should be interpreted as a structured snapshot of a rapidly changing
 
 \subsection{Future Research Directions}
 
-Based on the identified gaps, three research directions appear especially important:
+Based on the identified gaps, four research directions appear especially important:
 \begin{itemize}
     \item \textbf{Provable Semantic Security}: Extending security analysis beyond token distributions toward stronger guarantees about contextual plausibility and recoverability.
+    \item \textbf{Robustness-Aware Capacity}: Reporting payload together with degradation under paraphrasing, substitution, deletion, platform normalization, and active tampering.
     \item \textbf{Multimodal Grounding}: Studying how text-based hiding strategies interact with multimodal systems without collapsing the review boundary between steganography and adjacent security problems.
     \item \textbf{Adaptive Context Synthesis}: Designing retrieval and prompting pipelines that improve realism without making systems excessively fragile, slow, or difficult to evaluate.
 \end{itemize}
