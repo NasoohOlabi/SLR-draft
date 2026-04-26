@@ -10,7 +10,9 @@ Performance evaluation for LLM-based steganography relies on three key categorie
 \begin{table}[ht]
   \centering
   \footnotesize
-  \begin{tabular}{|p{3cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+  \caption{Evaluation metrics usage and typical ranges across studies}
+  \label{tab:evaluation_metrics}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
     \hline
     \textbf{Metric Type} & \textbf{Imperceptibility} & \textbf{Capacity} & \textbf{Security}  & \textbf{Usage} \\
     \hline
@@ -23,8 +25,6 @@ Performance evaluation for LLM-based steganography relies on three key categorie
     Human Eval           & MAUVE: 0.2-0.9            & -                 & -                  & 25\%           \\
     \hline
   \end{tabular}
-  \caption{Evaluation metrics usage and typical ranges across studies}
-  \label{tab:evaluation_metrics}
 \end{table}
 
 \subsubsection{Perplexity (PPL)}
@@ -89,7 +89,9 @@ These quantities quantify how densely a secret is packed, yet they are riddled w
 \begin{table}[ht]
   \centering
   \footnotesize
-  \begin{tabular}{|p{2cm}|p{4.5cm}|p{5cm}|}
+  \caption{Five primary bias categories affecting capacity metrics in steganographic evaluation}
+  \label{tab:capacity_bias_categories}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{5cm}|}
     \hline
     \textbf{Bias Category}       & \textbf{Core Problem}                                                           & \textbf{Critical Implication}                                                              \\
     \hline
@@ -104,8 +106,6 @@ These quantities quantify how densely a secret is packed, yet they are riddled w
     Context Blindness            & Density metrics treat text as neutral bit containers                            & Semantic incoherence constitutes a security failure that BPW/BPT fails to penalize         \\
     \hline
   \end{tabular}
-  \caption{Five primary bias categories affecting capacity metrics in steganographic evaluation}
-  \label{tab:capacity_bias_categories}
 \end{table}
 
 Tokenization differences make “1 BPT” from one paper incomparable to “1 BPT” from another due to the use of different tokenizers.
@@ -129,7 +129,7 @@ In contrast, \textbf{payload-dependent} methods scale with the cover text or sec
   \footnotesize
   \caption{Examples of stego texts. Limited by the space, we omitted the padding part.}
   \label{tab:stego_text_examples}
-  \begin{tabular}{|p{4cm}|p{3.5cm}|p{6cm}|}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{6cm}|}
     \hline
     \multicolumn{3}{|c|}{24-bit Secret Message : (1,0,0,0,1,0,0,1,0,1,1,0,1,0,1,0,1,1,1,1,1,0,1,1)}                                                                                                        \\
     \hline
@@ -152,7 +152,9 @@ Table \ref{tab:stego_examples} provides a detailed catalog of stego text samples
 
 
 \begingroup\footnotesize
-\begin{longtable}{|p{10cm}|p{1.2cm}|p{1cm}|p{2cm}|}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{10cm}|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{1cm}|>{\raggedright\arraybackslash}p{2cm}|}
+  \caption{Practical embedding capacity and calculation basis for selected stego text samples.}
+  \label{tab:stego_examples}\\
   \hline
   \textbf{Stego Text}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     & \textbf{Cap} & \textbf{Source} & \textbf{Calculation Basis}                             \\ \hline
   \endfirsthead
@@ -177,9 +179,6 @@ Table \ref{tab:stego_examples} provides a detailed catalog of stego text samples
   ``Yes, I miss this cute kitty very much.''                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              & 64 bits      & GCStego         & 4 secret words $\times$ 16 bits/word                   \\ \hline
   ``A good subject to start.''                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            & 3 bits       & ParaLS          & Explicit binary watermark ``110''                      \\ \hline
   ``I was very nervous, at the time. I was 22, and the director was actually at a birthday party in Paris and just saying the doors were closed. But I put on a large black motorcycle, got my album saved and drove on, doing videos about history and the films. So I was really excited. And I found that in this movie, we were at a concert in London. And that concert was where every song and every act was at the movie playing the music that could be heard and the message was, ``By God, there's people. But time has passed, and we're here, maybe from another world. Let's see how things can go.'' And at the end of the movie I said, ``I hope the thing happened a bit, because there's no way you can change what you know. You know? Something has happened. Just let it happen. Let it happen.'' And at the end, I say to myself, ``Hey, maybe we can change''                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      & 968 bits     & Discop          & 200 tokens $\times$ 4.84 bits/token ($p=0.95$)         \\ \hline
-  \noalign{\vspace{2em}}
-  \caption{Practical embedding capacity and calculation basis for selected stego text samples.}
-  \label{tab:stego_examples}
 \end{longtable}
 \endgroup
 
