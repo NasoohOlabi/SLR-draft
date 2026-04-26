@@ -15,6 +15,18 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
         "μ": "\\ensuremath{\\mu}",
         "~": "\\textasciitilde{}",
         "^": "\\textasciicircum{}",
+        "≈": "\\ensuremath{\\approx}",
+        "≥": "\\ensuremath{\\geq}",
+        "≤": "\\ensuremath{\\leq}",
+        "±": "\\ensuremath{\\pm}",
+        "×": "\\ensuremath{\\times}",
+        "–": "--",
+        "—": "---",
+        "↓": "\\ensuremath{\\downarrow}",
+        "↑": "\\ensuremath{\\uparrow}",
+        "“": "``",
+        "”": "''",
+        "’": "'",
     }
 
     # Create column format with vertical lines - use appropriate widths that sum to less than 1.0
@@ -69,16 +81,6 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
 
     # Process data rows
     for i, row in enumerate(data):
-        # Handle Excel numeric types and NaN values
-        first_val = row[0] if len(row) > 0 else None
-        if first_val is not None and pd.notna(first_val) and str(first_val).strip():
-            try:
-                if int(float(first_val)) >= 25:
-                    print(row)
-                    continue
-            except (ValueError, TypeError):
-                pass
-
         # Convert Excel values to strings, handling NaN
         mapped = {n: str(row[idx]) if idx < len(row) and pd.notna(row[idx]) else ""
                   for n, idx in column_mapping.items()}
@@ -89,6 +91,9 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
 
         title_text = mapped.get("title", "").strip()
         if not title_text or title_text == "[Not specified]":
+            continue
+
+        if not mapped.get("Year", "").strip():
             continue
 
         paper_id = create_paper_citation(title_text, bib_data)
@@ -199,12 +204,12 @@ def parse_bib_file(path):
 
 if __name__ == "__main__":
     # Paths - use relative paths
-    excel_path = "./SLR.xlsx"
+    csv_path = "./data/SLR - SLR-Deep.csv"
     bib_path = "./references/bibliography.bib"
 
     try:
-        # Read data from Excel file
-        df = pd.read_excel(excel_path, sheet_name="SLR-Deep")
+        # Read data from canonical CSV file
+        df = pd.read_csv(csv_path, encoding="utf-8-sig")
         # Convert DataFrame to list of lists format (headers + data rows)
         rows = [df.columns.tolist()] + df.values.tolist()
 
@@ -214,23 +219,8 @@ if __name__ == "__main__":
         data_rows.sort(key=lambda x: int(float(x[0])) if pd.notna(
             x[0]) and str(x[0]).strip() else 0)
 
-        # Column mapping - adjust indices based on actual CSV structure
-        cmap = {
-            "number": 0,
-            "title": 1,
-            "Year": 2,
-            "Type": 3,
-            "LLM": 5,
-            "dataset": 9,
-            "result": 12,
-            "Main strengths": 7,
-            "Main weaknesses": 8,
-            "pipline method used": 14,
-            "context aware": 15,
-            "categ context": 16,
-            "representation context": 17,
-            "context usage in method detail text": 18,
-        }
+        cmap = {name: idx for idx, name in enumerate(headers)}
+        cmap["number"] = cmap.get("#", 0)
 
         # Define tables to generate
         tables = [
@@ -265,6 +255,6 @@ if __name__ == "__main__":
     except FileNotFoundError as e:
         print(f"Error: Could not find file - {e}")
         print(
-            "Please ensure the Excel file and bibliography file exist in the correct locations.")
+            "Please ensure the CSV file and bibliography file exist in the correct locations.")
     except Exception as e:
         print(f"Error generating tables: {e}")

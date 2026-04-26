@@ -17,6 +17,7 @@ import concurrent.futures
 import json
 import re
 import sys
+import time
 from dataclasses import asdict, dataclass
 from datetime import date
 from pathlib import Path
@@ -156,6 +157,50 @@ class ScreenDecision:
     full_text_status: str
     reason: str
     exclusion_reason: str
+
+
+class ProgressBar:
+    """Render a single-line progress bar in the terminal."""
+
+    def __init__(self, label: str, total: int, *, stream: Any = sys.stderr) -> None:
+        self.label = label
+        self.total = max(total, 0)
+        self.stream = stream
+        self.current = 0
+        self._last_render = ""
+        self._finished = False
+        self._start_time = time.monotonic()
+
+    def update(self, current: int | None = None, *, extra: str = "") -> None:
+        if current is None:
+            self.current += 1
+        else:
+            self.current = max(0, min(current, self.total))
+
+        total = self.total if self.total > 0 else 1
+        percent = self.current / total
+        filled = min(30, int(percent * 30))
+        bar = "#" * filled + "-" * (30 - filled)
+        elapsed = time.monotonic() - self._start_time
+        message = (
+            f"\r{self.label} [{bar}] {self.current}/{self.total} "
+            f"({percent * 100:5.1f}%) elapsed {elapsed:6.1f}s"
+        )
+        if extra:
+            message += f" | {extra}"
+
+        padding = max(0, len(self._last_render) - len(message))
+        self.stream.write(message + (" " * padding))
+        self.stream.flush()
+        self._last_render = message
+
+    def finish(self, *, extra: str = "") -> None:
+        if self._finished:
+            return
+        self.update(self.total, extra=extra)
+        self.stream.write("\n")
+        self.stream.flush()
+        self._finished = True
 
 
 def parse_args() -> argparse.Namespace:
@@ -752,7 +797,30 @@ def write_filtered_bib(entries: list[BibEntry], included_keys: set[str], output_
 def write_audit_jsonl(records: list[dict[str, Any]], output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     lines = [json.dumps(record, ensure_ascii=False) for record in records]
-    output_path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+    payload = "\n".join(lines) + ("\n" if lines else "")
+    temp_path = output_path.with_suffix(output_path.suffix + ".tmp")
+    temp_path.write_text(payload, encoding="utf-8")
+    temp_path.replace(output_path)
+
+
+def load_audit_jsonl(path: Path) -> dict[str, dict[str, Any]]:
+    if not path.exists():
+        return {}
+
+    cached_records: dict[str, dict[str, Any]] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+
+        key = str(record.get("key", "")).strip()
+        if key:
+            cached_records[key] = record
+
+    return cached_records
 
 
 def build_audit_record(
@@ -796,6 +864,45 @@ def classify_one(
     return entry.key, decision, source
 
 
+def apply_cached_llm_result(
+    audit_record: dict[str, Any],
+    cached_record: dict[str, Any],
+) -> bool:
+    llm_result = cached_record.get("llm_result")
+    final_decision = str(cached_record.get("final_decision", "")).strip().lower()
+    if not isinstance(llm_result, dict) or final_decision not in DECISIONS:
+        return False
+
+    try:
+        decision = screen_decision_from_payload(llm_result)
+    except ValueError:
+        return False
+
+    audit_record["llm_result"] = asdict(decision)
+    audit_record["final_decision"] = decision.decision
+    audit_record["confidence"] = decision.confidence
+    audit_record["reason"] = decision.reason
+    audit_record["exclusion_reason"] = decision.exclusion_reason
+    audit_record["full_text_status"] = decision.full_text_status
+    audit_record["source"] = str(cached_record.get("source", "cache")) or "cache"
+    return True
+
+
+def persist_outputs(
+    entries: list[BibEntry],
+    audit_records: list[dict[str, Any]],
+    output_bib: Path,
+    audit_jsonl: Path,
+) -> None:
+    included_keys = {
+        record["key"]
+        for record in audit_records
+        if record["final_decision"] == "include"
+    }
+    write_filtered_bib(entries, included_keys, output_bib)
+    write_audit_jsonl(audit_records, audit_jsonl)
+
+
 def main() -> int:
     args = parse_args()
     input_path = Path(args.input_bib)
@@ -805,6 +912,7 @@ def main() -> int:
 
     entries = parse_bibtex(input_path)
     doi_index, title_index = load_scopus_metadata(scopus_json)
+    cached_records = load_audit_jsonl(audit_jsonl)
 
     if args.dry_run:
         client = None
@@ -818,15 +926,29 @@ def main() -> int:
 
     audit_records: list[dict[str, Any]] = []
     llm_queue: list[tuple[BibEntry, ScopusMetadata | None]] = []
+    prefilter_progress = ProgressBar("Prefilter", len(entries))
+    cached_llm_hits = 0
 
-    for entry in entries:
+    for index, entry in enumerate(entries, start=1):
         metadata = metadata_for_entry(entry, doi_index, title_index)
         publication_date = extract_publication_date(entry, metadata)
         should_review, prefilter = rule_prefilter(entry, metadata, args.since_date, args.until_date)
         audit_record = build_audit_record(entry, metadata, publication_date, prefilter)
+
+        cached_record = cached_records.get(entry.key)
+        if should_review and cached_record is not None and apply_cached_llm_result(audit_record, cached_record):
+            should_review = False
+            cached_llm_hits += 1
+
         audit_records.append(audit_record)
         if should_review:
             llm_queue.append((entry, metadata))
+        prefilter_progress.update(
+            index,
+            extra=f"queued_for_llm={len(llm_queue)} cached={cached_llm_hits}",
+        )
+
+    prefilter_progress.finish(extra=f"queued_for_llm={len(llm_queue)} cached={cached_llm_hits}")
 
     if args.limit is not None:
         llm_queue = llm_queue[: args.limit]
@@ -839,33 +961,17 @@ def main() -> int:
                 record["exclusion_reason"] = "limit_skip"
                 record["source"] = "rules"
 
-    if client is not None:
-        if args.max_workers <= 1:
-            llm_results = [
-                classify_one(entry, metadata, client, args.model, args.temperature)
-                for entry, metadata in llm_queue
-            ]
-        else:
-            with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as executor:
-                futures = [
-                    executor.submit(
-                        classify_one,
-                        entry,
-                        metadata,
-                        client,
-                        args.model,
-                        args.temperature,
-                    )
-                    for entry, metadata in llm_queue
-                ]
-                llm_results = [future.result() for future in concurrent.futures.as_completed(futures)]
+    persist_outputs(entries, audit_records, output_bib, audit_jsonl)
 
-        llm_by_key = {key: (decision, source) for key, decision, source in llm_results}
-        for record in audit_records:
-            result = llm_by_key.get(record["key"])
-            if result is None:
-                continue
-            decision, source = result
+    if client is not None:
+        llm_progress = ProgressBar("LLM review", len(llm_queue))
+        audit_by_key = {record["key"]: record for record in audit_records}
+        processed_llm = 0
+
+        def store_result(result: tuple[str, ScreenDecision, str]) -> None:
+            nonlocal processed_llm
+            key, decision, source = result
+            record = audit_by_key[key]
             record["llm_result"] = asdict(decision)
             record["final_decision"] = decision.decision
             record["confidence"] = decision.confidence
@@ -873,14 +979,33 @@ def main() -> int:
             record["exclusion_reason"] = decision.exclusion_reason
             record["full_text_status"] = decision.full_text_status
             record["source"] = source
+            processed_llm += 1
+            persist_outputs(entries, audit_records, output_bib, audit_jsonl)
+            llm_progress.update(processed_llm, extra=key)
 
-    included_keys = {
-        record["key"]
-        for record in audit_records
-        if record["final_decision"] == "include"
-    }
-    write_filtered_bib(entries, included_keys, output_bib)
-    write_audit_jsonl(audit_records, audit_jsonl)
+        try:
+            if args.max_workers <= 1:
+                for entry, metadata in llm_queue:
+                    store_result(classify_one(entry, metadata, client, args.model, args.temperature))
+            else:
+                with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as executor:
+                    futures = [
+                        executor.submit(
+                            classify_one,
+                            entry,
+                            metadata,
+                            client,
+                            args.model,
+                            args.temperature,
+                        )
+                        for entry, metadata in llm_queue
+                    ]
+                    for future in concurrent.futures.as_completed(futures):
+                        store_result(future.result())
+        finally:
+            llm_progress.finish(extra=f"complete cached={cached_llm_hits}")
+
+    persist_outputs(entries, audit_records, output_bib, audit_jsonl)
     print_summary(entries, audit_records, args.dry_run)
     return 0
 

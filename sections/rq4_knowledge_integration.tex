@@ -7,33 +7,33 @@ The integration of external knowledge sources has emerged as a recurring design 
 \begin{table}[ht]
   \centering
   \small
-  \begin{tabular}{|p{3cm}|p{2.2cm}|p{3cm}|p{5.2cm}|}
+  \caption{Representative patterns of external knowledge integration}
+  \label{tab:knowledge_integration}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{5.2cm}|}
     \hline
     \textbf{Knowledge Type} & \textbf{Typical Role} & \textbf{Primary Benefit} & \textbf{Examples}              \\
     \hline
-    Semantic Resources      & Topic and entity guidance & Better semantic control      & Co-Stega, knowledge-graph guided methods     \\
+    Semantic Resources      & Topic, entity, and emotion guidance & Better semantic control      & Co-Stega, knowledge-graph guided methods, emotionally controllable steganography     \\
     \hline
     Domain Corpora          & Domain adaptation         & Better stylistic fit         & FREmax, specialized datasets \\
     \hline
-    Prompt Engineering      & In-context control        & Better task alignment        & Zero-shot methods              \\
+    Prompt Engineering      & In-context control        & Better task alignment        & Zero-shot, DeepStego, multi-criteria optimization              \\
     \hline
     Context Retrieval       & Evidence or example retrieval & Higher contextual plausibility & Co-Stega, retrieval-augmented pipelines      \\
     \hline
   \end{tabular}
-  \caption{Representative patterns of external knowledge integration}
-  \label{tab:knowledge_integration}
 \end{table}
 
 \subsubsection{Semantic Resources Integration}
 
-Rather than relying only on the internal prior of the language model, several recent systems inject external guidance during generation. Retrieved posts, headlines, or comments can provide a realistic discourse context for the cover text \cite{wang2023hi}. Knowledge-graph triples can constrain the content that should appear in the output, improving semantic consistency over longer spans \cite{li2024semantic}. Frequency-based external statistics can also be used to steer generation toward distributions that better match the target channel \cite{pang2024fremax}. Taken together, these strategies show that contextual conditioning has become an important mechanism for balancing plausibility, control, and payload.
+Rather than relying only on the internal prior of the language model, several recent systems inject external guidance during generation. Retrieved posts, headlines, or comments can provide a realistic discourse context for the cover text \cite{wang2023hi}. Knowledge-graph triples can constrain the content that should appear in the output, improving semantic consistency over longer spans \cite{li2024semantic}. Named entities and sentiment labels add a finer-grained control layer when the goal is emotional or conversational consistency \cite{shi2025emotionally}. Frequency-based external statistics can also be used to steer generation toward distributions that better match the target channel \cite{pang2024fremax}. Taken together, these strategies show that contextual conditioning has become an important mechanism for balancing plausibility, control, and payload.
 
 
 \subsubsection{Domain Corpora Integration}
 
 Another recurring pattern is the use of domain-specific corpora. Fine-tuning or conditioning on domain data helps align the generated text with the vocabulary, stylistic conventions, and topical expectations of the intended communication channel. This pattern appears in systems such as VAE-Stega \cite{yang2020vae}, Meteor \cite{kaptchuk2021meteor}, Hi-Stega \cite{wang2023hi}, FREmax \cite{pang2024fremax}, Rewriting-Stego \cite{li2023rewriting}, and Summarization-Stego \cite{zhang2024controllable}. Although the underlying architectures differ, these methods share the assumption that better alignment with a target domain improves both naturalness and practical usability.
 
-When additional training is not possible, black-box methods move this domain adaptation into the prompt or retrieval stage. Zero-shot approaches provide examples directly in the context window, LLM-Stega frames the generation request with topic-constrained prompts, and Co-Stega retrieves recent posts to anchor the generated reply in a plausible local context \cite{lin2024zero,wu2024generative,liao2024co}. In these settings, external context functions as a lightweight substitute for model adaptation.
+When additional training is not possible, black-box methods move this domain adaptation into the prompt, style specification, or retrieval stage. Zero-shot approaches provide examples directly in the context window, LLM-Stega frames the generation request with topic-constrained prompts, DeepStego uses prompts and synonym guidance, multi-criteria optimization encodes through stylistic controls, and Co-Stega retrieves recent posts to anchor the generated reply in a plausible local context \cite{lin2024zero,wu2024generative,kuznetsov2025deepstego,wozniak2025multicriteria,liao2024co}. In these settings, external context functions as a lightweight substitute for model adaptation.
 
 % \subsubsection{Prompt Engineering and Context Guidance}
 

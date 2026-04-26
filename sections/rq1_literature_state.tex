@@ -4,47 +4,49 @@
 \subsubsection{Publication Trends and Distribution}
 Our analysis indicates a clear rise in LLM-based steganography research after 2023, with most of the reviewed studies appearing in 2024--2025. This increase coincides with the rapid diffusion of large-scale language models in both proprietary and open-weight forms, including widely used families such as GPT, GPT-2, and LLaMA \cite{brown2020languagemodelsfewshotlearners,radford2019gpt2,touvron2023llama2openfoundation}. Across the reviewed corpus, open-weight and research-accessible models appear more frequently than closed commercial systems, reflecting the practical importance of reproducibility and controllable experimentation.
 
-The field has also evolved from earlier white-box token-sampling schemes toward a broader design space that includes hybrid and black-box methods. The reviewed studies now span generative schemes that write stego text from scratch \cite{yang2020vae,DBLP:journals/corr/abs-2106-02011,ding2023discop,kaptchuk2021meteor}, rewriting systems that paraphrase existing covers \cite{li2023rewriting}, black-box pipelines that treat the model as an opaque API \cite{wu2024generative,steinebach2024natural}, zero-shot protocols driven primarily by prompting \cite{lin2024zero}, context-aware frameworks that retrieve external information to increase semantic plausibility or payload \cite{liao2024co,wang2023hi}, and methods that emphasize stronger security guarantees \cite{kaptchuk2021meteor,ding2023discop}.
+The field has also evolved from earlier white-box token-sampling schemes toward a broader design space that includes hybrid and black-box methods. The reviewed studies now span generative schemes that write stego text from scratch \cite{yang2020vae,DBLP:journals/corr/abs-2106-02011,ding2023discop,kaptchuk2021meteor}, rewriting systems that paraphrase existing covers \cite{li2023rewriting,ou2025multigranularity}, black-box pipelines that treat the model as an opaque API \cite{wu2024generative,steinebach2024natural,kuznetsov2025deepstego,wozniak2025multicriteria}, zero-shot protocols driven primarily by prompting \cite{lin2024zero}, context-aware frameworks that retrieve or constrain external information to increase semantic plausibility or payload \cite{liao2024co,wang2023hi,shi2025emotionally}, and methods that emphasize stronger security, robustness, or token-level quality control \cite{kaptchuk2021meteor,ding2023discop,lin2025positionagnostic,chen2025activetwo,wang2025rsstega}.
 
 
 \begin{table}[ht]
   \centering
   \small
-  \begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \caption{Publication trends by year}
+  \label{tab:publication_trends}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{2cm}|}
     \hline
     \textbf{Year} & \textbf{2020} & \textbf{2021-2022} & \textbf{2023} & \textbf{2024-2025} & \textbf{Total} \\
     \hline
-    Publications  & 2             & 3                  & 5             & 16                 & 26             \\
+    Publications  & 2             & 3                  & 5             & 24                 & 34             \\
     \hline
   \end{tabular}
-  \caption{Publication trends by year}
-  \label{tab:publication_trends}
 \end{table}
 
 
 \begin{table}[h]
   \centering
   \small
-  \begin{tabular}{p{4cm} p{9cm}}
+  \caption{Representative model families across the 34 studies explicitly enumerated in the current synthesis tables. Categories are non-exclusive, so totals exceed 100\%.}
+  \label{tab:model_families}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}p{9cm}}
     \hline
     \textbf{Model Type (Studies)} & \textbf{Models and Representative Works}  \\
     \hline
-    Open-weight Models (20/26, 76.9\%) &
+    Open-weight Models (26/34, 76.5\%) &
     GPT-2 \cite{ding2023discop,pang2024fremax,kaptchuk2021meteor,wang2023hi},
     LLaMA/LLaMA2 \cite{liao2024co,lin2024zero,qi2024provably,li2024semantic},
     BERT \cite{zheng2022general,zhang2024controllable,ding2023joint,ding2023context,ji2024principled,xiang2023cpg,zhang2020linguistic,qiang2023natural,yi2022alisa},
     OPT \cite{munyer2024deeptextmark},
     BART \cite{qiang2023natural,li2023rewriting},
-    Qwen \cite{li2024imperceptible}                                          \\
-    Proprietary Models (4/26, 15.4\%) &
+    Qwen \cite{li2024imperceptible,shi2025emotionally},
+    XLNet \cite{chen2025cdea}                                          \\
+    Proprietary Models (7/34, 20.6\%) &
     GPT-3.5/4, ChatGPT
-    \cite{xu2024beyond,steinebach2024natural,wu2024generative,hao2025robust} \\
-    Custom or Task-Specific Architectures (4/26, 15.4\%) &
+    \cite{xu2024beyond,steinebach2024natural,wu2024generative,hao2025robust,kuznetsov2025deepstego,wozniak2025multicriteria} \\
+    Custom or Task-Specific Architectures (6/34, 17.6\%) &
     From-scratch or task-specific models
-    \cite{yang2020vae,ding2023joint,ji2024principled,munyer2024deeptextmark} \\
+    \cite{yang2020vae,ding2023joint,ji2024principled,munyer2024deeptextmark,wang2025rsstega,chen2025activetwo} \\
     \hline
   \end{tabular}
-  \caption{Representative model families across the 26 studies explicitly enumerated in the current synthesis tables. Categories are non-exclusive, so totals exceed 100\%.}
 \end{table}
 
 
