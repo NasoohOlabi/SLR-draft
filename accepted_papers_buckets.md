@@ -1,6 +1,6 @@
 # Accepted Papers Buckets
 
-These 35 accepted papers are grouped by semantic similarity and then split into smaller sub-buckets for review.
+These 34 accepted papers are grouped by semantic similarity and then split into smaller sub-buckets for review.
 
 ## 1. Linguistic Steganography Generation and Text Hiding Methods
 
@@ -9,8 +9,6 @@ These 35 accepted papers are grouped by semantic similarity and then split into 
 1. [X] `DeepStego: Privacy-Preserving Natural Language Steganography Using Large Language Models and Advanced Neural Architectures` (2025, `Computers`, DOI [10.3390/computers14050165](https://doi.org/10.3390/computers14050165))
 1. [X] `Emotionally Controllable Text Steganography Based on Large Language Model and Named Entity` (2025, `Technologies`, DOI [10.3390/technologies13070264](https://doi.org/10.3390/technologies13070264))
 1. [X] `Multi-criteria linguistic optimization for covert communication in secure LLM-based steganography` (2025, `Applied Soft Computing`, DOI [10.1016/j.asoc.2025.113960](https://doi.org/10.1016/j.asoc.2025.113960))
-1. [X] `Promising Multi-Granularity Linguistic Steganography by Jointing Syntactic and Lexical Manipulations` (2025, `Proceedings of the AAAI Conference on Artificial Intelligence`, DOI [10.1609/aaai.v39i23.34682](https://doi.org/10.1609/aaai.v39i23.34682))
-
 ### 1.2 Robustness and Quality Control
 
 1. [ ] `Dynamically allocated interval-based generative linguistic steganography with roulette wheel` (2025, `Applied Soft Computing`, DOI [10.1016/j.asoc.2025.113101](https://doi.org/10.1016/j.asoc.2025.113101))
