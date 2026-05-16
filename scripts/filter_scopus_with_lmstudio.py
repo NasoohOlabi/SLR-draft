@@ -64,6 +64,37 @@ Return strict JSON only with this schema:
   "exclusion_reason": "short label or empty string"
 }"""
 
+LENIENT_SYSTEM_PROMPT = """You are assisting with title-level and metadata-level screening for a systematic literature review on LLM-based linguistic steganography.
+
+Task:
+Classify one paper as INCLUDE, EXCLUDE, or MAYBE using only the metadata provided.
+
+Scope:
+We want PRIMARY STUDIES only.
+Prefer INCLUDE or MAYBE when a paper looks plausibly relevant.
+
+Include if the paper is directly about linguistic/text steganography, natural-language watermarking, or closely related information-hiding in text, and language-model methods such as LLMs, GPT, BERT, LLaMA, masked language models, or comparable NLP generation models are central to the method.
+
+Use EXCLUDE only when the paper is clearly outside scope, such as image, video, audio, diffusion-image, multimodal watermarking, model ownership/fingerprinting, federated learning watermarking, malware/code watermarking, or generic AI-generated text detection that is not a text steganography/watermarking study.
+
+Important:
+- Full-text access cannot be verified here. Treat it as unresolved, not as a reason to exclude by itself.
+- If relevance is uncertain, return MAYBE rather than EXCLUDE.
+- Base the decision on the supplied title, venue, year, type, and DOI only. Do not invent facts.
+
+Return strict JSON only with this schema:
+{
+  "decision": "include|exclude|maybe",
+  "confidence": "high|medium|low",
+  "primary_study": true,
+  "peer_reviewed_likely": true,
+  "llm_relevance": "direct|indirect|none",
+  "text_steganography_relevance": "direct|indirect|none",
+  "full_text_status": "manual_check_required",
+  "reason": "one concise sentence",
+  "exclusion_reason": "short label or empty string"
+}"""
+
 REPAIR_PROMPT = """Repair the following model output so it becomes valid JSON that exactly matches the required schema. Return JSON only and do not add commentary.
 
 Required schema:
@@ -242,6 +273,12 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.0,
         help="Sampling temperature for chat completions.",
+    )
+    parser.add_argument(
+        "--screening-mode",
+        choices=("strict", "lenient"),
+        default="strict",
+        help="Use a stricter or more permissive screening prompt.",
     )
     parser.add_argument(
         "--since-date",
@@ -680,10 +717,12 @@ def classify_with_lmstudio(
     metadata: ScopusMetadata | None,
     model: str,
     temperature: float,
+    screening_mode: str,
 ) -> tuple[ScreenDecision, str]:
     publication_date = extract_publication_date(entry, metadata)
     user_message = build_user_message(entry, metadata, publication_date)
-    content = request_chat_completion(client, model, temperature, SYSTEM_PROMPT, user_message)
+    system_prompt = LENIENT_SYSTEM_PROMPT if screening_mode == "lenient" else SYSTEM_PROMPT
+    content = request_chat_completion(client, model, temperature, system_prompt, user_message)
     try:
         payload = parse_response_payload(content)
         return screen_decision_from_payload(payload), "llm"
@@ -859,8 +898,9 @@ def classify_one(
     client: OpenAI,
     model: str,
     temperature: float,
+    screening_mode: str,
 ) -> tuple[str, ScreenDecision, str]:
-    decision, source = classify_with_lmstudio(client, entry, metadata, model, temperature)
+    decision, source = classify_with_lmstudio(client, entry, metadata, model, temperature, screening_mode)
     return entry.key, decision, source
 
 
@@ -986,7 +1026,16 @@ def main() -> int:
         try:
             if args.max_workers <= 1:
                 for entry, metadata in llm_queue:
-                    store_result(classify_one(entry, metadata, client, args.model, args.temperature))
+                    store_result(
+                        classify_one(
+                            entry,
+                            metadata,
+                            client,
+                            args.model,
+                            args.temperature,
+                            args.screening_mode,
+                        )
+                    )
             else:
                 with concurrent.futures.ThreadPoolExecutor(max_workers=args.max_workers) as executor:
                     futures = [
@@ -997,6 +1046,7 @@ def main() -> int:
                             client,
                             args.model,
                             args.temperature,
+                            args.screening_mode,
                         )
                         for entry, metadata in llm_queue
                     ]

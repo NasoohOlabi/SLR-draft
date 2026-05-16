@@ -209,12 +209,14 @@ def classify_model_type(llm_text):
 
 
 def verify_publication_trends(df, matches):
-    """Count papers by year period"""
+    """Count papers by publication year"""
     trends = {
         '2020': [],
-        '2021-2022': [],
+        '2021': [],
+        '2022': [],
         '2023': [],
-        '2024-2025': []
+        '2024': [],
+        '2025': []
     }
     
     for idx, row in df.iterrows():
@@ -233,14 +235,9 @@ def verify_publication_trends(df, matches):
                 'citation': citation_key
             }
             
-            if year == 2020:
-                trends['2020'].append(paper_info)
-            elif 2021 <= year <= 2022:
-                trends['2021-2022'].append(paper_info)
-            elif year == 2023:
-                trends['2023'].append(paper_info)
-            elif 2024 <= year <= 2025:
-                trends['2024-2025'].append(paper_info)
+            year_key = str(year)
+            if year_key in trends:
+                trends[year_key].append(paper_info)
         except (ValueError, TypeError):
             continue
     
@@ -348,14 +345,14 @@ def generate_report(df, matches, bib_data, output_path):
     
     # Publication Trends
     report.append("## 1. Publication Trends by Year\n")
-    report.append("| Period | Claimed | Actual | Papers |\n")
+    report.append("| Year | Claimed | Actual | Papers |\n")
     report.append("|--------|---------|--------|--------|\n")
     
-    claimed_trends = {'2020': 2, '2021-2022': 3, '2023': 4, '2024-2025': 17, 'Total': 26}
+    claimed_trends = {'2020': 2, '2021': 1, '2022': 2, '2023': 5, '2024': 14, '2025': 8, 'Total': 32}
     actual_totals = {k: len(v) for k, v in trends.items()}
     actual_total = sum(actual_totals.values())
     
-    for period in ['2020', '2021-2022', '2023', '2024-2025']:
+    for period in ['2020', '2021', '2022', '2023', '2024', '2025']:
         claimed = claimed_trends.get(period, 0)
         actual = actual_totals.get(period, 0)
         status = "✓" if claimed == actual else "✗"
@@ -364,7 +361,7 @@ def generate_report(df, matches, bib_data, output_path):
     report.append(f"| **Total** | {claimed_trends['Total']} | {actual_total} {'✓' if claimed_trends['Total'] == actual_total else '✗'} | {actual_total} |\n\n")
     
     # Detailed paper lists by year
-    report.append("### Papers by Year Period\n")
+    report.append("### Papers by Year\n")
     for period, papers in trends.items():
         if papers:
             report.append(f"#### {period} ({len(papers)} papers)\n")
