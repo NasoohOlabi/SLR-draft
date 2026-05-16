@@ -1,17 +1,15 @@
 \section{Research Method}\label{sec:design}
 
-
 This study was undertaken as a systematic literature review using the guidelines presented in
 Petersen et al. \cite{slr_guidelines}. The goal of this review is to identify, categorize, and analyze existing literature
-published between 2018 and 2025 and use syntactic and semantics aspects to represent context handling in linguistic steganographic methods.
+published between 2018 and 2025 on LLM-based linguistic steganography, with particular attention to context handling, evaluation practice, and unresolved technical limitations.
 
 \subsection{Planning}
 
-In this section, we deﬁne our research questions, the search strategy we use, and the inclusion
-and exclusion criteria considered to filter the results.
+In this section, we define the research questions, the search strategy, and the inclusion and exclusion criteria used to filter the retrieved studies.
 
 \subsubsection{Research Questions}
-This systematic literature review is guided by five research questions:
+This systematic literature review is guided by the following five research questions:
 \begin{itemize}
 	\item \textbf{RQ1:} What is the current state of published literature on LLM-based steganography?
 	\item \textbf{RQ2:} What applications are being explored for LLM-based steganographic techniques?
@@ -20,9 +18,15 @@ This systematic literature review is guided by five research questions:
 	\item \textbf{RQ5:} What limitations and trade-offs characterize current LLM-based steganographic techniques?
 \end{itemize}
 
-\subsubsection{Search Strategies}
-The initial literature search employed a specific query string: `(steganography or watermark or "Information Hiding") and ("Large Language Model" or LLM or BERT or LAMA or GPT)`. The query was intentionally broad to maximize recall during the identification stage, even though the final synthesis focuses on LLM-based linguistic steganography. It was executed across several digital libraries, including ACM Digital Library, IEEE Digital Library, Science@Direct, Scopus, and Springer Link, to ensure broad coverage. To complement this automated search and identify additional relevant studies, a snowballing technique was also applied. This involved examining the reference lists of included studies. While snowballing primarily yielded older steganographic techniques not explicitly mentioning LLMs, these papers often utilized similar methodological approaches to contemporary LLM-based steganography, providing valuable contextual information.
+RQ1 provides a general overview of the published literature. RQ2 identifies the main application areas addressed by the selected studies. RQ3 examines how LLM-based steganographic methods are evaluated. RQ4 focuses on the role of external knowledge and contextual information. RQ5 summarizes the limitations, trade-offs, and open challenges reported across the literature.
 
+\subsubsection{Search Strategies}
+The initial literature search used the following query string:
+\begin{quote}
+	\small (steganography OR watermark OR ``Information Hiding'') AND (``Large Language Model'' OR LLM OR BERT OR LAMA OR GPT)
+\end{quote}
+
+The query was intentionally broad to maximize recall during the identification stage, even though the final synthesis focuses on LLM-based linguistic steganography. It was executed across ACM Digital Library, IEEE Digital Library, Science@Direct, Scopus, and Springer Link. To complement the automated search, backward snowballing was applied by examining the reference lists of included studies. Snowballing mainly retrieved older linguistic steganography studies that did not explicitly mention LLMs but provided useful methodological context for interpreting recent work.
 
 \subsubsection{Inclusion and Exclusion Criteria}
 To ensure the selection of high-quality and relevant studies, the following criteria were applied.
@@ -34,51 +38,35 @@ Studies were included if they:
 	\item Provided full-text access.
 	\item Were published in English from 2018 onwards.
 	\item Appeared in peer-reviewed journals, conferences, or workshops.
-	\item Directly addressed linguistic steganography or closely related information-hiding techniques involving or significantly impacted by LLMs, BERT, LAMA, or GPT architectures.
+	\item Directly addressed linguistic steganography or closely related information-hiding techniques involving or significantly impacted by LLMs, BERT, LLaMA, or GPT architectures.
 	\item Represented empirical studies, surveys, reviews, or theoretical contributions.
 \end{enumerate}
-
 
 \textbf{Exclusion Criteria}
 Studies were excluded if they:
 
 \begin{enumerate}[label=EC\arabic*:]
-	\item Were duplicates (retaining the most complete or recent version).
+	\item Were duplicates, retaining the most complete or recent version.
 	\item Were incomplete, abstract-only, or irrelevant to steganography with LLMs.
 	\item Were non-English publications.
-	\item Came from non-peer-reviewed sources (e.g., preprints, dissertations, theses, books, book chapters), unless extended from peer-reviewed conference papers.
+	\item Came from non-peer-reviewed sources such as preprints, dissertations, theses, books, or book chapters, unless extended from peer-reviewed conference papers.
 \end{enumerate}
 
-
-
 \subsection{Conducting the Search}
-The initial automated search across the selected digital libraries yielded a total of 1043 candidate papers. The distribution by source was: ACM Digital Library (346), IEEE Digital Library (61), Science@Direct (209), Scopus (151), and Springer Link (276). Consistent with the scope of this review, only studies published between 2018 and 2025 were considered during screening and selection. Duplicate papers were eliminated using the Parsifal tool \footnote{\href{https://parsif.al}{https://parsif.al}} before the remaining papers underwent a multi-stage filtering process based on title, abstract, and full-text review, guided by the predefined inclusion and exclusion criteria. After title and abstract filtering, 58 papers remained. Of these, 34 were accepted for analysis with usable bibliographic and extraction data, while 6 additional papers were identified as potentially relevant but remained pending full extraction at the time of analysis.
+The initial automated search across the selected digital libraries yielded a total of 1043 candidate papers. The distribution by source was ACM Digital Library (346), IEEE Digital Library (61), Science@Direct (209), Scopus (151), and Springer Link (276). Consistent with the scope of this review, only studies published between 2018 and 2025 were considered during screening and selection.
+
+Duplicate papers were eliminated using the Parsifal tool\footnote{\href{https://parsif.al}{https://parsif.al}} before the remaining papers underwent a multi-stage filtering process based on title, abstract, and full-text review. After title and abstract filtering, 58 papers remained. Of these, 34 were accepted for analysis with usable bibliographic and extraction data, while 6 additional papers were identified as potentially relevant but remained pending full extraction at the time of analysis.
 
 \subsection{Data Extraction and Classification}
-A Data Extraction Form (DEF) was developed to systematically collect data from each primary study to address our research questions. The form is designed in a table format consisting of the following types of information:
+A Data Extraction Form (DEF) was developed to systematically collect data from each primary study and answer the research questions. The form was organized as a table with the following types of information:
 
 \begin{itemize}
-	\item Bibliometric Information: paper title, type (Steganography or Watermarking), author(s), publication year, and publication venue.
-	\item Model Details: input and output formats, key characteristics, approach classification (three-term categorical), specific LLM used (if applicable), embedding process description, and code availability.
-	\item Datasets: all datasets employed, including their sizes.
-	\item Context Awareness: whether the method is "Explicit," "Implicit," or "No," the context keyword (e.g., "Social Media," "Formal Document"), how context is represented (e.g., "Text," "Pretext," "Graph," "Vector"), and how it is utilized in the method.
-	\item Evaluation Details: evaluation metrics, steganalysis models used, and the best numerical results for each reported metric.
-	\item Strengths and Limitations: main strengths and weaknesses of the approach or model.
+	\item Bibliometric information: paper title, type (steganography or watermarking), author(s), publication year, and publication venue.
+	\item Model details: input and output formats, key characteristics, approach classification, specific LLM used, embedding process description, and code availability.
+	\item Datasets: all datasets employed, including their sizes when reported.
+	\item Context awareness: whether the method is explicit, implicit, or absent; the context keyword; how context is represented; and how it is used in the method.
+	\item Evaluation details: evaluation metrics, steganalysis models used, and the best numerical results for each reported metric.
+	\item Strengths and limitations: the main strengths and weaknesses of the approach or model.
 \end{itemize}
 
-Following data extraction, studies were classified based on predefined categories derived from the research questions to identify trends, patterns, and gaps in the literature. The results are summarized using tables and descriptive statistics. Each research question is addressed individually with interpretation of findings and identification of future research directions.
-
-% \subsection{Threats to Validity}
-
-% Several threats to validity should be acknowledged. First, the search was limited to English-language studies published from 2018 onward, which may have excluded relevant earlier or non-English work. Second, although the selected databases provide broad coverage, the query terms may still have missed studies that used different terminology for closely related methods. Third, the review focused on peer-reviewed sources, which improves baseline quality but may introduce publication bias by underrepresenting negative or null findings. Fourth, six potentially relevant papers were not included in the final synthesis because full PDFs were not available at the time of analysis. Finally, no formal risk-of-bias instrument was applied beyond relevance-based screening and structured extraction. These limitations do not invalidate the review, but they should be considered when interpreting the reported trends and proportions.
-
-
-
-
-% \subsection{Presentation of Results}
-
-% The results of the data synthesis are presented in a structured manner, often utilizing tables, figures, and descriptive statistics to summarize key findings. This includes an overview of publication trends, distribution of studies across different categories, and the prevalence of various approaches and techniques.
-
-% \subsection{Discussion in Relation to Research Questions}
-
-% Each research question is addressed individually, with a detailed discussion of the synthesized data. This involves interpreting the findings, highlighting significant observations, and drawing conclusions based on the evidence gathered from the primary studies. The discussion also identifies areas where further research is needed and potential future directions.
+Following data extraction, studies were classified using predefined categories derived from the research questions. The results are summarized using tables and descriptive statistics, and each research question is addressed individually with interpretation of findings and identification of future research directions.
