@@ -1,11 +1,9 @@
-\documentclass[onecolumn,draftclsnofoot]{IEEEtran}
-\usepackage{cite}
+\documentclass[manuscript,screen,nonacm]{sections/acmart}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath}
 \usepackage{array}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{url}
-\usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{longtable}
@@ -20,42 +18,41 @@
 % \renewcommand{\@acmart@checkdesc}{}
 % \makeatother
 
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08emT\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-
-\title{A Systematic Literature Review of LLM-Based Linguistic Steganography}
+\title{A Systematic Literature Review of LLM-Based Linguistic Steganography: Context, Evaluation, and Trade-offs}
 
 \author{
-Nasouh AlOlabi\\
-Higher Institute for Applied Sciences and Technology\\
-Damascus, Syria\\
-Riad Sonbol\\
-Higher Institute for Applied Sciences and Technology\\
-Damascus, Syria
+  Nasouh AlOlabi and Riad Sonbol
+}
+
+\affiliation{
+  \institution{Higher Institute for Applied Sciences and Technology}
+  \city{Damascus}
+  \country{Syria}
 }
 
 \begin{document}
 
-\maketitle
-
 \begin{abstract}
-	This systematic literature review examines how Large Language Models (LLMs) are reshaping linguistic steganography. Through
+	Steganography is the practice of concealing information within seemingly ordinary text. The rapid growth of Large Language Models (LLMs) has led to increasing research attention on their potential for linguistic steganography. This systematic literature review examines how LLMs are reshaping this field. Through
 	analysis of primary studies, the review synthesizes recent work on generative, rewriting-based, black-box, and context-aware
 	approaches, with particular attention to application domains, evaluation practices, external knowledge integration, and recurring
 	technical trade-offs. The surveyed literature suggests that LLM-based methods can improve text fluency and contextual plausibility
 	relative to earlier linguistic steganography techniques, but it also shows that gains in payload, naturalness, and security remain
 	difficult to balance in practice. A recurring theme across the reviewed studies is the growing importance of contextual compatibility,
-	including domain adaptation, retrieval, and semantic guidance, as a mechanism for improving both usability and concealment. The
+	meaning the extent to which generated cover text fits the surrounding discourse, task, and conversational setting rather than merely sounding fluent. This includes domain adaptation, retrieval, and semantic guidance as mechanisms for improving both usability and concealment. The
 	review concludes by identifying unresolved challenges in evaluation standardization, robustness, tokenization reliability, and practical
 	deployment.
 
 
 \end{abstract}
 
-\begin{IEEEkeywords}
+\keywords{
 	Systematic Literature Review, Linguistic Steganography, Large Language Models, LLMs, Natural Language Processing, NLP, Black-box Steganography, Context Retrieval, Generative Text Steganography, Imperceptibility
-\end{IEEEkeywords}
+}
 
-\noindent\textbf{Preprint Notice:} This is a preprint version of our systematic literature review, last updated on January 8, 2026. The work is currently under review for publication.
+\maketitle
+
+\noindent\textbf{Preprint Notice:} This is a preprint version of our systematic literature review, last updated on May 23, 2026. The manuscript is currently under review.
 
 %\vspace{10pt}
 % IMPORTANT: Do not change or add any headers below this line.
@@ -69,7 +66,7 @@ Damascus, Syria
 \input{sections/threats.tex}
 \input{sections/conclusion.tex}
 
-\bibliographystyle{IEEEtran}
+\bibliographystyle{ACM-Reference-Format}
 \bibliography{references/bibliography}
 
 \clearpage
