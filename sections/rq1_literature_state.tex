@@ -2,28 +2,28 @@
 \label{subsec:rq1}
 
 \subsubsection{Publication Trends and Distribution}
-Our analysis of 32 studies indicates a clear rise in LLM-based steganography research after 2023, with most of the reviewed studies appearing in 2024--2025. This increase coincides with the rapid diffusion of large-scale language models in both proprietary and open-weight forms, including widely used families such as GPT, GPT-2, and LLaMA \cite{brown2020language,radford2019gpt2,xi2025rise2openfoundation}. Across the reviewed corpus, open-weight and research-accessible models appear more frequently than closed commercial systems, reflecting the practical importance of reproducibility and controllable experimentation.
+Our analysis of 32 studies indicates a clear rise in LLM-based steganography research after 2023, with 10 publications in 2020--2023 and 22 in 2024--2025. This increase coincides with the rapid diffusion of large-scale language models in both proprietary and open-weight forms, including widely used families such as GPT, GPT-2, and LLaMA \cite{brown2020language,radford2019gpt2,xi2025rise2openfoundation}. Across the reviewed corpus, open-weight and research-accessible models appear more frequently than closed commercial systems, reflecting the practical importance of reproducibility and controllable experimentation.
 
 The field has also evolved from earlier white-box token-sampling schemes toward a broader design space that includes hybrid and black-box methods. The reviewed studies now span generative schemes that write stego text from scratch \cite{yang2020vae,zhang2021provably,ding2023discop,kaptchuk2021meteor}, rewriting systems that paraphrase existing covers \cite{li2023rewriting,ou2025multigranularity}, black-box pipelines that treat the model as an opaque API \cite{wu2024generative,steinebach2024natural,kuznetsov2025deepstego,wozniak2025multicriteria}, zero-shot protocols driven primarily by prompting \cite{lin2024zero}, context-aware frameworks that retrieve or constrain external information to increase semantic plausibility or payload \cite{liao2024co,wang2023hi,shi2025emotionally}, and methods that emphasize stronger security, robustness, or token-level quality control \cite{kaptchuk2021meteor,ding2023discop,lin2025positionagnostic,chen2025activetwo,wang2025rsstega}.
 
 Table~\ref{tab:publication_trends} summarizes the year-wise publication growth, while Table~\ref{tab:model_families} shows how the reviewed studies distribute across model families.
 
-Table~\ref{tab:model_families} gives the model-family breakdown used in the synthesis.
+% Table~\ref{tab:model_families} gives the model-family breakdown used in the synthesis.
 
 
-\begin{table}[ht]
-  \centering
-  \small
-  \caption{Publication trends by year}
-  \label{tab:publication_trends}
-  \begin{tabular}{|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|}
-    \hline
-    \textbf{Year} & \textbf{2020} & \textbf{2021} & \textbf{2022} & \textbf{2023} & \textbf{2024} & \textbf{2025} & \textbf{Total} \\
-    \hline
-    Publications  & 2             & 1             & 2             & 5             & 14            & 8             & 32             \\
-    \hline
-  \end{tabular}
-\end{table}
+% \begin{table}[ht]
+%   \centering
+%   \small
+%   \caption{Publication trends by year}
+%   \label{tab:publication_trends}
+%   \begin{tabular}{|>{\raggedright\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|}
+%     \hline
+%     \textbf{Year} & \textbf{2020} & \textbf{2021} & \textbf{2022} & \textbf{2023} & \textbf{2024} & \textbf{2025} & \textbf{Total} \\
+%     \hline
+%     Publications  & 2             & 1             & 2             & 5             & 14            & 8             & 32             \\
+%     \hline
+%   \end{tabular}
+% \end{table}
 
 
 \begin{table}[h]
