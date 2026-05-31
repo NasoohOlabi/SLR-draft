@@ -7,30 +7,57 @@ Within this application space, the reviewed papers explore several operational v
 
 Although adjacent topics such as watermarking, authorship attribution, or prompt-hiding attacks are relevant to the broader landscape of information hiding, they remain analytically distinct from covert payload transmission. The new 2025 watermarking studies are therefore treated as boundary cases: useful for understanding robustness, semantic preservation, and detection methods, but not interchangeable with steganographic communication systems \cite{wang2025contrastive}.
 
+A comprehensive breakdown of how these reviewed studies are distributed across these primary application areas and variants is summarized in Table~\ref{tab:app_distribution}.
+
+\begin{table}[H]
+	\centering
+	\small
+	\caption{Distribution of Applications for LLM-Based Steganography}
+	\label{tab:app_distribution}
+	\begin{tabular}{|p{0.2\linewidth}|p{0.25\linewidth}|p{0.35\linewidth}|c|}
+		\hline
+		\textbf{Primary Application}                   & \textbf{Variant / Category}           & \textbf{Representative Studies}                                                                                                                                                 & \textbf{Total Count} \\
+		\hline
+		\multirow{3}{*}{\textbf{Covert Communication}} & Generation-based (from scratch)       & \cite{yang2020vae,kaptchuk2021meteor,ding2023discop,li2023rewriting,ding2023context,wu2024generative,lin2024zero,wang2025contrastive,kuznetsov2025deepstego,shi2025emotionally} & 10                   \\
+		\cline{2-4}
+		                                               & Paraphrasing or Rewriting             & \cite{chen2025cdea,wozniak2025multicriteria,lin2025positionagnostic,ou2025multigranularity,chen2025activetwo}                                                                   & 5                    \\
+		\cline{2-4}
+		                                               & Black-box and Prompt-based            & \cite{ji2024principled,yi2022alisa,li2024semantic,xu2024beyond,xiang2023cpg}                                                                                                    & 5                    \\
+		\hline
+		\textbf{Context-Aware Systems}                 & Domain, Emotion, or Social Adaptation & \cite{liao2024co,zhang2024controllable,munyer2024deeptextmark,pang2024fremax,zheng2022general,wang2023hi,li2024imperceptible}                                                   & 7                    \\
+		\hline
+		\textbf{Watermarking}                          & Content Attribution (Boundary Cases)  & \cite{ding2023joint,zhang2020linguistic,steinebach2024natural,qiang2023natural,qi2024provably,math9212829}                                                                      & 6                    \\
+		\hline
+		\multicolumn{3}{|r|}{\textbf{Total}}           & \textbf{33}                                                                                                                                                                                                                                    \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
 % \subsubsection{Primary Applications}
 
 % \begin{table}[ht]
-%   \centering
-%   \small
-%   \begin{tabular}{|p{4cm}|p{2cm}|p{2cm}|p{4cm}|}
-%     \hline
-%     \textbf{Application Domain} & \textbf{Percentage} & \textbf{Studies} & \textbf{Key Examples}              \\
-%     \hline
-%     Covert Communication        & 60\%                & 19               & DAIRstega, Co-Stega, FreStega      \\
-%     \hline
-%     Content Watermarking        & 25\%                & 8                & DeepTextMark, Natural Watermarking \\
-%     \hline
-%     Fingerprinting              & 8\%                 & 3                & Model identification, licensing    \\
-%     \hline
-%     Adversarial Attacks         & 4\%                 & 1                & StegoAttack                        \\
-%     \hline
-%     Data Exfiltration           & 2\%                 & 1                & TrojanStego                        \\
-%     \hline
-%     Social Media Hiding         & 1\%                 & 1                & Hi-stega                           \\
-%     \hline
-%   \end{tabular}
-%   \caption{Distribution of applications across reviewed studies}
-%   \label{tab:applications}
+% 	\centering
+% 	\small
+% 	\begin{tabular}{|p{4cm}|p{2cm}|p{2cm}|p{4cm}|}
+% 		\hline
+% 		\textbf{Application Domain} & \textbf{Percentage} & \textbf{Studies} & \textbf{Key Examples}              \\
+% 		\hline
+% 		Covert Communication        & 60\%                & 19               & DAIRstega, Co-Stega, FreStega      \\
+% 		\hline
+% 		Content Watermarking        & 25\%                & 8                & DeepTextMark, Natural Watermarking \\
+% 		\hline
+% 		Fingerprinting              & 8\%                 & 3                & Model identification, licensing    \\
+% 		\hline
+% 		Adversarial Attacks         & 4\%                 & 1                & StegoAttack                        \\
+% 		\hline
+% 		Data Exfiltration           & 2\%                 & 1                & TrojanStego                        \\
+% 		\hline
+% 		Social Media Hiding         & 1\%                 & 1                & Hi-stega                           \\
+% 		\hline
+% 	\end{tabular}
+% 	\caption{Distribution of applications across reviewed studies}
+% 	\label{tab:applications}
 % \end{table}
 
 % \subsubsection{Covert Communication Applications}
