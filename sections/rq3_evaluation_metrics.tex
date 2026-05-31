@@ -3,31 +3,9 @@
 
 Performance evaluation for LLM-based steganography relies on three key categories of metrics, with significant variation in reporting standards across studies. The analysis reveals both the diversity of evaluation approaches and the need for standardization.
 
-Table~\ref{tab:evaluation_metrics} provides a compact overview of the main metric families and their typical ranges.
-
-
 % While metric inconsistency plagues many AI fields, linguistic steganography faces a structurally distinct *re-implementation barrier*: its core units of measurement-"perplexity," "bits per token"-are model-dependent and semantically incompatible across papers. Unlike computer vision's model-agnostic pixels or NLP's fixed benchmarks, a tokenizer or LLM change fundamentally alters what these metrics quantify, making direct comparison impossible without costly re-implementation. This compounds with steganography's inherently multi-objective nature (imperceptibility, capacity, security, robustness), forcing researchers to reconstruct rather than verify prior work, and rendering claims of improvement inherently noisy.
 % \subsubsection{Metric Categories and Standards}
 
-\begin{table}[ht]
-  \centering
-  \footnotesize
-  \caption{Evaluation metrics usage and typical ranges across studies}
-  \label{tab:evaluation_metrics}
-  \begin{tabular}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{2.5cm}|}
-    \hline
-    \textbf{Metric Type} & \textbf{Imperceptibility} & \textbf{Capacity} & \textbf{Security}  & \textbf{Usage} \\
-    \hline
-    Perceptual           & PPL: 3-300                & BPW: 0.5-6.0      & Detection: 50-98\% & 85\%           \\
-    \hline
-    Statistical          & KLD: 0-3.3                & BPT: 1.0-5.8      & F1: 0.5-0.99       & 70\%           \\
-    \hline
-    Semantic             & BLEU: 0.3-0.9             & ER: 0.2-0.4       & Acc: 0.5-0.99      & 60\%           \\
-    \hline
-    Human Eval           & MAUVE: 0.2-0.9            & -                 & -                  & 25\%           \\
-    \hline
-  \end{tabular}
-\end{table}
 
 \subsubsection{Perplexity (PPL)}
 
@@ -226,7 +204,7 @@ Recent robustness-oriented work broadens this evaluation set. Position-agnostic 
 
 \subsubsection{Evaluation Challenges and Gaps}
 
-Several significant challenges exist in current evaluation practices:
+The broad landscape of evaluation metrics across the reviewed studies is summarized in Table~\ref{tab:evaluation_metrics_overview}, which categorizes metrics by type, lists representative studies, and quantifies their usage frequency. Several significant challenges exist in current evaluation practices:
 
 \begin{itemize}
   \item \textbf{Lack of Standardized Benchmarks:} The absence of shared benchmarks means only 20\% of studies use common datasets, making comparison difficult
@@ -235,4 +213,39 @@ Several significant challenges exist in current evaluation practices:
   \item \textbf{Missing Robustness Testing:} 60\% of studies don't test against various attacks
   \item \textbf{Incomplete Evaluation:} Many studies focus on only one or two metric categories
 \end{itemize}
+
+
+\begin{table}[ht]
+  \centering
+  \footnotesize
+  \caption{Overview of evaluation metrics and representative studies}
+  \label{tab:evaluation_metrics_overview}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}p{0.25\linewidth}|>{\raggedright\arraybackslash}p{0.35\linewidth}|c|}
+    \hline
+    \textbf{Evaluation Metrics} & \textbf{Variant / Category}         & \textbf{Representative Studies}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                & \textbf{Total Count} \\
+    \hline
+    \textbf{Imperceptibility}   & Perplexity (PPL)                    & VAE-Stega \cite{yang2020vae}, Rewriting-Stego \cite{li2023rewriting}, NMT-Stego \cite{ding2023context}, LLM-Stego \cite{wu2024generative}, Zero-shot \cite{lin2024zero}, DeepStego \cite{kuznetsov2025deepstego}, Emotion-Controllable \cite{shi2025emotionally}, CDEA \cite{chen2025cdea}, GCStego \cite{liao2024co}, RDH \cite{zheng2022general}, ALiSa \cite{yi2022alisa}, Semantic Space \cite{zhang2020linguistic}                                                                                                                                                                                                                        & 12                   \\
+    \cline{2-4}
+                                & Statistical Divergence (KLD, JSD)   & VAE-Stega \cite{yang2020vae}, Discop \cite{ding2023discop}, NMT-Stego \cite{ding2023context}, LLM-Stego \cite{wu2024generative}, Zero-shot \cite{lin2024zero}, Emotion-Controllable \cite{shi2025emotionally}, CDEA \cite{chen2025cdea}, PAP \cite{lin2025positionagnostic}, RDH \cite{zheng2022general}, Semantic Space \cite{zhang2020linguistic}                                                                                                                                                                                                                                                                                            & 10                   \\
+    \cline{2-4}
+                                & Semantic Similarity (BLEU, SIM, SS) & NMT-Stego \cite{ding2023context}, LLM-Stego \cite{wu2024generative}, Emotion-Controllable \cite{shi2025emotionally}, MMLS \cite{ou2025multigranularity}, DeepTextMark \cite{munyer2024deeptextmark}, Paraphraser-based \cite{qiang2023natural}, GCStego \cite{liao2024co}, Post-hoc \cite{hao2025robust}                                                                                                                                                                                                                                                                                                                                       & 8                    \\
+    \cline{2-4}
+                                & Human Evaluation                    & VAE-Stega \cite{yang2020vae}, LLM-Stego \cite{wu2024generative}, Zero-shot \cite{lin2024zero}, Emotion-Controllable \cite{shi2025emotionally}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  & 4                    \\
+    \cline{2-4}
+                                & Diversity (TTR, Distinct-n)         & CWS \cite{li2024imperceptible}, CDEA \cite{chen2025cdea}, Multi-criteria \cite{wozniak2025multicriteria}, Hi-Stega \cite{wang2023hi}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           & 4                    \\
+    \hline
+    \textbf{Security}           & Detection Accuracy (Acc) / F1-Score & VAE-Stega \cite{yang2020vae}, Rewriting-Stego \cite{li2023rewriting}, NMT-Stego \cite{ding2023context}, LLM-Stego \cite{wu2024generative}, Zero-shot \cite{lin2024zero}, CWS \cite{li2024imperceptible}, DeepStego \cite{kuznetsov2025deepstego}, Emotion-Controllable \cite{shi2025emotionally}, CDEA \cite{chen2025cdea}, PAP \cite{lin2025positionagnostic}, MMLS \cite{ou2025multigranularity}, GCStego \cite{liao2024co}, RDH \cite{zheng2022general}, ALiSa \cite{yi2022alisa}, Semantic Space \cite{zhang2020linguistic}, Principled \cite{ji2024principled}, DeepTextMark \cite{munyer2024deeptextmark}, Post-hoc \cite{hao2025robust} & 18                   \\
+    \hline
+    \textbf{Capacity}           & Bits Per Word / Token (BPW/BPT)     & VAE-Stega \cite{yang2020vae}, Rewriting-Stego \cite{li2023rewriting}, NMT-Stego \cite{ding2023context}, LLM-Stego \cite{wu2024generative}, Zero-shot \cite{lin2024zero}, CWS \cite{li2024imperceptible}, DeepStego \cite{kuznetsov2025deepstego}, Emotion-Controllable \cite{shi2025emotionally}, CDEA \cite{chen2025cdea}, PAP \cite{lin2025positionagnostic}, MMLS \cite{ou2025multigranularity}, Multi-criteria \cite{wozniak2025multicriteria}, GCStego \cite{liao2024co}, RDH \cite{zheng2022general}, Joint-BERT \cite{ding2023joint}                                                                                                    & 15                   \\
+    \cline{2-4}
+                                & Entropy Utilization                 & Discop \cite{ding2023discop}, Disambiguating \cite{qi2024provably}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             & 2                    \\
+    \hline
+    \textbf{Robustness}         & Recovery Rate / Bit Match Rate      & DeepStego \cite{kuznetsov2025deepstego}, PAP \cite{lin2025positionagnostic}, DeepTextMark \cite{munyer2024deeptextmark}, Paraphraser-based \cite{qiang2023natural}                                                                                                                                                                                                                                                                                                                                                                                                                                                                             & 4                    \\
+    \cline{2-4}
+                                & Resilience to Attacks (F1 drop)     & CWS \cite{li2024imperceptible}, Active Attacks \cite{chen2025activetwo}, DeepTextMark \cite{munyer2024deeptextmark}, Post-hoc \cite{hao2025robust}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             & 4                    \\
+    \hline
+    \textbf{Efficiency}         & Generation / Extraction Time        & Meteor \cite{kaptchuk2021meteor}, Discop \cite{ding2023discop}, CWS \cite{li2024imperceptible}, DeepStego \cite{kuznetsov2025deepstego}, CDEA \cite{chen2025cdea}, Active Attacks \cite{chen2025activetwo}, GCStego \cite{liao2024co}, DeepTextMark \cite{munyer2024deeptextmark}                                                                                                                                                                                                                                                                                                                                                              & 8                    \\
+    \hline
+  \end{tabular}
+\end{table}
 
