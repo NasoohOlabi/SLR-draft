@@ -2,12 +2,12 @@
 
 \section{Results and Discussion}
 \label{sec:results_discussion}
-This section presents the synthesized findings from the systematic literature review, encompassing 34 primary studies included with usable bibliographic and extraction data; six additional candidate studies were potentially relevant but could not be fully extracted at the time of review. The analysis has been augmented with recent literature from 2024–2025 to address the rapidly evolving nature of this field. The discussion is organized around the five research questions (RQs) and provides a synthesis of trends, quantitative comparisons, and key examples for each. Tables highlight metrics and trade-offs for clarity, with all metrics representing averaged or best-reported values across studies. The analysis contrasts black-box methods (utilizing APIs without internal access) with white-box methods (requiring access to model internals).
+This section presents the synthesized findings from the systematic literature review, encompassing 32 primary studies included with usable bibliographic and extraction data; six additional candidate studies were potentially relevant but could not be fully extracted at the time of review. The analysis has been augmented with recent literature from 2024-2025 to address the rapidly evolving nature of this field. The discussion is organized around the five research questions (RQs) and provides a synthesis of trends, quantitative comparisons, and key examples for each. Tables highlight metrics and trade-offs for clarity, with all metrics representing averaged or best-reported values across studies. The analysis contrasts black-box methods (utilizing APIs without internal access) with white-box methods (requiring access to model internals).
 
 \subsection{State of Published Literature on LLM-based Steganography (RQ1)}
 \label{subsec:rq1}
 
-The review identified a significant surge in literature since 2023, with approximately 20 new papers published in 2024–2025 focusing on generative steganography. Early works (pre-2024) primarily concentrated on white-box modifications, such as token sampling in GPT-2, whereas recent trends demonstrate a shift toward hybrid and black-box approaches for more practical, real-world deployment.
+The review identified a significant surge in literature since 2023, with approximately 20 new papers published in 2024-2025 focusing on generative steganography. Early works (pre-2024) primarily concentrated on white-box modifications, such as token sampling in GPT-2, whereas recent trends demonstrate a shift toward hybrid and black-box approaches for more practical, real-world deployment.
 
 Key trends in this evolving field include:
 \begin{itemize}
@@ -40,7 +40,7 @@ The field further investigates domain-specific applications, including the utili
 
 Performance evaluation for LLM-based steganography relies on three key categories of metrics:
 \begin{itemize}
-	\item \textbf{Imperceptibility:} Encompasses both \textbf{perceptual metrics} (PPL, MAUVE) and \textbf{statistical metrics} (KLD, JSD). Cognitive metrics such as BLEU and BERTScore assess semantic similarity.
+	\item \textbf{Imperceptibility:} Encompasses both \textbf{perceptual metrics} (e.g., PPL) and \textbf{statistical metrics} (KLD, JSD). Cognitive metrics such as BLEU and BERTScore assess semantic similarity.
 	\item \textbf{Capacity:} Measured in bits per token/word (bpw/bpt) and embedding rate (ER).
 	\item \textbf{Security:} Evaluated through anti-steganalysis accuracy/F1 score and detection rate following attacks.
 \end{itemize}
@@ -58,7 +58,7 @@ Evaluation methods encompass automated tools, including steganalysis classifiers
 		\hline
 		Black-box            & $\sim$168-363     & $\sim$1.76-2.23   & $\sim$5.37 bpw            & 79-91\% detection             & Higher PPL but robust             \\
 		\hline
-		White-box            & $\sim$3-8         & $\sim$0-0.25      & $\sim$1.10-5.98 bpt       & MAUVE $\sim$80-92             & Lower PPL/KLD, requires internals \\
+		White-box            & $\sim$3-8         & $\sim$0-0.25      & $\sim$1.10-5.98 bpt       & Limited human evaluation      & Lower PPL/KLD, requires internals \\
 		\hline
 		Hybrid               & N/A               & N/A               & N/A                       & 95-98\% detection post-attack & Balances security but vulnerable  \\
 		\hline
@@ -85,8 +85,8 @@ This integration enhances capacity (e.g., a 15\% increase in FreStega) and impro
 Current LLM-based steganographic techniques face several fundamental limitations and trade-offs that constrain their practical deployment and security guarantees:
 \begin{itemize}
 	\item \textbf{Low Capacity:} Hiding information in short, low-entropy texts (e.g., social media posts) is a significant challenge.
-	\item \textbf{Psic Effect:} The Perceptual-Statistical Imperceptibility Conflict Effect (see Section~\ref{sec:terminology}) represents a critical trade-off between perceptual quality and statistical imperceptibility, leading to an average capacity loss of 1–2 bpw when optimizing for PPL over KLD.
-	\item \textbf{Vulnerability to Attacks:} Techniques are often vulnerable to paraphrasing and fine-tuning attacks, with detection rates dropping by 5–50\% in some cases.
+	\item \textbf{Psic Effect:} The Perceptual-Statistical Imperceptibility Conflict Effect (see Section~\ref{sec:terminology}) represents a critical trade-off between perceptual quality and statistical imperceptibility, leading to an average capacity loss of 1-2 bpw when optimizing for PPL over KLD.
+	\item \textbf{Vulnerability to Attacks:} Techniques are often vulnerable to paraphrasing and fine-tuning attacks, with detection rates dropping by 5-50\% in some cases.
 	\item \textbf{Segmentation Ambiguity:} Subword tokenization (e.g., BPE in \textbf{SparSamp}) can create ambiguity in message extraction.
 	\item \textbf{White-box vs. Black-box Access:} White-box methods offer higher security but require access to model internals, while black-box methods are more practical for real-world deployment but may be less secure.
 	\item \textbf{Ethical Concerns:} Issues such as biases, discrimination, and the potential for misuse (e.g., in \textbf{TrojanStego}) remain unaddressed in many works.
@@ -140,3 +140,4 @@ The overall taxonomy of the reviewed LLM-based approaches is summarized in Figur
 	\Description{A sunburst chart displaying the hierarchical breakdown of Large Language Model approaches used in steganography research. The chart shows different categories and subcategories of LLM-based steganographic techniques, with each segment representing the relative proportion of different methodological approaches found in the literature review.}
 	\label{fig:sunburst_chart}
 \end{figure*}
+

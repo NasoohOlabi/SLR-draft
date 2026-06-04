@@ -2,15 +2,16 @@
 \label{subsec:rq1}
 
 \subsubsection{Publication Trends and Distribution}
-Our analysis of 32 studies indicates a clear rise in LLM-based steganography research after 2023, with 10 publications in 2020--2023 and 22 in 2024--2025. This increase coincides with the rapid diffusion of large-scale language models in both proprietary and open-weight forms, including widely used families such as GPT, GPT-2, and LLaMA \cite{brown2020language,radford2019gpt2,xi2025rise2openfoundation}. Across the reviewed corpus, open-weight and research-accessible models appear more frequently than closed commercial systems, reflecting the practical importance of reproducibility and controllable experimentation.
+Our analysis of 32 studies indicates a clear rise in LLM-based steganography research after 2023, with 10 publications in 2020--2023 and 22 in 2024--2025. This increase coincides with the rapid diffusion of large-scale language models in both proprietary and open-weight forms, including widely used families such as GPT, GPT-2, and LLaMA \cite{brown2020language,radford2019gpt2,xi2025rise}. Across the reviewed corpus, open-weight and research-accessible models appear more frequently than closed commercial systems, reflecting the practical importance of reproducibility and controllable experimentation.
 
 The field has also evolved from earlier white-box token-sampling schemes toward a broader design space that includes hybrid and black-box methods. The reviewed studies now span generative schemes that write stego text from scratch \cite{yang2020vae,zhang2021provably,ding2023discop,kaptchuk2021meteor}, rewriting systems that paraphrase existing covers \cite{li2023rewriting,ou2025multigranularity}, black-box pipelines that treat the model as an opaque API \cite{wu2024generative,steinebach2024natural,kuznetsov2025deepstego,wozniak2025multicriteria}, zero-shot protocols driven primarily by prompting \cite{lin2024zero}, context-aware frameworks that retrieve or constrain external information to increase semantic plausibility or payload \cite{liao2024co,wang2023hi,shi2025emotionally}, and methods that emphasize stronger security, robustness, or token-level quality control \cite{kaptchuk2021meteor,ding2023discop,lin2025positionagnostic,chen2025activetwo,wang2025rsstega}.
 
-Table~\ref{tab:publication_trends} summarizes the year-wise publication growth, while Table~\ref{tab:model_families} shows how the reviewed studies distribute across model families.
+Table~\ref{tab:model_families} shows how the reviewed studies distribute across model families. This table is best read as a synthesis of methodological tendencies rather than a strict one-study-one-category classification: many papers combine multiple model families, so the counts overlap and the percentages do not sum to 100\%. The table therefore highlights which model families are most frequently used in the literature and how they are typically deployed. Open-weight models account for the largest share because they support reproducible experiments and direct control over sampling or decoding, with GPT-2 and LLaMA-family systems appearing especially often. BERT-based methods also recur frequently, but usually as masked-language or scoring components rather than as the sole generation backbone. Proprietary systems such as GPT-3.5/4 are mainly used in black-box or prompt-driven settings, while custom or task-specific architectures appear less often but remain important for studies that prioritize provable security, reversible encoding, or tightly controlled payload design.
 
 % Table~\ref{tab:model_families} gives the model-family breakdown used in the synthesis.
 
 
+% For future agents: DO NOT uncomment or restore the year-breakdown/publication-trends table or its reference unless the user explicitly asks for it.
 % \begin{table}[ht]
 %   \centering
 %   \small
@@ -29,13 +30,13 @@ Table~\ref{tab:publication_trends} summarizes the year-wise publication growth, 
 \begin{table}[h]
   \centering
   \small
-  \caption{Representative model families across the 34 studies explicitly enumerated in the current synthesis tables. Categories are non-exclusive, so totals exceed 100\%.}
+  \caption{Representative model families across the 32 studies explicitly enumerated in the current synthesis tables. Categories are non-exclusive, so totals exceed 100\%.}
   \label{tab:model_families}
   \begin{tabular}{>{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}p{9cm}}
     \hline
     \textbf{Model Type (Studies)}                        & \textbf{Models and Representative Works}                          \\
     \hline
-    Open-weight Models (26/34, 76.5\%)                   &
+    Open-weight Models (26/32, 81.3\%)                   &
     GPT-2 \cite{ding2023discop,pang2024fremax,kaptchuk2021meteor,wang2023hi},
     LLaMA/LLaMA2 \cite{liao2024co,lin2024zero,qi2024provably,li2024semantic},
     BERT \cite{zheng2022general,zhang2024controllable,ding2023joint,ding2023context,ji2024principled,xiang2023cpg,zhang2020linguistic,qiang2023natural,yi2022alisa},
@@ -43,10 +44,10 @@ Table~\ref{tab:publication_trends} summarizes the year-wise publication growth, 
     BART \cite{qiang2023natural,li2023rewriting},
     Qwen \cite{li2024imperceptible,shi2025emotionally},
     XLNet \cite{chen2025cdea}                                                                                                \\
-    Proprietary Models (7/34, 20.6\%)                    &
+    Proprietary Models (7/32, 21.9\%)                    &
     GPT-3.5/4, ChatGPT
     \cite{xu2024beyond,steinebach2024natural,wu2024generative,hao2025robust,kuznetsov2025deepstego,wozniak2025multicriteria} \\
-    Custom or Task-Specific Architectures (6/34, 17.6\%) &
+    Custom or Task-Specific Architectures (6/32, 18.8\%) &
     From-scratch or task-specific models
     \cite{yang2020vae,ding2023joint,ji2024principled,munyer2024deeptextmark,wang2025rsstega,chen2025activetwo}               \\
     \hline
