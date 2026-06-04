@@ -4,6 +4,14 @@ import pandas as pd
 import re
 
 
+TITLE_ALIASES = {
+    # The CSV uses shortened working titles for these studies.
+    "emotionally controllable steganography": "shi2025emotionally",
+    "position agnostic generation": "lin2025positionagnostic",
+    "two model defense repair": "chen2025activetwo",
+}
+
+
 def generate_latex_table(data, columns_to_display, caption, label, bib_data, column_mapping):
     """Generate a clean LaTeX longtable"""
 
@@ -107,8 +115,8 @@ def generate_latex_table(data, columns_to_display, caption, label, bib_data, col
             cell_content = clean_latex_text(cell_content, replacements)
             row_cells.append(cell_content)
 
-        # add blank line after each row
-        latex_code += " & ".join(row_cells) + " \\\\\n\n"
+        # Add a horizontal rule after each row for clearer separation.
+        latex_code += " & ".join(row_cells) + " \\\\\n\\hline\n\n"
 
     latex_code += "\\end{longtable}\n\n"
     return latex_code
@@ -118,10 +126,18 @@ def create_paper_citation(title_text, bib_data):
     """Create a proper paper citation"""
     # Try to find matching citation
     citation_key = None
-    for key, bib_title in bib_data.items():
-        if title_text.lower() in bib_title.lower() or bib_title.lower() in title_text.lower():
-            citation_key = key
-            break
+    normalized_title = normalize_text(title_text)
+
+    if normalized_title in TITLE_ALIASES:
+        citation_key = TITLE_ALIASES[normalized_title]
+    else:
+        normalized_bib_titles = {
+            key: normalize_text(bib_title) for key, bib_title in bib_data.items()
+        }
+        for key, bib_title in normalized_bib_titles.items():
+            if normalized_title == bib_title or normalized_title in bib_title or bib_title in normalized_title:
+                citation_key = key
+                break
 
     # Truncate long titles and add citation
     if len(title_text) > 50:
@@ -129,10 +145,20 @@ def create_paper_citation(title_text, bib_data):
     else:
         short_title = title_text
 
+    # Escape title text so special characters like '&' do not break table columns.
+    short_title = clean_latex_text(short_title, {})
+
     if citation_key:
         return f"{short_title} \\cite{{{citation_key}}}"
     else:
         return short_title
+
+
+def normalize_text(text):
+    """Normalize text for tolerant title matching."""
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def clean_latex_text(text, replacements):
@@ -168,6 +194,42 @@ def clean_latex_text(text, replacements):
     return text.strip()
 
 
+def extract_bib_field(entry, field_name):
+    """Extract a BibTeX field value while handling nested braces."""
+    field_match = re.search(rf"\b{re.escape(field_name)}\s*=\s*", entry, re.IGNORECASE)
+    if not field_match:
+        return None
+
+    idx = field_match.end()
+    while idx < len(entry) and entry[idx].isspace():
+        idx += 1
+    if idx >= len(entry):
+        return None
+
+    delimiter = entry[idx]
+    if delimiter == "{":
+        depth = 0
+        start = idx + 1
+        for pos in range(idx, len(entry)):
+            char = entry[pos]
+            if char == "{":
+                depth += 1
+            elif char == "}":
+                depth -= 1
+                if depth == 0:
+                    return entry[start:pos].strip()
+    elif delimiter == "\"":
+        start = idx + 1
+        escaped = False
+        for pos in range(start, len(entry)):
+            char = entry[pos]
+            if char == "\"" and not escaped:
+                return entry[start:pos].strip()
+            escaped = (char == "\\") and not escaped
+
+    return None
+
+
 def parse_bib_file(path):
     """Parse bibliography file to extract citation keys and titles"""
     bib = {}
@@ -183,17 +245,9 @@ def parse_bib_file(path):
             header = lines[0]
             if "{" in header:
                 key = header.split("{", 1)[1].split(",", 1)[0].strip()
-
-                # Look for title
-                for line in lines[1:]:
-                    if "title=" in line.lower():
-                        # Extract title between braces
-                        title_match = re.search(
-                            r'title\s*=\s*\{([^}]+)\}', line, re.IGNORECASE)
-                        if title_match:
-                            title = title_match.group(1).strip()
-                            bib[key] = title
-                            break
+                title = extract_bib_field(entry, "title")
+                if title:
+                    bib[key] = " ".join(title.split())
     except FileNotFoundError:
         print(f"Warning: Bibliography file not found at {path}")
     except Exception as e:
