@@ -64,7 +64,7 @@ These quantities quantify how densely a secret is packed, yet they are riddled w
 
 Table~\ref{tab:capacity_bias_categories} summarizes the main bias sources that affect capacity reporting.
 
-\begin{table}[ht]
+\begin{table*}[t]
   \centering
   \footnotesize
   \caption{Five primary bias categories affecting capacity metrics in steganographic evaluation}
@@ -84,7 +84,7 @@ Table~\ref{tab:capacity_bias_categories} summarizes the main bias sources that a
     Context Blindness            & Density metrics treat text as neutral bit containers                            & Semantic incoherence constitutes a security failure that BPW/BPT fails to penalize         \\
     \hline
   \end{tabular}
-\end{table}
+\end{table*}
 
 Tokenization differences make “1 BPT” from one paper incomparable to “1 BPT” from another due to the use of different tokenizers.
 The PSIC effect shows that higher density can hurt human fluency yet help statistical evasion.
@@ -104,6 +104,7 @@ To contextualize theoretical capacity metrics, Table \ref{tab:stego_examples} su
 
 In contrast, \textbf{payload-dependent} methods scale with the cover text or secret message length. \textbf{Meteor's} capacity of 1280 bits corresponds to an embedded payload of 160 bytes (e.g., Lorem Ipsum text). \textbf{Zero-shot} capacity is directly tied to the Base64 representation of the secret bitstream (encoding 24 bits per 4 characters). Finally, \textbf{Discop} utilizes a statistical approach; with a truncation parameter of $p=0.95$, it achieves an entropy rate of 4.84 bits per token, yielding 968 bits over a 200-token sequence.
 
+\iffalse
 \begin{table}[ht]
   \centering
   \footnotesize
@@ -133,8 +134,7 @@ Table~\ref{tab:stego_text_examples} gives representative stego-text samples.
 
 Table~\ref{tab:stego_examples} lists the corresponding capacity calculations and source methods.
 
-
-
+\onecolumn
 \begingroup\footnotesize
 \begin{longtable}{|>{\raggedright\arraybackslash}p{10cm}|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{1cm}|>{\raggedright\arraybackslash}p{2cm}|}
   \caption{Practical embedding capacity and calculation basis for selected stego text samples.}
@@ -165,6 +165,27 @@ Table~\ref{tab:stego_examples} lists the corresponding capacity calculations and
   ``I was very nervous, at the time. I was 22, and the director was actually at a birthday party in Paris and just saying the doors were closed. But I put on a large black motorcycle, got my album saved and drove on, doing videos about history and the films. So I was really excited. And I found that in this movie, we were at a concert in London. And that concert was where every song and every act was at the movie playing the music that could be heard and the message was, ``By God, there's people. But time has passed, and we're here, maybe from another world. Let's see how things can go.'' And at the end of the movie I said, ``I hope the thing happened a bit, because there's no way you can change what you know. You know? Something has happened. Just let it happen. Let it happen.'' And at the end, I say to myself, ``Hey, maybe we can change''                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      & 968 bits     & Discop          & 200 tokens $\times$ 4.84 bits/token ($p=0.95$)         \\ \hline
 \end{longtable}
 \endgroup
+\twocolumn
+\fi
+
+\begin{table*}[t]
+  \centering
+  \footnotesize
+  \caption{Representative capacity calculations reported by selected methods. Full generated passages are omitted because they do not support direct cross-study comparison.}
+  \label{tab:stego_examples}
+  \begin{tabular}{p{0.18\textwidth}p{0.16\textwidth}p{0.22\textwidth}p{0.35\textwidth}}
+    \hline
+    \textbf{Method} & \textbf{Reported Capacity} & \textbf{Encoding Basis} & \textbf{Comparability Note} \\
+    \hline
+    Meteor & 1280 bits & 160-byte payload $\times$ 8 bits & Payload total; depends on the selected message length. \\
+    LLM-Stega & 64 bits per sentence & Fixed semantic-slot mapping & Sentence-level capacity; not directly comparable with BPW or BPT. \\
+    GCStego & 16 bits per word & Fixed word-level mapping & Mapping-specific rate under the study's candidate construction. \\
+    ParaLS & 3 bits & Binary lexical watermark & Example payload rather than a normalized embedding rate. \\
+    Zero-shot & 24 bits per four Base64 characters & Encoded secret representation & Capacity depends on the representation and prompt protocol. \\
+    Discop & 968 bits over 200 tokens & 4.84 bits per token at $p=0.95$ & Token-level rate tied to the model, tokenizer, and truncation setting. \\
+    \hline
+  \end{tabular}
+\end{table*}
 
 
 \subsubsection{Security Metrics}
@@ -211,6 +232,7 @@ The broad landscape of evaluation metrics across the reviewed studies is summari
 \end{itemize}
 
 
+\iffalse
 \begin{table}[ht]
   \centering
   \footnotesize
@@ -243,5 +265,27 @@ The broad landscape of evaluation metrics across the reviewed studies is summari
     \textbf{Efficiency}         & Generation / Extraction Time        & Meteor \cite{kaptchuk2021meteor}, Disambiguating \cite{qi2024provably}, DeepStego \cite{kuznetsov2025deepstego}, Contrastive \cite{wang2025contrastive}, Two-Model \cite{chen2025activetwo}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      & 5                    \\
     \hline
   \end{tabular}
-\end{table}
+\end{table*}
+\fi
+
+\begin{table*}[t]
+  \centering
+  \footnotesize
+  \caption{Frequency of evaluation metric categories in the reviewed studies. Categories are non-exclusive.}
+  \label{tab:evaluation_metrics_overview}
+  \begin{tabular}{p{0.20\textwidth}p{0.34\textwidth}p{0.12\textwidth}p{0.25\textwidth}}
+    \hline
+    \textbf{Dimension} & \textbf{Metric Category} & \textbf{Studies} & \textbf{Main Comparability Constraint} \\
+    \hline
+    Imperceptibility & Perplexity & 13 & Model, tokenizer, corpus, and sequence length \\
+    Imperceptibility & Statistical divergence (KLD/JSD) & 10 & Estimated distributions and sampling settings \\
+    Imperceptibility & Semantic similarity & 13 & Reference construction and metric choice \\
+    Imperceptibility & Human evaluation & 1 & Protocol, annotator population, and sample size \\
+    Security & Detection accuracy or F1 & 21 & Detector, class balance, and train/test data \\
+    Capacity & BPW or BPT & 27 & Tokenization and payload accounting \\
+    Robustness & Recovery or attack resilience & 5 & Attack type, strength, and evaluation protocol \\
+    Efficiency & Generation or extraction time & 5 & Hardware, model size, and implementation \\
+    \hline
+  \end{tabular}
+\end{table*}
 
