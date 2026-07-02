@@ -1,7 +1,7 @@
 \subsection{Integration of External Knowledge Sources (RQ4)}
 \label{subsec:rq4}
 
-The integration of external knowledge sources has emerged as a recurring design pattern in LLM-based steganography. Across the reviewed studies, external information is used primarily to improve contextual plausibility, maintain topic consistency, and in some cases expand the effective space available for embedding.
+External knowledge integration is a recurring design pattern in the reviewed literature. Across the surveyed studies, external information serves three main purposes: improving contextual plausibility, maintaining topic consistency, and---in some cases---expanding the effective space available for embedding.
 
 Table~\ref{tab:knowledge_integration} summarizes the main knowledge-integration patterns and their roles.
 
@@ -129,12 +129,6 @@ Building on the initial categorization, Table~\ref{tab:knowledge_integration_com
 
 \subsubsection{Key Insights from Knowledge Integration Patterns}
 
-The integration of external knowledge sources follows distinct patterns, each serving specific purposes:
+The five integration patterns summarized in Table~\ref{tab:knowledge_integration_comprehensive} differ primarily in how directly they constrain the generation process. Structured knowledge approaches \cite{li2024semantic,ding2023joint} use external knowledge graphs or graph attention networks to enforce long-range semantic consistency---a stronger form of control than prompting alone, but one that requires the knowledge resource to exist and be aligned with the target domain. Information retrieval frameworks \cite{wang2023hi,liao2024co} pull contextually relevant material from external sources at runtime, grounding the cover text in real discourse without requiring model retraining. Linguistic resource methods \cite{qiang2023natural,ou2025multigranularity} rely on synonym databases and paraphrase corpora to constrain lexical choice while preserving meaning---a lighter form of intervention that nonetheless depends on the quality and coverage of the external resource.
 
-\begin{itemize}
-  \item \textbf{Structured Knowledge}: Studies like \cite{li2024semantic} and \cite{ding2023joint} use external knowledge graphs or graph attention networks to guide generation with semantic facts, ensuring long-range consistency.
-  \item \textbf{Information Retrieval}: Frameworks such as \cite{wang2023hi} and \cite{liao2024co} utilize retrieval modules to search external news datasets or social media platforms for contextually relevant covers.
-  \item \textbf{Linguistic Resources}: Works like \cite{qiang2023natural} and \cite{ou2025multigranularity} leverage external databases (e.g., ParaBank2, PPDB) to ensure synonym substitutions and paraphrases remain semantically faithful.
-  \item \textbf{External Model Feedback}: This is the most prevalent category, where models like BERT are used as external discriminators or "soft" scorers to assess the naturalness and security of steganographic output (e.g., \cite{xiang2023cpg, munyer2024deeptextmark}).
-  \item \textbf{Shared Side Information}: Studies such as \cite{kaptchuk2021meteor} and \cite{lin2024zero} rely on shared (public) models and auxiliary history to synchronize probability distributions between sender and receiver.
-\end{itemize}
+External model feedback is the most common pattern, appearing in seven of the 32 reviewed studies: auxiliary models such as BERT serve as discriminators or soft scorers to assess naturalness or security during generation \cite{xiang2023cpg,munyer2024deeptextmark}. Finally, shared side information methods \cite{kaptchuk2021meteor,lin2024zero} use public models or auxiliary history to synchronize probability distributions between sender and receiver without explicitly passing knowledge through the channel, trading interpretability for coordination efficiency.

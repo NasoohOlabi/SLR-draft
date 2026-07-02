@@ -1,9 +1,11 @@
-\documentclass[manuscript,screen,nonacm]{sections/acmart}
+\documentclass{ieeeaccess}
+\usepackage{cite}
 \usepackage{graphicx}
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{array}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{url}
+\usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{longtable}
@@ -13,6 +15,19 @@
 \usepackage{pifont} % used for \todo symbol
 \newcommand{\todo}[1]{\textcolor{blue}{#1}}
 \usepackage{float} 
+
+\usepackage{bm}
+\makeatletter
+\AtBeginDocument{\DeclareMathVersion{bold}
+\SetSymbolFont{operators}{bold}{T1}{times}{b}{n}
+\SetSymbolFont{NewLetters}{bold}{T1}{times}{b}{it}
+\SetMathAlphabet{\mathrm}{bold}{T1}{times}{b}{n}
+\SetMathAlphabet{\mathit}{bold}{T1}{times}{b}{it}
+\SetMathAlphabet{\mathbf}{bold}{T1}{times}{b}{n}
+\SetMathAlphabet{\mathtt}{bold}{OT1}{pcr}{b}{n}
+\SetSymbolFont{symbols}{bold}{OMS}{cmsy}{b}{n}
+\renewcommand\boldmath{\@nomath\boldmath\mathversion{bold}}}
+\makeatother
 % \usepackage{accsupp} % For accessibility support
 
 % % Suppress false positive accessibility warnings if all descriptions are present
@@ -20,19 +35,23 @@
 % \renewcommand{\@acmart@checkdesc}{}
 % \makeatother
 
-\title{A Systematic Literature Review of LLM-Based Linguistic Steganography: Contextual Compatibility, Evaluation challenges, and Trade-offs}
-
-\author{
-  Nasouh AlOlabi and Riad Sonbol
-}
-
-\affiliation{
-  \institution{Higher Institute for Applied Sciences and Technology}
-  \city{Damascus}
-  \country{Syria}
-}
-
 \begin{document}
+
+\history{Received \todo{date}; accepted \todo{date}. Date of publication \todo{date}; date of current version \todo{date}.}
+\doi{10.1109/ACCESS.XXXX.XXXXXXX}
+
+\title{A Systematic Literature Review of LLM-Based Linguistic Steganography: Contextual Compatibility, Evaluation Challenges, and Trade-offs}
+
+\author{\uppercase{Nasouh AlOlabi}\authorrefmark{1} and
+\uppercase{Riad Sonbol}\authorrefmark{1}}
+
+\address[1]{Higher Institute for Applied Sciences and Technology, Damascus, Syria}
+
+\markboth
+{AlOlabi and Sonbol: Systematic Literature Review of LLM-Based Linguistic Steganography}
+{AlOlabi and Sonbol: Systematic Literature Review of LLM-Based Linguistic Steganography}
+
+\corresp{Corresponding author: Nasouh AlOlabi (e-mail: \todo{add email}).}
 
 \begin{abstract}
 	Steganography is the practice of concealing information within seemingly ordinary text. The rapid growth of Large Language Models (LLMs) has led to increasing research attention on their potential for linguistic steganography. This systematic literature review examines how LLMs are reshaping this field through 32 accepted papers published between 2018 and 2025. Through
@@ -46,10 +65,11 @@
 
 \end{abstract}
 
-\keywords{
+\begin{keywords}
 	Systematic Literature Review, Linguistic Steganography, Large Language Models, LLMs, Natural Language Processing, NLP, Black-box Steganography, Context Retrieval, Generative Text Steganography, Imperceptibility
-}
+\end{keywords}
 
+\titlepgskip=-21pt
 \maketitle
 
 \noindent\textbf{Preprint Notice:} This is a preprint version of our systematic literature review, last updated on May 23, 2026. The manuscript is currently under review.
@@ -66,14 +86,27 @@
 \input{sections/threats.tex}
 \input{sections/conclusion.tex}
 
-\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{IEEEtran}
 \bibliography{references/bibliography}
 
 \clearpage
+\onecolumn
 \begin{landscape}
 	\input{sections/generated_tables.tex}
 \end{landscape}
 \clearpage
+
+\begin{IEEEbiographynophoto}{Nasouh AlOlabi}
+is with the Higher Institute for Applied Sciences and Technology, Damascus,
+Syria. \todo{Add education, professional background, and research interests.}
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Riad Sonbol}
+is with the Higher Institute for Applied Sciences and Technology, Damascus,
+Syria. \todo{Add education, professional background, and research interests.}
+\end{IEEEbiographynophoto}
+
+\EOD
 
 %
 % If your work has an appendix, this is the place to put it.

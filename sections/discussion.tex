@@ -1,42 +1,36 @@
 \section{Discussion}
 \label{sec:discussion}
 
-This section synthesizes the findings across the five research questions and discusses how recent LLM-based approaches are changing the design priorities of linguistic steganography.
+The findings across the five research questions point to a field in genuine transition---not in the sense that core problems have been solved, but in that the way researchers frame and attack those problems has shifted.
 
 \subsection{The Emergence of Meaning-Based Steganography}
 
-One of the clearest patterns in the reviewed studies is the shift from strictly white-box, probability-driven methods toward broader black-box, context-aware, and robustness-oriented approaches. Earlier linguistic steganography often depended on local lexical or sampling manipulations that were difficult to scale and easy to distort semantically. More recent work uses LLMs to support full-text generation, rewriting, prompting, retrieval, stylistic control, and token-level quality control, thereby moving the problem from isolated token selection toward broader control of discourse, context, and transmission resilience.
+The most visible change in the reviewed literature is the move away from strictly white-box, probability-driven methods toward a broader design space that includes black-box, context-aware, and robustness-oriented approaches. Earlier work depended heavily on local lexical or sampling manipulations---precise but difficult to scale and semantically fragile. More recent systems use LLMs to support full-text generation, rewriting, prompting, retrieval, and stylistic control, effectively shifting the problem from isolated token selection toward managing discourse, context, and transmission resilience together. Whether this shift also produces more secure systems in practice is a separate question that the existing evaluation literature does not yet answer convincingly.
 
-\subsection{Resolving the PSIC Effect through Contextual Compatibility}
+\subsection{Contextual Compatibility as a Mitigation for the PSIC Effect}
 
-The Perceptual-Statistical Imperceptibility Conflict (PSIC) remains one of the main technical hurdles identified across the reviewed studies. The synthesis suggests that \textbf{contextual compatibility} is not simply an optional enhancement, but an increasingly important strategy for mitigating this conflict.
+The Perceptual-Statistical Imperceptibility Conflict (PSIC) remains one of the harder technical problems in the field. What the reviewed studies collectively suggest is that \textbf{contextual compatibility} offers a partial route around this conflict---not a solution, but a means of gaining room to maneuver.
 
-By integrating external knowledge sources (RQ4), recent systems can better align generated text with the topic, style, and discourse expectations of a target channel. In practical terms, this means that security is increasingly tied not only to distributional similarity, but also to whether the text remains semantically plausible within a recognizable communicative setting.
+When systems align generated text with the topic, style, and discourse expectations of a target channel---drawing on external knowledge sources as described in RQ4---they gain some degree of cover: the text can be more plausible to human readers without necessarily becoming more anomalous to statistical detectors. Framed this way, security is no longer only about distributional proximity to natural text; it also depends on whether the output functions as a plausible communicative act in its intended setting. That is a subtler criterion, but arguably a more realistic one for practical deployment.
 
 \subsection{Implications for Research and Practice}
 
 \subsubsection{The Democratization of Covertness}
 
-The shift toward black-box approaches (RQ1, RQ2) lowers the practical barrier to deployment. By treating models as opaque APIs or hosted services, covert communication is no longer limited to settings where both parties can share and run the same model locally. This may improve accessibility in constrained environments, but as noted in RQ5 it also lowers the barrier for misuse.
+The shift toward black-box approaches documented in RQ1 and RQ2 has a concrete practical consequence: covert communication no longer requires both parties to share and run the same model locally. Treating models as opaque APIs substantially lowers the deployment barrier. This is not a neutral development---it makes the techniques more accessible for legitimate uses in constrained environments, but it lowers the barrier for misuse in exactly the same measure. This asymmetry is noted in RQ5 and deserves more explicit attention in the literature than it currently receives.
 
 \subsubsection{The Need for Semantic-First Evaluation}
 
-The evaluation metrics reviewed in RQ3 show that the field still relies heavily on surface-level or model-dependent metrics such as perplexity and bit-density measures, while human and semantic evaluation remain less common. The new 2025 studies add stronger robustness and capacity claims, but they also reinforce the same comparability problem because reported improvements depend on different baselines, datasets, prompt settings, and attack models. Future benchmarking should therefore place more emphasis on semantic and human-centered evaluation alongside statistical measures and realistic perturbation tests.
+The evaluation landscape assembled in RQ3 shows that the field remains heavily weighted toward surface-level and model-dependent metrics---perplexity, bit density---while human and semantic evaluation are far less common. The 2025 papers add robustness and capacity claims, but often in ways that deepen the comparability problem rather than resolving it: reported improvements depend on different baselines, datasets, prompt settings, and attack models, which makes cross-paper synthesis difficult. Progress on this front will require either shared benchmarks or, at minimum, a more consistent reporting convention for what is being measured and under what conditions.
 
 \subsection{Ethical Responsibility and the Forensics Arms Race}
 
-The reviewed literature also highlights a gap between technical innovation and explicit discussion of misuse, governance, and defensive implications. As LLM-based steganography becomes more fluent and easier to deploy, steganalysis and provenance research will likely need to adapt beyond traditional lexical or shallow statistical features.
+The reviewed literature is technically detailed but sparse on governance. As LLM-based steganography becomes more fluent and easier to deploy, the gap between what is technically possible and what is discussed in terms of responsible use continues to widen. Steganalysis and provenance research will likely need to move beyond traditional lexical or shallow statistical features to keep pace, but the reviewed studies offer relatively little guidance on where that work should go.
 
 \subsection{Limitations of the Review}
 
-This review should be interpreted as a structured snapshot of a rapidly changing field. The pace of LLM development and the heterogeneity of models, datasets, tokenizers, prompts, and attack settings limit the stability and direct comparability of quantitative summaries.
+This review is best understood as a structured snapshot of a rapidly evolving field. The pace of LLM development and the heterogeneity of models, datasets, tokenizers, prompts, and attack settings limit the stability and direct comparability of quantitative summaries.
 
 \subsection{Future Research Directions}
 
-Based on the identified gaps, four research directions appear especially important:
-\begin{itemize}
-    \item \textbf{Provable Semantic Security}: Extending security analysis beyond token distributions toward stronger guarantees about contextual plausibility and recoverability.
-    \item \textbf{Robustness-Aware Capacity}: Reporting payload together with degradation under paraphrasing, substitution, deletion, platform normalization, and active tampering.
-    \item \textbf{Multimodal Grounding}: Studying how text-based hiding strategies interact with multimodal systems without collapsing the review boundary between steganography and adjacent security problems.
-    \item \textbf{Adaptive Context Synthesis}: Designing retrieval and prompting pipelines that improve realism without making systems excessively fragile, slow, or difficult to evaluate.
-\end{itemize}
+Four directions stand out from the gaps identified across the RQs. First, the field needs stronger \textbf{provable semantic security}---extending formal analysis beyond token distributions toward guarantees about contextual plausibility and recoverability. Second, \textbf{robustness-aware capacity} reporting should become standard: payload figures should be accompanied by degradation curves under realistic editing, including paraphrasing, substitution, deletion, platform normalization, and active tampering, rather than reported in isolation. Third, \textbf{multimodal grounding} deserves systematic study---how text-based hiding strategies interact with vision-language systems is largely unexplored, though keeping a clear analytical boundary between steganography and adjacent security problems will matter here. Fourth, \textbf{adaptive context synthesis}---retrieval and prompting pipelines that improve realism without making systems fragile or impractical to evaluate---offers a concrete path toward closing the gap between laboratory results and deployable systems.

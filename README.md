@@ -1,45 +1,27 @@
-# A Systematic Literature Review of LLM-Based Linguistic Steganography
+# SLR Draft: LLM-Based Linguistic Steganography
 
-This repository contains the LaTeX source, data, scripts, and generated outputs for a systematic literature review on large language models in linguistic steganography.
+This repository contains the LaTeX source for a systematic literature review on LLM-based linguistic steganography, focused on contextual compatibility, evaluation challenges, and trade-offs.
 
-The paper focuses on contextual compatibility, evaluation challenges, and trade-offs in LLM-based steganographic methods.
-
-## Repository Structure
+## Current Layout
 
 ```text
-.
-|-- draft.tex                 # Main LaTeX manuscript
-|-- sections/                 # Section files and ACM class
-|   |-- introduction.tex
-|   |-- background.tex
-|   |-- llm_approaches.tex
-|   |-- related_reviews.tex
-|   |-- research_method.tex
-|   |-- results.tex
-|   |-- discussion.tex
-|   |-- threats.tex
-|   |-- conclusion.tex
-|   `-- generated_tables.tex
-|-- references/               # Bibliography files and reference material
-|-- data/                     # Source data used in the review
-|-- scripts/                  # Python utilities for data processing and plotting
-|-- output/                   # Generated figures and compiled PDF
-`-- build/                    # LaTeX build artifacts
+draft.tex                 Main IEEE Access manuscript
+sections/                 Manuscript sections and generated tables
+references/bibliography.bib
+                          Active BibTeX database
+ieeeaccess.cls            IEEE Access class used by draft.tex
+IEEEtran.bst              IEEE bibliography style
+IEEEtran.cls              IEEE class reference asset
+*.pfb, *.tfm, *.fd, *.map  Font assets required by the IEEE Access class
+logo.png, notaglinelogo.png, bullet.png, spotcolor.sty
+                          IEEE Access template assets
 ```
 
-## Manuscript Overview
+Generated files such as `draft.pdf`, `.aux`, `.bbl`, `.log`, `build/`, and `output/` are intentionally ignored.
 
-The manuscript reviews recent primary studies on:
+## Build
 
-- generative and rewriting-based LLM steganography
-- black-box and context-aware approaches
-- application domains and evaluation practices
-- external knowledge integration
-- recurring trade-offs in payload, naturalness, and security
-
-## Building the Paper
-
-Compile `draft.tex` with LaTeX and BibTeX:
+Run from the repository root:
 
 ```powershell
 pdflatex draft.tex
@@ -48,16 +30,8 @@ pdflatex draft.tex
 pdflatex draft.tex
 ```
 
-## Scripts
+The manuscript now uses `ieeeaccess.cls` and `IEEEtran.bst`.
 
-Key scripts in `scripts/`:
+## Cleanup Notes
 
-- `generate_tables.py` for table generation
-- `generate_sunburst.py` for visualization
-- `convert_scopus_to_bibtex.py` for bibliography conversion
-- `clean_bibliography.py` for bibliography cleanup
-- `verify_rq1_claims.py` for verification of RQ1-related claims
-
-## Outputs
-
-Generated figures and the compiled paper are stored in `output/`.
+The repository has been narrowed to the active manuscript source, bibliography, and IEEE template assets. Older review notes, prior PDFs, generated visualizations, raw CSV exports, and helper scripts were removed from version control because they are not required to build the current paper.

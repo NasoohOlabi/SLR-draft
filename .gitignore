@@ -11,38 +11,34 @@
 *.lof
 *.lot
 
+# Generated manuscript outputs
+draft.pdf
+draft.SLR.*.pdf
+build/
+output/
+sunburst_chart.pdf
+
+# Temporary data and exports
+*.csv
+*.xlsx
+parsifal*
+temp_*.bib
+temp_*.jsonl
+
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
 .venv/
-pip-log.txt
-pip-delete-this-directory.txt
+venv/
+env/
 
-# IDE
+# Editor and OS files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Temporary files
 *.tmp
 *.temp
-
-*.csv
-*.xlsx
-prompts.md
-draft.pdf
-parsifal*
-temp_audit.jsonl
-temp_filtered.bib
-draft.SLR.2026-05-23.pdf
