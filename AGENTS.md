@@ -61,3 +61,23 @@ The agent can help manage the project workflow.
 To start collaborating with the AI agent, simply formulate your request in natural language. Be as specific as possible to get the best results. The agent has access to all the files in the repository and can read, write, and execute code.
 
 By leveraging the capabilities of an AI assistant, we can significantly enhance the quality and impact of this research.
+
+## Cursor Cloud specific instructions
+
+This repo is an academic SLR manuscript (LaTeX) plus offline Python utilities — not a web/app service stack. There are no long-running application servers to start.
+
+### Core workflows
+
+- **Paper compile:** From repo root, follow README (`pdflatex` → `bibtex` → `pdflatex` ×2 on `draft.tex`). Output is `draft.pdf` (gitignored); a copy may already exist under `build/draft.pdf`.
+- **Table regeneration:** `python3 scripts/generate_tables.py` (expects `./data/SLR - SLR-Deep.csv` and `./references/bibliography.bib`).
+- **Bibliography cleanup:** `python3 scripts/clean_bibliography.py references/bibliography.bib`.
+- **Sunburst chart:** `scripts/generate_sunburst.py` reads `./SLR - SLR-Deep.csv` in the **current working directory** (not `data/`). From repo root, symlink or copy `data/SLR - SLR-Deep.csv` before running, or `cd` appropriately.
+- **Python deps:** `pandas`, `plotly`, `kaleido` (see `requirements.txt`). Optional: `openai` only for `scripts/filter_scopus_with_lmstudio.py` (needs a local/OpenAI-compatible API).
+
+### Gotchas
+
+- Several older scripts (`list_all_papers.py`, `analyze_*.py`) hardcode Windows paths (`d:\Master\...`); prefer scripts that use repo-relative paths (`generate_tables.py`, `clean_bibliography.py`, `convert_scopus_to_bibtex.py`).
+- `verify_rq1_claims.py` expects `./SLR.xlsx` (not committed). Canonical coding data is the CSV under `data/`.
+- ACM class is vendored at `sections/acmart.cls`; system TeX must provide `ACM-Reference-Format.bst` (texlive-publishers) and scalable fonts (`cm-super` / `lmodern`) or microtype font-expansion can abort PDF output.
+- No conventional lint/test suite or package.json; “lint” is LaTeX compile + script dry-runs; “tests” are verification scripts like `verify_rq1_claims.py` when Excel data is available.
+- `.gitignore` ignores `*.csv` and `draft.pdf`; tracked data under `data/` remains available via git.
